@@ -1,4 +1,4 @@
-import { Technology } from "@components/type/type";
+import { Node, Technology } from "@components/type/type";
 
 const baseURL = "example.com/";
 
@@ -32,17 +32,30 @@ const fetcher = <T = any>(
   return wrap<T>(fetch(input, init));
 };
 
-async function getTechs(): Promise<Technology[]> {
+export async function getTechs(): Promise<Node[]> {
   const url = new URL("techs", baseURL);
 
-  const techs = await fetcher<Technology[]>(url.toString())
-    .then((techs) => techs)
+  const nodes = await fetcher<Node[]>(url.toString())
+    .then((nodes) => nodes)
     .catch((err) => {
       console.log(err);
-      return [];
+      return [] as Node[];
     });
 
-  return techs;
+  return nodes;
 }
 
-export { getTechs };
+export async function getTechInfo(id: number): Promise<Technology | null> {
+  const url = new URL("tech", baseURL);
+
+  const info = await fetcher<Technology>(url.toString(), {
+    headers: { id: id.toString() },
+  })
+    .then((info) => info)
+    .catch((err) => {
+      console.log(err);
+      return null;
+    });
+
+  return info;
+}

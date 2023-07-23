@@ -1,114 +1,175 @@
-import styles from "@styles/common/top.module.scss";
+import styles from "@styles/pages/top.module.scss";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Technology } from "@components/type/type";
+import { Node } from "@components/type/type";
 import { getTechs } from "@/components/model/api";
 import { MdiMagnify } from "@/components/common/icons";
 
 export default function Top() {
   const [search, setSearch] = useState<string>("");
-  const [techs, setTechs] = useState<Technology[]>([]);
-  const [filteredTechs, setFilteredTechs] = useState<Technology[]>([]);
+  const [techs, setTechs] = useState<Node[]>([]);
+  const [filteredTechs, setFilteredTechs] = useState<Node[]>([]);
   const router = useRouter();
 
   useEffect(() => {
     (async () => {
-      // const techsSnap: Technology[] = await getTechs();
-      const techsSnap: Technology[] = [
+      // const techsSnap: Node[] = await getTechs();
+      const techsSnap: Node[] = [
         {
-          id: "1",
+          id: 1,
           name: "React.js",
-          parents: ["JavaScript", "TypeScript", "library"],
-          children: ["Hooks", "Context", "Redux", "Router", "Form"],
+          parentIds: [0],
+          childIds: [1],
+          articleId: 2,
         },
+        { id: 2, name: "Vue.js", parentIds: [0], childIds: [2], articleId: 2 },
         {
-          id: "2",
-          name: "Next.js",
-          parents: ["React.js", "SSG", "SSR", "ISR", "SPA"],
-          children: ["Hooks", "Context", "Redux", "Router", "Form"],
+          id: 3,
+          name: "Angular.js",
+          parentIds: [0],
+          childIds: [3],
+          articleId: 2,
         },
+        { id: 4, name: "Next.js", parentIds: [1], childIds: [4], articleId: 2 },
+        { id: 5, name: "Nuxt.js", parentIds: [2], childIds: [5], articleId: 2 },
         {
-          id: "3",
+          id: 6,
+          name: "React Native",
+          parentIds: [1],
+          childIds: [6],
+          articleId: 2,
+        },
+        { id: 7, name: "Flutter", parentIds: [0], childIds: [7], articleId: 2 },
+        { id: 8, name: "Dart", parentIds: [7], childIds: [8], articleId: 2 },
+        {
+          id: 9,
           name: "TypeScript",
-          parents: ["JavaScript", "library"],
-          children: ["React.js", "Next.js", "Node.js"],
+          parentIds: [0],
+          childIds: [9],
+          articleId: 2,
         },
         {
-          id: "4",
-          name: "Sass",
-          parents: ["CSS", "preprocessor"],
-          children: [],
+          id: 10,
+          name: "JavaScript",
+          parentIds: [0],
+          childIds: [10],
+          articleId: 2,
+        },
+        { id: 11, name: "HTML", parentIds: [0], childIds: [11], articleId: 2 },
+        { id: 12, name: "CSS", parentIds: [0], childIds: [12], articleId: 2 },
+        { id: 13, name: "Sass", parentIds: [12], childIds: [13], articleId: 2 },
+        { id: 14, name: "Less", parentIds: [12], childIds: [14], articleId: 2 },
+        {
+          id: 15,
+          name: "Stylus",
+          parentIds: [12],
+          childIds: [15],
+          articleId: 2,
         },
         {
-          id: "5",
+          id: 16,
+          name: "Bootstrap",
+          parentIds: [12],
+          childIds: [16],
+          articleId: 2,
+        },
+        {
+          id: 17,
           name: "Tailwind CSS",
-          parents: ["CSS", "utility"],
-          children: [],
+          parentIds: [12],
+          childIds: [17],
+          articleId: 2,
         },
         {
-          id: "6",
-          name: "PostCSS",
-          parents: ["CSS", "preprocessor"],
-          children: [],
+          id: 18,
+          name: "Material UI",
+          parentIds: [12],
+          childIds: [18],
+          articleId: 2,
         },
         {
-          id: "7",
-          name: "ESLint",
-          parents: ["JavaScript", "linter"],
-          children: [],
+          id: 19,
+          name: "Bulma",
+          parentIds: [12],
+          childIds: [19],
+          articleId: 2,
         },
         {
-          id: "8",
-          name: "Prettier",
-          parents: ["JavaScript", "formatter"],
-          children: [],
+          id: 20,
+          name: "Vuetify",
+          parentIds: [12],
+          childIds: [20],
+          articleId: 2,
         },
         {
-          id: "9",
-          name: "Jest",
-          parents: ["JavaScript", "test"],
-          children: [],
+          id: 21,
+          name: "Quasar",
+          parentIds: [12],
+          childIds: [21],
+          articleId: 2,
         },
         {
-          id: "10",
-          name: "React Testing Library",
-          parents: ["JavaScript", "test"],
-          children: [],
+          id: 22,
+          name: "Chakra UI",
+          parentIds: [12],
+          childIds: [22],
+          articleId: 2,
         },
         {
-          id: "11",
-          name: "GitHub Actions",
-          parents: ["CI", "CD"],
-          children: [],
-        },
-        { id: "12", name: "Vercel", parents: ["PaaS"], children: [] },
-        { id: "13", name: "Google Fonts", parents: ["font"], children: [] },
-        {
-          id: "14",
-          name: "Material Design Icons",
-          parents: ["icon"],
-          children: [],
+          id: 23,
+          name: "React Bootstrap",
+          parentIds: [12],
+          childIds: [23],
+          articleId: 2,
         },
         {
-          id: "15",
-          name: "Favicon Generator",
-          parents: ["icon"],
-          children: [],
-        },
-        { id: "16", name: "PWA", parents: ["web", "app"], children: [] },
-        { id: "17", name: "SEO", parents: ["web"], children: [] },
-        { id: "18", name: "Open Graph", parents: ["web"], children: [] },
-        {
-          id: "19",
-          name: "TypeDoc",
-          parents: ["TypeScript", "documentation"],
-          children: [],
+          id: 24,
+          name: "Reactstrap",
+          parentIds: [12],
+          childIds: [24],
+          articleId: 2,
         },
         {
-          id: "20",
-          name: "TypeScript ESLint",
-          parents: ["TypeScript", "linter"],
-          children: [],
+          id: 25,
+          name: "Ant Design",
+          parentIds: [12],
+          childIds: [25],
+          articleId: 2,
+        },
+        {
+          id: 26,
+          name: "PrimeReact",
+          parentIds: [12],
+          childIds: [26],
+          articleId: 2,
+        },
+        {
+          id: 27,
+          name: "Onsen UI",
+          parentIds: [12],
+          childIds: [27],
+          articleId: 2,
+        },
+        {
+          id: 28,
+          name: "Ionic",
+          parentIds: [12],
+          childIds: [28],
+          articleId: 2,
+        },
+        {
+          id: 29,
+          name: "Framework7",
+          parentIds: [12],
+          childIds: [29],
+          articleId: 2,
+        },
+        {
+          id: 30,
+          name: "Buefy",
+          parentIds: [12],
+          childIds: [30],
+          articleId: 2,
         },
       ];
       setTechs(techsSnap);
@@ -116,7 +177,7 @@ export default function Top() {
     })();
   }, []);
 
-  function toTreePage(tech: Technology) {
+  function toTreePage(tech: Node) {
     router.push("/tree");
   }
 
@@ -136,11 +197,7 @@ export default function Top() {
     <>
       <div className={styles.search}>
         <MdiMagnify className={styles.icon} />
-        <input
-          type="text"
-          value={search}
-          onChange={onChangeSearch}
-        />
+        <input type="text" value={search} onChange={onChangeSearch} />
       </div>
 
       <main className={styles.main}>
@@ -148,10 +205,12 @@ export default function Top() {
           return (
             <div
               key={tech.id}
-              className={styles.box}
+              className={styles.bo}
               onClick={() => toTreePage(tech)}
             >
+              <div className={styles.box}>
               <div>{tech.name}</div>
+              </div>
             </div>
           );
         })}
