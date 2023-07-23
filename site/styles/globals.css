@@ -1,4 +1,6 @@
 :root {
+  font-size: 15px;
+
   --primary: #e68bbc;
   --primary-thin: #e08daa;
   --on-primary: #ffffff;
@@ -10,6 +12,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+::-moz-selection {
+  color: var(--on-primary);
+  background-color: var(--primary);
+}
+
+::selection {
+  color: var(--on-primary);
+  background-color: var(--primary);
 }
 
 p,
