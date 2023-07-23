@@ -1,17 +1,20 @@
 :root {
   font-size: 15px;
 
-  --primary: #e68bbc;
+  --primary: #e68b8c;
   --primary-thin: #e08daa;
   --on-primary: #ffffff;
   --background: #ffffff;
   --shadow: #000000;
+  --box-shadow: rgba(0, 0, 0, .2);
+  --transition-time: 0.3s;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--primary);
 }
 
 ::-moz-selection {
@@ -22,17 +25,4 @@
 ::selection {
   color: var(--on-primary);
   background-color: var(--primary);
-}
-
-p,
-a,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ul,
-li {
-  color: var(--primary);
 }
