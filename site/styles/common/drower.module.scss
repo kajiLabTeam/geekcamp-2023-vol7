@@ -1,0 +1,85 @@
+.wrap {
+  .arrow {
+    margin-inline: auto 0;
+    display: block;
+    color: var(--on-primary);
+    font-size: 2rem;
+  }
+
+  .drower {
+    width: 500px;
+    max-width: 100vw;
+    padding: 20px 30px 20px;
+    position: fixed;
+    left: -500px;
+    top: 0;
+    bottom: 0;
+    z-index: 500;
+    background-color: var(--primary);
+    transition: all var(--transition-time) ease-out;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    a {
+      color: var(--on-primary);
+    }
+
+    .content {
+      color: var(--on-primary);
+      margin-top: 20px;
+      padding-left: 20px;
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+
+    .drower_footer {
+      width: calc(100% - 40px);
+      position: absolute;
+      bottom: 40px;
+
+      .lastedit {
+        display: inline-block;
+        color: var(--on-primary);
+        font-size: 2rem;
+      }
+
+      .last_updated {
+        margin-left: 5px;
+        font-size: 1.2rem;
+        display: inline-block;
+        vertical-align: super;
+      }
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    z-index: 100;
+    transition: all var(--transition-time) ease-out;
+    pointer-events: none;
+  }
+
+  &.open {
+    .drower {
+      left: 0;
+    }
+
+    .overlay {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}

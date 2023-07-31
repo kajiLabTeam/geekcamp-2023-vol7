@@ -1,0 +1,36 @@
+:root {
+  font-size: 15px;
+
+  --primary: #e68b8c;
+  --primary-thin: #e08daa;
+  --on-primary: #ffffff;
+  --background: #ffffff;
+  --shadow: #000000;
+  --box-shadow: rgba(0, 0, 0, .2);
+  --transition-time: 0.3s;
+}
+
+*:not(path) {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--primary);
+}
+
+::-moz-selection {
+  color: var(--on-primary);
+  background-color: var(--primary);
+}
+
+::selection {
+  color: var(--on-primary);
+  background-color: var(--primary);
+}
+
+main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

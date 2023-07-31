@@ -1,0 +1,38 @@
+.container {
+  width: 100vw;
+  padding: 20px;
+  text-align: center;
+
+  @media (max-width: 750px) {
+    text-align: start;
+  }
+
+  .title_box {
+    width: fit-content;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      height: 1px;
+      width: 100%;
+      background-color: var(--primary);
+      position: absolute;
+      left: calc(50% - 100px);
+      top: 40px;
+
+      @media (max-width: 750px) {
+        left: 0;
+      }
+    }
+
+    .title {
+      font-weight: 100;
+    }
+
+    .description {
+      font-weight: 100;
+    }
+  }
+}
