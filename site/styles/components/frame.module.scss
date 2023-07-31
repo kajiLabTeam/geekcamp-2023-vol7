@@ -1,0 +1,135 @@
+.frame > div {
+  background-color: var(--primary);
+  position: fixed;
+  pointer-events: none;
+}
+
+.top_left_1 {
+  height: 4px;
+  width: 80px;
+  top: 57px;
+  left: 0px;
+  rotate: -45deg;
+}
+
+.top_1 {
+  height: 4px;
+  width: calc(100% - 250px);
+  top: 30px;
+  left: 65px;
+}
+
+.top_2 {
+  height: 4px;
+  width: calc(100% - 110px);
+  top: 20px;
+  right: 95px;
+}
+
+.top_right_1 {
+  height: 4px;
+  width: calc(1.414 * 80px);
+  top: 60px;
+  right: 0px;
+  rotate: 45deg;
+}
+
+.right_1 {
+  height: 25%;
+  width: 4px;
+  top: 100px;
+  right: 15px;
+}
+
+.right_2 {
+  height: 20%;
+  width: 4px;
+  bottom: 120px;
+  right: 15px;
+}
+
+.bottom_right_1 {
+  height: 4px;
+  width: calc(1.414 * 80px);
+  bottom: 80px;
+  right: 0px;
+  rotate: -45deg;
+}
+
+.bottom_1 {
+  width: max(calc(100% - 300px), 40%);
+  height: 4px;
+  bottom: 40px;
+  right: 95px;
+}
+
+.bottom_2 {
+  width: calc(100% - 300px);
+  height: 4px;
+  bottom: 30px;
+  left: 105px;
+}
+
+.bottom_left_1 {
+  width: 30%;
+  height: 4px;
+  bottom: 20px;
+  left: 20px;
+}
+
+.bottom_left_2 {
+  width: 4px;
+  height: 30%;
+  bottom: 20px;
+  left: 20px;
+}
+
+.bottom_left_3 {
+  width: 4px;
+  height: 100px;
+  bottom: 17px;
+  left: 70px;
+  rotate: -45deg;
+}
+
+.left_1 {
+  width: 4px;
+  height: 5%;
+  bottom: 100px;
+  left: 35px;
+}
+
+.rect_1 {
+  height: 10px;
+  width: 10px;
+  top: 20px;
+  left: 30%;
+}
+
+.rect_2 {
+  height: 10px;
+  width: 10px;
+  top: 20px;
+  right: max(30%, 200px);
+}
+
+.rect_3 {
+  height: 10px;
+  width: 10px;
+  bottom: 30px;
+  right: max(20%, 200px);
+}
+
+.rect_4 {
+  height: 10px;
+  width: 10px;
+  bottom: 30px;
+  right: max(40%, 200px);
+}
+
+.rect_5 {
+  height: 10px;
+  width: 10px;
+  bottom: 20px;
+  left: min(200px, 30%);
+}

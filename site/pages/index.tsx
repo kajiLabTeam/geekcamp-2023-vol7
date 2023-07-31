@@ -1,5 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/pages/home.module.scss";
+import Canvas from "@/components/canvas";
+import Frame from "@/components/frame";
 
 export default function Home() {
   return (
@@ -15,6 +17,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <Frame></Frame>
+        <Canvas></Canvas>
       </main>
     </>
   );
