@@ -8,6 +8,9 @@ services:
       - "3306:3306"
     volumes:
       - ./mysqld_charset.cnf:/etc/mysql/conf.d/mysql_charset.cnf
-      - ./init/init:/docker-entrypoint-initdb.d
-    env_file:
-      - ../.env
+      - ./init:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wisdomtree
+      MYSQL_USER: geek_camp
+      MYSQL_PASSWORD: geek_camp_pass

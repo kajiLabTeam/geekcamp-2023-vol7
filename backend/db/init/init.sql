@@ -5,20 +5,20 @@ GRANT ALL PRIVILEGES ON *.* TO 'geek_camp' @'%';
 use wisdomtree;
 
 create table articles(
-    id int primary key auto_increment,
+    id int primary key,
     content VARCHAR(10000),
     last_update datetime
 );
 
 create table nodes(
-    id int primary key auto_increment,
+    id int primary key,
     node_name VARCHAR(255),
     article_id int,
     foreign key (article_id) references articles (id)
 );
 
 create table parent_id_list(
-    id int primary key auto_increment,
+    id int primary key,
     current_node_id int,
     parent_node_id int,
     foreign key (current_node_id) references nodes (id),
@@ -27,7 +27,7 @@ create table parent_id_list(
 );
 
 create table child_id_list(
-    id int primary key auto_increment,
+    id int primary key,
     current_node_id int,
     child_node_id int,
     foreign key (current_node_id) references nodes (id),
