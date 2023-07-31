@@ -1,0 +1,255 @@
+openapi: "3.0.3"
+
+info:
+  title: geekcamp-2023-vol7
+  version: 1.0.0
+
+paths:
+  /api/nodes:
+    get:
+      tags:
+        - Node
+      summary: 全てのノードを取得する
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "JavaScript"
+                        parentIds:
+                          type: array
+                          example: []
+                        childIds:
+                          type: array
+                          example: []
+                        articleId:
+                          type: integer
+                          example: 1
+                # example:
+                # - id: 1
+                #   name: "JavaScript"
+                #   parentIds: []
+                #   childIds: [3]
+                #   articleId: 1
+                # - id: 2
+                #   name: "TypeScript"
+                #   parentIds: [1]
+                #   childIds: [3]
+                #   articleId: 2
+                # - id: 3
+                #   name: "React"
+                #   parentIds: [1, 2]
+                #   childIds: [4, 5]
+                #   articleId: 3
+                # - id: 4
+                #   name: "useState"
+                #   parentIds: [3]
+                #   childIds: []
+                #   articleId: 4
+                # - id: 5
+                #   name: "useCallback"
+                #   parentIds: [3]
+                #   childIds: []
+                #   articleId: 5
+  /api/search/nodes:
+    get:
+      tags:
+        - Node
+      summary: 指定されたIDのノードを取得する
+      parameters:
+        - name: nodeId
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: integer
+          explode: false
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        name:
+                          type: string
+                          example: "TypeScript"
+                        parentIds:
+                          type: array
+                          example: [1]
+                        childIds:
+                          type: array
+                          example: [3]
+                        articleId:
+                          type: integer
+                          example: 2
+                # example:
+                #   - id: 1
+                #     name: "JavaScript"
+                #     parentIds: []
+                #     childIds: [3]
+                #     articleId: 1
+                #   - id: 2
+                #     name: "TypeScript"
+                #     parentIds: [1]
+                #     childIds: [3]
+                #     articleId: 2
+
+  /api/node/{nodeId}:
+    post:
+      tags:
+        - Node
+      summary: 親のIDをもとにノードを追加する
+      parameters:
+        - name: nodeId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nodes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: integer
+                        example: "JavaScript"
+                      content:
+                        type: string
+                        example: "# JavaScript\\nJavaScriptはJavaに触発されたプログラミング言語です"
+              # example:
+              #   - id: 1
+              #     name: "JavaScript"
+              #     parentIds: []
+              #     childIds: [3]
+              #     articleId: 1
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "JavaScript"
+                        parentIds:
+                          type: array
+                          example: []
+                        childIds:
+                          type: array
+                          example: [3]
+                        articleId:
+                          type: integer
+                          example: 1
+  /api/article/{articleId}:
+    get:
+      tags:
+        - Article
+      summary: 指定された記事のIDをもとに記事を取得する
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  nodeName:
+                    type: string
+                    example: "React"
+                  content:
+                    type: string
+                    example: "# React\\nReactとはUIコンポーネントを開発する際に便利なJavaScriptライブラリです"
+                  lastUpdate:
+                    type: string
+                    example: "2020-01-01 10:10:10"
+    put:
+      tags:
+        - Article
+      summary: 指定された記事のIDをもとに記事を編集する
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: "# JavaScript\\nJavaScriptはJavaに触発されたプログラミング言語です"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  nodeName:
+                    type: string
+                    example: "JavaScript"
+                  content:
+                    type: string
+                    example: "# JavaScript\\nReactとはUIコンポーネントを開発する際に便利なJavaScriptライブラリです"
+                  lastUpdate:
+                    type: string
+                    example: "2020-01-01 10:10:10"
