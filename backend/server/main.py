@@ -1,18 +1,9 @@
-from model.tables import create_all_tables
-# from settings import get_db_engine
+from fastapi import FastAPI
+from router.article import router as article_router
+from router.node import router as node_router
 
-# print(get_db_engine())
-
-create_all_tables()
-
+app = FastAPI()
 
 
-
-
-# from fastapi import FastAPI
-
-# app = FastAPI()
-
-# @app.get("/")
-# async def root():
-#     return {"greeting":"Hello world"}
+app.include_router(article_router, prefix="/api", tags=["article"])
+app.include_router(node_router, prefix="/api", tags=["node"])
