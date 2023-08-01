@@ -1,11 +1,16 @@
 import Head from "next/head";
 import styles from "@/styles/pages/home.module.scss";
-import Canvas from "@/components/canvas";
 import Frame from "@/components/frame";
 import Dialog from "@/components/dialog";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
 import { sleep } from "@/components/util";
+import dynamic from "next/dynamic";
+
+const Canvas = dynamic(import('@/components/canvas'), {
+  loading: () => <></>,
+  ssr: false
+})
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,16 +43,20 @@ export default function Home() {
         {!hideLoad && <Loading isLoading={isLoading} />}
         <main
           className={styles.main}
-          onClick={() => setIsDialogOpen(!isDialogOpen)}
         >
           <Dialog
             isOpen={isDialogOpen}
             nodeId={nodeId}
             nodeName={nodeName}
             forceLoading={isLoading}
+            onClick={() => setIsDialogOpen(!isDialogOpen)}
           ></Dialog>
           <Frame />
-          <Canvas />
+          <Canvas
+            setNodeId={setNodeId}
+            setNodeName={setNodeName}
+            openDirlog={() => setIsDialogOpen(true)}
+          />
         </main>
       </>
     </>

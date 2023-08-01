@@ -7,14 +7,16 @@ type Props = {
   nodeId: number;
   nodeName: string;
   forceLoading: boolean;
+  onClick: () => void;
 };
 
 export default function Dialog(
-  { isOpen, nodeId, nodeName, forceLoading }: Props = {
+  { isOpen, nodeId, nodeName, forceLoading, onClick }: Props = {
     isOpen: false,
     nodeId: 1,
     nodeName: "wisdom Tree",
     forceLoading: false,
+    onClick: () => {}
   }
 ) {
   const [description, setDescription] = useState(
@@ -37,7 +39,7 @@ export default function Dialog(
   }, [nodeId]);
 
   return (
-    <div className={`${styles.wrapper} ${isOpen ? styles.open : ""}`}>
+    <div className={`${styles.wrapper} ${isOpen ? styles.open : ""}`} onClick={onClick}>
       <div className={styles.top_left_1}></div>
       <div className={styles.top_left_2}></div>
       <div className={styles.top}></div>
