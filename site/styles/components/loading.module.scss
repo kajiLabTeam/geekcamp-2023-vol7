@@ -6,7 +6,7 @@
   align-items: center;
   position: relative;
   z-index: 100;
-  transition: transform var(--transition-time) ease;
+  transition: opacity var(--transition-time) ease;
 
   &.loaded {
     opacity: 0;

@@ -19,7 +19,7 @@ export default function Home() {
       setIsLoading(false);
       await sleep(1000);
       setHideLoad(true);
-    }, 1000);
+    }, 3000);
   }, []);
 
   return (
