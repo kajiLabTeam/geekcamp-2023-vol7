@@ -15,7 +15,3 @@ class ParentNodeIdList(SQLModel, table=True):
 
     current_node: "Node" = Relationship(back_populates="parent_nodes")
     child_node: "Node" = Relationship(back_populates="parent_nodes")
-
-
-def create_table():
-    SQLModel.metadata.create_all(bind=get_db_engine())

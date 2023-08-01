@@ -13,7 +13,3 @@ class Article(SQLModel, table=True):
     contents: str = Field(unique=False, nullable=False)
     updated_at: datetime = Field(DateTime, nullable=False)
     articles: list["Node"] = Relationship(back_populates="article")
-
-
-def create_table():
-    SQLModel.metadata.create_all(bind=get_db_engine())
