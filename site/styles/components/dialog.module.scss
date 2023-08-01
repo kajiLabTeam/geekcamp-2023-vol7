@@ -3,9 +3,9 @@
   height: 400px;
   position: fixed;
   top: 50%;
-  filter: drop-shadow(8px 4px 4px rgba(0, 0, 0, 0.5));
-  z-index: 10;
-  
+  filter: drop-shadow(8px 4px 4px rgba(0, 0, 0, .3));
+  z-index: 100;
+
   transition: all var(--transition-time);
   left: 0%;
   transform: translate(calc(-100% + 40px), -50%);

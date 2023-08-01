@@ -1,7 +1,15 @@
-.frame > div {
-  background-color: var(--primary);
-  position: fixed;
-  pointer-events: none;
+.frame {
+  z-index: 100;
+
+  & > div {
+    background-color: var(--primary);
+    position: fixed;
+    pointer-events: none;
+  }
+
+  &.rev > div {
+    background-color: var(--on-primary);
+  }
 }
 
 .top_left_1 {

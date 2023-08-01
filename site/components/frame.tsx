@@ -1,8 +1,13 @@
 import styles from "@/styles/components/frame.module.scss";
+import { type } from "os";
 
-export default function Frame() {
+type Props = {
+  revColor?: boolean;
+};
+
+export default function Frame({ revColor }: Props = { revColor: false }) {
   return (
-    <div className={styles.frame}>
+    <div className={`${styles.frame} ${revColor ? styles.rev : ""}`}>
       <div className={styles.top_left_1}></div>
       <div className={styles.top_1}></div>
       <div className={styles.top_2}></div>

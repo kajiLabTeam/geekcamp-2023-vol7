@@ -6,10 +6,20 @@ type Props = {
   isOpen: boolean;
   nodeId: number;
   nodeName: string;
+  forceLoading: boolean;
 };
 
-export default function Dialog({ isOpen, nodeId, nodeName }: Props) {
-  const [description, setDescription] = useState("");
+export default function Dialog(
+  { isOpen, nodeId, nodeName, forceLoading }: Props = {
+    isOpen: false,
+    nodeId: 1,
+    nodeName: "wisdom Tree",
+    forceLoading: false,
+  }
+) {
+  const [description, setDescription] = useState(
+    "wisdom Tree は知っている単語から繋がる知らない単語を知れるサービスです.あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -19,13 +29,11 @@ export default function Dialog({ isOpen, nodeId, nodeName }: Props) {
     //   .then((data) => {
     //     setDescription(data.description);
     //   });
-    const md =
-      "## h1\nReact is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies. React can be used as a base in the development of single-page or mobile applications.";
-    setDescription(md);
+    setDescription(
+      "wisdom Tree は知っている単語から繋がる知らない単語を知れるサービスです.あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
+    );
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 10000);
+    setIsLoading(false);
   }, [nodeId]);
 
   return (
@@ -51,10 +59,10 @@ export default function Dialog({ isOpen, nodeId, nodeName }: Props) {
       <div className={styles.inside_right}></div>
 
       <div className={styles.dialog}>
-        <h1 className={styles.title}>{nodeName ?? "Not found."}</h1>
-        <div className={styles.subtitle}>{nodeName ?? "Not found."}</div>
+        <h1 className={styles.title}>{nodeName ?? "wisdom Tree"}</h1>
+        <div className={styles.subtitle}>{nodeName ?? "wisdom Tree"}</div>
 
-        {isLoading ? (
+        {isLoading || forceLoading ? (
           <div className={styles.loading}>
             <div className={styles.box}>
               <svg viewBox="0 0 120 90">
