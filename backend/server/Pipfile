@@ -8,6 +8,8 @@ sqlmodel = "*"
 load-dotenv = "*"
 mysql-connector-python = "*"
 autopep8 = "*"
+fastapi = "*"
+uvicorn = "*"
 
 [dev-packages]
 
