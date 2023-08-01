@@ -33,8 +33,7 @@ def get_nodes(node_ids: list) -> Node | None:
     """
 
     session = get_db_session()
-    # ノードIDを元にchild_node_id_list、parent_node_id_listに検索をかけ
-    # child_nodesとparent_nodesに検索して得た値を代入する
+    # ノードIDを元にrelation_node_id_listに検索
 
     session.close()
     return node
