@@ -52,6 +52,7 @@ export default function Dialog({ isOpen, nodeId, nodeName }: Props) {
 
       <div className={styles.dialog}>
         <h1 className={styles.title}>{nodeName ?? "Not found."}</h1>
+        <div className={styles.subtitle}>{nodeName ?? "Not found."}</div>
 
         {isLoading ? (
           <div className={styles.loading}>

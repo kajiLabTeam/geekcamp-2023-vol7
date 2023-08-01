@@ -4,18 +4,15 @@
 
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 0%;
   filter: drop-shadow(8px 4px 4px rgba(0, 0, 0, 0.5));
 
   transition: all var(--transition-time);
-  transform: translate(-50%, -50%) scale(90%, 90%);
-  opacity: 0;
-  pointer-events: none;
+  transform: translate(calc(-100% + 50px), -50%);
+  z-index: 10;
 
   &.open {
-    transform: translate(-50%, -50%) scale(100%, 100%);
-    opacity: 1;
-    pointer-events: all;
+    transform: translate(50%, -50%);
   }
 
   & > div:not(.dialog) {
@@ -181,14 +178,31 @@
       }
     }
 
+    .subtitle {
+      color: var(--on-primary);
+      font-weight: bold;
+      position: absolute;
+      right: -80px;
+      rotate: 90deg;
+      top: 250px;
+      font-size: 1.5rem;
+      width: 200px;
+    }
+
     .description {
-      width: calc(100% - 20px);
+      width: calc(100% - 70px);
       height: 260px;
-      padding: 0 40px 20px 70px;
+      padding: 0 40px 20px 20px;
+      margin-left: 60px;
       overflow-y: scroll;
+      direction: rtl;
 
       p {
         font-size: 1.3rem;
+      }
+
+      * {
+        direction: ltr;
       }
     }
   }

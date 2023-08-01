@@ -1,12 +1,12 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Nunito } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 
-const nunito = Nunito({ subsets: ["latin"] });
+const noto = Noto_Sans_JP({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={nunito.className}>
+    <div className={noto.className}>
       <Component {...pageProps} />
     </div>
   );
