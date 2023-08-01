@@ -1,0 +1,44 @@
+.load {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  transition: all .3s ease;
+
+  &.loaded {
+    transform: translateY(-100%);
+  }
+
+  .logo {
+    margin-inline: auto;
+    max-width: 90%;
+    height: auto;
+  }
+
+  div[class*="line"] {
+    height: 2px;
+    width: min(200px, 15%);
+    background-color: var(--on-primary);
+    position: fixed;
+  }
+
+  .line_1 {
+    top: 50%;
+    rotate: -18deg;
+  }
+
+  .line_2 {
+    top: 20%;
+    right: 0;
+    rotate: -18deg;
+  }
+
+  .line_3 {
+    width: min(250px, 20%) !important;
+    bottom: 20%;
+    right: 20%;
+    rotate: -18deg;
+  }
+}
