@@ -4,11 +4,13 @@
   background-color: var(--primary);
   display: flex;
   align-items: center;
+  position: relative;
   z-index: 100;
   transition: all .3s ease;
 
   &.loaded {
-    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
   }
 
   .logo {

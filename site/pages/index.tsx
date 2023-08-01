@@ -5,18 +5,21 @@ import Frame from "@/components/frame";
 import Dialog from "@/components/dialog";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
+import { sleep } from "@/components/util";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [hideLoad, setHideLoad] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [nodeId, setNodeId] = useState(1);
   const [nodeName, setNodeName] = useState("wisdom Tree");
 
   useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async () => {
       setIsLoading(false);
-      setIsDialogOpen(false);
-    }, 5000);
+      await sleep(1000);
+      setHideLoad(true);
+    }, 1000);
   }, []);
 
   return (
@@ -32,7 +35,7 @@ export default function Home() {
       </Head>
 
       <>
-        <Loading isLoading={isLoading} />
+        {!hideLoad && <Loading isLoading={isLoading} />}
         <main
           className={styles.main}
           onClick={() => setIsDialogOpen(!isDialogOpen)}
@@ -43,8 +46,8 @@ export default function Home() {
             nodeName={nodeName}
             forceLoading={isLoading}
           ></Dialog>
-          <Frame></Frame>
-          <Canvas></Canvas>
+          <Frame />
+          <Canvas />
         </main>
       </>
     </>
