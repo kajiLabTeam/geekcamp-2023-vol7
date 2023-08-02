@@ -1,5 +1,9 @@
 -- CREATE USER 'geek_camp'@'%' IDENTIFIED BY 'geek_camp_pass';
+DROP DATABASE IF EXISTS wisdomtree;
+CREATE DATABASE wisdomtree;
+
 GRANT ALL PRIVILEGES ON *.* TO 'geek_camp' @'%';
+
 USE wisdomtree;
 
 CREATE TABLE
@@ -22,10 +26,17 @@ CREATE TABLE
         id INT AUTO_INCREMENT PRIMARY KEY,
         node_id INT,
         connect_node_id INT,
-        connection_strength FLOAT (1, 5),
+        connection_strength INT,
         FOREIGN KEY (node_id) REFERENCES node (id),
         FOREIGN KEY (connect_node_id) REFERENCES node (id)
-    )
+    );
+
+CREATE TABLE
+    user (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(20)
+    );
+
 CREATE TABLE
     edit_history (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,12 +45,6 @@ CREATE TABLE
         date datetime,
         FOREIGN KEY (user_id) REFERENCES user (id),
         FOREIGN KEY (article_id) REFERENCES article (id)
-    );
-
-CREATE TABLE
-    user (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        name VARCHAR(20)
     );
 
 -- article -----------------------------
@@ -87,32 +92,32 @@ VALUES
 
 -- node --------------------------------
 INSERT INTO
-    nodes (node_name, article_id)
+    node (node_name, article_id)
 VALUES
     ("React.js", 1);
 
 INSERT INTO
-    nodes (node_name, article_id)
+    node (node_name, article_id)
 VALUES
     ("JavaScript", 2);
 
 INSERT INTO
-    nodes (node_name, article_id)
+    node (node_name, article_id)
 VALUES
     ("フレームワーク", 3);
 
 INSERT INTO
-    nodes (node_name, article_id)
+    node (node_name, article_id)
 VALUES
     ("hooks", 4);
 
 INSERT INTO
-    nodes (node_name, article_id)
+    node (node_name, article_id)
 VALUES
     ("useState", 5);
 
 INSERT INTO
-    nodes (node_name, article_id)
+    node (node_name, article_id)
 VALUES
     ("useEffect", 6);
 
@@ -120,79 +125,52 @@ VALUES
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (1, 2, 0.8);
+    (1, 2, 8000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (1, 3, 0.6);
+    (1, 3, 6000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (, 1, 0.6);
+    (1, 4, 4000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (1, 4, 0.4);
+    (4, 5, 8000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (4, 1, 0.4);
+    (4, 6, 7000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (4, 5, 0.8);
+    (2, 1, 8000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (5,4, 0.8);
+    (3, 1, 6000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (4, 6, 0.8);
+    (4, 1, 4000);
 
 INSERT INTO
     connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (6, 4, 0.8);
-
-
--- edit_history ------------------------
-INSERT INTO
-    edit_history (userid, article_id, date)
-VALUES
-    (1, 1, "2020-03-10");
+    (5, 4, 8000);
 
 INSERT INTO
-    edit_history (userid, article_id, date)
+    connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (2, 2, "2023-04-11");
-
-INSERT INTO
-    edit_history (userid, article_id, date)
-VALUES
-    (3, 3, "2021-01-01");
-
-INSERT INTO
-    edit_history (userid, article_id, date)
-VALUES
-    (4, 4, "2019-06-17");
-
-INSERT INTO
-    edit_history (userid, article_id, date)
-VALUES
-    (5, 5, "2022-03-16");
-
-INSERT INTO
-    edit_history (userid, article_id, date)
-VALUES
-    (6, 6, "2021-07-20");
+    (6, 4, 7000);
 
 -- user --------------------------------
 INSERT INTO
@@ -214,3 +192,24 @@ INSERT INTO
     user (name)
 VALUES
     ("kousei");
+
+-- edit_history ------------------------
+INSERT INTO
+    edit_history (user_id, article_id, date)
+VALUES
+    (1, 1, "2020-03-10");
+
+INSERT INTO
+    edit_history (user_id, article_id, date)
+VALUES
+    (2, 2, "2023-04-11");
+
+INSERT INTO
+    edit_history (user_id, article_id, date)
+VALUES
+    (3, 3, "2021-01-01");
+
+INSERT INTO
+    edit_history (user_id, article_id, date)
+VALUES
+    (4, 4, "2019-06-17");
