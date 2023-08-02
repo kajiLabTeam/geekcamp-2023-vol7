@@ -1,5 +1,5 @@
 -- CREATE USER 'geek_camp'@'%' IDENTIFIED BY 'geek_camp_pass';
--- GRANT ALL PRIVILEGES ON *.* TO 'geek_camp' @'%';
+GRANT ALL PRIVILEGES ON *.* TO 'geek_camp' @'%';
 USE wisdomtree;
 
 CREATE TABLE
