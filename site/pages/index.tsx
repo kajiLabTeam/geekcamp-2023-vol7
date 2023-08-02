@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "@/styles/pages/home.module.scss";
 import Frame from "@/components/frame";
 import Dialog from "@/components/dialog";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Loading from "./loading";
 import { sleep } from "@/components/util";
 import dynamic from "next/dynamic";
@@ -27,6 +27,7 @@ export default function Home() {
     }, 3000);
   }, []);
 
+  const openDirlog = useCallback(() => setIsDialogOpen(true), []);
   return (
     <>
       <Head>
@@ -55,7 +56,7 @@ export default function Home() {
           <Canvas
             setNodeId={setNodeId}
             setNodeName={setNodeName}
-            openDirlog={() => setIsDialogOpen(true)}
+            openDirlog={openDirlog}
           />
         </main>
       </>
