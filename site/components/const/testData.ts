@@ -5,8 +5,8 @@ const ACCENT = "#75BEC2"
 
 export type Node = NodeObject<{
     id: string;
-    name: string;
-    nodeLabel: string;
+    name?: string;
+    nodeLabel?: string;
     color?: string;
     val: number;
 }>
@@ -19,7 +19,7 @@ export const nodesData: Node[] = [
         name: "React.js",
         nodeLabel: "React.js",
         color: PRIMARY,
-        val: 3
+        val: 10
     },
     {
         id: "liblary",
