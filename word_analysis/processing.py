@@ -15,20 +15,20 @@ def shape2text(markdown_text):
 
     # 正規表現パターン
     code_block_pattern = r"```[\s\S]*?```"
-    code_block_pattern2 = r"!?\[.*?\]|\(.*?\)"
-    code_block_pattern3 = r"<.*?>"
-    code_block_pattern4 = r"https?://([a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})([/\w.-]*)*/?"
-    code_block_pattern5 = r"~~~[\s\S]*?~~~"
-    code_block_pattern6 = r"[0-9]+\. "
+    picture_pattern = r"!?\[.*?\]|\(.*?\)"
+    htmltag_pattern = r"<.*?>"
+    url_pattern = r"https?://([a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})([/\w.-]*)*/?"
+    programs_pattern = r"~~~[\s\S]*?~~~"
+    number_pattern = r"[0-9]+\. "
 
 
     # 正規表現で削除
     text = re.sub(code_block_pattern, "", markdown_text)
-    text = re.sub(code_block_pattern2, "", text)
-    text = re.sub(code_block_pattern3, "", text)
-    text = re.sub(code_block_pattern4, "", text)
-    text = re.sub(code_block_pattern5, "", text)
-    text = re.sub(code_block_pattern6, "", text)
+    text = re.sub(picture_pattern, "", text)
+    text = re.sub(htmltag_pattern, "", text)
+    text = re.sub(url_pattern, "", text)
+    text = re.sub(programs_pattern, "", text)
+    text = re.sub(number_pattern, "", text)
 
 
     shift_txt = "`%*:) 　-=><_＿「」『』〈〉《》〔〕【】|,'/・…→↓↑←⇒$^;ー：！※#"
