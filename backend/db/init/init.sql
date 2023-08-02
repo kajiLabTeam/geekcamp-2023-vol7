@@ -1,127 +1,216 @@
 -- CREATE USER 'geek_camp'@'%' IDENTIFIED BY 'geek_camp_pass';
-GRANT ALL PRIVILEGES ON *.* TO 'geek_camp' @'%';
+-- GRANT ALL PRIVILEGES ON *.* TO 'geek_camp' @'%';
+USE wisdomtree;
 
-use wisdomtree;
+CREATE TABLE
+    article (
+        id INT PRIMARY KEY,
+        article VARCHAR(10000),
+        last_update datetime
+    );
 
-create table article(
-    id int primary key,
-    content VARCHAR(10000),
-    last_update datetime
-);
+CREATE TABLE
+    node (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        node_name VARCHAR(50),
+        article_id INT,
+        FOREIGN KEY (article_id) REFERENCES article (id)
+    );
 
-create table node(
-    id int primary key,
-    node_name VARCHAR(255),
-    article_id int,
-    foreign key (article_id) references article (id)
-);
+CREATE TABLE
+    connection (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        node_id INT,
+        connect_node_id INT,
+        connection_strength FLOAT (1, 5),
+        FOREIGN KEY (node_id) REFERENCES node (id),
+        FOREIGN KEY (connect_node_id) REFERENCES node (id)
+    )
+CREATE TABLE
+    edit_history (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT,
+        article_id INT,
+        date datetime,
+        FOREIGN KEY (user_id) REFERENCES user (id),
+        FOREIGN KEY (article_id) REFERENCES article (id)
+    );
 
-create table relationnodeidlist(
-    id int primary key auto_increment,
-    one_node_id int,
-    two_node_id int,
-    foreign key (one_node_id) references node (id),
-    foreign key (two_node_id) references node (id),
-    unique (one_node_id, two_node_id)
-);
+CREATE TABLE
+    user (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(20)
+    );
 
--- article
+-- article -----------------------------
 INSERT INTO
-    article(id, content, last_update)
+    article (id, article, last_update)
 VALUES
     (
         1,
-        "# JavaScript
-    JavaScriptはJavaに触発されたプログラミング言語です",
-        "2020-01-01 10:10:10"
+        "# React.js\nReact.jsはなんかすごい、やつですよ",
+        "2021-01-01"
     );
 
 INSERT INTO
-    article(id, content, last_update)
+    article (id, article, last_update)
 VALUES
     (
         2,
-        "# TypeScript
-    TypeScriptとはJavaScriptに型づけを行うプログラミング言語です",
-        "2020-01-01 10:10:10"
+        "# JavaScript\nJavaScriptはなんかすごい、やつですよ",
+        "2021-02-02"
     );
 
 INSERT INTO
-    article(id, content, last_update)
+    article (id, article, last_update)
+VALUES
+    (3, "# フレームワーク\nフレームワークはなんかすごい、やつ", "2021-03-03");
+
+INSERT INTO
+    article (id, article, last_update)
+VALUES
+    (4, "# hooks\nhooksはなんかすごい、やつ", "2021-04-04");
+
+INSERT INTO
+    article (id, article, last_update)
+VALUES
+    (5, "# useState\nuseStateはなんかすごい、やつ", "2021-04-05");
+
+INSERT INTO
+    article (id, article, last_update)
 VALUES
     (
-        3,
-        "# React
-    ReactとはUIコンポーネントを開発する際に便利なJavaScriptライブラリです",
-        "2020-01-01 10:10:10"
+        6,
+        "# useEffect\nuseEffectはなんかすごい、やつ",
+        "2021-04-06"
     );
 
+-- node --------------------------------
 INSERT INTO
-    article(id, content, last_update)
+    nodes (node_name, article_id)
 VALUES
-    (
-        4,
-        "# useState
-    useStateとはReactのHooksで状態を管理するために用いられる関数です",
-        "2020-01-01 10:10:10"
-    );
+    ("React.js", 1);
 
 INSERT INTO
-    article(id, content, last_update)
+    nodes (node_name, article_id)
 VALUES
-    (
-        5,
-        "# useCallback
-    useCallbackとはReactのHooksで変数の変化に応じて発火させる関数のタイミングを管理する関数です",
-        "2020-01-01 10:10:10"
-    );
-
--- node
-INSERT INTO
-    node(id, node_name, article_id)
-VALUES
-    (1, "JavaScript", 1);
+    ("JavaScript", 2);
 
 INSERT INTO
-    node(id, node_name, article_id)
+    nodes (node_name, article_id)
 VALUES
-    (2, "TypeScript", 2);
+    ("フレームワーク", 3);
 
 INSERT INTO
-    node(id, node_name, article_id)
+    nodes (node_name, article_id)
 VALUES
-    (3, "React", 3);
+    ("hooks", 4);
 
 INSERT INTO
-    node(id, node_name, article_id)
+    nodes (node_name, article_id)
 VALUES
-    (4, "useState", 4);
+    ("useState", 5);
 
 INSERT INTO
-    node(id, node_name, article_id)
+    nodes (node_name, article_id)
 VALUES
-    (5, "useCallback", 5);
+    ("useEffect", 6);
 
--- relationnodeidlist
+-- connection --------------------------
 INSERT INTO
-    relationnodeidlist(one_node_id, two_node_id)
+    connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (3, 1);
-
-INSERT INTO
-    relationnodeidlist(one_node_id, two_node_id)
-VALUES
-    (3, 2);
+    (1, 2, 0.8);
 
 INSERT INTO
-    relationnodeidlist(one_node_id, two_node_id)
+    connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (4, 3);
+    (1, 3, 0.6);
 
 INSERT INTO
-    relationnodeidlist(one_node_id, two_node_id)
+    connection (node_id, connect_node_id, connection_strength)
 VALUES
-    (5, 3);
+    (, 1, 0.6);
 
-select
-    'ok' as result;
+INSERT INTO
+    connection (node_id, connect_node_id, connection_strength)
+VALUES
+    (1, 4, 0.4);
+
+INSERT INTO
+    connection (node_id, connect_node_id, connection_strength)
+VALUES
+    (4, 1, 0.4);
+
+INSERT INTO
+    connection (node_id, connect_node_id, connection_strength)
+VALUES
+    (4, 5, 0.8);
+
+INSERT INTO
+    connection (node_id, connect_node_id, connection_strength)
+VALUES
+    (5,4, 0.8);
+
+INSERT INTO
+    connection (node_id, connect_node_id, connection_strength)
+VALUES
+    (4, 6, 0.8);
+
+INSERT INTO
+    connection (node_id, connect_node_id, connection_strength)
+VALUES
+    (6, 4, 0.8);
+
+
+-- edit_history ------------------------
+INSERT INTO
+    edit_history (userid, article_id, date)
+VALUES
+    (1, 1, "2020-03-10");
+
+INSERT INTO
+    edit_history (userid, article_id, date)
+VALUES
+    (2, 2, "2023-04-11");
+
+INSERT INTO
+    edit_history (userid, article_id, date)
+VALUES
+    (3, 3, "2021-01-01");
+
+INSERT INTO
+    edit_history (userid, article_id, date)
+VALUES
+    (4, 4, "2019-06-17");
+
+INSERT INTO
+    edit_history (userid, article_id, date)
+VALUES
+    (5, 5, "2022-03-16");
+
+INSERT INTO
+    edit_history (userid, article_id, date)
+VALUES
+    (6, 6, "2021-07-20");
+
+-- user --------------------------------
+INSERT INTO
+    user (name)
+VALUES
+    ("SatooRu65536");
+
+INSERT INTO
+    user (name)
+VALUES
+    ("shibaken");
+
+INSERT INTO
+    user (name)
+VALUES
+    ("mi");
+
+INSERT INTO
+    user (name)
+VALUES
+    ("kousei");
