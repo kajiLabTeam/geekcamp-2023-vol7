@@ -17,10 +17,11 @@ export default function Dialog(
     forceLoading: false,
   }
 ) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [lastUpdate, setLastUpdate] = useState("2023.08.02");
   const [description, setDescription] = useState(
     "wisdom Tree は知っている単語から繋がる知らない単語を知れるサービスです.あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
   );
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,7 +31,7 @@ export default function Dialog(
     //     setDescription(data.description);
     //   });
     setDescription(
-      "wisdom Tree は知っている単語から繋がる知らない単語を知れるサービスです.あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
+      "# hi\nwisdom Tree は知っている単語から繋がる知らない単語を知れるサービスです.あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
     );
 
     setIsLoading(false);
@@ -114,13 +115,15 @@ export default function Dialog(
             </div>
           </div>
         ) : (
-          <div className={styles.description}>
-            <p
+          <>
+            <div
+              className={styles.description}
               dangerouslySetInnerHTML={{
                 __html: markdownit().render(description),
               }}
-            ></p>
-          </div>
+            ></div>
+            <p className={styles.last_update}>{lastUpdate}</p>
+          </>
         )}
       </div>
     </div>

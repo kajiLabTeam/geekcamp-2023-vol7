@@ -165,8 +165,11 @@
     );
 
     .title {
-      padding: 40px 100px 30px 80px;
+      margin-right: 100px;
+      padding: 40px 0 30px 80px;
       position: relative;
+      white-space: nowrap;
+      overflow: hidden;
 
       &::after {
         content: "";
@@ -191,8 +194,8 @@
 
     .description {
       width: calc(100% - 70px);
-      height: 260px;
-      padding: 0 40px 20px 20px;
+      height: 250px;
+      padding: 0 40px 0 20px;
       margin-left: 60px;
       overflow-y: scroll;
       direction: rtl;
@@ -204,6 +207,13 @@
       * {
         direction: ltr;
       }
+    }
+
+    .last_update {
+      padding-right: 10px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: right;
     }
   }
 }
