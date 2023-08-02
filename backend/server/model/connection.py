@@ -8,13 +8,13 @@ if TYPE_CHECKING:
     from model.node import Node
 
 
-class RelationNodeIdList(SQLModel, table=True):
+class Connection(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True)
-    one_node_id: Optional[int] = Field(foreign_key="node.id")
-    two_node_id: Optional[int] = Field(foreign_key="node.id")
+    node_id: Optional[int] = Field(foreign_key="node.id")
+    connect_node_id: Optional[int] = Field(foreign_key="node.id")
 
-    one_node: "Node" = Relationship(back_populates="relation_nodes")
-    two_node: "Node" = Relationship(back_populates="relation_nodes")
+    node: "Node" = Relationship(back_populates="connection")
+    connect_node: "Node" = Relationship(back_populates="connection")
 
 
 def create_table():
