@@ -10,11 +10,6 @@
   left: 0%;
   transform: translate(calc(-100% + 40px), -50%);
 
-  &.open {
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
   & > div:not(.dialog) {
     background-color: var(--primary);
     position: absolute;
@@ -210,10 +205,20 @@
     }
 
     .last_update {
-      padding-right: 10px;
+      padding-right: 50px;
       font-size: 1.3rem;
       font-weight: bold;
       text-align: right;
+      transition: padding-right .3s;
+    }
+  }
+
+  &.open {
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .last_update {
+      padding-right: 10px;
     }
   }
 }
