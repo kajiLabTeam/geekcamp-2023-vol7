@@ -6,13 +6,16 @@ from settings import get_db_engine
 if TYPE_CHECKING:
     # Circular Importsによるエラー防止
     from model.node import Node
+    from model.edit_history import EditHistory
 
 
 class Article(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True)
     contents: str = Field(unique=False, nullable=False)
     updated_at: datetime = Field(DateTime, nullable=False)
+
     articles: list["Node"] = Relationship(back_populates="article")
+    edit_history: list["EditHistory"] = Relationship(back_populates="article")
 
 
 def create_table():
