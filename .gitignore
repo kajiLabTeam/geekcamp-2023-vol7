@@ -286,3 +286,8 @@ cython_debug/
 #.idea/
 
 .DS_Store
+
+*.ipynb
+*.env
+
+word_analysis/data/*.txt
