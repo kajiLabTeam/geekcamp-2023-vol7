@@ -20,9 +20,12 @@ class Node(SQLModel, table=True):
     connections: List["Connection"] = Relationship(back_populates="node")
 
     @classmethod
-    def get_node_by_id(cls, node_id: int):
+    def get_node_by_ids(cls, node_ids: list) -> List["Node"]:
+        if not node_ids:
+            return []
+        
         session = get_db_session()
-        stmt = select(Node).where(Node.id == node_id)
+        stmt = select(Node).where(Node.id.in_(node_ids))
         result = session.exec(stmt).all()
         session.close()
         return result
