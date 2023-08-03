@@ -15,21 +15,21 @@ export default function Loading({ isLoading }: { isLoading: boolean }) {
       <Image
         className={styles.logo}
         src={"/images/logo.png"}
-        alt="logo"
+        alt={"logo"}
         width={"600"}
         height={"400"}
       />
       <Image
         className={styles.kirakira_top}
         src={"/images/kirakira_top.svg"}
-        alt="kirakira"
+        alt={"kirakira"}
         width={"600"}
         height={"400"}
       />
       <Image
         className={styles.kirakira_bottom}
         src={"/images/kirakira_bottom.svg"}
-        alt="kirakira"
+        alt={"kirakira"}
         width={"600"}
         height={"400"}
       />
