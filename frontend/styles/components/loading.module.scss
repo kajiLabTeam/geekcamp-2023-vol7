@@ -3,7 +3,7 @@
   height: 100vh;
   background-color: var(--primary);
   display: flex;
-  position: relative;
+  position: fixed;
   z-index: 100;
   transition: opacity var(--transition-time) ease;
 
