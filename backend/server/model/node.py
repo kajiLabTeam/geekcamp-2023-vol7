@@ -1,10 +1,9 @@
 from typing import TYPE_CHECKING, List, Optional, Tuple
 
 from cerberus import Validator
-from sqlmodel import Field, Relationship, SQLModel, select
-
 from model.article import Article
 from settings import get_db_engine, get_db_session
+from sqlmodel import Field, Relationship, SQLModel, select
 
 if TYPE_CHECKING:
     from model.connection import Connection
@@ -20,10 +19,21 @@ class Node(SQLModel, table=True):
     connections: List["Connection"] = Relationship(back_populates="node")
 
     @classmethod
-    def get_node_by_ids(cls, node_ids: list) -> List["Node"]:
+    def get_node_by_id(cls, node_id: int) -> "Node":
+        # if not node_id:
+        #     return
+
+        session = get_db_session()
+        stmt = select(Node).where(Node.id == node_id)
+        result = session.exec(stmt).first()
+        session.close()
+        return result
+
+    @classmethod
+    def get_connection_node_by_ids(cls, node_ids: list) -> List["Node"]:
         if not node_ids:
             return []
-        
+
         session = get_db_session()
         stmt = select(Node).where(Node.id.in_(node_ids))
         result = session.exec(stmt).all()

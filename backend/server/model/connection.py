@@ -1,9 +1,8 @@
-from typing import Optional
-
-from sqlmodel import Field, Relationship, SQLModel, select, or_
+from typing import List, Optional
 
 from model.node import Node
 from settings import get_db_engine, get_db_session
+from sqlmodel import Field, Relationship, SQLModel, or_, select
 
 
 class Connection(SQLModel, table=True):
@@ -16,7 +15,7 @@ class Connection(SQLModel, table=True):
     connect_node: Optional[Node] = Relationship(back_populates="connections")
 
     @classmethod
-    def get_connection_by_node_id(cls, node_id: int):
+    def get_connection_by_node_id(cls, node_id: int) -> List["Connection"]:
         session = get_db_session()
         stmt = select(Connection).where(
             # or_(Connection.node_id == node_id, Connection.connect_node_id == node_id)

@@ -1,6 +1,5 @@
-from fastapi import APIRouter
-
 from db.article_db import get_article
+from fastapi import APIRouter
 
 router = APIRouter()
 
