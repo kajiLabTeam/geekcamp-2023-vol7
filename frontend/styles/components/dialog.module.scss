@@ -209,7 +209,33 @@
       font-size: 1.3rem;
       font-weight: bold;
       text-align: right;
-      transition: padding-right .3s;
+      transition: padding-right 0.3s;
+    }
+
+    @media (max-width: 500px) {
+      clip-path: polygon(
+        0 00%,
+        0% 0,
+        calc(100% - 70px) 0,
+        100% 70px,
+        100% 100%,
+        0 100%
+      );
+
+      .title {
+        margin-right: 70px;
+        padding: 20px 0 20px 30px;
+      }
+
+      .subtitle {
+        top: 220px;
+      }
+
+      .description {
+        height: 280px;
+        padding: 0 0 0 20px;
+        margin-left: 20px;
+      }
     }
   }
 
@@ -219,6 +245,26 @@
 
     .last_update {
       padding-right: 10px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .inside {
+      display: none;
+    }
+
+    .top_right {
+      height: 98px;
+      top: -12.5px;
+      right: 34.2px;
+    }
+
+    .top {
+      right: 70px;
+    }
+
+    .right {
+      top: 70px;
     }
   }
 }
