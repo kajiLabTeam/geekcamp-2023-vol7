@@ -9,3 +9,8 @@ export const currentNodeState = atom<NodeObject>({
     name: "wisdom Tree"
   }
 });
+
+export const isDialogOpenState = atom<boolean>({
+  key: recoilKeyHashSet.isDialogOpen,
+  default: false
+})

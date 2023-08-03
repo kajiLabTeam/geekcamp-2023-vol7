@@ -1,25 +1,23 @@
 import styles from "@/styles/components/dialog.module.scss";
 import { useEffect, useState } from "react";
 import markdownit from "markdown-it";
-import { useRecoilValue } from "recoil";
-import { currentNodeState } from "@/const/recoil/state";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
 
 type Props = {
-  isOpen: boolean;
   forceLoading: boolean;
-  onClick: () => void;
 };
 
 export default function Dialog(
-  { isOpen, forceLoading, onClick }: Props = {
-    isOpen: false,
-    forceLoading: false,
-    onClick: () => {}
+  { forceLoading }: Props = {
+    forceLoading: false
   }
 ) {
   const currentNode = useRecoilValue(currentNodeState);
   const nodeId = currentNode.id;
   const nodeName = currentNode.name;
+
+  const [isDialogOpen, setIsDialogOpen] = useRecoilState(isDialogOpenState)
 
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState("2023.08.02");
@@ -42,7 +40,7 @@ export default function Dialog(
   }, [nodeId]);
 
   return (
-    <div className={`${styles.wrapper} ${isOpen ? styles.open : ""}`} onClick={onClick}>
+    <div className={`${styles.wrapper} ${isDialogOpen ? styles.open : ""}`} onClick={() => setIsDialogOpen(v => !v)}>
       <div className={styles.top_left_1}></div>
       <div className={styles.top_left_2}></div>
       <div className={styles.top}></div>

@@ -3,16 +3,12 @@ import { useCallback, useRef } from "react";
 import ForceGraph2D from 'react-force-graph-2d';
 import { Link, Node, linksData, nodesData } from "../const/testData";
 import { useRecoilCallback, useSetRecoilState } from "recoil";
-import { currentNodeState } from "@/const/recoil/state";
+import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
 
-type Props = {
-  openDirlog: () => void;
-}
-
-export default function Canvas(props: Props) {
-  const { openDirlog } = props;
+export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
   const getCurrentNode = useRecoilCallback(({ snapshot }) => () => snapshot.getPromise(currentNodeState));
+  const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
   const nodes: Node[] = [...nodesData, ...nodesData.map(v => ({ id: `label_${v.id}`, label: "", val: 1 }))];
   const links: Link[] = [...linksData, ...nodesData.map(v => ({ source: v.id, target: `label_${v.id}`, isLabel: true }))];
@@ -56,7 +52,7 @@ export default function Canvas(props: Props) {
   )
 
   const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
-    if ((await getCurrentNode()).id === node.id) openDirlog();
+    if ((await getCurrentNode()).id === node.id) setIsDialogOpen(true);
     setCurrentNode({ ...node });
   }, []);
 

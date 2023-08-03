@@ -1,11 +1,11 @@
-import Head from "next/head";
-import styles from "@/styles/pages/home.module.scss";
-import Frame from "@/components/frame";
 import Dialog from "@/components/dialog";
-import { useCallback, useEffect, useState } from "react";
-import Loading from "./loading";
+import Frame from "@/components/frame";
 import { sleep } from "@/components/util";
+import styles from "@/styles/pages/home.module.scss";
 import dynamic from "next/dynamic";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import Loading from "./loading";
 
 const Canvas = dynamic(import('@/components/canvas'), {
   loading: () => <></>,
@@ -15,7 +15,6 @@ const Canvas = dynamic(import('@/components/canvas'), {
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [hideLoad, setHideLoad] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     setTimeout(async () => {
@@ -25,7 +24,6 @@ export default function Home() {
     }, 3000);
   }, []);
 
-  const openDirlog = useCallback(() => setIsDialogOpen(true), []);
   return (
     <>
       <Head>
@@ -44,14 +42,10 @@ export default function Home() {
           className={styles.main}
         >
           <Dialog
-            isOpen={isDialogOpen}
             forceLoading={isLoading}
-            onClick={() => setIsDialogOpen(!isDialogOpen)}
           />
           <Frame />
-          <Canvas
-            openDirlog={openDirlog}
-          />
+          <Canvas />
         </main>
       </>
     </>

@@ -1,6 +1,7 @@
 // Keyの配列
 const recoilKeys = [
   "currentNode",
+  "isDialogOpen",
 ] as const;
 
 // Key: Keyのオブジェクト
