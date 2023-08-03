@@ -3,7 +3,6 @@
   height: 100vh;
   background-color: var(--primary);
   display: flex;
-  align-items: center;
   position: relative;
   z-index: 100;
   transition: opacity var(--transition-time) ease;
@@ -14,10 +13,32 @@
   }
 
   .logo {
-    margin-inline: auto;
+    min-width: 400px;
     width: 80%;
-    max-width: 90%;
     height: auto;
+
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+  }
+
+  .kirakira_top {
+    min-width: 200px;
+    width: 40%;
+    max-width: 400px;
+    position: fixed;
+    right: 60%;
+    top: 5%;
+  }
+
+  .kirakira_bottom {
+    min-width: 200px;
+    width: 40%;
+    max-width: 400px;
+    position: fixed;
+    left: 60%;
+    bottom: 5%;
   }
 
   div[class*="line"] {
