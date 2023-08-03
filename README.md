@@ -8,45 +8,70 @@
 
 1. ディレクトリを移動
 
-```
+```shell
 cd backend/db
 ```
 
 2. MySQL サーバーを建てる
 
-```
+```shell
 docker compose up -d
 ```
 
 3. MySQL コンテナにある MySQL サーバーにログイン
 
+```shell
+bash bin/connect_mysql.sh
 ```
-bash backend/db/bin/connect_mysql.sh
+
+4. DB にテーブルが挿入されているか確認
+```shell
+use wisdomtree;
+```
+
+```shell
+show tables;
+```
+
+```shell
+select * from article;
+```
+
+#### もしサーバーを立て、テーブルが作られていなかった時
+Dokcer環境を初期化してください
+```shell
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+
+docker network prune -f
+docker rmi -f $(docker images --filter dangling=true -qa)
+docker volume rm $(docker volume ls --filter dangling=true -q)
+docker rmi -f $(docker images -qa)
 ```
 
 #### FastAPI サーバーを建てる
 
 1. ディレクトリを移動
 
-```
+```shell
 cd backend/server
 ```
 
 2. 必要モジュールのインストール
 
-```
+```shell
 pipenv install
 ```
 
 3. 仮想環境に入る
 
-```
+```shell
 pipenv shell
 ```
 
 4. FastAPI サーバーを建てる
 
-```
+```shell
 uvicorn main:app --reload
 ```
 
@@ -60,3 +85,4 @@ uvicorn main:app --reload
 
 #### router
 - dbで定義した関数を呼び出しながら最終的にAPIとして出力するJSONを作成する
+

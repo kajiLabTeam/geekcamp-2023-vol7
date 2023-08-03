@@ -1,5 +1,6 @@
 import datetime as t
 from typing import List
+
 from model.node import Node
 from settings import get_db_session
 
