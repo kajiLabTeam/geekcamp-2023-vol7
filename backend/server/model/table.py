@@ -1,9 +1,8 @@
-import model.user as userModel
 import model.article as articleModel
-import model.node as nodeModel
 import model.connection as connectionModel
 import model.edit_history as editHistoryModel
-
+import model.node as nodeModel
+import model.user as userModel
 
 
 def create_all_tables():
@@ -13,4 +12,3 @@ def create_all_tables():
     editHistoryModel.create_table()
     connectionModel.create_table()
     nodeModel.create_table()
-    

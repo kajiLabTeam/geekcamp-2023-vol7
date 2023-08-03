@@ -1,5 +1,6 @@
 import datetime as t
 from typing import List
+
 from model.article import Article
 from settings import get_db_session
 

@@ -1,6 +1,9 @@
 from datetime import datetime
-from typing import TYPE_CHECKING, Optional
-from sqlmodel import SQLModel, DateTime, Relationship, Field
+from typing import TYPE_CHECKING, List, Optional
+
+from sqlmodel import DateTime, Field, Relationship, SQLModel
+
+from model.user import User
 from settings import get_db_engine
 
 if TYPE_CHECKING:
@@ -11,17 +14,14 @@ if TYPE_CHECKING:
 
 class EditHistory(SQLModel, table=True):
     __tablename__ = "edit_history"
-    
+
     id: Optional[int] = Field(primary_key=True)
     edit_date: datetime = Field(DateTime, nullable=False)
     user_id: int = Field(foreign_key="user.id")
     article_id: int = Field(foreign_key="article.id")
 
-    user: list["User"] = Relationship(back_populates="user")
-    article: list["Article"] = Relationship(back_populates="article")
-    
-    class Meta:
-        table = "edit_history"
+    user: List["User"] = Relationship(back_populates="edit_histories")
+    article: List["Article"] = Relationship(back_populates="edit_histories")
 
 
 def create_table():

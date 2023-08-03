@@ -1,6 +1,8 @@
 from datetime import datetime
-from typing import TYPE_CHECKING, Optional
-from sqlmodel import SQLModel, Relationship, Field
+from typing import TYPE_CHECKING, List, Optional
+
+from sqlmodel import Field, Relationship, SQLModel
+
 from settings import get_db_engine
 
 if TYPE_CHECKING:
@@ -12,7 +14,7 @@ class User(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True)
     name: str = Field(unique=False, nullable=False)
 
-    edit_history: list["EditHistory"] = Relationship(back_populates="edit_history")
+    edit_histories: List["EditHistory"] = Relationship(back_populates="user")
 
 
 def create_table():
