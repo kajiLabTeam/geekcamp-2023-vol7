@@ -10,14 +10,14 @@ type Props = {
 
 export default function Dialog(
   { forceLoading }: Props = {
-    forceLoading: false
+    forceLoading: false,
   }
 ) {
   const currentNode = useRecoilValue(currentNodeState);
   const nodeId = currentNode.id;
   const nodeName = currentNode.name;
 
-  const [isDialogOpen, setIsDialogOpen] = useRecoilState(isDialogOpenState)
+  const [isDialogOpen, setIsDialogOpen] = useRecoilState(isDialogOpenState);
 
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState("2023.08.02");
@@ -40,7 +40,10 @@ export default function Dialog(
   }, [nodeId]);
 
   return (
-    <div className={`${styles.wrapper} ${isDialogOpen ? styles.open : ""}`} onClick={() => setIsDialogOpen(v => !v)}>
+    <div
+      className={`${styles.wrapper} ${isDialogOpen ? styles.open : ""}`}
+      onClick={() => setIsDialogOpen((v) => !v)}
+    >
       <div className={styles.top_left_1}></div>
       <div className={styles.top_left_2}></div>
       <div className={styles.top}></div>
@@ -51,15 +54,15 @@ export default function Dialog(
       <div className={styles.bottom_2}></div>
       <div className={styles.left}></div>
 
-      <div className={styles.inside_bottom}></div>
-      <div className={styles.inside_left_1}></div>
-      <div className={styles.inside_bottom_left}></div>
-      <div className={styles.inside_left_2}></div>
-      <div className={styles.inside_top_left}></div>
-      <div className={styles.inside_top_1}></div>
-      <div className={styles.inside_top_2}></div>
-      <div className={styles.inside_top_right}></div>
-      <div className={styles.inside_right}></div>
+      <div className={`${styles.inside} ${styles.inside_bottom}`}></div>
+      <div className={`${styles.inside} ${styles.inside_left_1}`}></div>
+      <div className={`${styles.inside} ${styles.inside_bottom_left}`}></div>
+      <div className={`${styles.inside} ${styles.inside_left_2}`}></div>
+      <div className={`${styles.inside} ${styles.inside_top_left}`}></div>
+      <div className={`${styles.inside} ${styles.inside_top_1}`}></div>
+      <div className={`${styles.inside} ${styles.inside_top_2}`}></div>
+      <div className={`${styles.inside} ${styles.inside_top_right}`}></div>
+      <div className={`${styles.inside} ${styles.inside_right}`}></div>
 
       <div className={styles.dialog}>
         <h1 className={styles.title}>{nodeName ?? "wisdom Tree"}</h1>
