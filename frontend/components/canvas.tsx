@@ -1,14 +1,16 @@
-import styles from "@styles/components/canvas.module.scss";
-import { useCallback, useRef } from "react";
-import ForceGraph2D from 'react-force-graph-2d';
-import { Link, Node, linksData, nodesData } from "../const/testData";
-import { useRecoilCallback, useSetRecoilState } from "recoil";
 import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
+import useDomSize from "@/hooks/useDomSize";
+import styles from "@styles/components/canvas.module.scss";
+import { useCallback } from "react";
+import ForceGraph2D from 'react-force-graph-2d';
+import { useRecoilCallback, useSetRecoilState } from "recoil";
+import { Link, Node, linksData, nodesData } from "../const/testData";
 
 export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
   const getCurrentNode = useRecoilCallback(({ snapshot }) => () => snapshot.getPromise(currentNodeState));
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
+  const [wrapperRef, size] = useDomSize<HTMLDivElement>();
 
   const nodes: Node[] = [...nodesData, ...nodesData.map(v => ({ id: `label_${v.id}`, label: "", val: 1 }))];
   const links: Link[] = [...linksData, ...nodesData.map(v => ({ source: v.id, target: `label_${v.id}`, isLabel: true }))];
@@ -57,8 +59,10 @@ export default function Canvas() {
   }, []);
 
   return (
-    <div className={styles.canvas}>
-      <ForceGraph2D
+    <div className={styles.canvas} ref={wrapperRef}>
+      {size && <ForceGraph2D
+        width={size.width}
+        height={size.height}
         graphData={{ nodes, links }}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
@@ -67,7 +71,7 @@ export default function Canvas() {
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
         linkCanvasObject={drawLinks}
         nodeVisibility={node => !node.id.startsWith("label_")}
-      />
+      />}
     </div>
   );
 }
