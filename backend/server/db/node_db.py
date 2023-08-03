@@ -1,11 +1,12 @@
 import datetime as t
 from typing import List
 
+from model.connection import Connection
 from model.node import Node
 from settings import get_db_session
 
 
-def get_all_nodes() -> Node | None:
+def get_nodes(node_id: int):
     """指定したノードを取得する
 
     Args:
@@ -15,29 +16,29 @@ def get_all_nodes() -> Node | None:
         Node: ノード
     """
 
-    session = get_db_session()
-    # ノードIDを元にchild_node_id_list、parent_node_id_listに検索をかけ
-    # child_nodesとparent_nodesに検索して得た値を代入する
+    current_node = Node.get_node_by_id(node_id)
+    connections = Connection.get_connection_by_node_id(current_node.id)
+    relation_nodes = Node.get_connection_node_by_ids(
+        [connection.connect_node_id for connection in connections]
+    )
 
-    session.close()
-    return node
-
-
-def get_nodes(node_ids: list) -> Node | None:
-    """指定したノードを取得する
-
-    Args:
-        node_id (str): ノードID
-
-    Returns:
-        Node: ノード
-    """
-
-    session = get_db_session()
-    # ノードIDを元にrelation_node_id_listに検索
-
-    session.close()
-    return node
+    return {
+        "currentNode": {
+            "nodeId": current_node.id,
+            "name": current_node.node_name,
+            "articleId": current_node.article_id,
+            # "lastUpdate": current_node[0].last_update,
+        },
+        "relationNode": [
+            {
+                "nodeId": relation_node.id,
+                "name": relation_node.node_name,
+                "articleId": relation_node.article_id,
+            }
+            for relation_node in relation_nodes
+        ],
+    }
+    return {"message": "Hello Nodes"}
 
 
 def add_node(node: Node):
