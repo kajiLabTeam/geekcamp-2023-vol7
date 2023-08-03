@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import TYPE_CHECKING, List, Optional
 
-from sqlmodel import DateTime, Field, Relationship, SQLModel
+from sqlmodel import DateTime, Field, Relationship, SQLModel, select
 
 from model.user import User
-from settings import get_db_engine
+from settings import get_db_engine, get_db_session
 
 if TYPE_CHECKING:
     # Circular Importsによるエラー防止
@@ -22,6 +22,22 @@ class EditHistory(SQLModel, table=True):
 
     user: List["User"] = Relationship(back_populates="edit_histories")
     article: List["Article"] = Relationship(back_populates="edit_histories")
+
+    @classmethod
+    def get_edit_history_by_user_id(cls, user_id: int):
+        session = get_db_session()
+        stmt = select(EditHistory).where(EditHistory.user_id == user_id)
+        result = session.exec(stmt).all()
+        session.close()
+        return result
+
+    @classmethod
+    def get_edit_history_by_article_id(cls, article_id: int):
+        session = get_db_session()
+        stmt = select(EditHistory).where(EditHistory.article_id == article_id)
+        result = session.exec(stmt).all()
+        session.close()
+        return result
 
 
 def create_table():

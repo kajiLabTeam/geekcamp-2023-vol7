@@ -1,12 +1,9 @@
-from typing import TYPE_CHECKING, Optional
+from typing import Optional
 
-from sqlmodel import Field, Relationship, SQLModel
+from sqlmodel import Field, Relationship, SQLModel, select, or_
 
 from model.node import Node
-from settings import get_db_engine
-
-# if TYPE_CHECKING:
-#     from model.node import Node
+from settings import get_db_engine, get_db_session
 
 
 class Connection(SQLModel, table=True):
@@ -17,6 +14,18 @@ class Connection(SQLModel, table=True):
 
     node: Optional[Node] = Relationship(back_populates="connections")
     connect_node: Optional[Node] = Relationship(back_populates="connections")
+
+    @classmethod
+    def get_connection_by_node_id(cls, node_id: int):
+        session = get_db_session()
+        stmt = select(Connection).where(
+            # or_(Connection.node_id == node_id, Connection.connect_node_id == node_id)
+            Connection.node_id
+            == node_id
+        )
+        result = session.exec(stmt).all()
+        session.close()
+        return result
 
 
 def create_table():
