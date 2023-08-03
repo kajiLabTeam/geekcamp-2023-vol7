@@ -4,8 +4,10 @@ import ForceGraph2D from 'react-force-graph-2d';
 import { Link, Node, linksData, nodesData } from "../const/testData";
 import { useRecoilCallback, useSetRecoilState } from "recoil";
 import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
+import { useWindowSize } from "@react-hook/window-size";
 
 export default function Canvas() {
+  const [width, height] = useWindowSize();
   const setCurrentNode = useSetRecoilState(currentNodeState);
   const getCurrentNode = useRecoilCallback(({ snapshot }) => () => snapshot.getPromise(currentNodeState));
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
@@ -59,6 +61,8 @@ export default function Canvas() {
   return (
     <div className={styles.canvas}>
       <ForceGraph2D
+        width={width}
+        height={height}
         graphData={{ nodes, links }}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
