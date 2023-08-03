@@ -291,3 +291,4 @@ cython_debug/
 *.env
 
 word_analysis/data/*.txt
+*.db
