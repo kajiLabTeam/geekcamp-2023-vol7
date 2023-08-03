@@ -19,6 +19,20 @@ export default function Loading({ isLoading }: { isLoading: boolean }) {
         width={"600"}
         height={"400"}
       />
+      <Image
+        className={styles.kirakira_top}
+        src={"/images/kirakira_top.svg"}
+        alt="kirakira"
+        width={"600"}
+        height={"400"}
+      />
+      <Image
+        className={styles.kirakira_bottom}
+        src={"/images/kirakira_bottom.svg"}
+        alt="kirakira"
+        width={"600"}
+        height={"400"}
+      />
       <div className={styles.line_1}></div>
       <div className={styles.line_2}></div>
       <div className={styles.line_3}></div>
