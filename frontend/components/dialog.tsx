@@ -1,24 +1,26 @@
 import styles from "@/styles/components/dialog.module.scss";
 import { useEffect, useState } from "react";
 import markdownit from "markdown-it";
+import { useRecoilValue } from "recoil";
+import { currentNodeState } from "@/const/recoil/state";
 
 type Props = {
   isOpen: boolean;
-  nodeId: number;
-  nodeName: string;
   forceLoading: boolean;
   onClick: () => void;
 };
 
 export default function Dialog(
-  { isOpen, nodeId, nodeName, forceLoading, onClick }: Props = {
+  { isOpen, forceLoading, onClick }: Props = {
     isOpen: false,
-    nodeId: 1,
-    nodeName: "wisdom Tree",
     forceLoading: false,
     onClick: () => {}
   }
 ) {
+  const currentNode = useRecoilValue(currentNodeState);
+  const nodeId = currentNode.id;
+  const nodeName = currentNode.name;
+
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdate, setLastUpdate] = useState("2023.08.02");
   const [description, setDescription] = useState(

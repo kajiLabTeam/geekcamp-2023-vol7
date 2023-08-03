@@ -16,8 +16,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [hideLoad, setHideLoad] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [nodeId, setNodeId] = useState(1);
-  const [nodeName, setNodeName] = useState("wisdom Tree");
 
   useEffect(() => {
     setTimeout(async () => {
@@ -47,15 +45,11 @@ export default function Home() {
         >
           <Dialog
             isOpen={isDialogOpen}
-            nodeId={nodeId}
-            nodeName={nodeName}
             forceLoading={isLoading}
             onClick={() => setIsDialogOpen(!isDialogOpen)}
-          ></Dialog>
+          />
           <Frame />
           <Canvas
-            setNodeId={setNodeId}
-            setNodeName={setNodeName}
             openDirlog={openDirlog}
           />
         </main>

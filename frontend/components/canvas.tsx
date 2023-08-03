@@ -1,23 +1,26 @@
 import styles from "@styles/components/canvas.module.scss";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import ForceGraph2D from 'react-force-graph-2d';
-import { nodesData, linksData, Link, Node } from "./const/testData";
+import { Link, Node, linksData, nodesData } from "../const/testData";
+import { useRecoilCallback, useSetRecoilState } from "recoil";
+import { currentNodeState } from "@/const/recoil/state";
 
 type Props = {
-  setNodeId: (nodeId: number) => void;
-  setNodeName: (nodeName: string) => void;
   openDirlog: () => void;
 }
 
 export default function Canvas(props: Props) {
-  const { setNodeId, setNodeName, openDirlog } = props;
-  const currentNode = useRef<string>();
+  const { openDirlog } = props;
+  const setCurrentNode = useSetRecoilState(currentNodeState);
+  const getCurrentNode = useRecoilCallback(({ snapshot }) => () => snapshot.getPromise(currentNodeState));
+
   const nodes: Node[] = [...nodesData, ...nodesData.map(v => ({ id: `label_${v.id}`, label: "", val: 1 }))];
   const links: Link[] = [...linksData, ...nodesData.map(v => ({ source: v.id, target: `label_${v.id}`, isLabel: true }))];
 
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
-    (node, ctx, globalScale) => {
-      if (currentNode.current === node.id) {
+    async (node, ctx, globalScale) => {
+      const currentNode = await getCurrentNode();
+      if (currentNode.id === node.id) {
         ctx.beginPath();
         ctx.arc(node.x!, node.y!, Math.sqrt(node.val) * 3, 0, Math.PI * 2, true);
         ctx.strokeStyle = '#ffffff';
@@ -52,11 +55,9 @@ export default function Canvas(props: Props) {
     []
   )
 
-  const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(node => {
-    if (currentNode.current === node.id) openDirlog();
-    currentNode.current = node.id;
-    setNodeId(Number(node.id));
-    setNodeName(node.name ?? "");
+  const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
+    if ((await getCurrentNode()).id === node.id) openDirlog();
+    setCurrentNode({ ...node });
   }, []);
 
   return (
