@@ -1,17 +1,7 @@
-import { LinkObject, NodeObject } from "react-force-graph-2d";
+import { Link, Node } from "@/foundation/graph/types";
 
 const PRIMARY = "#000000";
 const ACCENT = "#75BEC2"
-
-export type Node = NodeObject<{
-  id: string;
-  name?: string;
-  nodeLabel?: string;
-  color?: string;
-  val: number;
-}>
-
-export type Link = LinkObject<Node>
 
 export const nodesData: Node[] = [
   {

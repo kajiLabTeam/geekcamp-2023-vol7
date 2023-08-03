@@ -1,17 +1,19 @@
-import styles from "@styles/components/canvas.module.scss";
-import { useCallback, useRef } from "react";
-import ForceGraph2D from 'react-force-graph-2d';
-import { Link, Node, linksData, nodesData } from "../const/testData";
-import { useRecoilCallback, useSetRecoilState } from "recoil";
 import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
+import fetchLinkNodes from "@/foundation/graph/fetchLinkNodes";
+import nodeAddLabel from "@/foundation/graph/nodeAddLabel";
+import { GraphData, Node } from "@/foundation/graph/types";
+import styles from "@styles/components/canvas.module.scss";
+import { useCallback, useState } from "react";
+import ForceGraph2D from 'react-force-graph-2d';
+import { useRecoilCallback, useSetRecoilState } from "recoil";
+import { linksData, nodesData } from "../const/testData";
 
 export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
   const getCurrentNode = useRecoilCallback(({ snapshot }) => () => snapshot.getPromise(currentNodeState));
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
-  const nodes: Node[] = [...nodesData, ...nodesData.map(v => ({ id: `label_${v.id}`, label: "", val: 1 }))];
-  const links: Link[] = [...linksData, ...nodesData.map(v => ({ source: v.id, target: `label_${v.id}`, isLabel: true }))];
+  const [graphData, setGraphData] = useState<GraphData>(() => nodeAddLabel({ links: linksData, nodes:nodesData }));
 
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     async (node, ctx, globalScale) => {
@@ -52,14 +54,26 @@ export default function Canvas() {
   )
 
   const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
-    if ((await getCurrentNode()).id === node.id) setIsDialogOpen(true);
+    const currentNode = await getCurrentNode();
+    if (currentNode.id === node.id) setIsDialogOpen(true);
+    if (!node.isOpened) {
+      node.isOpened = true;
+      const linkData = await fetchLinkNodes(node.id);
+      const linkDataWithLabel = nodeAddLabel(linkData);
+
+      setGraphData(v => ({
+        nodes: [...v.nodes, ...linkDataWithLabel.nodes],
+        links: [...v.links, ...linkDataWithLabel.links]
+      }));
+    }
+
     setCurrentNode({ ...node });
   }, []);
 
   return (
     <div className={styles.canvas}>
       <ForceGraph2D
-        graphData={{ nodes, links }}
+        graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
         nodeCanvasObjectMode={() => "after"}
