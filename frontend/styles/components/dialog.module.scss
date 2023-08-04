@@ -4,7 +4,7 @@
   position: fixed;
   top: 50%;
   filter: drop-shadow(8px 4px 4px rgba(0, 0, 0, 0.3));
-  z-index: 100;
+  z-index: 200;
 
   transition: all var(--transition-time);
   left: 0%;
@@ -248,6 +248,11 @@
     }
   }
 
+  &:focus-visible {
+    border: none;
+    outline: none;
+  }
+
   @media (max-width: 500px) {
     .inside {
       display: none;
@@ -266,6 +271,20 @@
     .right {
       top: 70px;
     }
+  }
+}
+
+.bg {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 100;
+
+  &.open {
+    pointer-events: all;
   }
 }
 
