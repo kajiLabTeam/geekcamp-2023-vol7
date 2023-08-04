@@ -34,7 +34,7 @@ export default function Canvas() {
       if (typeof source !== 'object' || typeof target !== 'object') return;
       const fontSize = 12 * Math.sqrt(source.val) / globalScale;
       ctx.font = `${fontSize}px Sans-Serif`;
-      const textWidth = ctx.measureText(source.nodeLabel!).width;
+      const textWidth = ctx.measureText(source.name!).width;
       const textAngle = Math.atan2(target.y! - source.y!, target.x! - source.x!);
       const isFlip = textAngle > Math.PI / 2 || textAngle < -Math.PI / 2
 
@@ -47,7 +47,7 @@ export default function Canvas() {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#000000';
-      ctx.fillText(source.nodeLabel!, 0, 0);
+      ctx.fillText(source.name!, 0, 0);
       ctx.restore();
     },
     []
@@ -76,6 +76,7 @@ export default function Canvas() {
         graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
+        nodeColor={node => node.isOpened ? "#000000" : "#75BEC2"}
         nodeCanvasObjectMode={() => "after"}
         nodeCanvasObject={drawWithLabel}
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
