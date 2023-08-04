@@ -1,26 +1,27 @@
 import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
 import fetchLinkNodes from "@/foundation/graph/fetchLinkNodes";
 import nodeAddLabel from "@/foundation/graph/nodeAddLabel";
-import { GraphData, Node } from "@/foundation/graph/types";
+import { GraphData, Link, Node } from "@/foundation/graph/types";
 import styles from "@styles/components/canvas.module.scss";
-import { useCallback, useState } from "react";
-import ForceGraph2D from 'react-force-graph-2d';
-import { useRecoilCallback, useSetRecoilState } from "recoil";
+import { useCallback, useRef, useState } from "react";
+import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
+import { useSetRecoilState } from "recoil";
 import { linksData, nodesData } from "../const/testData";
 
 export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
-  const getCurrentNode = useRecoilCallback(({ snapshot }) => () => snapshot.getPromise(currentNodeState));
+  const currentNodeRef = useRef<Node>();
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
   const [graphData, setGraphData] = useState<GraphData>(() => nodeAddLabel({ links: linksData, nodes:nodesData }));
+  const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     async (node, ctx, globalScale) => {
-      const currentNode = await getCurrentNode();
-      if (currentNode.id === node.id) {
+      const currentNode = currentNodeRef.current;
+      if (currentNode && currentNode.id === node.id) {
         ctx.beginPath();
-        ctx.arc(node.x!, node.y!, Math.sqrt(node.val) * 3, 0, Math.PI * 2, true);
+        ctx.arc(node.fx!, node.fy!, Math.sqrt(node.val) * 3, 0, Math.PI * 2, true);
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 1;
         ctx.stroke();
@@ -59,8 +60,20 @@ export default function Canvas() {
   )
 
   const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
-    const currentNode = await getCurrentNode();
-    if (currentNode.id === node.id) setIsDialogOpen(true);
+    const currentNode = currentNodeRef.current;
+    if (currentNode && currentNode.id === node.id) {
+      setIsDialogOpen(true);
+    } else {
+      if (currentNode) {
+        currentNode.fx = undefined;
+        currentNode.fy = undefined;
+      }
+      node.fx = node.x;
+      node.fy = node.y;
+      graphRef.current.centerAt(node.x, node.y, 1000);
+      graphRef.current.zoom(4, 1000);
+    }
+
     if (!node.isOpened) {
       node.isOpened = true;
       const linkData = await fetchLinkNodes(node.id);
@@ -72,12 +85,15 @@ export default function Canvas() {
       }));
     }
 
+
+    currentNodeRef.current = node;
     setCurrentNode({ ...node });
   }, []);
 
   return (
     <div className={styles.canvas}>
       <ForceGraph2D
+        ref={graphRef}
         graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
