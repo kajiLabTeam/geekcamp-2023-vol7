@@ -14,13 +14,10 @@ const Canvas = dynamic(import('@/components/canvas'), {
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [hideLoad, setHideLoad] = useState(false);
 
   useEffect(() => {
     setTimeout(async () => {
       setIsLoading(false);
-      await sleep(1000);
-      setHideLoad(true);
     }, 3000);
   }, []);
 
@@ -37,7 +34,7 @@ export default function Home() {
       </Head>
 
       <>
-        {!hideLoad && <Loading isLoading={isLoading} />}
+        <Loading isLoading={isLoading} />
         <main
           className={styles.main}
         >
