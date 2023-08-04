@@ -1,9 +1,13 @@
 from fastapi import FastAPI
+
+from init.insert import insert_article
 from model.table import create_all_tables
 from router.article import router as article_router
 from router.node import router as node_router
 
 create_all_tables()
+
+insert_article()
 
 
 app = FastAPI()
