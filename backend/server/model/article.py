@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING, List, Optional
 
 from model.edit_history import EditHistory
 from settings import get_db_engine, get_db_session
+from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import DateTime, Field, Relationship, SQLModel, select
 
 if TYPE_CHECKING:
@@ -20,12 +21,19 @@ class Article(SQLModel, table=True):
     edit_histories: List["EditHistory"] = Relationship(back_populates="article")
 
     @classmethod
-    def get_connection_by_id(cls, article_id: int):
-        session = get_db_session()
-        stmt = select(Article).where(Article.id == article_id)
-        result = session.exec(stmt).first()
-        session.close()
-        return result
+    def get_article_by_id(cls, article_id: int) -> List["Article"] | None:
+        if not article_id:
+            return None
+
+        try:
+            session = get_db_session()
+            stmt = select(Article).where(Article.id == article_id)
+            result = session.exec(stmt).first()
+            session.close()
+            return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
 
 
 def create_table():

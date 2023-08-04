@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING, List, Optional, Tuple
 from cerberus import Validator
 from model.article import Article
 from settings import get_db_engine, get_db_session
+from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import Field, Relationship, SQLModel, select
 
 if TYPE_CHECKING:
@@ -19,26 +20,34 @@ class Node(SQLModel, table=True):
     connections: List["Connection"] = Relationship(back_populates="node")
 
     @classmethod
-    def get_node_by_id(cls, node_id: int) -> "Node":
-        # if not node_id:
-        #     return
+    def get_node_by_id(cls, node_id: int) -> List["Node"] | None:
+        if not node_id:
+            return None
 
-        session = get_db_session()
-        stmt = select(Node).where(Node.id == node_id)
-        result = session.exec(stmt).first()
-        session.close()
-        return result
+        try:
+            session = get_db_session()
+            stmt = select(Node).where(Node.id == node_id)
+            result = session.exec(stmt).first()
+            session.close()
+            return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
 
     @classmethod
-    def get_connection_node_by_ids(cls, node_ids: list) -> List["Node"]:
+    def get_connection_node_by_ids(cls, node_ids: list) -> List["Node"] | None:
         if not node_ids:
             return []
 
-        session = get_db_session()
-        stmt = select(Node).where(Node.id.in_(node_ids))
-        result = session.exec(stmt).all()
-        session.close()
-        return result
+        try:
+            session = get_db_session()
+            stmt = select(Node).where(Node.id.in_(node_ids))
+            result = session.exec(stmt).all()
+            session.close()
+            return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
 
 
 def validate(params) -> Tuple[bool, dict]:

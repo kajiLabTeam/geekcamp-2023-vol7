@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from model.node import Node
 from settings import get_db_engine, get_db_session
+from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import Field, Relationship, SQLModel, or_, select
 
 
@@ -15,16 +16,19 @@ class Connection(SQLModel, table=True):
     connect_node: Optional[Node] = Relationship(back_populates="connections")
 
     @classmethod
-    def get_connection_by_node_id(cls, node_id: int) -> List["Connection"]:
-        session = get_db_session()
-        stmt = select(Connection).where(
-            # or_(Connection.node_id == node_id, Connection.connect_node_id == node_id)
-            Connection.node_id
-            == node_id
-        )
-        result = session.exec(stmt).all()
-        session.close()
-        return result
+    def get_connection_by_node_id(cls, node_id: int) -> List["Connection"] | None:
+        if not node_id:
+            return None
+
+        try:
+            session = get_db_session()
+            stmt = select(Connection).where(Connection.node_id == node_id)
+            result = session.exec(stmt).all()
+            session.close()
+            return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
 
 
 def create_table():
