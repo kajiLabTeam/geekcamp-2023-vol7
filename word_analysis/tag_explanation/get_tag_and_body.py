@@ -15,7 +15,7 @@ HEADERS = {
     "Authorization": "Bearer " + QIITA_TOKEN
 }
 
-conn = sqlite3.connect('tags.db')
+conn = sqlite3.connect('explanation.db')
 cur = conn.cursor()
 
 cur.execute('''

@@ -3,7 +3,7 @@ import json
 from time import sleep
 import sqlite3
 
-conn = sqlite3.connect('tags.db')
+conn = sqlite3.connect('explanation.db')
 cur = conn.cursor()
 
 cur.execute('''
