@@ -65,6 +65,15 @@ class Node(SQLModel, table=True):
             print(f"An error occurred: {e}")
             return None
 
+    @classmethod
+    # データモデルをMySQLにインサート
+    def insert_node(cls, node: "Node"):
+        session = get_db_session()
+        session.add(node)
+        session.commit()
+        session.refresh(node)
+        session.close()
+
 
 def validate(params) -> Tuple[bool, dict]:
     schema = {
