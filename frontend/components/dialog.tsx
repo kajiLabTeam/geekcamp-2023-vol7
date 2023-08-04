@@ -2,7 +2,12 @@ import styles from "@/styles/components/dialog.module.scss";
 import { useEffect, useState } from "react";
 import markdownit from "markdown-it";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
+import {
+  currentArticleState,
+  currentNodeState,
+  isDialogOpenState,
+} from "@/const/recoil/state";
+// import { fetchNode } from "./util/fetch";
 
 type Props = {
   forceLoading: boolean;
@@ -13,31 +18,23 @@ export default function Dialog(
     forceLoading: false,
   }
 ) {
-  const currentNode = useRecoilValue(currentNodeState);
-  const nodeId = currentNode.id;
-  const nodeName = currentNode.name;
-
   const [isDialogOpen, setIsDialogOpen] = useRecoilState(isDialogOpenState);
+  const currentNode = useRecoilValue(currentNodeState);
+  const [article, setArticle] = useRecoilState(currentArticleState);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [lastUpdate, setLastUpdate] = useState("2023.08.02");
-  const [description, setDescription] = useState(
-    "wisdom Tree は知っている単語から繋がる知らない単語を知れるサービスです.あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
-  );
 
   useEffect(() => {
     setIsLoading(true);
-    // fetch(`https://wisdom-tree-api.vercel.app/api/nodes/${nodeId}`)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setDescription(data.description);
-    //   });
-    setDescription(
-      "# hi\nwisdom Tree は知っている単語から繋がる知らない単語を知れるサービスです.あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん"
-    );
 
-    setIsLoading(false);
-  }, [nodeId]);
+    // async () => {
+    //   const articleSnap = await fetchNode(currentNode.id);
+    //   setArticle(articleSnap);
+    //   setIsLoading(false);
+    // }
+
+    setIsLoading(false); // 仮
+  }, [currentNode]);
 
   return (
     <div
@@ -65,8 +62,8 @@ export default function Dialog(
       <div className={`${styles.inside} ${styles.inside_right}`}></div>
 
       <div className={styles.dialog}>
-        <h1 className={styles.title}>{nodeName ?? "wisdom Tree"}</h1>
-        <div className={styles.subtitle}>{nodeName ?? "wisdom Tree"}</div>
+        <h1 className={styles.title}>{currentNode.name}</h1>
+        <div className={styles.subtitle}>{currentNode.name}</div>
 
         {isLoading || forceLoading ? (
           <div className={styles.loading}>
@@ -124,10 +121,10 @@ export default function Dialog(
             <div
               className={styles.description}
               dangerouslySetInnerHTML={{
-                __html: markdownit().render(description),
+                __html: markdownit().render(article.content),
               }}
             ></div>
-            <p className={styles.last_update}>{lastUpdate}</p>
+            <p className={styles.last_update}>{article.lastUpdate}</p>
           </>
         )}
       </div>
