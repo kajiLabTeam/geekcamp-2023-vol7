@@ -1,7 +1,8 @@
 import os
+
 from dotenv import load_dotenv
-from sqlmodel import create_engine, Session
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlmodel import Session, create_engine
 
 load_dotenv()
 
@@ -22,4 +23,5 @@ def get_db_engine():
 
 
 def get_db_session():
-    return Session(get_db_engine())
+    with Session(engine) as session:
+        return session
