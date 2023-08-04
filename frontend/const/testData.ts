@@ -43,16 +43,6 @@ export const nodesData: Node[] = [
     name: "useEffect",
     val: 1
   },
-  {
-    id: "empty_0",
-    name: "",
-    val: 1
-  },
-  {
-    id: "empty_1",
-    name: "",
-    val: 1
-  },
 ]
 
 export const linksData: Link[] = [
@@ -75,14 +65,6 @@ export const linksData: Link[] = [
   {
     source: "reactjs",
     target: "JavaScript",
-  },
-  {
-    source: "reactjs",
-    target: "empty_0",
-  },
-  {
-    source: "reactjs",
-    target: "empty_1",
   },
   {
     source: "hooks",
