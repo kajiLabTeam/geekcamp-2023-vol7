@@ -38,16 +38,18 @@ conn.commit()
 # pageが最小かつitems_countが指定した値以上かつitems_countが最大のタグを取得
 def get_next_tag(min_items_count=486):
     sql = f'''
-        SELECT tag
+        SELECT tag, page
         FROM tags
         WHERE items_count > {min_items_count}
         ORDER BY page ASC, items_count DESC LIMIT 1
     '''
 
     cur.execute(sql)
-    tag = cur.fetchone()[0]
+    res = cur.fetchone()
+    tag = res[0]
+    page = res[1]
 
-    return tag
+    return (tag, page+1)
 
 
 # 指定したtagのpageを1増やす
@@ -90,12 +92,12 @@ def tag_connect_counter(article_tags, target_tag):
 
 
 # Qiitaからtag同士の関連性を取得
-def get_tag_connection(tag):
+def get_tag_connection(tag, page):
     print()
     print(f'----- {tag} -----')
 
     params = {
-        "page": 1,
+        "page": page,
         "per_page": 100,
         'query': f'tag:{tag}',
         'sort': 'likes_count',
@@ -137,6 +139,6 @@ def get_tags():
 if __name__ == '__main__':
     # get_tags()
     while True:
-        next_tag = get_next_tag(486)
-        pls_one_page(next_tag)
+        (next_tag, nest_page) = get_next_tag(486)
+        pls_one_page(next_tag, nest_page)
         get_tag_connection(next_tag)
