@@ -2,6 +2,7 @@
 const recoilKeys = [
   "currentNode",
   "isDialogOpen",
+  "currentArticle",
 ] as const;
 
 // Key: Keyのオブジェクト

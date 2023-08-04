@@ -1,6 +1,6 @@
 import Dialog from "@/components/dialog";
 import Frame from "@/components/frame";
-import { sleep } from "@/components/util";
+import { sleep } from "@/components/util/util";
 import styles from "@/styles/pages/home.module.scss";
 import dynamic from "next/dynamic";
 import Head from "next/head";
