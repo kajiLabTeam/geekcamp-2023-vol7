@@ -97,8 +97,8 @@ def get_tag_connection(tag, page, items_count):
     print()
     print(f'----- {tag} -----')
 
-    if items_count >= page * 100:
-        print('記事数を上回っています')
+    if items_count <= page * 100:
+        print(f'記事数を上回っています. {items_count} >= {page * 100}')
         return
 
     params = {
