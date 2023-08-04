@@ -1,10 +1,11 @@
 from typing import TYPE_CHECKING, List, Optional, Tuple
 
 from cerberus import Validator
-from model.article import Article
-from settings import get_db_engine, get_db_session
 from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import Field, Relationship, SQLModel, select
+
+from model.article import Article
+from settings import get_db_engine, get_db_session
 
 if TYPE_CHECKING:
     from model.connection import Connection

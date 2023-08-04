@@ -1,5 +1,6 @@
-from db.node_db import get_nodes as db_get_nodes
 from fastapi import APIRouter, Query
+
+from db.node_db import get_nodes as db_get_nodes
 
 router = APIRouter()
 

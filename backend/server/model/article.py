@@ -1,10 +1,11 @@
 from datetime import datetime
 from typing import TYPE_CHECKING, List, Optional
 
-from model.edit_history import EditHistory
-from settings import get_db_engine, get_db_session
 from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import DateTime, Field, Relationship, SQLModel, select
+
+from model.edit_history import EditHistory
+from settings import get_db_engine, get_db_session
 
 if TYPE_CHECKING:
     # Circular Importsによるエラー防止
@@ -57,6 +58,15 @@ class Article(SQLModel, table=True):
         except SQLAlchemyError as e:
             print(f"An error occurred: {e}")
             return None
+
+    @classmethod
+    # データモデルをMySQLにインサート
+    def insert_article(cls, article: "Article"):
+        session = get_db_session()
+        session.add(article)
+        session.commit()
+        session.refresh(article)
+        session.close()
 
 
 def create_table():
