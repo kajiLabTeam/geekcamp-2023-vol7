@@ -2,80 +2,31 @@ import { Link, Node } from "@/foundation/graph/types";
 
 export const nodesData: Node[] = [
   {
-    id: "reactjs",
-    name: "React.js",
+    id: 1,
+    name: "wisdom Tree",
     isOpened: true,
+    isCurrent: true,
     val: 10
   },
   {
-    id: "liblary",
-    name: "ライブラリ",
-    val: 2
+    id: 2,
+    name: "フロントエンド",
+    val: 10
   },
   {
-    id: "framework",
-    name: "フレームワーク",
-    val: 1
-  },
-  {
-    id: "JavaScript",
-    name: "JavaScript",
-    val: 2
-  },
-  {
-    id: "hooks",
-    name: "hooks",
-    isOpened: true,
-    val: 1
-  },
-  {
-    id: "useRef",
-    name: "useRef",
-    val: 1
-  },
-  {
-    id: "useState",
-    name: "useState",
-    val: 1
-  },
-  {
-    id: "useEffect",
-    name: "useEffect",
-    val: 1
+    id: 3,
+    name: "バックエンド",
+    val: 10
   },
 ]
 
 export const linksData: Link[] = [
   {
-    source: "reactjs",
-    target: "liblary",
+    source: 1,
+    target: 2
   },
   {
-    source: "reactjs",
-    target: "framework",
-  },
-  {
-    source: "reactjs",
-    target: "JavaScript",
-  },
-  {
-    source: "reactjs",
-    target: "hooks",
-  },
-  {
-    source: "reactjs",
-    target: "JavaScript",
-  },
-  {
-    source: "hooks",
-    target: "useState",
-  },
-  {
-    source: "hooks",
-    target: "useRef",
-  },
-  {
-    source: "hooks",
-    target: "useEffect",
-  },
+    source: 1,
+    target: 3
+  }
 ]

@@ -10,18 +10,22 @@ import { linksData, nodesData } from "../const/testData";
 
 export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
-  const currentNodeRef = useRef<Node>();
+  const currentNodeRef = useRef<Node>({ ...nodesData[0] });
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
   const [graphData, setGraphData] = useState<GraphData>(() => nodeAddLabel({ links: linksData, nodes:nodesData }));
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
+  console.log(currentNodeRef.current);
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     async (node, ctx, globalScale) => {
       const currentNode = currentNodeRef.current;
       if (currentNode && currentNode.id === node.id) {
+        const { x, y } = node;
+        if (x == null || y == null) return;
+
         ctx.beginPath();
-        ctx.arc(node.fx!, node.fy!, Math.sqrt(node.val) * 3, 0, Math.PI * 2, true);
+        ctx.arc(x, y, Math.sqrt(node.val) * 3, 0, Math.PI * 2, true);
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 1;
         ctx.stroke();
@@ -34,13 +38,13 @@ export default function Canvas() {
     ({ source, target }, ctx, globalScale) => {
       if (typeof source !== 'object' || typeof target !== 'object') return;
 
-      const { x: sx, y: sy } = source;
+      const { x: sx, y: sy, name } = source;
       const { x: tx, y: ty } = target;
-      if (sx == null || sy == null || tx == null || ty == null) return;
+      if (sx == null || sy == null || tx == null || ty == null || !name) return;
 
       const fontSize = 12 * Math.sqrt(source.val) / Math.min(4, Math.max(globalScale, 1));
       ctx.font = `${fontSize}px Sans-Serif`;
-      const textWidth = ctx.measureText(source.name!).width;
+      const textWidth = ctx.measureText(name).width;
       const textAngle = Math.atan2(ty - sy, tx - sx);
       const isFlip = textAngle < -Math.PI / 2 || Math.PI / 2 < textAngle
 
@@ -53,7 +57,7 @@ export default function Canvas() {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#000000';
-      ctx.fillText(source.name!, 0, 0);
+      ctx.fillText(name, 0, 0);
       ctx.restore();
     },
     []
@@ -99,10 +103,11 @@ export default function Canvas() {
         onNodeClick={onNodeClick}
         nodeColor={node => node.isOpened ? "#000000" : "#75BEC2"}
         nodeCanvasObjectMode={() => "after"}
+        // nodeCanvasObjectMode={node => node.id === currentNodeRef.current.id ? "after" : "none"}
         nodeCanvasObject={drawWithLabel}
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
         linkCanvasObject={drawLinks}
-        nodeVisibility={node => !node.id.startsWith("label_")}
+        nodeVisibility={node => !!node.name}
       />
     </div>
   );
