@@ -27,11 +27,11 @@ export default function Dialog(
   useEffect(() => {
     setIsLoading(true);
 
-    // async () => {
+    // (async () => {
     //   const articleSnap = await fetchNode(currentNode.id);
     //   setArticle(articleSnap);
     //   setIsLoading(false);
-    // }
+    // })();
 
     setIsLoading(false); // 仮
   }, [currentNode]);
