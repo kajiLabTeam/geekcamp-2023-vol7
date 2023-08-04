@@ -29,7 +29,7 @@ localhost:80
 1. MySQL コンテナにある MySQL サーバーにログイン
 
 ```shell
-bash bin/connect_mysql.sh
+bash backend/build/bin/connect_mysql.sh
 ```
 
 2. DB にテーブルが挿入されているか確認
