@@ -17,10 +17,18 @@ def get_nodes(node_id: int):
     """
 
     current_node = Node.get_node_by_id(node_id)
+    if current_node is None:
+        return None
+
     connections = Connection.get_connection_by_node_id(current_node.id)
+    if connections is None:
+        return None
+
     relation_nodes = Node.get_connection_node_by_ids(
         [connection.connect_node_id for connection in connections]
     )
+    if relation_nodes is None:
+        return None
 
     return {
         "currentNode": {
@@ -38,7 +46,6 @@ def get_nodes(node_id: int):
             for relation_node in relation_nodes
         ],
     }
-    return {"message": "Hello Nodes"}
 
 
 def add_node(node: Node):
