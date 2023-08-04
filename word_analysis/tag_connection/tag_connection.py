@@ -4,6 +4,7 @@ from time import sleep
 from dotenv import load_dotenv
 import os
 import sqlite3
+import sys
 
 load_dotenv()
 
@@ -109,6 +110,12 @@ def get_tag_connection(tag, page, items_count):
     }
 
     response = requests.get(f'{URL}/items', params=params, headers=HEADERS)
+    json_data = response.json()
+
+    if 'type' in json_data and json_data['type'] == 'rate_limit_exceeded':
+        print('APIの上限に達しています')
+        sys.exit()
+
     tags_list = [article['tags'] for article in response.json()]
     tag_connect_counter(tags_list, tag)
 
@@ -144,10 +151,6 @@ def get_tags():
 if __name__ == '__main__':
     # get_tags()
     while True:
-        try:
-            (next_tag, nest_page, items_count) = get_next_tag(486)
-            pls_one_page(next_tag)
-            get_tag_connection(next_tag, nest_page, items_count)
-        except Exception as e:
-            with open('./err.log', 'a') as f:
-                f.write(e)
+        (next_tag, nest_page, items_count) = get_next_tag(486)
+        pls_one_page(next_tag)
+        get_tag_connection(next_tag, nest_page, items_count)
