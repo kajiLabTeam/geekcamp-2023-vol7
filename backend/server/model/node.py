@@ -35,6 +35,21 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
+    def get_node_by_article_id(cls, article_id: int) -> List["Node"] | None:
+        if not article_id:
+            return None
+
+        try:
+            session = get_db_session()
+            stmt = select(Node).where(Node.article_id == article_id)
+            result = session.exec(stmt).first()
+            session.close()
+            return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
+
+    @classmethod
     def get_connection_node_by_ids(cls, node_ids: list) -> List["Node"] | None:
         if not node_ids:
             return []
