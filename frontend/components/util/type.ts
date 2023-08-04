@@ -1,7 +1,4 @@
-type Year = `${number}${number}${number}${number}`;
-type Month = `${number}${number}`;
-type Day = `${number}${number}`;
-export type LastUpdate = `${Year}.${Month}.${Day}`;
+export type LastUpdate = `${number}.${number}.${number}`;
 
 export type NodeObject = {
   id: number;
