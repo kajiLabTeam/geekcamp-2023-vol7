@@ -140,5 +140,5 @@ if __name__ == '__main__':
     # get_tags()
     while True:
         (next_tag, nest_page) = get_next_tag(486)
-        pls_one_page(next_tag, nest_page)
-        get_tag_connection(next_tag)
+        pls_one_page(next_tag)
+        get_tag_connection(next_tag, nest_page)
