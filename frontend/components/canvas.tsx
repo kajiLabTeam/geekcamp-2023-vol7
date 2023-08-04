@@ -32,14 +32,19 @@ export default function Canvas() {
   const drawLinks = useCallback<(obj: { source?: string | number | Node, target?: string | number | Node }, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     ({ source, target }, ctx, globalScale) => {
       if (typeof source !== 'object' || typeof target !== 'object') return;
-      const fontSize = 12 * Math.sqrt(source.val) / globalScale;
+
+      const { x: sx, y: sy } = source;
+      const { x: tx, y: ty } = target;
+      if (sx == null || sy == null || tx == null || ty == null) return;
+
+      const fontSize = 12 * Math.sqrt(source.val) / Math.min(4, Math.max(globalScale, 1));
       ctx.font = `${fontSize}px Sans-Serif`;
       const textWidth = ctx.measureText(source.name!).width;
-      const textAngle = Math.atan2(target.y! - source.y!, target.x! - source.x!);
-      const isFlip = textAngle > Math.PI / 2 || textAngle < -Math.PI / 2
+      const textAngle = Math.atan2(ty - sy, tx - sx);
+      const isFlip = textAngle < -Math.PI / 2 || Math.PI / 2 < textAngle
 
       ctx.save();
-      ctx.translate(source.x!, source.y!);
+      ctx.translate(sx, sy);
       ctx.rotate(textAngle);
       ctx.translate(textWidth / 2 + Math.sqrt(source.val) * 4 + 1 / globalScale, 0);
       if (isFlip) ctx.rotate(Math.PI);

@@ -5,7 +5,8 @@ export default async function fetchLinkNodes(currentId: string): Promise<GraphDa
   const length = Math.random() * 5 + 1 | 0;
   const nodes = Array.from({ length }, () => ({
     id: (Math.random() * 1e10).toFixed(0),
-    val: Math.random() * 10
+    name: String((Math.random() * 1e3).toFixed(0)),
+    val: Math.random() * 10 + 1
   }));
   const links = nodes.map(({ id }) => ({
     source: currentId,
