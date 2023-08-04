@@ -148,6 +148,6 @@ if __name__ == '__main__':
             (next_tag, nest_page, items_count) = get_next_tag(486)
             pls_one_page(next_tag)
             get_tag_connection(next_tag, nest_page, items_count)
-        except e:
+        except Exception as e:
             with open('./err.log', 'a') as f:
                 f.write(e)
