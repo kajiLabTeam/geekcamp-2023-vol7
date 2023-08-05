@@ -24,14 +24,16 @@ export default function useGraphData() {
           id: nodeId,
           name: node.name,
           articleId: node.articleId,
-          val: 10
+          val: node.childNodeNum,
+          connectNum: 0
         });
 
         const labelId = -nodeId;
         const labelLinkKey = getLinkKey(nodeId, labelId);
         nodesMap.set(labelId, {
           id: labelId,
-          val: 10
+          val: node.childNodeNum,
+          connectNum: 0
         });
 
         linksMap.set(labelLinkKey, {
@@ -43,21 +45,25 @@ export default function useGraphData() {
 
       if (!linksMap.has(key)) {
         linksMap.set(key, {
-            source: rootId,
-            target: node.nodeId
+          source: rootId,
+          target: nodeId
         });
+
+        for (const id of [rootId, nodeId]) {
+          const connectNode = nodesMap.get(id);
+          if (connectNode && connectNode.connectNum != null) {
+            connectNode.connectNum++;
+          }
+        }
       }
     }
-
-    const currentNode = nodesMap.get(rootId)!;
-    currentNode.isOpened = true;
 
     setGraphData({
       nodes: [...nodesMap.values()],
       links: [...linksMap.values()],
     });
 
-    return currentNode;
+    return nodesMap.get(rootId)!;
   }
 
   return { graphData, fetchConnectNode };

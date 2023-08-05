@@ -103,7 +103,7 @@ export default function Canvas() {
         graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
-        nodeColor={node => node.isOpened ? "#000000" : "#75BEC2"}
+        nodeColor={node => node.connectNum >= node.val ? "#000000" : "#75BEC2"}
         nodeCanvasObjectMode={node => node.id === currentNodeRef.current?.id ? "after" : "none"}
         nodeCanvasObject={drawWithLabel}
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
