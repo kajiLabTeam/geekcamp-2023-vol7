@@ -95,7 +95,6 @@ export default function Canvas() {
     <div className={styles.canvas}>
       <ForceGraph2D
         ref={graphRef}
-        nodeId={"nodeId"}
         graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
