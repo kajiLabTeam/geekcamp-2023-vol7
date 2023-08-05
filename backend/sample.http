@@ -1,7 +1,10 @@
-GET http://localhost:80/api/nodes/connect/2 HTTP/1.1
+GET http://localhost:80/api/nodes/connect/1 HTTP/1.1
 
 ###
 GET http://localhost:80/api/article/info/1 HTTP/1.1
+
+###
+GET http://localhost:80/api/node/search/?query=React.js HTTP/1.1
 
 ###
 PUT http://localhost:80/api/article/edit/1 HTTP/1.1
