@@ -9,9 +9,19 @@ import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
 import { useRecoilState, useSetRecoilState } from "recoil";
 
 export default function Canvas() {
-  const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
   const [wrapperRef, size] = useDomSize<HTMLDivElement>();
+
+  return (
+    <div className={styles.canvas} ref={wrapperRef}>
+      {size && <ForceGraphField {...size} />}
+    </div>
+  );
+}
+
+function ForceGraphField (props: { width: number, height: number }) {
+  const { width, height } = props;
   const [currentNodeId, setCurrentNodeId] = useRecoilState(currentNodeIdState);
+  const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
   const { graphData, addConnection, getNode } = useGraphData();
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
@@ -31,10 +41,13 @@ export default function Canvas() {
     currentNode.fx = currentNode.x;
     currentNode.fy = currentNode.y;
     graphRef.current.centerAt(currentNode.x, currentNode.y, 1000);
+    graphRef.current.zoom(4, 1000);
 
     return () => {
-      currentNode.fx = undefined;
-      currentNode.fy = undefined;
+      if (currentNode) {
+        currentNode.fx = undefined;
+        currentNode.fy = undefined;
+      }
     };
   }, [currentNodeId, getNode]);
 
@@ -86,6 +99,16 @@ export default function Canvas() {
   const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
     if (currentNodeId === node.id) {
       setIsDialogOpen(true);
+    } else {
+      const currentNode = getNode(currentNodeId);
+      if (currentNode) {
+        currentNode.fx = undefined;
+        currentNode.fy = undefined;
+      }
+      node.fx = node.x;
+      node.fy = node.y;
+      graphRef.current.centerAt(node.x, node.y, 1000);
+      graphRef.current.zoom(4, 1000);
     }
 
     if (node.connectNum < node.val) {
@@ -99,21 +122,19 @@ export default function Canvas() {
   }, [currentNodeId]);
 
   return (
-    <div className={styles.canvas} ref={wrapperRef}>
-      {size && <ForceGraph2D
-        ref={graphRef}
-        width={size.width}
-        height={size.height}
-        graphData={graphData}
-        backgroundColor="#FFF9F1"
-        onNodeClick={onNodeClick}
-        nodeColor={node => node.connectNum >= node.val ? "#000000" : "#75BEC2"}
-        nodeCanvasObjectMode={node => node.id === currentNodeId ? "after" : "none"}
-        nodeCanvasObject={drawWithLabel}
-        linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
-        linkCanvasObject={drawLinks}
-        nodeVisibility={node => !!node.name}
-      />}
-    </div>
+    <ForceGraph2D
+      ref={graphRef}
+      width={width}
+      height={height}
+      graphData={graphData}
+      backgroundColor="#FFF9F1"
+      onNodeClick={onNodeClick}
+      nodeColor={node => node.connectNum >= node.val ? "#000000" : "#75BEC2"}
+      nodeCanvasObjectMode={node => node.id === currentNodeId ? "after" : "none"}
+      nodeCanvasObject={drawWithLabel}
+      linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
+      linkCanvasObject={drawLinks}
+      nodeVisibility={node => !!node.name}
+    />
   );
 }
