@@ -6,19 +6,17 @@ import useGraphData from "@/hooks/useGraphData";
 import styles from "@styles/components/canvas.module.scss";
 import { useCallback, useEffect, useRef } from "react";
 import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
-import { useRecoilCallback, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 export default function Canvas() {
-  const setCurrentNodeId = useSetRecoilState(currentNodeIdState);
-  const getCurrentNodeId = useRecoilCallback(({ snapshot }) => () => snapshot.getLoadable(currentNodeIdState).getValue());
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
   const [wrapperRef, size] = useDomSize<HTMLDivElement>();
+  const [currentNodeId, setCurrentNodeId] = useRecoilState(currentNodeIdState);
 
   const { graphData, addConnection, getNode } = useGraphData();
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
   useEffect(() => {
-    const currentNodeId = getCurrentNodeId();
     fetchConnectNodes(currentNodeId)
       .then(connectData => {
         if (connectData == null) throw new Error("ノードの読み込みに失敗しました");
@@ -27,9 +25,21 @@ export default function Canvas() {
       });
   }, []);
 
+  useEffect(() => {
+    const currentNode = getNode(currentNodeId);
+    if (currentNode == null) return;
+    currentNode.fx = currentNode.x;
+    currentNode.fy = currentNode.y;
+    graphRef.current.centerAt(currentNode.x, currentNode.y, 1000);
+
+    return () => {
+      currentNode.fx = undefined;
+      currentNode.fy = undefined;
+    };
+  }, [currentNodeId, getNode]);
+
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     async (node, ctx, globalScale) => {
-      const currentNodeId = getCurrentNodeId();
       if (currentNodeId === node.id) {
         const { x, y } = node;
         if (x == null || y == null) return;
@@ -41,7 +51,7 @@ export default function Canvas() {
         ctx.stroke();
       }
     },
-    []
+    [currentNodeId]
   )
 
   const drawLinks = useCallback<(obj: { source?: string | number | Node, target?: string | number | Node }, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
@@ -70,23 +80,12 @@ export default function Canvas() {
       ctx.fillText(name, 0, 0);
       ctx.restore();
     },
-    []
+    [currentNodeId]
   )
 
   const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
-    const currentNodeId = getCurrentNodeId();
     if (currentNodeId === node.id) {
       setIsDialogOpen(true);
-    } else {
-      const currentNode = getNode(currentNodeId);
-      if (currentNode) {
-        currentNode.fx = undefined;
-        currentNode.fy = undefined;
-      }
-      node.fx = node.x;
-      node.fy = node.y;
-      graphRef.current.centerAt(node.x, node.y, 1000);
-      graphRef.current.zoom(4, 1000);
     }
 
     if (node.connectNum < node.val) {
@@ -97,7 +96,7 @@ export default function Canvas() {
     }
 
     setCurrentNodeId(node.id);
-  }, []);
+  }, [currentNodeId]);
 
   return (
     <div className={styles.canvas} ref={wrapperRef}>
@@ -109,7 +108,7 @@ export default function Canvas() {
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
         nodeColor={node => node.connectNum >= node.val ? "#000000" : "#75BEC2"}
-        nodeCanvasObjectMode={node => node.id === getCurrentNodeId() ? "after" : "none"}
+        nodeCanvasObjectMode={node => node.id === currentNodeId ? "after" : "none"}
         nodeCanvasObject={drawWithLabel}
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
         linkCanvasObject={drawLinks}
