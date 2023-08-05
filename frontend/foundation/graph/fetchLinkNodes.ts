@@ -1,30 +1,14 @@
+import { ApiConnectResponse } from "@/components/util/type";
 import { GraphData } from "./types";
 
 export default async function fetchLinkNodes(currentId: number): Promise<GraphData> {
-  // TODO: ちゃんとしたfetchに置き換える
+  const response = await fetch(`/api/nodes/connect/${currentId}`);
+  if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
+  const data = await response.json() as ApiConnectResponse;
+  if (data == null) throw Error("data is null");
 
-  const data = {
-    currentNode : {
-      nodeId : currentId,
-      name : "",
-      articleId: 1234
-    },
-    connectNodes: [
-      {
-        nodeId : Math.random() * 1e10 | 0,
-        name : "JavaScript",
-        articleId: 31415
-      },
-      {
-        nodeId : Math.random() * 1e10 | 0,
-        name : "Next.js",
-        articleId: 20394
-      }
-    ]
-  };
-
-  const nodes = data.connectNodes.map(v => ({
-    id: v.nodeId,
+  const nodes = data.relationNode.map(v => ({
+    id: v.id,
     name: v.name,
     articleId: v.articleId,
     val: 10

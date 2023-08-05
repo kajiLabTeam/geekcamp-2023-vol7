@@ -12,4 +12,9 @@ export type ArticleObject = {
   nodeId: number;
   content: string;
   lastUpdate: LastUpdate;
-}
+};
+
+export type ApiConnectResponse = {
+  currentNode: NodeObject;
+  relationNode: NodeObject[];
+} | null;
