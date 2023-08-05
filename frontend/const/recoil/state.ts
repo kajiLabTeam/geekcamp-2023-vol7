@@ -8,12 +8,6 @@ export const currentNodeIdState = atom<number>({
   default: 1
 });
 
-export const GraphDataState = atom<GraphData>({
-  key: recoilKeyHashSet.graphData,
-  default: { nodes: [], links: [] },
-  dangerouslyAllowMutability: true
-});
-
 export const currentArticleState = atom<ArticleObject>({
   key: recoilKeyHashSet.currentArticle,
   default: {

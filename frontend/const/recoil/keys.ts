@@ -5,6 +5,8 @@ const recoilKeys = [
   "isDialogOpen",
   "currentArticle",
   "graphData",
+  "nodesMap",
+  "linksMap",
 ] as const;
 
 // Key: Keyのオブジェクト
