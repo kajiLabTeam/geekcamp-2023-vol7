@@ -1,4 +1,5 @@
 import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
+import fetchConnectNodes from "@/foundation/fetchConnectNodes";
 import { Link, Node } from "@/foundation/graph/types";
 import useDomSize from "@/hooks/useDomSize";
 import useGraphData from "@/hooks/useGraphData";
@@ -13,15 +14,17 @@ export default function Canvas() {
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
   const [wrapperRef, size] = useDomSize<HTMLDivElement>();
 
-  const { graphData, fetchConnectNode } = useGraphData();
+  const { graphData, addConnection } = useGraphData();
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
   useEffect(() => {
-    fetchConnectNode(1)
-      .then(currentNode => {
+    fetchConnectNodes(1)
+      .then(connectData => {
+        if (connectData == null) throw new Error("ノードの読み込みに失敗しました");
+        const currentNode = addConnection(connectData);
         currentNodeRef.current = currentNode;
         setCurrentNode(structuredClone(currentNode));
-        return currentNode;
+        return connectData;
       });
   }, []);
 
@@ -86,10 +89,13 @@ export default function Canvas() {
       graphRef.current.zoom(4, 1000);
     }
 
-    if (!node.isOpened) {
-      node.isOpened = true;
-      fetchConnectNode(node.id);
+    if (node.connectNum < node.val) {
+      const connectData = await fetchConnectNodes(node.id);
+      if (connectData) {
+        addConnection(connectData);
+      }
     }
+
     currentNodeRef.current = node;
     setCurrentNode({ ...node });
   }, []);

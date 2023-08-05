@@ -1,21 +1,19 @@
-import { ApiConnectResponse } from "@/components/util/type";
+import { NodeConnectData } from "@/components/util/type";
 import { GraphData, Link, Node } from "@/foundation/graph/types";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 type LinkKey = `${number}=${number}`;
 
+const nodesMap = new Map<number, Node>();
+const linksMap = new Map<LinkKey, Link>();
+
 export default function useGraphData() {
   const [graphData, setGraphData] = useState<GraphData>({ nodes: [], links: [] });
-  const nodesMap = useRef(new Map<number, Node>()).current;
-  const linksMap = useRef(new Map<LinkKey, Link>()).current;
 
-  const fetchConnectNode = async (rootId: number) => {
-    const response = await fetch(`/api/nodes/connect/${rootId}`);
-    if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
-    const data = await response.json() as ApiConnectResponse;
-    if (data == null) throw Error("data is null");
+  const addConnection = (connectData: NodeConnectData) => {
+    const rootId = connectData.currentNode.nodeId;
 
-    for (const node of [data.currentNode, ...data.relationNode]) {
+    for (const node of [connectData.currentNode, ...connectData.relationNode]) {
       const nodeId = node.nodeId;
       const key = getLinkKey(rootId, nodeId);
 
@@ -66,7 +64,7 @@ export default function useGraphData() {
     return nodesMap.get(rootId)!;
   }
 
-  return { graphData, fetchConnectNode };
+  return { graphData, addConnection };
 }
 
 const getLinkKey = (source: number, target: number): LinkKey =>
