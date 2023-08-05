@@ -1,9 +1,9 @@
 import Dialog from "@/components/dialog";
 import Frame from "@/components/frame";
-import { sleep } from "@/components/util/util";
 import styles from "@/styles/pages/home.module.scss";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import Search from "@/components/search";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
 
@@ -41,6 +41,7 @@ export default function Home() {
           <Dialog
             forceLoading={isLoading}
           />
+          <Search />
           <Frame />
           <Canvas />
 

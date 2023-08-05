@@ -4,17 +4,29 @@ export type NodeObject = {
   nodeId: number;
   name: string;
   articleId: number;
-  childNodeNum : number;
+  childNodeNumber: number;
 };
 
 export type ArticleObject = {
   id: number;
   nodeId: number;
-  content: string;
+  article: string;
   lastUpdate: LastUpdate;
+};
+
+export type SearchNodeObject = {
+  type: "node";
+  currentNode: NodeObject;
+  connectNodes: NodeObject[];
+};
+
+export type SuggestionObject = {
+  type: "suggestion";
+  suggestions: NodeObject[];
 };
 
 export type NodeConnectData = {
   currentNode: NodeObject;
   relationNode: NodeObject[];
+
 };

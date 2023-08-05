@@ -37,6 +37,7 @@ export default function Frame({ revColor }: Props = { revColor: false }) {
               width={100}
               height={100}
               alt={"logo"}
+              priority={true}
             />
             <div className={styles.bottom_1}></div>
             <div className={styles.bottom_2}></div>
