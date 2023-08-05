@@ -1,10 +1,10 @@
 export type LastUpdate = `${number}.${number}.${number}`;
 
 export type NodeObject = {
-  id: number;
+  nodeId: number;
   name: string;
   articleId: number;
-  lastUpdate: LastUpdate;
+  childNodeNum : number;
 };
 
 export type ArticleObject = {
@@ -12,4 +12,9 @@ export type ArticleObject = {
   nodeId: number;
   content: string;
   lastUpdate: LastUpdate;
-}
+};
+
+export type ApiConnectResponse = {
+  currentNode: NodeObject;
+  relationNode: NodeObject[];
+} | null;

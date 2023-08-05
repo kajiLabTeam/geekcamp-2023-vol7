@@ -3,6 +3,7 @@ const recoilKeys = [
   "currentNode",
   "isDialogOpen",
   "currentArticle",
+  "graphData",
 ] as const;
 
 // Key: Keyのオブジェクト

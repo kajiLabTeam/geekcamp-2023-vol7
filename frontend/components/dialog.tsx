@@ -69,8 +69,8 @@ export default function Dialog(
         <div className={`${styles.inside} ${styles.inside_right}`}></div>
 
         <div className={styles.dialog}>
-          <h1 className={styles.title}>{currentNode.name}</h1>
-          <div className={styles.subtitle}>{currentNode.name}</div>
+          <h1 className={styles.title}>{currentNode?.name}</h1>
+          <div className={styles.subtitle}>{currentNode?.name}</div>
 
           {isLoading || forceLoading ? (
             <div className={styles.loading}>
