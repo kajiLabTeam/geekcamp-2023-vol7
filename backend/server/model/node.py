@@ -66,7 +66,7 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
-    def get_node_by_node_name_perfection(cls, node_query: list) -> List["Node"] | None:
+    def get_node_by_node_name_perfection(cls, node_query: str) -> List["Node"] | None:
         if not node_query:
             return None
 

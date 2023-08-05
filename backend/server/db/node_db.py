@@ -1,9 +1,5 @@
-import datetime as t
-from typing import List
-
 from model.connection import Connection
 from model.node import Node
-from settings import get_db_session
 
 
 def get_nodes(node_id: int):
@@ -35,13 +31,16 @@ def get_nodes(node_id: int):
             "nodeId": current_node.id,
             "name": current_node.node_name,
             "articleId": current_node.article_id,
-            # "lastUpdate": current_node[0].last_update,
+            "childNodeNum": len(relation_nodes),
         },
         "relationNode": [
             {
                 "nodeId": relation_node.id,
                 "name": relation_node.node_name,
                 "articleId": relation_node.article_id,
+                "childNodeNum": len(
+                    Connection.get_connection_by_node_id(relation_node.id)
+                ),
             }
             for relation_node in relation_nodes
         ],
@@ -75,12 +74,16 @@ def search_node(node_query: str):
             "id": current_node.id,
             "name": current_node.node_name,
             "articleId": current_node.article_id,
+            "childNodeNum": len(relation_nodes),
         },
         "relationNode": [
             {
                 "id": relation_node.id,
                 "name": relation_node.node_name,
                 "articleId": relation_node.article_id,
+                "childNodeNum": len(
+                    Connection.get_connection_by_node_id(relation_node.id)
+                ),
             }
             for relation_node in relation_nodes
         ],

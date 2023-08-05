@@ -15,17 +15,17 @@ services:
       MYSQL_USER: geek_camp
       MYSQL_PASSWORD: geek_camp_pass
 
-  # python:
-  #   container_name: Wisdom_Tree_API
-  #   restart: always
-  #   build: ./docker/api
-  #   env_file:
-  #     - ../.env
-  #   working_dir: "/server/"
-  #   tty: true
-  #   volumes:
-  #     - ../server:/server
-  #   ports:
-  #     - 80:8000
-  #   depends_on:
-  #     - mysql
+  python:
+    container_name: Wisdom_Tree_API
+    restart: always
+    build: ./docker/api
+    env_file:
+      - ../.env
+    working_dir: "/server/"
+    tty: true
+    volumes:
+      - ../server:/server
+    ports:
+      - 80:8000
+    depends_on:
+      - mysql
