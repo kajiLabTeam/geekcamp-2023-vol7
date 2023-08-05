@@ -1,7 +1,7 @@
 export type LastUpdate = `${number}.${number}.${number}`;
 
 export type NodeObject = {
-  nodeId: number;
+  id: number;
   name: string;
   articleId: number;
   childNodeNumber: number;

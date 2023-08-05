@@ -11,10 +11,10 @@ export default function useGraphData() {
   const [graphData, setGraphData] = useState<GraphData>({ nodes: [], links: [] });
 
   const addConnection = (connectData: NodeConnectData) => {
-    const rootId = connectData.currentNode.nodeId;
+    const rootId = connectData.currentNode.id;
 
     for (const node of [connectData.currentNode, ...connectData.relationNode]) {
-      const nodeId = node.nodeId;
+      const nodeId = node.id;
       const key = getLinkKey(rootId, nodeId);
 
       if (!nodesMap.has(nodeId)) {
