@@ -22,6 +22,7 @@ lxml = "*"
 janome = "*"
 nltk = "*"
 tokenizer = "*"
+googletrans = "*"
 
 [dev-packages]
 
