@@ -4,7 +4,7 @@ export type NodeObject = {
   id: number;
   name: string;
   articleId: number;
-  childNodeNumber: number;
+  childNodeNum: number;
 };
 
 export type ArticleObject = {

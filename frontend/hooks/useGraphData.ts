@@ -22,7 +22,7 @@ export default function useGraphData() {
           id: nodeId,
           name: node.name,
           articleId: node.articleId,
-          val: node.childNodeNumber,
+          val: node.childNodeNum,
           connectNum: 0
         });
 
@@ -30,7 +30,7 @@ export default function useGraphData() {
         const labelLinkKey = getLinkKey(nodeId, labelId);
         nodesMap.set(labelId, {
           id: labelId,
-          val: node.childNodeNumber,
+          val: node.childNodeNum,
           connectNum: 0
         });
 
@@ -62,9 +62,11 @@ export default function useGraphData() {
     });
 
     return nodesMap.get(rootId)!;
-  }
+  };
 
-  return { graphData, addConnection };
+  const getNode = (nodeId: number) => nodesMap.get(nodeId);
+
+  return { graphData, addConnection, getNode };
 }
 
 const getLinkKey = (source: number, target: number): LinkKey =>
