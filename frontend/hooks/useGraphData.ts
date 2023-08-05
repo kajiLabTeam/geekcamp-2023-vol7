@@ -22,7 +22,7 @@ export default function useGraphData() {
           id: nodeId,
           name: node.name,
           articleId: node.articleId,
-          val: node.childNodeNum,
+          val: node.childNodeNumber,
           connectNum: 0
         });
 
@@ -30,7 +30,7 @@ export default function useGraphData() {
         const labelLinkKey = getLinkKey(nodeId, labelId);
         nodesMap.set(labelId, {
           id: labelId,
-          val: node.childNodeNum,
+          val: node.childNodeNumber,
           connectNum: 0
         });
 
