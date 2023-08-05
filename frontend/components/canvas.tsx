@@ -16,15 +16,16 @@ export default function Canvas() {
 
   const [graphData, setGraphData] = useRecoilState(GraphDataState);
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
-  console.log(graphData);
-
 
   useEffect(() => {
     fetchLinkNodes(1).then(init => {
-      setGraphData({
-        nodes: [init.current, ...init.nodes],
+      const initData = {
+        nodes: [{ ...init.current, isOpened: true }, ...init.nodes],
         links: init.links
-      })
+      };
+      const initDataWithLabel = nodeAddLabel(initData);
+      setGraphData(initDataWithLabel);
+      currentNodeRef.current = init.current;
     });
   }, []);
 
@@ -109,7 +110,7 @@ export default function Canvas() {
         ref={graphRef}
         width={size.width}
         height={size.height}
-        graphData={structuredClone(graphData)}
+        graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
         nodeColor={node => node.isOpened ? "#000000" : "#75BEC2"}

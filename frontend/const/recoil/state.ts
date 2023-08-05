@@ -11,7 +11,8 @@ export const currentNodeState = atom<NodeObject | null>({
 
 export const GraphDataState = atom<GraphData>({
   key: recoilKeyHashSet.graphData,
-  default: { nodes: [], links: [] }
+  default: { nodes: [], links: [] },
+  dangerouslyAllowMutability: true
 });
 
 export const currentArticleState = atom<ArticleObject>({
@@ -26,5 +27,5 @@ export const currentArticleState = atom<ArticleObject>({
 
 export const isDialogOpenState = atom<boolean>({
   key: recoilKeyHashSet.isDialogOpen,
-  default: false,
+  default: false
 });
