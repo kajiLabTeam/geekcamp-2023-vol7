@@ -101,12 +101,14 @@ all_tag = [tag[0] for tag in all_tag]
 cursor.execute("SELECT MAX(id) FROM articles")
 max_id = cursor.fetchall()
 max_id = max_id[0][0]
+if max_id is None:
+    max_id = 0
 
 # all_tagから先頭に#のついた要素を削除
 all_tag = [tag for tag in all_tag if tag[0] != "#"]
 
-# all_tagの前10を削除
-counter = max_id - 2
+# 任意の数から処理を再開
+counter = max_id
 all_tag = all_tag[counter:]
 
 
