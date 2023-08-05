@@ -4,6 +4,7 @@ from time import sleep
 from dotenv import load_dotenv
 import os
 import sqlite3
+import sys
 
 load_dotenv()
 
@@ -20,7 +21,8 @@ cur.execute('''
     CREATE TABLE IF NOT EXISTS connection(
         target_tag TEXT,
         connect_tag TEXT,
-        count INTEGER
+        count INTEGER DEFAULT 0,
+        ratio INTEGER DEFAULT 0,
     )
 ''')
 cur.execute('''
@@ -38,7 +40,7 @@ conn.commit()
 # pageが最小かつitems_countが指定した値以上かつitems_countが最大のタグを取得
 def get_next_tag(min_items_count=486):
     sql = f'''
-        SELECT tag, page
+        SELECT tag, page, items_count
         FROM tags
         WHERE items_count > {min_items_count}
         ORDER BY page ASC, items_count DESC LIMIT 1
@@ -48,8 +50,9 @@ def get_next_tag(min_items_count=486):
     res = cur.fetchone()
     tag = res[0]
     page = res[1]
+    items_count = res[2]
 
-    return (tag, page+1)
+    return (tag, page+1, items_count)
 
 
 # 指定したtagのpageを1増やす
@@ -86,15 +89,19 @@ def tag_connect_counter(article_tags, target_tag):
             else:
                 cur.execute(f'''
                     INSERT INTO connection
-                    VALUES("{target_tag}", "{tag}", 1)
+                    VALUES("{target_tag}", "{tag}", 1, 0)
                 ''')
         conn.commit()
 
 
 # Qiitaからtag同士の関連性を取得
-def get_tag_connection(tag, page):
+def get_tag_connection(tag, page, items_count):
     print()
     print(f'----- {tag} -----')
+
+    if items_count <= page * 100:
+        print(f'記事数を上回っています. {items_count} >= {page * 100}')
+        return
 
     params = {
         "page": page,
@@ -104,10 +111,17 @@ def get_tag_connection(tag, page):
     }
 
     response = requests.get(f'{URL}/items', params=params, headers=HEADERS)
+    json_data = response.json()
+
+    if 'type' in json_data and json_data['type'] == 'rate_limit_exceeded':
+        print('APIの上限に達しています')
+        sys.exit()
+
     tags_list = [article['tags'] for article in response.json()]
     tag_connect_counter(tags_list, tag)
 
-    sleep(2)
+    if len(tags_list) < 100:
+        sleep(2)
 
 
 # Qiitaからタグ一覧を取得してDBに保存
@@ -139,6 +153,6 @@ def get_tags():
 if __name__ == '__main__':
     # get_tags()
     while True:
-        (next_tag, nest_page) = get_next_tag(486)
+        (next_tag, nest_page, items_count) = get_next_tag(486)
         pls_one_page(next_tag)
-        get_tag_connection(next_tag, nest_page)
+        get_tag_connection(next_tag, nest_page, items_count)
