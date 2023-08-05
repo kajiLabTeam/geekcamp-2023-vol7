@@ -48,8 +48,8 @@ def put_article(article_id: int, article: str):
         return None
 
     return {
+        "id": article.id,
         "nodeId": node.id,
-        "articleId": article.id,
         "name": node.node_name,
         "article": article.article,
         "lastUpdate": article.last_update,

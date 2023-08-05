@@ -28,14 +28,14 @@ def get_nodes(node_id: int):
 
     return {
         "currentNode": {
-            "nodeId": current_node.id,
+            "id": current_node.id,
             "name": current_node.node_name,
             "articleId": current_node.article_id,
             "childNodeNum": len(relation_nodes),
         },
         "relationNode": [
             {
-                "nodeId": relation_node.id,
+                "id": relation_node.id,
                 "name": relation_node.node_name,
                 "articleId": relation_node.article_id,
                 "childNodeNum": len(
