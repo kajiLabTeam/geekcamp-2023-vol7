@@ -12,7 +12,7 @@ async def get_nodes(nodeId):
     return nodes
 
 
-@router.get("/node/search/")
+@router.get("/node/search")
 async def get_node(request: Request):
     node_query = request.query_params.get("query")
     nodes = db_search_node(node_query)
