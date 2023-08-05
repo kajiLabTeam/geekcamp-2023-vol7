@@ -17,7 +17,7 @@ export type ArticleObject = {
 export type SearchNodeObject = {
   type: "node";
   currentNode: NodeObject;
-  connectNodes: NodeObject[];
+  relationNode: NodeObject[];
 };
 
 export type SuggestionObject = {

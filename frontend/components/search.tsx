@@ -1,22 +1,30 @@
 import styles from "@/styles/components/search.module.scss";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { fetchSearchWord } from "./util/api";
+import { useEffect, useState } from "react";
+import { fetchNodeConnect, fetchSearchWord } from "@/components/util/api";
 import { NodeObject } from "@/components/util/type";
+import useGraphData from "@/hooks/useGraphData";
 
 export default function Search() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchWord, setSearchWord] = useState("");
   const [suggestions, setSuggestions] = useState<NodeObject[]>([]);
+  const { addConnection } = useGraphData();
+
+  async function nodeId2NodeConnection(nodeId: number) {
+    const res = await fetchNodeConnect(nodeId);
+    addConnection(res);
+  }
 
   async function search(word: string) {
     const res = await fetchSearchWord(word);
 
     if (res.type === "node") {
-      // TODO: MOVE TO NODE
-      console.log(res);
+      const nodeRelation = {
+        currentNode: res.currentNode,
+        relationNode: res.relationNode,
+      };
+      addConnection(nodeRelation);
     } else {
-      console.log(res);
       setSuggestions(res.suggestions);
     }
   }
@@ -89,7 +97,7 @@ export default function Search() {
             key={suggestion.id}
             onClick={() => {
               setIsOpen(false);
-              // TODO: MOVE TO NODE
+              nodeId2NodeConnection(suggestion.id);
             }}
           >
             {suggestion.name}
