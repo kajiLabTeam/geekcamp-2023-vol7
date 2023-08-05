@@ -1,5 +1,6 @@
 // Keyの配列
 const recoilKeys = [
+  "currentNodeId",
   "currentNode",
   "isDialogOpen",
   "currentArticle",
