@@ -25,6 +25,7 @@ bash bin/connect_mysql.sh
 ```
 
 4. DB にテーブルが挿入されているか確認
+
 ```shell
 use wisdomtree;
 ```
@@ -38,7 +39,9 @@ select * from article;
 ```
 
 #### もしサーバーを立て、テーブルが作られていなかった時
-Dokcer環境を初期化してください
+
+Dokcer 環境を初期化してください
+
 ```shell
 docker stop $(docker ps -aq)
 docker rm $(docker ps -aq)
@@ -76,13 +79,39 @@ uvicorn main:app --reload
 ```
 
 ### ディレクトリの説明
+
 #### model
+
 - データベースのテーブルの定義を記述する
-- DBとの具体的なやり取りを行う (追加、更新、削除)
+- DB との具体的なやり取りを行う (追加、更新、削除)
 
 #### db
-- modelで定義した関数を呼び出しながらフロントエンドが欲しい形にデータを整形する
+
+- model で定義した関数を呼び出しながらフロントエンドが欲しい形にデータを整形する
 
 #### router
-- dbで定義した関数を呼び出しながら最終的にAPIとして出力するJSONを作成する
 
+- db で定義した関数を呼び出しながら最終的に API として出力する JSON を作成する
+
+## word_analysis で使用しているモジュールについて
+
+[自動抽出 Python モジュール termextract](http://gensen.dl.itc.u-tokyo.ac.jp/pytermextract/)
+
+上記の URL よりダウンロードして解凍してください
+
+### その後のセットアップ
+
+```
+$ pip install .
+$ pip install janome
+$ pip install nltk
+$ pip install pynlpir
+```
+
+```
+$ python setup.py install
+```
+
+```
+$ sudo python -m nltk.downloader -d /usr/local/share/nltk_data all
+```

@@ -76,16 +76,15 @@ def make_jaccard_coef_data(combination_sentences):
     
     return word_associates
 
-
 # data/tags.csvからタグを取得
 all_tags = pd.read_csv('data/tags.csv', header=None)[0].values.tolist()
-# all_tags から 前48個を消す
-tags = all_tags
+# 日本語が含まれたタグを削除
+all_tags = [tag for tag in all_tags if isinstance(tag, str) and re.match(r'^[a-zA-Z\s]+$', tag)]
 # tags = ['Python', 'javascript']
 
-for tag in tags:
-
-    with open(f'data/qiita_{tag}.txt', 'r', encoding='utf-8') as file:
+for tag in all_tags:
+    lines = ""
+    with open(f'data/text/qiita_{tag}.txt', 'r', encoding='utf-8') as file:
         lines = file.readlines()
         
     sentences = []
@@ -116,8 +115,6 @@ for tag in tags:
 
     # 初期化
     jaccard_coef_data = pd.DataFrame(columns=['word1', 'word2', 'intersection_count', 'count1', 'count2', 'union_count', 'jaccard_coef'])
-    output_jaccard_coef_data = pd.DataFrame(columns=['word1', 'word2', 'jaccard_coef'])
-    output_jaccard_coef_data2 = pd.DataFrame(columns=['word1', 'word2', 'jaccard_coef'])
     jaccard_coef_data = make_jaccard_coef_data(combination_sentences)
     # Python , javascript , 0.5 を追加
     # new_row = {'word1': 'Python', 'word2': 'javascript', 'jaccard_coef': 0.5}
@@ -126,11 +123,12 @@ for tag in tags:
     jaccard_coef_data = jaccard_coef_data.drop(['intersection_count', 'count1', 'count2', 'union_count'], axis=1)
     # Jaccard係数をtagsにあるものを抽出
     output_jaccard_coef_data = pd.DataFrame(columns=['word1', 'word2', 'jaccard_coef'])
+    output_jaccard_coef_data2 = pd.DataFrame(columns=['word1', 'word2', 'jaccard_coef'])
     output_jaccard_coef_data = pd.concat([output_jaccard_coef_data, jaccard_coef_data[jaccard_coef_data['word1'].isin(all_tags)]])
-    output_jaccard_coef_data2 = pd.concat([output_jaccard_coef_data2, output_jaccard_coef_data[output_jaccard_coef_data['word2'].isin(tags)]])
+    # output_jaccard_coef_data2 = pd.concat([output_jaccard_coef_data2, output_jaccard_coef_data[output_jaccard_coef_data['word2'].isin(all_tags)]])
     # word1とword2が同じものを消す
     output_jaccard_coef_data2 = output_jaccard_coef_data2[output_jaccard_coef_data2['word1'] != output_jaccard_coef_data2['word2']]
     # print(output_jaccard_coef_data)
     # output_jaccard_coef_dataをcsvファイルとして出力
-    output_jaccard_coef_data2.to_csv(f'result/test/jaccard_coef_data_{tag}.csv', index=False)
+    output_jaccard_coef_data.to_csv(f'result/en_only/jaccard_coef_data_{tag}.csv', index=False)
 

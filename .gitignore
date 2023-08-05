@@ -287,7 +287,16 @@ cython_debug/
 
 .DS_Store
 
+# word_analysis関連
+
 *.ipynb
 *.env
 
-word_analysis/data/*.txt
+word_analysis/data/text/*.txt
+word_analysis/data/wiki/*.txt
+word_analysis/data/wiki_miss/*.txt
+
+word_analysis/pytermextract
+
+word_analysis/data/qiita_tags
+word_analysis/data/*.zip
