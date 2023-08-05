@@ -4,27 +4,36 @@
 
 ### 実行方法
 
-#### MySQL サーバーを建てる
-
 1. ディレクトリを移動
 
 ```shell
-cd backend/db
+cd backend/build
 ```
 
-2. MySQL サーバーを建てる
+2. MySQL と Python コンテナを建てる
+
+```
+docker compose up
+```
+
+3. ブラウザで以下の URL にアクセス
+
+```
+localhost:80
+```
+
+4. sample.http で API の動作確認を行ってみてください
+
+### MySQL のデータを確認したいとき
+
+1. MySQL コンテナにある MySQL サーバーにログイン
 
 ```shell
-docker compose up -d
+bash backend/build/bin/connect_mysql.sh
 ```
 
-3. MySQL コンテナにある MySQL サーバーにログイン
+2. DB にテーブルが挿入されているか確認
 
-```shell
-bash bin/connect_mysql.sh
-```
-
-4. DB にテーブルが挿入されているか確認
 ```shell
 use wisdomtree;
 ```
@@ -37,8 +46,10 @@ show tables;
 select * from article;
 ```
 
-#### もしサーバーを立て、テーブルが作られていなかった時
-Dokcer環境を初期化してください
+### コンテナ立ち上げ時にエラーが発生したとき
+
+Dokcer 環境を初期化してください
+
 ```shell
 docker stop $(docker ps -aq)
 docker rm $(docker ps -aq)
@@ -48,41 +59,3 @@ docker rmi -f $(docker images --filter dangling=true -qa)
 docker volume rm $(docker volume ls --filter dangling=true -q)
 docker rmi -f $(docker images -qa)
 ```
-
-#### FastAPI サーバーを建てる
-
-1. ディレクトリを移動
-
-```shell
-cd backend/server
-```
-
-2. 必要モジュールのインストール
-
-```shell
-pipenv install
-```
-
-3. 仮想環境に入る
-
-```shell
-pipenv shell
-```
-
-4. FastAPI サーバーを建てる
-
-```shell
-uvicorn main:app --reload
-```
-
-### ディレクトリの説明
-#### model
-- データベースのテーブルの定義を記述する
-- DBとの具体的なやり取りを行う (追加、更新、削除)
-
-#### db
-- modelで定義した関数を呼び出しながらフロントエンドが欲しい形にデータを整形する
-
-#### router
-- dbで定義した関数を呼び出しながら最終的にAPIとして出力するJSONを作成する
-

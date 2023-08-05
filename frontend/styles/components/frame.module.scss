@@ -182,5 +182,9 @@
     .bottom_left_2 {
       clip-path: ellipse(200px 200px at 20px calc(100% - 60px));
     }
+
+    @media (max-width: 500px) {
+      display: none;
+    }
   }
 }

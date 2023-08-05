@@ -7,11 +7,13 @@ import { useCallback, useRef, useState } from "react";
 import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
 import { useSetRecoilState } from "recoil";
 import { linksData, nodesData } from "../const/testData";
+import useDomSize from "@/hooks/useDomSize";
 
 export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
   const currentNodeRef = useRef<Node>({ ...nodesData[0] });
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
+  const [wrapperRef, size] = useDomSize<HTMLDivElement>();
 
   const [graphData, setGraphData] = useState<GraphData>(() => nodeAddLabel({ links: linksData, nodes:nodesData }));
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
@@ -92,9 +94,11 @@ export default function Canvas() {
   }, []);
 
   return (
-    <div className={styles.canvas}>
-      <ForceGraph2D
+    <div className={styles.canvas} ref={wrapperRef}>
+      {size && <ForceGraph2D
         ref={graphRef}
+        width={size.width}
+        height={size.height}
         graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
@@ -104,7 +108,7 @@ export default function Canvas() {
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
         linkCanvasObject={drawLinks}
         nodeVisibility={node => !!node.name}
-      />
+      />}
     </div>
   );
 }

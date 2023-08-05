@@ -1,14 +1,22 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
-from db.article_db import get_article
+from db.article_db import get_article as db_get_article
+from db.article_db import put_article as db_put_article
 
 router = APIRouter()
 
 
-@router.get("/search/article/{nodeId}")
-async def get_article(node_id: int):
-    # db から記事情報を取得する
-    # article = get_article(node_id)
-    # return {"article": article}
+@router.get("/article/info/{nodeId}")
+async def get_article(nodeId: int):
+    article = db_get_article(nodeId)
 
-    return {"message": "Hello Article"}
+    return article
+
+
+@router.put("/article/edit/{articleId}")
+async def get_article(articleId: int, request: Request):
+    data = await request.json()
+    article = data.get("article", "")
+    article = db_put_article(articleId, article)
+
+    return article

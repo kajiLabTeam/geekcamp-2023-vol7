@@ -1,9 +1,10 @@
 from datetime import datetime
 from typing import TYPE_CHECKING, List, Optional
 
-from sqlmodel import Field, Relationship, SQLModel
+from sqlalchemy.exc import SQLAlchemyError
+from sqlmodel import Field, Relationship, SQLModel, select
 
-from settings import get_db_engine
+from settings import get_db_engine, get_db_session
 
 if TYPE_CHECKING:
     # Circular Importsによるエラー防止
@@ -15,6 +16,21 @@ class User(SQLModel, table=True):
     name: str = Field(unique=False, nullable=False)
 
     edit_histories: List["EditHistory"] = Relationship(back_populates="user")
+
+    @classmethod
+    def get_user_by_id(cls, user_id: int):
+        if not user_id:
+            return None
+
+        try:
+            session = get_db_session()
+            stmt = select(User).where(User.id == user_id)
+            result = session.exec(stmt).first()
+            session.close()
+            return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
 
 
 def create_table():
