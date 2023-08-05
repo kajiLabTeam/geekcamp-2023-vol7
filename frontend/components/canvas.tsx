@@ -96,8 +96,8 @@ export default function Canvas() {
       const linkDataWithLabel = nodeAddLabel(linkData);
 
       setGraphData(v => ({
-        nodes: [...v.nodes, ...linkDataWithLabel.nodes],
-        links: [...v.links, ...linkDataWithLabel.links]
+        nodes: [...v.nodes, ...linkDataWithLabel.nodes].filter((v, i, a) => a.findIndex(w => v.id === w.id) === i),
+        links: [...v.links, ...linkDataWithLabel.links].filter((v, i, a) => a.findIndex(w => v.source === w.source && v.target === w.target) === i)
       }));
     }
     currentNodeRef.current = node;
