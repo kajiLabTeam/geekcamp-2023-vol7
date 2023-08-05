@@ -7,7 +7,7 @@ import {
   currentNodeState,
   isDialogOpenState,
 } from "@/const/recoil/state";
-// import { fetchNode } from "./util/fetch";
+import { fetchArticle } from "@/components/util/api";
 
 type Props = {
   forceLoading: boolean;
@@ -33,13 +33,13 @@ export default function Dialog(
   useEffect(() => {
     setIsLoading(true);
 
-    // (async () => {
-    //   const articleSnap = await fetchNode(currentNode.id);
-    //   setArticle(articleSnap);
-    //   setIsLoading(false);
-    // })();
-
-    setIsLoading(false); // 仮
+    (async () => {
+      if (!currentNode?.id) return;
+      
+      const articleSnap = await fetchArticle(currentNode?.id as number);
+      setArticle(articleSnap);
+      setIsLoading(false);
+    })();
   }, [currentNode]);
 
   return (

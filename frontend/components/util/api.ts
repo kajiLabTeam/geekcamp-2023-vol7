@@ -1,4 +1,5 @@
 import {
+  ArticleObject,
   NodeConnectData,
   NodeObject,
   SearchNodeObject,
@@ -32,6 +33,17 @@ export async function fetchNodeConnect(
   const response = await fetch(`/api/nodes/connect/${nodeId}`);
   if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
   const data = (await response.json()) as NodeConnectData;
+
+  return data;
+}
+
+// 記事を取得する
+export async function fetchArticle(nodeId: number): Promise<ArticleObject> {
+  const response = await fetch(`/api/article/info/${nodeId}`);
+  console.log(response);
+  
+  if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
+  const data = (await response.json()) as ArticleObject;
 
   return data;
 }
