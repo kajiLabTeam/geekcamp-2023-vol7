@@ -1,7 +1,7 @@
 export type LastUpdate = `${number}.${number}.${number}`;
 
 export type NodeObject = {
-  id: number;
+  nodeId: number;
   name: string;
   articleId: number;
   childNodeNumber: number;
@@ -23,4 +23,10 @@ export type SearchNodeObject = {
 export type SuggestionObject = {
   type: "suggestion";
   suggestions: NodeObject[];
+};
+
+export type NodeConnectData = {
+  currentNode: NodeObject;
+  relationNode: NodeObject[];
+
 };
