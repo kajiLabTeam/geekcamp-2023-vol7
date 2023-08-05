@@ -1,12 +1,17 @@
 import { ArticleObject } from "@/components/util/type";
+import { GraphData } from "@/foundation/graph/types";
 import { NodeObject } from "react-force-graph-2d";
 import { atom } from "recoil";
-import { nodesData } from "../testData";
 import { recoilKeyHashSet } from "./keys";
 
-export const currentNodeState = atom<NodeObject>({
+export const currentNodeState = atom<NodeObject | null>({
   key: recoilKeyHashSet.currentNode,
-  default: { ...nodesData[0] }
+  default: null
+});
+
+export const GraphDataState = atom<GraphData>({
+  key: recoilKeyHashSet.graphData,
+  default: { nodes: [], links: [] }
 });
 
 export const currentArticleState = atom<ArticleObject>({
