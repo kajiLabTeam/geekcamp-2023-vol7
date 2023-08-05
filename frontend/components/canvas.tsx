@@ -41,7 +41,6 @@ function ForceGraphField (props: { width: number, height: number }) {
     currentNode.fx = currentNode.x;
     currentNode.fy = currentNode.y;
     graphRef.current.centerAt(currentNode.x, currentNode.y, 1000);
-    graphRef.current.zoom(4, 1000);
 
     return () => {
       if (currentNode) {
@@ -99,16 +98,6 @@ function ForceGraphField (props: { width: number, height: number }) {
   const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
     if (currentNodeId === node.id) {
       setIsDialogOpen(true);
-    } else {
-      const currentNode = getNode(currentNodeId);
-      if (currentNode) {
-        currentNode.fx = undefined;
-        currentNode.fy = undefined;
-      }
-      node.fx = node.x;
-      node.fy = node.y;
-      graphRef.current.centerAt(node.x, node.y, 1000);
-      graphRef.current.zoom(4, 1000);
     }
 
     if (node.connectNum < node.val) {

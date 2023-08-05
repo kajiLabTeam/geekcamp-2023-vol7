@@ -40,8 +40,7 @@ export async function fetchNodeConnect(
 // 記事を取得する
 export async function fetchArticle(nodeId: number): Promise<ArticleObject> {
   const response = await fetch(`/api/article/info/${nodeId}`);
-  console.log(response);
-  
+
   if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
   const data = (await response.json()) as ArticleObject;
 
