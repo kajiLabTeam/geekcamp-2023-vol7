@@ -3,27 +3,28 @@ import { useEffect, useState } from "react";
 import { fetchNodeConnect, fetchSearchWord } from "@/components/util/api";
 import { NodeObject } from "@/components/util/type";
 import useGraphData from "@/hooks/useGraphData";
+import { useSetRecoilState } from "recoil";
+import { currentNodeIdState } from "@/const/recoil/state";
 
 export default function Search() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchWord, setSearchWord] = useState("");
   const [suggestions, setSuggestions] = useState<NodeObject[]>([]);
+  const setCurrentId = useSetRecoilState(currentNodeIdState);
   const { addConnection } = useGraphData();
 
   async function nodeId2NodeConnection(nodeId: number) {
     const res = await fetchNodeConnect(nodeId);
-    addConnection(res);
+    const currentNode = addConnection(res);
+    setCurrentId(currentNode.id);
   }
 
   async function search(word: string) {
     const res = await fetchSearchWord(word);
 
     if (res.type === "node") {
-      const nodeRelation = {
-        currentNode: res.currentNode,
-        relationNode: res.relationNode,
-      };
-      addConnection(nodeRelation);
+      const currentNode = addConnection(res);
+      setCurrentId(currentNode.id);
     } else {
       setSuggestions(res.suggestions);
     }

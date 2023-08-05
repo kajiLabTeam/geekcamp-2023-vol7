@@ -4,10 +4,11 @@ import markdownit from "markdown-it";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   currentArticleState,
-  currentNodeState,
+  currentNodeIdState,
   isDialogOpenState,
 } from "@/const/recoil/state";
 import { fetchArticle } from "@/components/util/api";
+import useGraphData from "@/hooks/useGraphData";
 
 type Props = {
   forceLoading: boolean;
@@ -19,7 +20,9 @@ export default function Dialog(
   }
 ) {
   const [isDialogOpen, setIsDialogOpen] = useRecoilState(isDialogOpenState);
-  const currentNode = useRecoilValue(currentNodeState);
+  const { getNode } = useGraphData();
+  const currentNodeId = useRecoilValue(currentNodeIdState);
+  const currentNode = getNode(currentNodeId);
   const [article, setArticle] = useRecoilState(currentArticleState);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -35,7 +38,7 @@ export default function Dialog(
 
     (async () => {
       if (!currentNode?.id) return;
-      
+
       const articleSnap = await fetchArticle(currentNode?.id as number);
       setArticle(articleSnap);
       setIsLoading(false);

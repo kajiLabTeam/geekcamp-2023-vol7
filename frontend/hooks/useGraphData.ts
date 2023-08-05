@@ -1,16 +1,35 @@
 import { NodeConnectData } from "@/components/util/type";
+import { recoilKeyHashSet } from "@/const/recoil/keys";
 import { GraphData, Link, Node } from "@/foundation/graph/types";
-import { useState } from "react";
+import { useCallback } from "react";
+import { atom, useRecoilState } from "recoil";
 
 type LinkKey = `${number}=${number}`;
 
-const nodesMap = new Map<number, Node>();
-const linksMap = new Map<LinkKey, Link>();
+const nodesMapState = atom({
+  key: recoilKeyHashSet.nodesMap,
+  default: new Map<number, Node>(),
+  dangerouslyAllowMutability: true
+});
+
+const linksMapState = atom({
+  key: recoilKeyHashSet.linksMap,
+  default: new Map<LinkKey, Link>(),
+  dangerouslyAllowMutability: true
+});
+
+const graphDataState = atom<GraphData>({
+  key: recoilKeyHashSet.graphData,
+  default: { nodes: [], links: [] },
+  dangerouslyAllowMutability: true
+});
 
 export default function useGraphData() {
-  const [graphData, setGraphData] = useState<GraphData>({ nodes: [], links: [] });
+  const [graphData, setGraphData] = useRecoilState(graphDataState);
+  const [nodesMap] = useRecoilState(nodesMapState);
+  const [linksMap] = useRecoilState(linksMapState);
 
-  const addConnection = (connectData: NodeConnectData) => {
+  const addConnection = useCallback((connectData: NodeConnectData) => {
     const rootId = connectData.currentNode.id;
 
     for (const node of [connectData.currentNode, ...connectData.relationNode]) {
@@ -22,7 +41,7 @@ export default function useGraphData() {
           id: nodeId,
           name: node.name,
           articleId: node.articleId,
-          val: node.childNodeNumber,
+          val: node.childNodeNum,
           connectNum: 0
         });
 
@@ -30,7 +49,7 @@ export default function useGraphData() {
         const labelLinkKey = getLinkKey(nodeId, labelId);
         nodesMap.set(labelId, {
           id: labelId,
-          val: node.childNodeNumber,
+          val: node.childNodeNum,
           connectNum: 0
         });
 
@@ -62,9 +81,13 @@ export default function useGraphData() {
     });
 
     return nodesMap.get(rootId)!;
-  }
+  }, [nodesMap, linksMap]);
 
-  return { graphData, addConnection };
+  const getNode = useCallback((nodeId: number) => (
+    nodesMap.get(nodeId)
+  ), [nodesMap]);
+
+  return { graphData, addConnection, getNode };
 }
 
 const getLinkKey = (source: number, target: number): LinkKey =>
