@@ -1,26 +1,32 @@
 import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
-import useDomSize from "@/hooks/useDomSize";
+import fetchLinkNodes from "@/foundation/graph/fetchLinkNodes";
+import nodeAddLabel from "@/foundation/graph/nodeAddLabel";
+import { GraphData, Link, Node } from "@/foundation/graph/types";
 import styles from "@styles/components/canvas.module.scss";
-import { useCallback } from "react";
-import ForceGraph2D from 'react-force-graph-2d';
-import { useRecoilCallback, useSetRecoilState } from "recoil";
-import { Link, Node, linksData, nodesData } from "../const/testData";
+import { useCallback, useRef, useState } from "react";
+import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
+import { useSetRecoilState } from "recoil";
+import { linksData, nodesData } from "../const/testData";
+import useDomSize from "@/hooks/useDomSize";
 
 export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
-  const getCurrentNode = useRecoilCallback(({ snapshot }) => () => snapshot.getPromise(currentNodeState));
+  const currentNodeRef = useRef<Node>({ ...nodesData[0] });
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
   const [wrapperRef, size] = useDomSize<HTMLDivElement>();
 
-  const nodes: Node[] = [...nodesData, ...nodesData.map(v => ({ id: `label_${v.id}`, label: "", val: 1 }))];
-  const links: Link[] = [...linksData, ...nodesData.map(v => ({ source: v.id, target: `label_${v.id}`, isLabel: true }))];
+  const [graphData, setGraphData] = useState<GraphData>(() => nodeAddLabel({ links: linksData, nodes:nodesData }));
+  const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     async (node, ctx, globalScale) => {
-      const currentNode = await getCurrentNode();
-      if (currentNode.id === node.id) {
+      const currentNode = currentNodeRef.current;
+      if (currentNode && currentNode.id === node.id) {
+        const { x, y } = node;
+        if (x == null || y == null) return;
+
         ctx.beginPath();
-        ctx.arc(node.x!, node.y!, Math.sqrt(node.val) * 3, 0, Math.PI * 2, true);
+        ctx.arc(x, y, Math.sqrt(node.val) * 3, 0, Math.PI * 2, true);
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 1;
         ctx.stroke();
@@ -32,14 +38,19 @@ export default function Canvas() {
   const drawLinks = useCallback<(obj: { source?: string | number | Node, target?: string | number | Node }, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     ({ source, target }, ctx, globalScale) => {
       if (typeof source !== 'object' || typeof target !== 'object') return;
-      const fontSize = 12 * Math.sqrt(source.val) / globalScale;
+
+      const { x: sx, y: sy, name } = source;
+      const { x: tx, y: ty } = target;
+      if (sx == null || sy == null || tx == null || ty == null || !name) return;
+
+      const fontSize = 12 * Math.sqrt(source.val) / Math.min(4, Math.max(globalScale, 1));
       ctx.font = `${fontSize}px Sans-Serif`;
-      const textWidth = ctx.measureText(source.nodeLabel!).width;
-      const textAngle = Math.atan2(target.y! - source.y!, target.x! - source.x!);
-      const isFlip = textAngle > Math.PI / 2 || textAngle < -Math.PI / 2
+      const textWidth = ctx.measureText(name).width;
+      const textAngle = Math.atan2(ty - sy, tx - sx);
+      const isFlip = textAngle < -Math.PI / 2 || Math.PI / 2 < textAngle
 
       ctx.save();
-      ctx.translate(source.x!, source.y!);
+      ctx.translate(sx, sy);
       ctx.rotate(textAngle);
       ctx.translate(textWidth / 2 + Math.sqrt(source.val) * 4 + 1 / globalScale, 0);
       if (isFlip) ctx.rotate(Math.PI);
@@ -47,30 +58,56 @@ export default function Canvas() {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#000000';
-      ctx.fillText(source.nodeLabel!, 0, 0);
+      ctx.fillText(name, 0, 0);
       ctx.restore();
     },
     []
   )
 
   const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
-    if ((await getCurrentNode()).id === node.id) setIsDialogOpen(true);
+    const currentNode = currentNodeRef.current;
+    if (currentNode && currentNode.id === node.id) {
+      setIsDialogOpen(true);
+    } else {
+      if (currentNode) {
+        currentNode.fx = undefined;
+        currentNode.fy = undefined;
+      }
+      node.fx = node.x;
+      node.fy = node.y;
+      graphRef.current.centerAt(node.x, node.y, 1000);
+      graphRef.current.zoom(4, 1000);
+    }
+
+    if (!node.isOpened) {
+      node.isOpened = true;
+      const linkData = await fetchLinkNodes(node.id);
+      const linkDataWithLabel = nodeAddLabel(linkData);
+
+      setGraphData(v => ({
+        nodes: [...v.nodes, ...linkDataWithLabel.nodes],
+        links: [...v.links, ...linkDataWithLabel.links]
+      }));
+    }
+    currentNodeRef.current = node;
     setCurrentNode({ ...node });
   }, []);
 
   return (
     <div className={styles.canvas} ref={wrapperRef}>
       {size && <ForceGraph2D
+        ref={graphRef}
         width={size.width}
         height={size.height}
-        graphData={{ nodes, links }}
+        graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
-        nodeCanvasObjectMode={() => "after"}
+        nodeColor={node => node.isOpened ? "#000000" : "#75BEC2"}
+        nodeCanvasObjectMode={node => node.id === currentNodeRef.current.id ? "after" : "none"}
         nodeCanvasObject={drawWithLabel}
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
         linkCanvasObject={drawLinks}
-        nodeVisibility={node => !node.id.startsWith("label_")}
+        nodeVisibility={node => !!node.name}
       />}
     </div>
   );
