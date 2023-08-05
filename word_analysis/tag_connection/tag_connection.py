@@ -21,7 +21,8 @@ cur.execute('''
     CREATE TABLE IF NOT EXISTS connection(
         target_tag TEXT,
         connect_tag TEXT,
-        count INTEGER
+        count INTEGER DEFAULT 0,
+        ratio INTEGER DEFAULT 0,
     )
 ''')
 cur.execute('''
@@ -88,7 +89,7 @@ def tag_connect_counter(article_tags, target_tag):
             else:
                 cur.execute(f'''
                     INSERT INTO connection
-                    VALUES("{target_tag}", "{tag}", 1)
+                    VALUES("{target_tag}", "{tag}", 1, 0)
                 ''')
         conn.commit()
 
@@ -119,7 +120,8 @@ def get_tag_connection(tag, page, items_count):
     tags_list = [article['tags'] for article in response.json()]
     tag_connect_counter(tags_list, tag)
 
-    sleep(2)
+    if len(tags_list) < 100:
+        sleep(2)
 
 
 # Qiitaからタグ一覧を取得してDBに保存
