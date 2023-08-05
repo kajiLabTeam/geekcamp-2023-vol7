@@ -1,6 +1,7 @@
 import csv
 
 from model.article import Article
+from model.connection import Connection
 from model.node import Node
 
 
@@ -29,6 +30,27 @@ def insert_node():
             Node.insert_node(article)
 
 
+def insert_connection():
+    with open("./init/data/connection.csv", "r", encoding="utf-8") as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            node_id = row[0]
+            connect_node_id = row[1]
+            connection_strength = row[2]
+
+            connection = Connection(
+                node_id=node_id,
+                connect_node_id=connect_node_id,
+                connection_strength=connection_strength,
+            )
+
+            print(connection)
+
+            Connection.insert_connection(connection)
+
+
 def insert_all_data():
     insert_article()
     insert_node()
+    # insert_connection()
