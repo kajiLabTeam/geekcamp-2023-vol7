@@ -17,6 +17,11 @@ mecab-python3 = "*"
 neologdn = "*"
 beautifulsoup4 = "*"
 python-dotenv = "*"
+wikipedia = "*"
+lxml = "*"
+janome = "*"
+nltk = "*"
+tokenizer = "*"
 
 [dev-packages]
 
