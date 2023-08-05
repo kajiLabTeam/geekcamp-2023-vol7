@@ -1,12 +1,11 @@
-import { GraphDataState, currentNodeState, isDialogOpenState } from "@/const/recoil/state";
-import fetchLinkNodes from "@/foundation/graph/fetchLinkNodes";
-import nodeAddLabel from "@/foundation/graph/nodeAddLabel";
+import { currentNodeState, isDialogOpenState } from "@/const/recoil/state";
 import { Link, Node } from "@/foundation/graph/types";
 import useDomSize from "@/hooks/useDomSize";
+import useGraphData from "@/hooks/useGraphData";
 import styles from "@styles/components/canvas.module.scss";
 import { useCallback, useEffect, useRef } from "react";
 import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 
 export default function Canvas() {
   const setCurrentNode = useSetRecoilState(currentNodeState);
@@ -14,19 +13,16 @@ export default function Canvas() {
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
   const [wrapperRef, size] = useDomSize<HTMLDivElement>();
 
-  const [graphData, setGraphData] = useRecoilState(GraphDataState);
+  const { graphData, fetchConnectNode } = useGraphData();
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
   useEffect(() => {
-    fetchLinkNodes(1).then(init => {
-      const initData = {
-        nodes: [{ ...init.current, isOpened: true }, ...init.nodes],
-        links: init.links
-      };
-      const initDataWithLabel = nodeAddLabel(initData);
-      setGraphData(initDataWithLabel);
-      currentNodeRef.current = init.current;
-    });
+    fetchConnectNode(1)
+      .then(currentNode => {
+        currentNodeRef.current = currentNode;
+        setCurrentNode(structuredClone(currentNode));
+        return currentNode;
+      });
   }, []);
 
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
@@ -92,13 +88,7 @@ export default function Canvas() {
 
     if (!node.isOpened) {
       node.isOpened = true;
-      const linkData = await fetchLinkNodes(node.id);
-      const linkDataWithLabel = nodeAddLabel(linkData);
-
-      setGraphData(v => ({
-        nodes: [...v.nodes, ...linkDataWithLabel.nodes].filter((v, i, a) => a.findIndex(w => v.id === w.id) === i),
-        links: [...v.links, ...linkDataWithLabel.links].filter((v, i, a) => a.findIndex(w => v.source === w.source && v.target === w.target) === i)
-      }));
+      fetchConnectNode(node.id);
     }
     currentNodeRef.current = node;
     setCurrentNode({ ...node });
