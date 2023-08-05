@@ -24,7 +24,7 @@ def get_nodes(node_id: int):
     if connections is None:
         return None
 
-    relation_nodes = Node.get_connection_node_by_ids(
+    relation_nodes = Node.get_node_by_ids(
         [connection.connect_node_id for connection in connections]
     )
     if relation_nodes is None:
@@ -48,14 +48,58 @@ def get_nodes(node_id: int):
     }
 
 
-def add_node(node: Node):
+def search_node(node_query: str):
     """ノードを追加する
 
     Args:
         uid (str): ユーザーID
         spending_amount (int): 支出額
     """
-    session = get_db_session()
+    current_node = Node.get_node_by_node_name_perfection(node_query)
+    if current_node is None:
+        return search_node_partial(node_query)
 
-    session.commit()
-    session.close()
+    connections = Connection.get_connection_by_node_id(current_node.id)
+    if connections is None:
+        return None
+
+    relation_nodes = Node.get_node_by_ids(
+        [connection.connect_node_id for connection in connections]
+    )
+    if relation_nodes is None:
+        return None
+
+    return {
+        "type": "node",
+        "currentNode": {
+            "id": current_node.id,
+            "name": current_node.node_name,
+            "articleId": current_node.article_id,
+        },
+        "relationNode": [
+            {
+                "id": relation_node.id,
+                "name": relation_node.node_name,
+                "articleId": relation_node.article_id,
+            }
+            for relation_node in relation_nodes
+        ],
+    }
+
+
+def search_node_partial(node_query: str):
+    suggestions = Node.get_node_by_node_name_partial(node_query)
+    if suggestions is None:
+        return None
+
+    return {
+        "type": "suggestion",
+        "suggestions": [
+            {
+                "id": suggestion_node.id,
+                "name": suggestion_node.node_name,
+                "articleId": suggestion_node.article_id,
+            }
+            for suggestion_node in suggestions
+        ],
+    }

@@ -23,8 +23,8 @@ def get_article(node_id: int):
         return None
 
     return {
+        "id": article.id,
         "nodeId": node_id,
-        "articleId": article.id,
         "name": node.node_name,
         "article": article.article,
         "lastUpdate": article.last_update,
