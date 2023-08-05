@@ -1,6 +1,6 @@
 import requests
 import os
-import csv
+from dotenv import load_dotenv
 import pandas as pd
 import wikipedia
 import sqlite3
@@ -9,8 +9,9 @@ from time import sleep
 import sys
 
 DB_PATH = "connection.db"
-# GITHUB_TOKEN = "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"
-GITHUB_TOKEN = "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"
+# GITHUB_TOKENを環境変数から取得
+load_dotenv()
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
 # データベースに接続
 conn = sqlite3.connect(DB_PATH)
@@ -23,6 +24,14 @@ today = today.replace("-", ".")
 today = today[2:]
 
 
+def add_db(query, description, last_up):
+    cursor.execute(
+        "INSERT INTO articles (tag, article, last_up) VALUES (?, ?, ?);",
+        (query, description, last_up),
+    )
+    conn.commit()
+
+
 def get_summary_from_github(query):
     headers = {"Authorization": f"Bearer {GITHUB_TOKEN}"}
     url = f"https://api.github.com/search/topics?per_page=100&q={query}"
@@ -31,10 +40,8 @@ def get_summary_from_github(query):
 
     # queryを小文字に
     lower_query = query.lower()
-    # #をsharpに
-    lower_query = lower_query.replace("#", "sharp")
-    # +をpに
-    lower_query = lower_query.replace("+", "p")
+    # #をsharp、++をppに
+    lower_query = lower_query.replace("#", "sharp").replace("++", "pp")
 
     # queryを大文字に
     upper_query = query.upper()
@@ -54,13 +61,9 @@ def get_summary_from_github(query):
                 description = item["description"]
 
                 if description == "NULL":
-                    description = "None"
+                    return False
                 # dbの"tag"の一番下に格納
-                cursor.execute(
-                    "INSERT INTO articles (tag, article, last_up) VALUES (?, ?, ?);",
-                    (query, description, last_up),
-                )
-                conn.commit()
+                add_db(query, description, last_up)
                 return True
     except:
         print(data)
@@ -82,11 +85,7 @@ def get_summary_from_wikipedia(query):
     # textが空じゃないとき
     if text:
         # dbの"tag"の一番下に格納
-        cursor.execute(
-            "INSERT INTO articles (tag, article, last_up) VALUES (?, ?, ?);",
-            (query, text, today),
-        )
-        conn.commit()
+        add_db(query, text, today)
         return True
     else:
         return False
@@ -98,11 +97,9 @@ all_tag = cursor.fetchall()
 all_tag = [tag[0] for tag in all_tag]
 
 # articlesテーブルから"id"の最大値を取得
+max_id = 0
 cursor.execute("SELECT MAX(id) FROM articles")
-max_id = cursor.fetchall()
-max_id = max_id[0][0]
-if max_id is None:
-    max_id = 0
+max_id = cursor.fetchone()[0] or 0
 
 # all_tagから先頭に#のついた要素を削除
 all_tag = [tag for tag in all_tag if tag[0] != "#"]
@@ -114,25 +111,19 @@ all_tag = all_tag[counter:]
 
 for name in all_tag:
     counter += 1
-
-    bool = True
-    # print(name)
     if not name:
-        continue
+        name = "None"
 
     if not get_summary_from_github(name):
         if not get_summary_from_wikipedia(name):
-            cursor.execute(
-                "INSERT INTO articles (tag, article, last_up) VALUES (?, ?, ?);",
-                (name, "None", today),
-            )
-            conn.commit()
-            print(f"ccount:{counter},item:{name},prosseing:None")
+            add_db(name, name, today)
+            prosseing = "None"
         else:
-            print(f"ccount:{counter},item:{name},prosseing:wiki")
+            prosseing = "wikipedia"
     else:
-        print(f"ccount:{counter},item:{name},prosseing:github")
+        prosseing = "github"
 
+    print(f"ccount:{counter},item:{name},prosseing:{prosseing}")
     sleep(3)
 
 # 最後の処理
