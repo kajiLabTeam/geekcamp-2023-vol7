@@ -16,7 +16,6 @@ export default function Canvas() {
   const [graphData, setGraphData] = useState<GraphData>(() => nodeAddLabel({ links: linksData, nodes:nodesData }));
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
-  console.log(currentNodeRef.current);
   const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     async (node, ctx, globalScale) => {
       const currentNode = currentNodeRef.current;
@@ -88,8 +87,6 @@ export default function Canvas() {
         links: [...v.links, ...linkDataWithLabel.links]
       }));
     }
-
-
     currentNodeRef.current = node;
     setCurrentNode({ ...node });
   }, []);
@@ -98,12 +95,12 @@ export default function Canvas() {
     <div className={styles.canvas}>
       <ForceGraph2D
         ref={graphRef}
+        nodeId={"nodeId"}
         graphData={graphData}
         backgroundColor="#FFF9F1"
         onNodeClick={onNodeClick}
         nodeColor={node => node.isOpened ? "#000000" : "#75BEC2"}
-        nodeCanvasObjectMode={() => "after"}
-        // nodeCanvasObjectMode={node => node.id === currentNodeRef.current.id ? "after" : "none"}
+        nodeCanvasObjectMode={node => node.id === currentNodeRef.current.id ? "after" : "none"}
         nodeCanvasObject={drawWithLabel}
         linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
         linkCanvasObject={drawLinks}
