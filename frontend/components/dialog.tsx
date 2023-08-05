@@ -128,7 +128,7 @@ export default function Dialog(
               <div
                 className={styles.description}
                 dangerouslySetInnerHTML={{
-                  __html: markdownit().render(article.content),
+                  __html: markdownit().render(article.article),
                 }}
               ></div>
               <p className={styles.last_update}>{article.lastUpdate}</p>

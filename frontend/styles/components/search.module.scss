@@ -1,0 +1,73 @@
+.search {
+  height: 44px;
+  background-color: var(--background);
+  border: 2px solid var(--primary);
+  position: fixed;
+  top: 30px;
+  right: 20px;
+  z-index: 1000;
+  cursor: pointer;
+
+  .arrow_box {
+    margin-right: 5px;
+    height: 100%;
+    width: 15px;
+    background-color: var(--primary);
+    vertical-align: bottom;
+    display: inline-flex;
+    align-items: center;
+    align-items: center;
+
+    .arrow {
+      fill: var(--background);
+    }
+  }
+
+  .input {
+    margin: 0 10px;
+    padding: 0 5px;
+    width: 200px;
+    font-size: 1.5rem;
+    line-height: 40px;
+    background-color: var(--background);
+    vertical-align: bottom;
+    outline: none;
+    border: none;
+    transition: all 0.3s;
+  }
+
+  &.open {
+    .arrow {
+      rotate: 180deg;
+    }
+
+    .input {
+      width: 0;
+      margin: 0;
+    }
+  }
+}
+
+.suggestion {
+  width: 200px;
+  background-color: var(--background);
+  position: fixed;
+  top: 74px;
+  right: 20px;
+  z-index: 900;
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 1;
+
+  & > div {
+    transition: all .3s;
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+
+  &.open {
+    opacity: 0;
+  }
+}

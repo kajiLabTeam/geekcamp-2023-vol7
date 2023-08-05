@@ -4,12 +4,23 @@ export type NodeObject = {
   id: number;
   name: string;
   articleId: number;
-  lastUpdate: LastUpdate;
+  childNodeNumber: number;
 };
 
 export type ArticleObject = {
   id: number;
   nodeId: number;
-  content: string;
+  article: string;
   lastUpdate: LastUpdate;
-}
+};
+
+export type SearchNodeObject = {
+  type: "node";
+  currentNode: NodeObject;
+  connectNodes: NodeObject[];
+};
+
+export type SuggestionObject = {
+  type: "suggestion";
+  suggestions: NodeObject[];
+};
