@@ -1,6 +1,7 @@
 import { NodeConnectData } from "@/components/util/type";
 import { recoilKeyHashSet } from "@/const/recoil/keys";
 import { GraphData, Link, Node } from "@/foundation/graph/types";
+import { useCallback } from "react";
 import { atom, useRecoilState } from "recoil";
 
 type LinkKey = `${number}=${number}`;
@@ -28,7 +29,7 @@ export default function useGraphData() {
   const [nodesMap] = useRecoilState(nodesMapState);
   const [linksMap] = useRecoilState(linksMapState);
 
-  const addConnection = (connectData: NodeConnectData) => {
+  const addConnection = useCallback((connectData: NodeConnectData) => {
     const rootId = connectData.currentNode.id;
 
     for (const node of [connectData.currentNode, ...connectData.relationNode]) {
@@ -80,9 +81,11 @@ export default function useGraphData() {
     });
 
     return nodesMap.get(rootId)!;
-  };
+  }, [nodesMap, linksMap]);
 
-  const getNode = (nodeId: number) => nodesMap.get(nodeId);
+  const getNode = useCallback((nodeId: number) => (
+    nodesMap.get(nodeId)
+  ), [nodesMap]);
 
   return { graphData, addConnection, getNode };
 }
