@@ -95,13 +95,19 @@ class Node(SQLModel, table=True):
 
     @classmethod
     # ノードの名前を元にノードを取得する (部分一致)
-    def get_node_by_node_name_partial(cls, node_query: str) -> List["Node"] | None:
+    def get_node_by_node_name_partial(
+        cls, node_query: str, search_limit: int
+    ) -> List["Node"] | None:
         if not node_query:
             return None
 
         try:
             session = get_db_session()
-            stmt = select(Node).where(Node.node_name.like(f"%{node_query}%"))
+            stmt = (
+                select(Node)
+                .where(Node.node_name.like(f"%{node_query}%"))
+                .limit(search_limit)
+            )
             result = session.exec(stmt).all()
             session.close()
             return result

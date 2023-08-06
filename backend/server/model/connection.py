@@ -17,14 +17,21 @@ class Connection(SQLModel, table=True):
     # connect_node: Optional[Node] = Relationship(back_populates="connections")
 
     @classmethod
-    # ノードIDを元にノードを取得する (Node型で)
-    def get_connection_by_node_id(cls, node_id: int) -> List["Connection"] | None:
+    # ノードIDを元にノードを取得する (List["Connection"]型 & 上位100個)
+    def get_connection_by_node_id(
+        cls, node_id: int, higher_limit: int
+    ) -> List["Connection"] | None:
         if not node_id:
             return None
 
         try:
             session = get_db_session()
-            stmt = select(Connection).where(Connection.node_id == node_id)
+            stmt = (
+                select(Connection)
+                .where(Connection.node_id == node_id)
+                .order_by(Connection.connection_strength.desc())
+                .limit(higher_limit)
+            )
             result = session.exec(stmt).all()
             session.close()
             return result
