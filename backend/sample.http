@@ -1,4 +1,4 @@
-GET http://localhost:80/api/nodes/connect/1 HTTP/1.1
+GET http://localhost:80/api/nodes/connect/7 HTTP/1.1
 
 ###
 GET http://localhost:80/api/article/info/1 HTTP/1.1

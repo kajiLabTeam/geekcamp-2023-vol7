@@ -17,8 +17,7 @@ CREATE TABLE
     node (
         id INT AUTO_INCREMENT PRIMARY KEY,
         node_name VARCHAR(50),
-        article_id INT,
-        FOREIGN KEY (article_id) REFERENCES article (id)
+        article_id INT
     );
 
 CREATE TABLE
@@ -26,9 +25,7 @@ CREATE TABLE
         id INT AUTO_INCREMENT PRIMARY KEY,
         node_id INT,
         connect_node_id INT,
-        connection_strength INT,
-        FOREIGN KEY (node_id) REFERENCES node (id),
-        FOREIGN KEY (connect_node_id) REFERENCES node (id)
+        connection_strength INT
     );
 
 CREATE TABLE
