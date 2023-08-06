@@ -4,12 +4,14 @@ from model.connection import Connection
 from model.node import Node
 
 
-def get_nodes(node_id: int, higher_limit: int, res_node_limit: int):
+def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
     current_node = Node.get_node_by_id(node_id)
     if current_node is None:
         return []
 
-    connections = Connection.get_connection_by_node_id(current_node.id, higher_limit)
+    connections = Connection.get_connection_by_node_id(
+        current_node.id, extracted_node_limit
+    )
     relation_nodes = None
     if connections is not None:
         connections = random.sample(connections, k=res_node_limit)
@@ -32,7 +34,7 @@ def get_nodes(node_id: int, higher_limit: int, res_node_limit: int):
                 "childNodeNum": min(
                     len(
                         Connection.get_connection_by_node_id(
-                            relation_node.id, higher_limit
+                            relation_node.id, extracted_node_limit
                         ),
                         res_node_limit,
                     ),

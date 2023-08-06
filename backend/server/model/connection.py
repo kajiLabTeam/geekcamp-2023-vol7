@@ -19,7 +19,7 @@ class Connection(SQLModel, table=True):
     @classmethod
     # ノードIDを元にノードを取得する (List["Connection"]型 & 上位100個)
     def get_connection_by_node_id(
-        cls, node_id: int, higher_limit: int
+        cls, node_id: int, extracted_node_limit: int
     ) -> List["Connection"] | None:
         if not node_id:
             return None
@@ -30,7 +30,7 @@ class Connection(SQLModel, table=True):
                 select(Connection)
                 .where(Connection.node_id == node_id)
                 .order_by(Connection.connection_strength.desc())
-                .limit(higher_limit)
+                .limit(extracted_node_limit)
             )
             result = session.exec(stmt).all()
             session.close()

@@ -19,6 +19,7 @@ async def get_article(nodeId: int):
 async def get_article(articleId: int, request: Request):
     data = await request.json()
     article = data.get("article", "")
+
     article = db_put_article(articleId, article)
 
     return article

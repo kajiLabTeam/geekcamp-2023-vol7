@@ -6,6 +6,10 @@ from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlmodel import Session, create_engine
 
+EXTRACTED_NODE_LIMIT = 100
+RESPONSE_NODE_LIMIT = 10
+SEARCH_NODE_LIMIT = 5
+
 
 def create_engine_with_retry(url, max_retries=180, retry_interval=5):
     retries = 0
