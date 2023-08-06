@@ -20,6 +20,7 @@ export default function Search() {
   }
 
   async function search(word: string) {
+    if (word === "") return;
     const res = await fetchSearchWord(word);
 
     if (res.type === "node") {
