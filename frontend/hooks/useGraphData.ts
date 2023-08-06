@@ -50,6 +50,7 @@ export default function useGraphData() {
         const labelNode: GraphNode = {
           id: labelId,
           val: node.childNodeNum,
+          articleId: node.articleId,
           connectNum: 0
         };
 

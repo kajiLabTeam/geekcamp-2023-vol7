@@ -34,7 +34,7 @@ export type GraphNode = {
   id: number;
   val: number;
   connectNum: number;
-  articleId?: number;
+  articleId: number;
   x?: number | undefined;
   y?: number | undefined;
   vx?: number | undefined;
