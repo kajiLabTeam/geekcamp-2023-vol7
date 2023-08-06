@@ -1,17 +1,26 @@
 import sqlite3
-import numpy as np
-import pandas as pd
+
+number = 1
 
 # データベースに接続
 conn = sqlite3.connect("connection.db")
 cursor = conn.cursor()
 
-cursor.execute("SELECT DISTINCT target_tag FROM connection")
+cursor.execute("""
+    SELECT DISTINCT target_tag
+    FROM connection
+    WHERE ratio == 0
+        AND count > 1
+    ORDER BY count ASC
+""")
 tags = cursor.fetchall()
 
 counter = 0
+length = len(tags)
+start = int(length * 0.05 * (number - 1))
+end = int(length * 0.05 * number)
 
-for tag_snap in tags:
+for tag_snap in tags[start:end]:
     tag = tag_snap[0]
     print(f"----- {tag} -----")
 
@@ -32,14 +41,13 @@ for tag_snap in tags:
     diff_ = max_ - min_
     for connection in connections:
         print(connection[1])
-        normalized_count = (connection[2] - min_) / diff_
         cursor.execute(f"""
             UPDATE connection
-            SET ratio={int(normalized_count*10000)}
+            SET ratio={(connection[2] - min_) * 10000 / diff_}
             WHERE target_tag='{connection[0]}'
                 AND connect_tag='{connection[1]}'
         """)
-        conn.commit()
+    conn.commit()
 
 # 接続を閉じる
 conn.close()
