@@ -15,11 +15,8 @@ def insert_node_article():
     all_node = cur.execute('''
         SELECT tag
         FROM node
-        WHERE tag="JavaScript"
-        OR tag = "React"
-        OR tag = "TypeScript"
-        OR tag = "Next.js"
         ORDER BY items_count DESC
+        LIMIT 1000
     ''').fetchall()
 
     for i, node in enumerate(all_node):
@@ -46,23 +43,18 @@ def insert_connection():
     all_connection = cur.execute('''
         SELECT node_id, connect_node_id, connection_strength 
         FROM connection
-        WHERE node_id = "JavaSciprt"
-            OR node_id = "React"
-            OR node_id = "TypeScript"
-            OR node_id = "Next.js"
-        ORDER BY node_id DESC
+        ORDER BY connection_strength DESC
+        LIMIT 10000
     ''').fetchall()
 
-    node = None
+
     for i, connection in enumerate(all_connection):
         print(f'\n\nB-------------{i}--------------\n\n')
         node_name = connection[0]
         connect_node_name = connection[1]
         connection_strength = connection[2]
 
-        if not node or node.node_name != node_name:
-            node = Node.get_node_by_node_name_perfection(node_name)
-
+        node = Node.get_node_by_node_name_perfection(node_name)
         connect_node = Node.get_node_by_node_name_perfection(connect_node_name)
 
         if node == None or connect_node == None:
