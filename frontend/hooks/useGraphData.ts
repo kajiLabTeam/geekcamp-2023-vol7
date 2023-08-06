@@ -1,6 +1,5 @@
-import { NodeConnectData } from "@/components/util/type";
+import { GraphData, GraphLink, GraphNode, NodeConnectData } from "@/components/util/type";
 import { recoilKeyHashSet } from "@/const/recoil/keys";
-import { GraphData, Link, Node } from "@/foundation/graph/types";
 import { useCallback } from "react";
 import { atom, useRecoilState } from "recoil";
 
@@ -8,13 +7,13 @@ type LinkKey = `${number}=${number}`;
 
 const nodesMapState = atom({
   key: recoilKeyHashSet.nodesMap,
-  default: new Map<number, Node>(),
+  default: new Map<number, GraphNode>(),
   dangerouslyAllowMutability: true
 });
 
 const linksMapState = atom({
   key: recoilKeyHashSet.linksMap,
-  default: new Map<LinkKey, Link>(),
+  default: new Map<LinkKey, GraphLink>(),
   dangerouslyAllowMutability: true
 });
 
@@ -36,39 +35,48 @@ export default function useGraphData() {
       const nodeId = node.id;
       const key = getLinkKey(rootId, nodeId);
 
-      if (!nodesMap.has(nodeId)) {
-        nodesMap.set(nodeId, {
-          id: nodeId,
-          name: node.name,
-          articleId: node.articleId,
-          val: node.childNodeNum,
-          connectNum: 0
-        });
+      const mainNode: GraphNode = {
+        id: nodeId,
+        name: node.name,
+        articleId: node.articleId,
+        val: node.childNodeNum,
+        connectNum: 0
+      };
 
+      if (!nodesMap.has(nodeId)) {
         const labelId = -nodeId;
         const labelLinkKey = getLinkKey(nodeId, labelId);
-        nodesMap.set(labelId, {
+
+        const labelNode: GraphNode = {
           id: labelId,
           val: node.childNodeNum,
+          articleId: node.articleId,
           connectNum: 0
-        });
+        };
 
-        linksMap.set(labelLinkKey, {
-          source: nodeId,
-          target: labelId,
+        const labelLink: GraphLink = {
+          source: mainNode,
+          target: labelNode,
           isLabel: true
-        });
+        };
+
+        nodesMap.set(nodeId, mainNode);
+        nodesMap.set(labelId, labelNode);
+        linksMap.set(labelLinkKey, labelLink);
       }
+
+      // TODO: 仮
+      const currentNode = nodesMap.get(rootId)!;
 
       if (!linksMap.has(key)) {
         linksMap.set(key, {
-          source: rootId,
-          target: nodeId
+          source: currentNode,
+          target: mainNode
         });
 
         for (const id of [rootId, nodeId]) {
           const connectNode = nodesMap.get(id);
-          if (connectNode && connectNode.connectNum != null) {
+          if (connectNode?.connectNum != null) {
             connectNode.connectNum++;
           }
         }

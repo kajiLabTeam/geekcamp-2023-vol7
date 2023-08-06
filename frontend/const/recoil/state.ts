@@ -1,5 +1,4 @@
 import { ArticleObject } from "@/components/util/type";
-import { GraphData } from "@/foundation/graph/types";
 import { atom } from "recoil";
 import { recoilKeyHashSet } from "./keys";
 

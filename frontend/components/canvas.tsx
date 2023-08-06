@@ -1,12 +1,12 @@
 import { currentNodeIdState, isDialogOpenState } from "@/const/recoil/state";
-import fetchConnectNodes from "@/foundation/fetchConnectNodes";
-import { Link, Node } from "@/foundation/graph/types";
 import useDomSize from "@/hooks/useDomSize";
 import useGraphData from "@/hooks/useGraphData";
 import styles from "@styles/components/canvas.module.scss";
 import { useCallback, useEffect, useRef } from "react";
 import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { fetchNodeConnect } from "./util/api";
+import { GraphLink, GraphNode } from "./util/type";
 
 export default function Canvas() {
   const [wrapperRef, size] = useDomSize<HTMLDivElement>();
@@ -24,10 +24,10 @@ function ForceGraphField (props: { width: number, height: number }) {
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
   const { graphData, addConnection, getNode } = useGraphData();
-  const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
+  const graphRef = useRef<ForceGraphMethods<GraphNode, GraphLink>>(null!);
 
   useEffect(() => {
-    fetchConnectNodes(currentNodeId)
+    fetchNodeConnect(currentNodeId)
       .then(connectData => {
         if (connectData == null) throw new Error("ノードの読み込みに失敗しました");
         addConnection(connectData);
@@ -50,7 +50,7 @@ function ForceGraphField (props: { width: number, height: number }) {
     };
   }, [currentNodeId, getNode]);
 
-  const drawWithLabel = useCallback<(obj: Node, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
+  const drawWithLabel = useCallback<(obj: GraphNode, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     async (node, ctx, globalScale) => {
       if (currentNodeId === node.id) {
         const { x, y } = node;
@@ -66,7 +66,7 @@ function ForceGraphField (props: { width: number, height: number }) {
     [currentNodeId]
   )
 
-  const drawLinks = useCallback<(obj: { source?: string | number | Node, target?: string | number | Node }, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
+  const drawLinks = useCallback<(obj: { source?: string | number | GraphNode, target?: string | number | GraphNode }, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
     ({ source, target }, ctx, globalScale) => {
       if (typeof source !== 'object' || typeof target !== 'object') return;
 
@@ -95,13 +95,13 @@ function ForceGraphField (props: { width: number, height: number }) {
     [currentNodeId]
   )
 
-  const onNodeClick = useCallback<(node: Node, event: MouseEvent) => void>(async node => {
+  const onNodeClick = useCallback<(node: GraphNode, event: MouseEvent) => void>(async node => {
     if (currentNodeId === node.id) {
       setIsDialogOpen(true);
     }
 
     if (node.connectNum < node.val) {
-      const connectData = await fetchConnectNodes(node.id);
+      const connectData = await fetchNodeConnect(node.id);
       if (connectData) {
         addConnection(connectData);
       }

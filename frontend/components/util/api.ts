@@ -6,43 +6,32 @@ import {
   SuggestionObject,
 } from "@/components/util/type";
 
-// ノードの情報を取得する
-export async function fetchNode(nodeId: number): Promise<NodeObject> {
-  const response = await fetch(`/api/node/${nodeId}`);
-  if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
-  const data = (await response.json()) as NodeObject;
+function customFetch (url: string) {
+  return new Promise<any>((resolve, reject) =>
+    fetch(url)
+      .then(res => res.ok
+        ? resolve(res.json())
+        : reject(new Error(`${res.status}: ${res.statusText}`))
+      )
+  );
+}
 
-  return data;
+// ノードの情報を取得する
+export function fetchNode(nodeId: number): Promise<NodeObject> {
+  return customFetch(`/api/node/${nodeId}`);
 }
 
 // wordを検索する
-export async function fetchSearchWord(
-  word: string
-): Promise<SearchNodeObject | SuggestionObject> {
-  const response = await fetch(`/api/node/search?query=${word}`);
-  if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
-  const data = (await response.json()) as SearchNodeObject | SuggestionObject;
-
-  return data;
+export function fetchSearchWord(word: string): Promise<SearchNodeObject | SuggestionObject> {
+  return customFetch(`/api/node/search?query=${word}`);
 }
 
 // ノードの関係を取得する
-export async function fetchNodeConnect(
-  nodeId: number
-): Promise<NodeConnectData> {
-  const response = await fetch(`/api/nodes/connect/${nodeId}`);
-  if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
-  const data = (await response.json()) as NodeConnectData;
-
-  return data;
+export async function fetchNodeConnect(nodeId: number): Promise<NodeConnectData> {
+  return customFetch(`/api/nodes/connect/${nodeId}`);
 }
 
 // 記事を取得する
-export async function fetchArticle(nodeId: number): Promise<ArticleObject> {
-  const response = await fetch(`/api/article/info/${nodeId}`);
-
-  if (!response.ok) throw Error(`${response.status}: ${response.statusText}`);
-  const data = (await response.json()) as ArticleObject;
-
-  return data;
+export function fetchArticle(nodeId: number): Promise<ArticleObject> {
+  return customFetch(`/api/article/info/${nodeId}`);
 }

@@ -28,5 +28,29 @@ export type SuggestionObject = {
 export type NodeConnectData = {
   currentNode: NodeObject;
   relationNode: NodeObject[];
+};
 
+export type GraphNode = {
+  id: number;
+  val: number;
+  connectNum: number;
+  articleId: number;
+  x?: number | undefined;
+  y?: number | undefined;
+  vx?: number | undefined;
+  vy?: number | undefined;
+  fx?: number | undefined;
+  fy?: number | undefined;
+  name?: string;
+};
+
+export type GraphLink = {
+  source: GraphNode;
+  target: GraphNode;
+  isLabel?: boolean;
+};
+
+export type GraphData = {
+  nodes: GraphNode[];
+  links: GraphLink[];
 };
