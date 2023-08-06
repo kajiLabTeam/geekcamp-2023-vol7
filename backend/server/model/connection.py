@@ -9,12 +9,12 @@ from settings import get_db_engine, get_db_session
 
 class Connection(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True)
-    node_id: Optional[int] = Field(foreign_key="node.id")
-    connect_node_id: Optional[int] = Field(foreign_key="connect_node.id")
+    node_id: Optional[int]
+    connect_node_id: Optional[int]
     connection_strength: int
 
-    node: Optional[Node] = Relationship(back_populates="connections")
-    connect_node: Optional[Node] = Relationship(back_populates="connections")
+    # node: Optional[Node] = Relationship(back_populates="connections")
+    # connect_node: Optional[Node] = Relationship(back_populates="connections")
 
     @classmethod
     def get_connection_by_node_id(cls, node_id: int) -> List["Connection"] | None:
@@ -42,6 +42,22 @@ class Connection(SQLModel, table=True):
             result = session.exec(stmt).all()
             session.close()
             return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
+
+    @classmethod
+    def insert_connection(cls, connection: "Connection") -> List["Connection"] | None:
+        if not connection:
+            return None
+
+        try:
+            session = get_db_session()
+            session.add(connection)
+            session.commit()
+            session.refresh(connection)
+            session.close()
+            return connection
         except SQLAlchemyError as e:
             print(f"An error occurred: {e}")
             return None

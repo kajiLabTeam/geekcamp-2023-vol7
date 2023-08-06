@@ -14,11 +14,11 @@ def get_article(node_id: int):
 
     node = Node.get_node_by_id(node_id)
     if node is None:
-        return None
+        return []
 
     article = Article.get_article_by_id(node.article_id)
     if article is None:
-        return None
+        return []
 
     return {
         "id": article.id,
@@ -41,11 +41,11 @@ def put_article(article_id: int, article: str):
 
     article = Article.put_article_by_id(article_id, article)
     if article is None:
-        return None
+        return []
 
     node = Node.get_node_by_article_id(article.id)
     if article is None:
-        return None
+        return []
 
     return {
         "id": article.id,

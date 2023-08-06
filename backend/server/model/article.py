@@ -18,7 +18,7 @@ class Article(SQLModel, table=True):
     article: str = Field(unique=False, nullable=False)
     last_update: datetime = Field(DateTime, nullable=False)
 
-    nodes: List["Node"] = Relationship(back_populates="article")
+    # nodes: List["Node"] = Relationship(back_populates="article")
     edit_histories: List["EditHistory"] = Relationship(back_populates="article")
 
     @classmethod

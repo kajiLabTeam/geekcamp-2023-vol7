@@ -14,11 +14,20 @@ if TYPE_CHECKING:
 class Node(SQLModel, table=True):
     id: Optional[int] = Field(primary_key=True)
     node_name: str
-    article_id: Optional[int] = Field(foreign_key="article.id")
+    article_id: Optional[int]
+    # article: Optional[Article] = Relationship(back_populates="nodes")
 
-    article: Optional[Article] = Relationship(back_populates="nodes")
-
-    connections: List["Connection"] = Relationship(back_populates="node")
+    @classmethod
+    def get_allnode(cls) -> List["Node"] | None:
+        try:
+            session = get_db_session()
+            stmt = select(Node.node_name).distinct()
+            result = session.exec(stmt).all()
+            session.close()
+            return result
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return None
 
     @classmethod
     def get_node_by_id(cls, node_id: int) -> List["Node"] | None:
