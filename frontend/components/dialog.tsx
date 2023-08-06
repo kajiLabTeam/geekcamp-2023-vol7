@@ -128,7 +128,11 @@ export default function Dialog(
             </div>
           ) : (
             <div className={styles.description}>
-              <div>{article.article}</div>
+              <div>
+                {article.article !== ""
+                  ? `Not Found : ${currentNode?.name} は ${currentNode?.name} です`
+                  : article.article}
+              </div>
             </div>
           )}
         </div>
