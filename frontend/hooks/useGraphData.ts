@@ -36,39 +36,47 @@ export default function useGraphData() {
       const nodeId = node.id;
       const key = getLinkKey(rootId, nodeId);
 
-      if (!nodesMap.has(nodeId)) {
-        nodesMap.set(nodeId, {
-          id: nodeId,
-          name: node.name,
-          articleId: node.articleId,
-          val: node.childNodeNum,
-          connectNum: 0
-        });
+      const mainNode: Node = {
+        id: nodeId,
+        name: node.name,
+        articleId: node.articleId,
+        val: node.childNodeNum,
+        connectNum: 0
+      };
 
+      if (!nodesMap.has(nodeId)) {
         const labelId = -nodeId;
         const labelLinkKey = getLinkKey(nodeId, labelId);
-        nodesMap.set(labelId, {
+
+        const labelNode: Node = {
           id: labelId,
           val: node.childNodeNum,
           connectNum: 0
-        });
+        };
 
-        linksMap.set(labelLinkKey, {
-          source: nodeId,
-          target: labelId,
+        const labelLink: Link = {
+          source: mainNode,
+          target: labelNode,
           isLabel: true
-        });
+        };
+
+        nodesMap.set(nodeId, mainNode);
+        nodesMap.set(labelId, labelNode);
+        linksMap.set(labelLinkKey, labelLink);
       }
+
+      // TODO: 仮
+      const currentNode = nodesMap.get(rootId)!;
 
       if (!linksMap.has(key)) {
         linksMap.set(key, {
-          source: rootId,
-          target: nodeId
+          source: currentNode,
+          target: mainNode
         });
 
         for (const id of [rootId, nodeId]) {
           const connectNode = nodesMap.get(id);
-          if (connectNode && connectNode.connectNum != null) {
+          if (connectNode?.connectNum != null) {
             connectNode.connectNum++;
           }
         }
