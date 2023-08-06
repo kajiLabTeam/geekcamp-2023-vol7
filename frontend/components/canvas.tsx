@@ -1,5 +1,4 @@
 import { currentNodeIdState, isDialogOpenState } from "@/const/recoil/state";
-import fetchConnectNodes from "@/foundation/fetchConnectNodes";
 import { Link, Node } from "@/foundation/graph/types";
 import useDomSize from "@/hooks/useDomSize";
 import useGraphData from "@/hooks/useGraphData";
@@ -7,6 +6,7 @@ import styles from "@styles/components/canvas.module.scss";
 import { useCallback, useEffect, useRef } from "react";
 import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { fetchNodeConnect } from "./util/api";
 
 export default function Canvas() {
   const [wrapperRef, size] = useDomSize<HTMLDivElement>();
@@ -27,7 +27,7 @@ function ForceGraphField (props: { width: number, height: number }) {
   const graphRef = useRef<ForceGraphMethods<Node, Link>>(null!);
 
   useEffect(() => {
-    fetchConnectNodes(currentNodeId)
+    fetchNodeConnect(currentNodeId)
       .then(connectData => {
         if (connectData == null) throw new Error("ノードの読み込みに失敗しました");
         addConnection(connectData);
@@ -101,7 +101,7 @@ function ForceGraphField (props: { width: number, height: number }) {
     }
 
     if (node.connectNum < node.val) {
-      const connectData = await fetchConnectNodes(node.id);
+      const connectData = await fetchNodeConnect(node.id);
       if (connectData) {
         addConnection(connectData);
       }
