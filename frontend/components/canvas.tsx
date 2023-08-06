@@ -74,7 +74,7 @@ function ForceGraphField (props: { width: number, height: number }) {
       const { x: tx, y: ty } = target;
       if (sx == null || sy == null || tx == null || ty == null || !name) return;
 
-      const fontSize = 12 * Math.sqrt(source.val) / Math.min(4, Math.max(globalScale, 1));
+      const fontSize = Math.min(12 * Math.sqrt(source.val) / Math.min(4, Math.max(globalScale, 1)), 24);
       ctx.font = `${fontSize}px Sans-Serif`;
       const textWidth = ctx.measureText(name).width;
       const textAngle = Math.atan2(ty - sy, tx - sx);
