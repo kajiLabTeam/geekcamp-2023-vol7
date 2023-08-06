@@ -1,6 +1,5 @@
-import { NodeConnectData } from "@/components/util/type";
+import { GraphData, GraphLink, GraphNode, NodeConnectData } from "@/components/util/type";
 import { recoilKeyHashSet } from "@/const/recoil/keys";
-import { GraphData, Link, Node } from "@/foundation/graph/types";
 import { useCallback } from "react";
 import { atom, useRecoilState } from "recoil";
 
@@ -8,13 +7,13 @@ type LinkKey = `${number}=${number}`;
 
 const nodesMapState = atom({
   key: recoilKeyHashSet.nodesMap,
-  default: new Map<number, Node>(),
+  default: new Map<number, GraphNode>(),
   dangerouslyAllowMutability: true
 });
 
 const linksMapState = atom({
   key: recoilKeyHashSet.linksMap,
-  default: new Map<LinkKey, Link>(),
+  default: new Map<LinkKey, GraphLink>(),
   dangerouslyAllowMutability: true
 });
 
@@ -36,7 +35,7 @@ export default function useGraphData() {
       const nodeId = node.id;
       const key = getLinkKey(rootId, nodeId);
 
-      const mainNode: Node = {
+      const mainNode: GraphNode = {
         id: nodeId,
         name: node.name,
         articleId: node.articleId,
@@ -48,13 +47,13 @@ export default function useGraphData() {
         const labelId = -nodeId;
         const labelLinkKey = getLinkKey(nodeId, labelId);
 
-        const labelNode: Node = {
+        const labelNode: GraphNode = {
           id: labelId,
           val: node.childNodeNum,
           connectNum: 0
         };
 
-        const labelLink: Link = {
+        const labelLink: GraphLink = {
           source: mainNode,
           target: labelNode,
           isLabel: true
