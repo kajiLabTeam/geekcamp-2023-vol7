@@ -25,6 +25,7 @@ class EditHistory(SQLModel, table=True):
     article: List["Article"] = Relationship(back_populates="edit_histories")
 
     @classmethod
+    # ユーザーのIDを元に編集履歴を取得する
     def get_edit_history_by_user_id(cls, user_id: int) -> List["EditHistory"] | None:
         if not user_id:
             return None
@@ -40,6 +41,7 @@ class EditHistory(SQLModel, table=True):
             return None
 
     @classmethod
+    # 記事のIDを元に編集履歴を取得する
     def get_edit_history_by_article_id(
         cls, article_id: int
     ) -> List["EditHistory"] | None:

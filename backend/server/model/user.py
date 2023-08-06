@@ -18,6 +18,7 @@ class User(SQLModel, table=True):
     edit_histories: List["EditHistory"] = Relationship(back_populates="user")
 
     @classmethod
+    # ユーザーIDを元にユーザーを取得する
     def get_user_by_id(cls, user_id: int):
         if not user_id:
             return None

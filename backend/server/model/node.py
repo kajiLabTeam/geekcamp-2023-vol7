@@ -30,6 +30,7 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
+    # ノードのIDを元にノードを取得する (Node型で)
     def get_node_by_id(cls, node_id: int) -> List["Node"] | None:
         if not node_id:
             return None
@@ -45,6 +46,7 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
+    # 記事のIDを元にノードを取得する
     def get_node_by_article_id(cls, article_id: int) -> List["Node"] | None:
         if not article_id:
             return None
@@ -60,6 +62,7 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
+    # 複数あるノードのIDを元にノードを取得する (Listで)
     def get_node_by_ids(cls, node_ids: list) -> List["Node"] | None:
         if not node_ids:
             return None
@@ -75,6 +78,7 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
+    # ノードの名前を元にノードを取得する (完全一致)
     def get_node_by_node_name_perfection(cls, node_query: str) -> List["Node"] | None:
         if not node_query:
             return None
@@ -90,6 +94,7 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
+    # ノードの名前を元にノードを取得する (部分一致)
     def get_node_by_node_name_partial(cls, node_query: str) -> List["Node"] | None:
         if not node_query:
             return None
@@ -105,6 +110,7 @@ class Node(SQLModel, table=True):
             return None
 
     @classmethod
+    # Node型の値を受け取り、そのデータをDBに追加
     def insert_node(cls, node: "Node"):
         session = get_db_session()
         session.add(node)

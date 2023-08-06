@@ -3,15 +3,6 @@ from model.node import Node
 
 
 def get_nodes(node_id: int):
-    """指定したノードを取得する
-
-    Args:
-        node_id (str): ノードID
-
-    Returns:
-        Node: ノード
-    """
-
     current_node = Node.get_node_by_id(node_id)
     if current_node is None:
         return []
@@ -22,10 +13,6 @@ def get_nodes(node_id: int):
         relation_nodes = Node.get_node_by_ids(
             [connection.connect_node_id for connection in connections]
         )
-
-
-    # if relation_nodes is None:
-    #     return None
 
     return {
         "currentNode": {
@@ -43,18 +30,13 @@ def get_nodes(node_id: int):
                     Connection.get_connection_by_node_id(relation_node.id)
                 ),
             }
-            for relation_node in relation_nodes  or []
+            for relation_node in relation_nodes or []
         ],
     }
 
 
+# 記事の名前を元にノードを取得する
 def search_node(node_query: str):
-    """ノードを追加する
-
-    Args:
-        uid (str): ユーザーID
-        spending_amount (int): 支出額
-    """
     current_node = Node.get_node_by_node_name_perfection(node_query)
     if current_node is None:
         return search_node_partial(node_query)
@@ -64,10 +46,6 @@ def search_node(node_query: str):
         relation_nodes = Node.get_node_by_ids(
             [connection.connect_node_id for connection in connections]
         )
-
-
-    # if relation_nodes is None:
-    #     return None
 
     return {
         "type": "node",
@@ -91,6 +69,7 @@ def search_node(node_query: str):
     }
 
 
+# 記事の名前を元にノードを取得する (部分一致)
 def search_node_partial(node_query: str):
     suggestions = Node.get_node_by_node_name_partial(node_query)
     if suggestions is None:
