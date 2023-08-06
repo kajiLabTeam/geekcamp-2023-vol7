@@ -1,4 +1,4 @@
-import { GraphData, GraphLink, GraphNode, NodeConnectData } from "@/components/util/type";
+import { GraphData, GraphLink, GraphNode, NodeConnectData, NodeObject } from "@/components/util/type";
 import { recoilKeyHashSet } from "@/const/recoil/keys";
 import { useCallback } from "react";
 import { atom, useRecoilState } from "recoil";
@@ -28,53 +28,52 @@ export default function useGraphData() {
   const [nodesMap] = useRecoilState(nodesMapState);
   const [linksMap] = useRecoilState(linksMapState);
 
+  const addNode = useCallback((nodeObj: NodeObject): GraphNode => {
+    const node: GraphNode = {
+      id: nodeObj.id,
+      name: nodeObj.name,
+      articleId: nodeObj.articleId,
+      val: nodeObj.childNodeNum,
+      connectNum: 0
+    };
+    const labelId = -node.id;
+    const labelLinkKey = getLinkKey(node.id, labelId);
+
+    const labelNode: GraphNode = {
+      id: labelId,
+      val: node.connectNum,
+      articleId: node.articleId,
+      connectNum: 0
+    };
+
+    const labelLink: GraphLink = {
+      source: node,
+      target: labelNode,
+      isLabel: true
+    };
+
+    nodesMap.set(node.id, node);
+    nodesMap.set(labelId, labelNode);
+    linksMap.set(labelLinkKey, labelLink);
+
+    return node;
+  }, []);
+
   const addConnection = useCallback((connectData: NodeConnectData) => {
-    const rootId = connectData.currentNode.id;
+    const { currentNode } = connectData;
+    const rootFGNode = nodesMap.get(currentNode.id) ?? addNode(connectData.currentNode);
 
-    for (const node of [connectData.currentNode, ...connectData.relationNode]) {
-      const nodeId = node.id;
-      const key = getLinkKey(rootId, nodeId);
+    for (const nodeObj of connectData.relationNode) {
+      const node = nodesMap.get(nodeObj.id) ?? addNode(nodeObj);
 
-      const mainNode: GraphNode = {
-        id: nodeId,
-        name: node.name,
-        articleId: node.articleId,
-        val: node.childNodeNum,
-        connectNum: 0
-      };
-
-      if (!nodesMap.has(nodeId)) {
-        const labelId = -nodeId;
-        const labelLinkKey = getLinkKey(nodeId, labelId);
-
-        const labelNode: GraphNode = {
-          id: labelId,
-          val: node.childNodeNum,
-          articleId: node.articleId,
-          connectNum: 0
-        };
-
-        const labelLink: GraphLink = {
-          source: mainNode,
-          target: labelNode,
-          isLabel: true
-        };
-
-        nodesMap.set(nodeId, mainNode);
-        nodesMap.set(labelId, labelNode);
-        linksMap.set(labelLinkKey, labelLink);
-      }
-
-      // TODO: 仮
-      const currentNode = nodesMap.get(rootId)!;
-
-      if (!linksMap.has(key)) {
+      const key = getLinkKey(rootFGNode.id, nodeObj.id);
+      if (rootFGNode.id !== node.id && !linksMap.has(key)) {
         linksMap.set(key, {
-          source: currentNode,
-          target: mainNode
+          source: rootFGNode,
+          target: node
         });
 
-        for (const id of [rootId, nodeId]) {
+        for (const id of [rootFGNode.id, nodeObj.id]) {
           const connectNode = nodesMap.get(id);
           if (connectNode?.connectNum != null) {
             connectNode.connectNum++;
@@ -88,7 +87,7 @@ export default function useGraphData() {
       links: [...linksMap.values()],
     });
 
-    return nodesMap.get(rootId)!;
+    return nodesMap.get(currentNode.id)!;
   }, [nodesMap, linksMap]);
 
   const getNode = useCallback((nodeId: number) => (
