@@ -127,10 +127,9 @@ export default function Dialog(
               </div>
             </div>
           ) : (
-            <>
-              <div className={styles.description}>{article.article}</div>
-              <p className={styles.last_update}>{article.lastUpdate}</p>
-            </>
+            <div className={styles.description}>
+              <div>{article.article}</div>
+            </div>
           )}
         </div>
       </div>
