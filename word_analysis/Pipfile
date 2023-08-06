@@ -23,6 +23,7 @@ janome = "*"
 nltk = "*"
 tokenizer = "*"
 googletrans = "*"
+pyperclip = "*"
 
 [dev-packages]
 
