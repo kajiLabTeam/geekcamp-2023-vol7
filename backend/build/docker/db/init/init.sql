@@ -30,7 +30,7 @@ CREATE TABLE
 
 CREATE TABLE
     user (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id VARCHAR(28) PRIMARY KEY,
         name VARCHAR(20)
     );
 

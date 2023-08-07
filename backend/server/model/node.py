@@ -118,11 +118,15 @@ class Node(SQLModel, table=True):
     @classmethod
     # Node型の値を受け取り、そのデータをDBに追加
     def insert_node(cls, node: "Node"):
-        session = get_db_session()
-        session.add(node)
-        session.commit()
-        session.refresh(node)
-        session.close()
+        try:
+            session = get_db_session()
+            session.add(node)
+            session.commit()
+            session.refresh(node)
+            session.close()
+        except SQLAlchemyError as e:
+            print(f"An error occurred: {e}")
+            return e
 
 
 def validate(params) -> Tuple[bool, dict]:

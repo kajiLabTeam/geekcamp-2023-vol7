@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 
 
 class User(SQLModel, table=True):
-    id: Optional[int] = Field(primary_key=True)
+    id: Optional[str] = Field(primary_key=True)
     name: str = Field(unique=False, nullable=False)
 
     edit_histories: List["EditHistory"] = Relationship(back_populates="user")
@@ -31,7 +31,22 @@ class User(SQLModel, table=True):
             return result
         except SQLAlchemyError as e:
             print(f"An error occurred: {e}")
+            return e
+
+    @classmethod
+    # ユーザーIDを元にユーザーを取得する
+    def insert_user(cls, user: "User"):
+        if not user:
             return None
+
+        try:
+            session = get_db_session()
+            session.add(user)
+            session.commit()
+            session.refresh(user)
+            session.close()
+        except SQLAlchemyError as e:
+            return e
 
 
 def create_table():
