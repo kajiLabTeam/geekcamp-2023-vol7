@@ -58,6 +58,23 @@ class EditHistory(SQLModel, table=True):
             print(f"An error occurred: {e}")
             return None
 
+    @classmethod
+    # 記事のIDを元に編集履歴を取得する
+    def insert_edit_history(
+        cls, edit_history: "EditHistory"
+    ) -> List["EditHistory"] | None:
+        if not edit_history:
+            return None
+
+        try:
+            session = get_db_session()
+            session.add(edit_history)
+            session.commit()
+            session.refresh(edit_history)
+            session.close()
+        except SQLAlchemyError as e:
+            return e
+
 
 def create_table():
     SQLModel.metadata.create_all(bind=get_db_engine())

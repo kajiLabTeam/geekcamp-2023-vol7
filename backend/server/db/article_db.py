@@ -1,4 +1,5 @@
 from model.article import Article
+from model.edit_history import EditHistory
 from model.node import Node
 
 
@@ -21,6 +22,8 @@ def get_article(node_id: int):
 
 
 def put_article(article_id: int, article: str):
+    # edit_history = EditHistory.insert_edit_history(EditHistory(article_id=article_id))
+
     article = Article.put_article_by_id(article_id, article)
     if article is None:
         return []
