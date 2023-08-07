@@ -40,6 +40,17 @@ export default function Dialog(
       if (!currentNode?.id) return;
 
       const articleSnap = await fetchArticle(currentNode?.id as number);
+      if (articleSnap == null) {
+        setArticle({
+          id: 0,
+          nodeId: 0,
+          lastUpdate: "2023.08.02",
+          article: "wisdom Tree は、知識をさらに広げるためのサービスです.",
+        });
+        setIsLoading(false);
+        return;
+      }
+      console.log(articleSnap);
       setArticle(articleSnap);
       setIsLoading(false);
     })();
@@ -129,7 +140,7 @@ export default function Dialog(
           ) : (
             <div className={styles.description}>
               <div>
-                {article.article === ""
+                {article.article === null
                   ? `Not Found : ${currentNode?.name} は ${currentNode?.name} です`
                   : article.article}
               </div>
