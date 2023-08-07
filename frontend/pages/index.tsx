@@ -27,7 +27,7 @@ export default function Home() {
         <title>wisdom Tree</title>
         <meta
           name="description"
-          content="wisdom Tree is a dictionary for searching unknown words."
+          content="wisdom Tree は知ってる単語から知らない単語を視覚的に見つけられるサービスです."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.png" />
