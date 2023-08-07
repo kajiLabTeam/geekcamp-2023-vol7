@@ -26,6 +26,14 @@ export default function Dialog(
   const [article, setArticle] = useRecoilState(currentArticleState);
   const [isLoading, setIsLoading] = useState(true);
 
+  function formatLastUpdate(lastUpdate: string) {
+    const date = new Date(lastUpdate);
+    const yyyy = date.getFullYear();
+    const mm = ("0" + (1 + date.getMonth())).slice(-2);
+    const dd = ("0" + date.getDate()).slice(-2);
+    return `${yyyy}.${mm}.${dd}`;
+  }
+
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Escape") setIsDialogOpen(false);
@@ -138,17 +146,22 @@ export default function Dialog(
               </div>
             </div>
           ) : (
-            <div className={styles.description}>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: markdownit().render(
-                    article.article === null
-                      ? `### Not Found : ${currentNode?.name} は ${currentNode?.name} です`
-                      : article.article
-                  ),
-                }}
-              ></div>
-            </div>
+            <>
+              <div className={styles.description}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: markdownit().render(
+                      article.article === null
+                        ? `### Not Found : ${currentNode?.name} は ${currentNode?.name} です`
+                        : article.article
+                    ),
+                  }}
+                ></div>
+              </div>
+              <p className={styles.last_update}>
+                {formatLastUpdate(article.lastUpdate)}
+              </p>
+            </>
           )}
         </div>
       </div>
