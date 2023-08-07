@@ -139,11 +139,15 @@ export default function Dialog(
             </div>
           ) : (
             <div className={styles.description}>
-              <div>
-                {article.article === null
-                  ? `Not Found : ${currentNode?.name} は ${currentNode?.name} です`
-                  : article.article}
-              </div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: markdownit().render(
+                    article.article === null
+                      ? `### Not Found : ${currentNode?.name} は ${currentNode?.name} です`
+                      : article.article
+                  ),
+                }}
+              ></div>
             </div>
           )}
         </div>
