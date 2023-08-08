@@ -24,9 +24,6 @@ class Article(SQLModel, table=True):
     @classmethod
     # 記事のIDを元に記事を取得する
     def get_article_by_id(cls, article_id: int) -> List["Article"] | None:
-        if not article_id:
-            return None
-
         try:
             session = get_db_session()
             stmt = select(Article).where(Article.id == article_id)
@@ -40,9 +37,6 @@ class Article(SQLModel, table=True):
     @classmethod
     # 記事のIDと記事の内容を元に記事を更新する
     def put_article_by_id(cls, article_id: int, article: str) -> List["Article"] | None:
-        if not article_id:
-            return None
-
         try:
             session = get_db_session()
             result = session.get(Article, article_id)

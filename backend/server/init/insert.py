@@ -1,31 +1,32 @@
 import sqlite3
-from datetime import datetime
 import time
+from datetime import datetime
 
 from model.article import Article
 from model.connection import Connection
 from model.node import Node
-
 
 conn = sqlite3.connect("./data.db")
 cur = conn.cursor()
 
 
 def insert_node_article():
-    all_node = cur.execute('''
+    all_node = cur.execute(
+        """
         SELECT tag
         FROM node
         ORDER BY items_count DESC
         LIMIT 1000
-    ''').fetchall()
+    """
+    ).fetchall()
 
     for i, node in enumerate(all_node):
         node_name = node[0]
         res = cur.execute(
-            'SELECT article FROM article_tmp WHERE node_name=?', (node_name,)
+            "SELECT article FROM article_tmp WHERE node_name=?", (node_name,)
         ).fetchone()
 
-        print(f'\n\nA-------------{i}--------------\n\n') 
+        print(f"\n\nA-------------{i}--------------\n\n")
 
         randn = int(time.time() * 10000 + i)
         article_id = res != None and int(str(randn)[-9:])
@@ -34,22 +35,22 @@ def insert_node_article():
         Node.insert_node(node)
         if res != None:
             last_update = datetime.now()
-            article = Article(
-                id=article_id, article=res[0], last_update=last_update)
+            article = Article(id=article_id, article=res[0], last_update=last_update)
             Article.insert_article(article)
 
 
 def insert_connection():
-    all_connection = cur.execute('''
+    all_connection = cur.execute(
+        """
         SELECT node_id, connect_node_id, connection_strength 
         FROM connection
         ORDER BY connection_strength DESC
         LIMIT 10000
-    ''').fetchall()
-
+    """
+    ).fetchall()
 
     for i, connection in enumerate(all_connection):
-        print(f'\n\nB-------------{i}--------------\n\n')
+        print(f"\n\nB-------------{i}--------------\n\n")
         node_name = connection[0]
         connect_node_name = connection[1]
         connection_strength = connection[2]
@@ -66,8 +67,9 @@ def insert_connection():
             connect_node_id=connect_node.id,
             connection_strength=connection_strength,
         )
-        print("\n\n-------------", node.id,
-              connect_node.id, connection_strength, "\n\n")
+        print(
+            "\n\n-------------", node.id, connect_node.id, connection_strength, "\n\n"
+        )
         Connection.insert_connection(connection)
 
 
