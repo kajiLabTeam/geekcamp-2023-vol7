@@ -13,15 +13,15 @@ def get_article(node_id: int):
         return {"message": db_error(DBErrorType.NODE_IS_EMPTY_ERROR)}
 
     article = Article.get_article_by_id(node.article_id)
-    if article is None:
-        return []
 
     return {
         "id": article.id,
         "nodeId": node_id,
         "name": node.node_name,
-        "article": article.article,
-        "lastUpdate": article.last_update,
+        "article": article.article
+        if article
+        else "${node.node_name}は${node.node_name}です。",
+        "lastUpdate": article.last_update if article else "",
     }
 
 
@@ -35,7 +35,7 @@ def put_article(article_id: int, article_content: str):
 
     article = Article.put_article_by_id(article_id, article_content)
     if article is None:
-        return []
+        {"message": db_error(DBErrorType.NOT_EXIST_ARTICLE_CORRESPONDING_TO_NODE_ERROR)}
 
     node = Node.get_node_by_article_id(article.id)
     if node is None:
@@ -45,6 +45,8 @@ def put_article(article_id: int, article_content: str):
         "id": article.id,
         "nodeId": node.id,
         "name": node.node_name,
-        "article": article.article,
-        "lastUpdate": article.last_update,
+        "article": article.article
+        if article
+        else "${node.node_name}は${node.node_name}です。",
+        "lastUpdate": article.last_update if article else "",
     }
