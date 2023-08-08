@@ -12,6 +12,7 @@ class DBErrorType(Enum):
     ARTICLE_IS_EMPTY_ERROR = auto()
     NODE_IS_EMPTY_ERROR = auto()
     EDIT_HISTORY_IS_EMPTY_ERROR = auto()
+    NOT_EXIST_ARTICLE_CORRESPONDING_TO_NODE_ERROR = auto()
 
 
 def db_error(db_error_type: DBErrorType) -> str:
@@ -35,3 +36,5 @@ def db_error(db_error_type: DBErrorType) -> str:
         return "Node is empty"
     elif db_error_type == DBErrorType.EDIT_HISTORY_IS_EMPTY_ERROR:
         return "Edit history is empty"
+    elif db_error_type == DBErrorType.NOT_EXIST_ARTICLE_CORRESPONDING_TO_NODE_ERROR:
+        return "Not exits article corresponding to node"
