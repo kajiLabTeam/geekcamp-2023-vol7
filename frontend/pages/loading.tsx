@@ -25,6 +25,7 @@ export default function Loading({ isLoading }: { isLoading: boolean }) {
             alt={"logo"}
             width={"600"}
             height={"400"}
+            priority={true}
           />
           <Image
             className={styles.kirakira_top}
