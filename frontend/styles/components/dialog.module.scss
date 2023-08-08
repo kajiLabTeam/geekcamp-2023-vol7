@@ -177,6 +177,7 @@
     }
 
     .subtitle {
+      white-space: nowrap;
       color: var(--on-primary);
       font-weight: bold;
       position: absolute;

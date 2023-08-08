@@ -4,7 +4,7 @@ import { recoilKeyHashSet } from "./keys";
 
 export const currentNodeIdState = atom<number>({
   key: recoilKeyHashSet.currentNodeId,
-  default: 8
+  default: 7
 });
 
 export const currentArticleState = atom<ArticleObject>({

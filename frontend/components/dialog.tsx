@@ -127,10 +127,13 @@ export default function Dialog(
               </div>
             </div>
           ) : (
-            <>
-              <div className={styles.description}>{article.article}</div>
-              <p className={styles.last_update}>{article.lastUpdate}</p>
-            </>
+            <div className={styles.description}>
+              <div>
+                {article.article === ""
+                  ? `Not Found : ${currentNode?.name} は ${currentNode?.name} です`
+                  : article.article}
+              </div>
+            </div>
           )}
         </div>
       </div>
