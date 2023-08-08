@@ -1,31 +1,23 @@
+import random
+
 from model.connection import Connection
 from model.node import Node
 
 
-def get_nodes(node_id: int):
-    """指定したノードを取得する
-
-    Args:
-        node_id (str): ノードID
-
-    Returns:
-        Node: ノード
-    """
-
+def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
     current_node = Node.get_node_by_id(node_id)
     if current_node is None:
         return []
 
-    connections = Connection.get_connection_by_node_id(current_node.id)
+    connections = Connection.get_connection_by_node_id(
+        current_node.id, extracted_node_limit
+    )
     relation_nodes = None
     if connections is not None:
+        connections = random.sample(connections, k=res_node_limit)
         relation_nodes = Node.get_node_by_ids(
             [connection.connect_node_id for connection in connections]
         )
-
-
-    # if relation_nodes is None:
-    #     return None
 
     return {
         "currentNode": {
@@ -39,35 +31,34 @@ def get_nodes(node_id: int):
                 "id": relation_node.id,
                 "name": relation_node.node_name,
                 "articleId": relation_node.article_id,
-                "childNodeNum": len(
-                    Connection.get_connection_by_node_id(relation_node.id)
+                "childNodeNum": min(
+                    len(
+                        Connection.get_connection_by_node_id(
+                            relation_node.id, extracted_node_limit
+                        ),
+                        res_node_limit,
+                    ),
                 ),
             }
-            for relation_node in relation_nodes  or []
+            for relation_node in relation_nodes or []
         ],
     }
 
 
-def search_node(node_query: str):
-    """ノードを追加する
-
-    Args:
-        uid (str): ユーザーID
-        spending_amount (int): 支出額
-    """
+# 記事の名前を元にノードを取得する
+def search_node(
+    node_query: str, search_limit: int, higher_limit: int, res_node_limit: int
+):
     current_node = Node.get_node_by_node_name_perfection(node_query)
     if current_node is None:
-        return search_node_partial(node_query)
+        return search_node_partial(node_query, search_limit)
 
-    connections = Connection.get_connection_by_node_id(current_node.id)
+    connections = Connection.get_connection_by_node_id(current_node.id, higher_limit)
     if connections is not None:
+        connections = random.sample(connections, k=res_node_limit)
         relation_nodes = Node.get_node_by_ids(
             [connection.connect_node_id for connection in connections]
         )
-
-
-    # if relation_nodes is None:
-    #     return None
 
     return {
         "type": "node",
@@ -82,8 +73,9 @@ def search_node(node_query: str):
                 "id": relation_node.id,
                 "name": relation_node.node_name,
                 "articleId": relation_node.article_id,
-                "childNodeNum": len(
-                    Connection.get_connection_by_node_id(relation_node.id)
+                "childNodeNum": min(
+                    len(Connection.get_connection_by_node_id(relation_node.id)),
+                    res_node_limit,
                 ),
             }
             for relation_node in relation_nodes
@@ -91,8 +83,9 @@ def search_node(node_query: str):
     }
 
 
-def search_node_partial(node_query: str):
-    suggestions = Node.get_node_by_node_name_partial(node_query)
+# 記事の名前を元にノードを取得する (部分一致)
+def search_node_partial(node_query: str, search_limit: int):
+    suggestions = Node.get_node_by_node_name_partial(node_query, search_limit)
     if suggestions is None:
         return []
 
@@ -102,7 +95,6 @@ def search_node_partial(node_query: str):
             {
                 "id": suggestion_node.id,
                 "name": suggestion_node.node_name,
-                "articleId": suggestion_node.article_id,
             }
             for suggestion_node in suggestions
         ],

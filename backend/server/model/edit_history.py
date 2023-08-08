@@ -25,6 +25,7 @@ class EditHistory(SQLModel, table=True):
     article: List["Article"] = Relationship(back_populates="edit_histories")
 
     @classmethod
+    # ユーザーのIDを元に編集履歴を取得する
     def get_edit_history_by_user_id(cls, user_id: int) -> List["EditHistory"] | None:
         if not user_id:
             return None
@@ -40,6 +41,7 @@ class EditHistory(SQLModel, table=True):
             return None
 
     @classmethod
+    # 記事のIDを元に編集履歴を取得する
     def get_edit_history_by_article_id(
         cls, article_id: int
     ) -> List["EditHistory"] | None:
@@ -55,6 +57,23 @@ class EditHistory(SQLModel, table=True):
         except SQLAlchemyError as e:
             print(f"An error occurred: {e}")
             return None
+
+    @classmethod
+    # 記事のIDを元に編集履歴を取得する
+    def insert_edit_history(
+        cls, edit_history: "EditHistory"
+    ) -> List["EditHistory"] | None:
+        if not edit_history:
+            return None
+
+        try:
+            session = get_db_session()
+            session.add(edit_history)
+            session.commit()
+            session.refresh(edit_history)
+            session.close()
+        except SQLAlchemyError as e:
+            return e
 
 
 def create_table():

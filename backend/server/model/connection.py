@@ -17,13 +17,21 @@ class Connection(SQLModel, table=True):
     # connect_node: Optional[Node] = Relationship(back_populates="connections")
 
     @classmethod
-    def get_connection_by_node_id(cls, node_id: int) -> List["Connection"] | None:
+    # ノードIDを元にノードを取得する (List["Connection"]型 & 上位100個)
+    def get_connection_by_node_id(
+        cls, node_id: int, extracted_node_limit: int
+    ) -> List["Connection"] | None:
         if not node_id:
             return None
 
         try:
             session = get_db_session()
-            stmt = select(Connection).where(Connection.node_id == node_id)
+            stmt = (
+                select(Connection)
+                .where(Connection.node_id == node_id)
+                .order_by(Connection.connection_strength.desc())
+                .limit(extracted_node_limit)
+            )
             result = session.exec(stmt).all()
             session.close()
             return result
@@ -32,6 +40,7 @@ class Connection(SQLModel, table=True):
             return None
 
     @classmethod
+    # 複数のノードIDを元にノードを取得する (List型で)
     def get_connection_by_node_ids(cls, node_ids: list) -> List["Connection"] | None:
         if not node_ids:
             return None
@@ -47,6 +56,7 @@ class Connection(SQLModel, table=True):
             return None
 
     @classmethod
+    # Connection型の値を受け取り、そのデータをDBに追加
     def insert_connection(cls, connection: "Connection") -> List["Connection"] | None:
         if not connection:
             return None

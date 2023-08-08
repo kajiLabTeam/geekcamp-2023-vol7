@@ -6,7 +6,7 @@ from router.article import router as article_router
 from router.node import router as node_router
 
 create_all_tables()
-insert_all_data()
+# insert_all_data()
 
 
 app = FastAPI()

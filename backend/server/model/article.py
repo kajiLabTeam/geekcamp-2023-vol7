@@ -22,6 +22,7 @@ class Article(SQLModel, table=True):
     edit_histories: List["EditHistory"] = Relationship(back_populates="article")
 
     @classmethod
+    # 記事のIDを元に記事を取得する
     def get_article_by_id(cls, article_id: int) -> List["Article"] | None:
         if not article_id:
             return None
@@ -37,6 +38,7 @@ class Article(SQLModel, table=True):
             return None
 
     @classmethod
+    # 記事のIDと記事の内容を元に記事を更新する
     def put_article_by_id(cls, article_id: int, article: str) -> List["Article"] | None:
         if not article_id:
             return None
