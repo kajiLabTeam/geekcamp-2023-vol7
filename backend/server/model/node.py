@@ -80,9 +80,6 @@ class Node(SQLModel, table=True):
     @classmethod
     # ノードの名前を元にノードを取得する (完全一致)
     def get_node_by_node_name_perfection(cls, node_query: str) -> List["Node"] | None:
-        if not node_query:
-            return None
-
         try:
             session = get_db_session()
             stmt = select(Node).where(Node.node_name == node_query)
