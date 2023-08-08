@@ -1,0 +1,76 @@
+.frame {
+  position: relative;
+  z-index: 1000;
+
+  div {
+    background-color: var(--primary);
+    position: fixed;
+
+    &::before,
+    &::after {
+      content: "";
+      position: fixed;
+      background-color: var(--primary);
+    }
+  }
+
+  .line_1 {
+    &::before {
+      height: 5px;
+      width: 30%;
+      top: 25px;
+      left: 25px;
+    }
+
+    &::after {
+      height: 30%;
+      width: 5px;
+      top: 25px;
+      left: 25px;
+    }
+  }
+
+  .line_2 {
+    height: 5px;
+    top: 50px;
+    left: 107px;
+    right: 180px;
+
+    &::before {
+      height: 5px;
+      width: 80px;
+      top: 78px;
+      left: 39.8px;
+      rotate: -45deg;
+    }
+
+    &::after {
+      width: 5px;
+      top: 108px;
+      bottom: 0;
+      left: 50px;
+    }
+  }
+
+  .line_3 {
+    height: 5px;
+    width: 150px;
+    top: 25px;
+    right: 143px;
+
+    &::before {
+      height: 5px;
+      width: 170px;
+      top: 85px;
+      right: 0;
+      rotate: 45deg;
+    }
+
+    &::after {
+      width: 5px;
+      top: 146px;
+      bottom: 0;
+      right: 23px;
+    }
+  }
+}

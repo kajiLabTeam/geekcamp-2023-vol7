@@ -1,5 +1,5 @@
 import Frame from "@/components/frame";
-import styles from "@styles/components/loading.module.scss";
+import styles from "@styles/pages/loading.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
