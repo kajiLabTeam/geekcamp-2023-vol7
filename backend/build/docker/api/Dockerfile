@@ -21,4 +21,4 @@ RUN python -m pip install fastapi
 RUN python -m pip install uvicorn
 RUN python -m pip install cerberus
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "800"]
