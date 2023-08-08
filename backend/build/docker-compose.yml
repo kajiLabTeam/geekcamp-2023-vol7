@@ -5,7 +5,7 @@ services:
     container_name: Wisdom_Tree_DB
     platform: linux/x86_64
     ports:
-      - "3306:3306"
+      - "336:3306"
     volumes:
       - ./docker/db/mysqld_charset.cnf:/etc/mysql/conf.d/mysql_charset.cnf
       - ./docker/db/init:/docker-entrypoint-initdb.d
@@ -26,6 +26,6 @@ services:
     volumes:
       - ../server:/server
     ports:
-      - 80:8000
+      - 800:8000
     depends_on:
       - mysql
