@@ -1,7 +1,6 @@
 from datetime import datetime
 from typing import TYPE_CHECKING, List, Optional
 
-from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import DateTime, Field, Relationship, SQLModel, select
 
 from model.edit_history import EditHistory
@@ -24,36 +23,29 @@ class Article(SQLModel, table=True):
     @classmethod
     # 記事のIDを元に記事を取得する
     def get_article_by_id(cls, article_id: int) -> List["Article"] | None:
-        try:
-            session = get_db_session()
-            stmt = select(Article).where(Article.id == article_id)
-            result = session.exec(stmt).first()
-            session.close()
-            return result
-        except SQLAlchemyError as e:
-            print(f"An error occurred: {e}")
-            return None
+        session = get_db_session()
+        stmt = select(Article).where(Article.id == article_id)
+        result = session.exec(stmt).first()
+        session.close()
+        return result
 
     @classmethod
     # 記事のIDと記事の内容を元に記事を更新する
     def put_article_by_id(cls, article_id: int, article: str) -> List["Article"] | None:
-        try:
-            session = get_db_session()
-            result = session.get(Article, article_id)
-            if not result:
-                # 記事が見つからない場合はNoneを返す
-                return None
-
-            # 記事を更新する
-            result.article = article
-            result.last_update = datetime.now()
-            session.add(result)
-            session.commit()
-            session.refresh(result)
-            return result
-        except SQLAlchemyError as e:
-            print(f"An error occurred: {e}")
+        session = get_db_session()
+        result = session.get(Article, article_id)
+        if not result:
+            session.close()
+            # 記事が見つからない場合はNoneを返す
             return None
+
+        result.article = article
+        result.last_update = datetime.now()
+        session.add(result)
+        session.commit()
+        session.refresh(result)
+        session.close()
+        return result
 
     @classmethod
     # データモデルをMySQLにインサート

@@ -2,7 +2,8 @@ from fastapi import APIRouter, Request
 
 from db.node_db import get_node as db_get_node
 from db.node_db import search_node as db_search_node
-from settings import EXTRACTED_NODE_LIMIT, RESPONSE_NODE_LIMIT, SEARCH_NODE_LIMIT
+from settings import (EXTRACTED_NODE_LIMIT, RESPONSE_NODE_LIMIT,
+                      SEARCH_NODE_LIMIT)
 
 router = APIRouter()
 
