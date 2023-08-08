@@ -1,48 +1,44 @@
 -- CREATE USER 'geek_camp'@'%' IDENTIFIED BY 'geek_camp_pass';
 DROP DATABASE IF EXISTS wisdomtree;
+
 CREATE DATABASE wisdomtree;
 
 GRANT ALL PRIVILEGES ON *.* TO 'geek_camp' @'%';
 
 USE wisdomtree;
 
-CREATE TABLE
-    article (
-        id INT PRIMARY KEY,
-        article VARCHAR(10000),
-        last_update datetime
-    );
+CREATE TABLE article (
+    id INT PRIMARY KEY,
+    article VARCHAR(10000),
+    last_update datetime
+);
 
-CREATE TABLE
-    node (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        node_name VARCHAR(50),
-        article_id INT
-    );
+CREATE TABLE node (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    node_name VARCHAR(50),
+    article_id INT
+);
 
-CREATE TABLE
-    connection (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        node_id INT,
-        connect_node_id INT,
-        connection_strength INT
-    );
+CREATE TABLE connection (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    node_id INT,
+    connect_node_id INT,
+    connection_strength INT
+);
 
-CREATE TABLE
-    user (
-        id VARCHAR(28) PRIMARY KEY,
-        name VARCHAR(20)
-    );
+CREATE TABLE user (
+    id VARCHAR(28) PRIMARY KEY,
+    name VARCHAR(20)
+);
 
-CREATE TABLE
-    edit_history (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT,
-        article_id INT,
-        date datetime,
-        FOREIGN KEY (user_id) REFERENCES user (id),
-        FOREIGN KEY (article_id) REFERENCES article (id)
-    );
+CREATE TABLE edit_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(28),
+    article_id INT,
+    date datetime,
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (article_id) REFERENCES article (id)
+);
 
 -- article -----------------------------
 INSERT INTO
@@ -76,7 +72,11 @@ VALUES
 INSERT INTO
     article (id, article, last_update)
 VALUES
-    (5, "# useState\nuseStateはなんかすごい、やつ", "2021-04-05");
+    (
+        5,
+        "# useState\nuseStateはなんかすごい、やつ",
+        "2021-04-05"
+    );
 
 INSERT INTO
     article (id, article, last_update)
@@ -171,42 +171,42 @@ VALUES
 
 -- user --------------------------------
 INSERT INTO
-    user (name)
+    user (id, name)
 VALUES
-    ("SatooRu65536");
+    ("NLbo4bPckPbLGrsxDb2zoPMr8r83", "SatooRu65536");
 
 INSERT INTO
-    user (name)
+    user (id, name)
 VALUES
-    ("shibaken");
+    ("NLbo4bPckPbLGrsxDb2zoPMr8c8f", "shibaken");
 
 INSERT INTO
-    user (name)
+    user (id, name)
 VALUES
-    ("mi");
+    ("NLbc4bPckPbLGrsxDb2zoPMr8c83", "mi");
 
 INSERT INTO
-    user (name)
+    user (id, name)
 VALUES
-    ("kousei");
+    ("NLbo4bPckPbLGrsxDb2zoPMr8c8c", "kousei");
 
 -- edit_history ------------------------
 INSERT INTO
     edit_history (user_id, article_id, date)
 VALUES
-    (1, 1, "2020-03-10");
+    ("NLbo4bPckPbLGrsxDb2zoPMr8r83", 1, "2020-03-10");
 
 INSERT INTO
     edit_history (user_id, article_id, date)
 VALUES
-    (2, 2, "2023-04-11");
+    ("NLbo4bPckPbLGrsxDb2zoPMr8c8f", 2, "2023-04-11");
 
 INSERT INTO
     edit_history (user_id, article_id, date)
 VALUES
-    (3, 3, "2021-01-01");
+    ("NLbo4bPckPbLGrsxDb2zoPMr8c8c", 3, "2021-01-01");
 
 INSERT INTO
     edit_history (user_id, article_id, date)
 VALUES
-    (4, 4, "2019-06-17");
+    ("NLbo4bPckPbLGrsxDb2zoPMr8c8c", 4, "2019-06-17");

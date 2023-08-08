@@ -19,10 +19,13 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
 
     relation_nodes = None
     if connections is not None:
-        connections = random.sample(connections, k=res_node_limit)
+        if len(connections) > res_node_limit:
+            connections = random.sample(connections, k=res_node_limit)
         relation_nodes = Node.get_node_by_ids(
             [connection.connect_node_id for connection in connections]
         )
+        if relation_nodes is None:
+            relation_nodes = []
 
     return {
         "currentNode": {
@@ -36,16 +39,14 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                 "id": relation_node.id,
                 "name": relation_node.node_name,
                 "articleId": relation_node.article_id,
-                "childNodeNum": min(
-                    len(
-                        Connection.get_connection_by_node_id(
-                            relation_node.id, extracted_node_limit
-                        ),
-                        res_node_limit,
-                    ),
+                "childNodeNum": len(
+                    Connection.get_connection_by_node_id(
+                        relation_node.id,
+                        extracted_node_limit,
+                    ) or 0,
                 ),
             }
-            for relation_node in relation_nodes or []
+            for relation_node in relation_nodes
         ],
     }
 
@@ -90,8 +91,8 @@ def search_node(
                 "articleId": relation_node.article_id,
                 "childNodeNum": len(
                     Connection.get_connection_by_node_id(
-                        relation_node.id, res_node_limit
-                    )
+                        relation_node.id, extracted_node_limit
+                    ) or []
                 ),
             }
             for relation_node in relation_nodes
