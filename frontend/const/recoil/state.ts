@@ -13,6 +13,7 @@ export const currentArticleState = atom<ArticleObject>({
     id: 0,
     nodeId: 0,
     lastUpdate: "2023.08.02",
+    name: "wisdom Tree",
     article: "wisdom Tree は、知識をさらに広げるためのサービスです.",
   },
 });
