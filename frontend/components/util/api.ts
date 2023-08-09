@@ -35,10 +35,10 @@ export function fetchArticle(nodeId: number): Promise<ArticleObject> {
 }
 
 export async function submitArticle(
-  nodeId: number,
+  articleId: number,
   article: string
-): Promise<Response> {
-  const res = await fetch(`/api/article/edit/${nodeId}`, {
+): Promise<ArticleObject> {
+  const res = await fetch(`/api/article/edit/${articleId}`, {
     method: "PUT",
     body: JSON.stringify({
       article: article,

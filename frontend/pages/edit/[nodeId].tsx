@@ -6,10 +6,11 @@ import styles from "@/styles/pages/edit.module.scss";
 import markdownit from "markdown-it";
 import { sanitize } from "dompurify";
 import { fetchArticle, submitArticle } from "@/components/util/api";
+import { ArticleObject } from "@/components/util/type";
 
 export default function EditPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [article, setArticle] = useState("");
+  const [article, setArticle] = useState<ArticleObject | null>(null);
   const [markdown, setMarkdown] = useState("");
   const [nodeId, setNodeId] = useState<number | null>(null);
   const [nodeName, setNodeName] = useState("");
@@ -18,14 +19,19 @@ export default function EditPage() {
   const router = useRouter();
 
   async function submit() {
-    if (nodeId !== null) {
-      const res = await submitArticle(nodeId, article);
-      console.log(res);
+    if (article !== null) {
+      const res = await submitArticle(article.id, article.article);
 
-      if (res.ok) setState("更新しました。");
+      if (res.article === article.article) setState("更新しました。");
       else setState("更新に失敗しました。");
     } else {
       setState("nodeId がみつかりませんでした。");
+    }
+  }
+
+  function changeArticle(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    if (article !== null) {
+      setArticle({ ...article, article: e.target.value });
     }
   }
 
@@ -42,15 +48,17 @@ export default function EditPage() {
       setNodeId(nodeIdSnap);
 
       const articleSnap = await fetchArticle(nodeIdSnap);
-      setArticle(articleSnap.article);
+      setArticle(articleSnap);
       setNodeName("node name");
       setIsLoading(false);
     })();
   }, [setIsLoading, setArticle, router.query.nodeId]);
 
   useEffect(() => {
+    if (article === null) return;
+
     setState("");
-    const html = markdown2html(article);
+    const html = markdown2html(article.article);
     setMarkdown(html);
   }, [article]);
 
@@ -67,8 +75,8 @@ export default function EditPage() {
               <div className={styles.edit_area_container}>
                 <textarea
                   className={styles.edit_area}
-                  defaultValue={article}
-                  onChange={(e) => setArticle(e.target.value)}
+                  defaultValue={article !== null ? article.article : ""}
+                  onChange={changeArticle}
                 ></textarea>
               </div>
 
@@ -82,7 +90,7 @@ export default function EditPage() {
           </div>
 
           <div className={styles.button_container}>
-            <span onClick={router.back}>top</span>
+            <span onClick={() => router.push("/")}>top</span>
             <p>{state}</p>
             <span onClick={submit}>submit</span>
           </div>
