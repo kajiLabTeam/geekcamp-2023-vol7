@@ -3,6 +3,9 @@
 const nextConfig = {
   reactStrictMode: true,
   plugins: ["~/plugins/contentful", "~/plugins/prism"],
+  images: {
+    domains: ["lh3.googleusercontent.com"],
+  },
   async rewrites() {
     return [
       {

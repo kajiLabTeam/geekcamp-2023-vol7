@@ -68,7 +68,6 @@ export default function Dialog(
       if (!currentNode?.id) return;
 
       const articleSnap = await fetchArticle(currentNode?.id as number);
-      console.log(articleSnap);
 
       if (articleSnap == null) {
         setArticle({
