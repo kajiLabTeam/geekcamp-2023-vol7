@@ -49,6 +49,7 @@ export default function EditPage() {
   }, [setIsLoading, setArticle, router.query.nodeId]);
 
   useEffect(() => {
+    setState("");
     const html = markdown2html(article);
     setMarkdown(html);
   }, [article]);
