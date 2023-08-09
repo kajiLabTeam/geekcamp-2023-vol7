@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import EditFrame from "@/components/editframe";
 import LoadLogo from "@/components/loadlogo";
@@ -7,16 +7,30 @@ import markdownit from "markdown-it";
 import { sanitize } from "dompurify";
 import { fetchArticle, submitArticle } from "@/components/util/api";
 import { ArticleObject } from "@/components/util/type";
+import { auth } from "@/components/firebase/init";
+import {
+  GoogleAuthProvider,
+  getRedirectResult,
+  onAuthStateChanged,
+  signInWithRedirect,
+  signOut,
+} from "firebase/auth";
+import Image from "next/image";
 
 export default function EditPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [article, setArticle] = useState<ArticleObject | null>(null);
   const [markdown, setMarkdown] = useState("");
-  const [nodeId, setNodeId] = useState<number | null>(null);
-  const [nodeName, setNodeName] = useState("");
   const [state, setState] = useState("");
+  const [isLogined, setIsLogined] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    photoURL: "/images/person-outline.png",
+    displayName: "",
+    token: "",
+  });
 
   const router = useRouter();
+  const provider = new GoogleAuthProvider();
 
   async function submit() {
     if (article !== null) {
@@ -35,32 +49,83 @@ export default function EditPage() {
     }
   }
 
-  function markdown2html(md: string) {
+  function markdown2html(md: string | null) {
+    if (md === null) return "";
     const mdit = markdownit();
     const sanitizedHtml = sanitize(mdit.render(md));
     return sanitizedHtml;
   }
 
+  function clickUserIcon() {
+    if (userInfo.displayName === "") {
+      clickLogin();
+    } else {
+      clickLogout();
+    }
+  }
+
+  function clickLogin() {
+    signInWithRedirect(auth, provider);
+  }
+
+  async function clickLogout() {
+    signOut(auth)
+      .then(() => {
+        const res = confirm("ログアウトしますか？");
+
+        if (!res) return;
+
+        setIsLogined(false);
+        setUserInfo({
+          photoURL: "/images/person-outline.png",
+          displayName: "",
+          token: "",
+        });
+      })
+      .catch((error) => {
+        console.log(`ログアウト時にエラーが発生しました (${error})`);
+      });
+  }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdToken().then((token) => token);
+        setUserInfo({
+          photoURL: user.photoURL || "",
+          displayName: user.displayName || "",
+          token: token,
+        });
+        setIsLogined(true);
+      } else {
+        setIsLogined(false);
+      }
+    })();
+  }, [setIsLoading, router.query.nodeId]);
+
   useEffect(() => {
     (async () => {
       const nodeIdSnap = Number(router.query.nodeId);
       if (Number.isNaN(nodeIdSnap)) return;
-      setNodeId(nodeIdSnap);
 
       const articleSnap = await fetchArticle(nodeIdSnap);
       setArticle(articleSnap);
-      setNodeName(articleSnap.name);
       setIsLoading(false);
     })();
-  }, [setIsLoading, setArticle, router.query.nodeId]);
+  }, [router.query.nodeId]);
 
   useEffect(() => {
     if (article === null) return;
 
+    if (!isLogined) {
+      alert("右上のアイコンからログインしてください。");
+      return;
+    }
+
     setState("");
     const html = markdown2html(article.article);
     setMarkdown(html);
-  }, [article]);
+  }, [article, isLogined]);
 
   return (
     <main className={styles.main}>
@@ -69,7 +134,19 @@ export default function EditPage() {
       ) : (
         <>
           <EditFrame />
-          <h1 className={styles.title}>{nodeName}</h1>
+
+          <Image
+            className={styles.user_icon}
+            src={userInfo.photoURL}
+            alt="user icon"
+            width={50}
+            height={50}
+            onClick={clickUserIcon}
+          />
+
+          <h1 className={styles.title}>
+            {article == null ? "" : article?.name}
+          </h1>
           <div className={styles.edit_container}>
             <div className={styles.scroll_box}>
               <div className={styles.edit_area_container}>

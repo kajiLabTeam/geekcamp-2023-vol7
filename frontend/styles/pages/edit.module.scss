@@ -5,6 +5,22 @@
   top: 0;
 }
 
+.user_icon {
+  position: fixed;
+  bottom: 20px;
+  right: 10%;
+  z-index: 10000;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background-color: var(--background);
+  cursor: pointer;
+
+  @media (min-width: 800px) {
+    top: 20px;
+    right: 20px;
+  }
+}
+
 .edit_container {
   width: 100%;
   height: calc(100vh - 80px);
@@ -93,7 +109,11 @@
 .button_container {
   display: flex;
   padding: 10px 50px 10px 80px;
-  justify-content: space-between;
+  gap: 10px;
+
+  @media (min-width: 800px) {
+    justify-content: space-between;
+  }
 
   span {
     padding: 5px 10px;
