@@ -7,10 +7,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination:
-          process.env.NODE_ENV === "production"
-            ? "http://karasuneo.com/api/:path*" // 本番用
-            : "http://localhost:80/api/:path*", // 開発用
+        destination: "https://wisdomtree-api.kajilab.tk/api/:path*",
       },
     ];
   },

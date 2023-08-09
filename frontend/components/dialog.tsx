@@ -68,10 +68,13 @@ export default function Dialog(
       if (!currentNode?.id) return;
 
       const articleSnap = await fetchArticle(currentNode?.id as number);
+      console.log(articleSnap);
+
       if (articleSnap == null) {
         setArticle({
           id: 0,
           nodeId: 0,
+          name: "wisdom Tree",
           lastUpdate: "2023.08.02",
           article: "wisdom Tree は、知識をさらに広げるためのサービスです.",
         });
