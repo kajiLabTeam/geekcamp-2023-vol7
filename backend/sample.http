@@ -1,5 +1,5 @@
 ### ノードをクリックして、ツリーを伸ばすとき
-GET http://localhost:8091/api/nodes/connect/7 HTTP/1.1
+GET http://localhost:8091/api/nodes/connect/4 HTTP/1.1
 
 
 ### ノードをクリックして、記事を表示させたいとき
