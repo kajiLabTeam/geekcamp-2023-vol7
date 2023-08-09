@@ -31,22 +31,16 @@
   }
 
   .line_2 {
-    height: 5px;
-    top: 50px;
-    left: 107px;
-    right: 180px;
-
     &::before {
       height: 5px;
-      width: 80px;
-      top: 78px;
-      left: 39.8px;
-      rotate: -45deg;
+      top: 50px;
+      left: 50px;
+      right: 180px;
     }
 
     &::after {
       width: 5px;
-      top: 108px;
+      top: 50px;
       bottom: 0;
       left: 50px;
     }
