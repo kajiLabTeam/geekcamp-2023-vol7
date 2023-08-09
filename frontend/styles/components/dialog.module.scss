@@ -190,7 +190,7 @@
 
     .description {
       width: calc(100% - 70px);
-      height: 250px;
+      height: 245px;
       padding: 0 40px 0 20px;
       margin-left: 60px;
       overflow-y: scroll;
@@ -198,6 +198,11 @@
 
       p {
         font-size: 1.3rem;
+      }
+
+      .edit_area {
+        width: 100%;
+        height: 245px;
       }
 
       * {
@@ -211,6 +216,15 @@
       font-weight: bold;
       text-align: right;
       transition: padding-right 0.3s;
+      user-select: none;
+
+      .edit_icon {
+        margin-left: 10px;
+        height: 25px;
+        width: 25px;
+        vertical-align: top;
+        cursor: pointer;
+      }
     }
 
     @media (max-width: 500px) {
@@ -245,7 +259,7 @@
     transform: translate(-50%, -50%);
 
     .last_update {
-      padding-right: 10px;
+      padding-right: 20px;
     }
   }
 
@@ -286,126 +300,5 @@
 
   &.open {
     pointer-events: all;
-  }
-}
-
-.loading {
-  height: 250px;
-  position: relative;
-
-  .box {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-
-    .stroke {
-      fill: none;
-      stroke: #000;
-      stroke-miterlimit: 10;
-    }
-
-    .main_cicle,
-    .left_bottom_circle,
-    .right_circle,
-    .top_circle,
-    .right_top_circle {
-      animation: loop 3s infinite;
-    }
-
-    .main_cicle {
-      animation-name: loop-1;
-    }
-    .left_bottom_circle {
-      animation-name: loop-2;
-    }
-    .right_circle {
-      animation-name: loop-3;
-    }
-    .right_top_circle {
-      animation-name: loop-4;
-    }
-    .top_circle {
-      animation-name: loop-5;
-    }
-  }
-}
-
-@keyframes loop-1 {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 0;
-  }
-  11% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes loop-2 {
-  0% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 0;
-  }
-  21% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes loop-3 {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  31% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes loop-4 {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  41% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes loop-5 {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  51% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
   }
 }
