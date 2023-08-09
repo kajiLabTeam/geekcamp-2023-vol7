@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import EditFrame from "@/components/editframe";
 import LoadLogo from "@/components/loadlogo";
@@ -22,9 +22,11 @@ export default function EditPage() {
   const [article, setArticle] = useState<ArticleObject | null>(null);
   const [markdown, setMarkdown] = useState("");
   const [state, setState] = useState("");
+  const [isLogined, setIsLogined] = useState(false);
   const [userInfo, setUserInfo] = useState({
     photoURL: "/images/person-outline.png",
     displayName: "",
+    token: "",
   });
 
   const router = useRouter();
@@ -69,10 +71,15 @@ export default function EditPage() {
   async function clickLogout() {
     signOut(auth)
       .then(() => {
-        console.log("ログアウトしました");
+        const res = confirm("ログアウトしますか？");
+
+        if (!res) return;
+
+        setIsLogined(false);
         setUserInfo({
           photoURL: "/images/person-outline.png",
           displayName: "",
+          token: "",
         });
       })
       .catch((error) => {
@@ -80,16 +87,21 @@ export default function EditPage() {
       });
   }
 
-  async function checkLogin() {
-    onAuthStateChanged(auth, (user) => {
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
+        const token = await user.getIdToken().then((token) => token);
         setUserInfo({
           photoURL: user.photoURL || "",
           displayName: user.displayName || "",
+          token: token,
         });
+        setIsLogined(true);
+      } else {
+        setIsLogined(false);
       }
-    });
-  }
+    })();
+  }, [setIsLoading, router.query.nodeId]);
 
   useEffect(() => {
     (async () => {
@@ -100,39 +112,20 @@ export default function EditPage() {
       setArticle(articleSnap);
       setIsLoading(false);
     })();
-  }, [setIsLoading, setArticle, router.query.nodeId]);
+  }, [router.query.nodeId]);
 
   useEffect(() => {
     if (article === null) return;
 
+    if (!isLogined) {
+      alert("右上のアイコンからログインしてください。");
+      return;
+    }
+
     setState("");
     const html = markdown2html(article.article);
     setMarkdown(html);
-  }, [article]);
-
-  useEffect(() => {
-    checkLogin();
-
-    getRedirectResult(auth)
-      .then((result) => {
-        if (result === null) return;
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        if (credential === null) return;
-        const token = credential.accessToken;
-        console.log(token);
-        const user = result.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        console.error(error);
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-        console.error(errorCode);
-        console.error(errorMessage);
-        console.error(email);
-      });
-  }, []);
+  }, [article, isLogined]);
 
   return (
     <main className={styles.main}>
