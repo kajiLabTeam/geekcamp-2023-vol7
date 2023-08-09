@@ -33,3 +33,20 @@ export async function fetchNodeConnect(
 export function fetchArticle(nodeId: number): Promise<ArticleObject> {
   return customFetch(`/api/article/info/${nodeId}`);
 }
+
+export async function submitArticle(
+  nodeId: number,
+  article: string
+): Promise<Response> {
+  const res = await fetch(`/api/article/edit/${nodeId}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      article: article,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  }).then((response) => response.json());
+
+  return res;
+}

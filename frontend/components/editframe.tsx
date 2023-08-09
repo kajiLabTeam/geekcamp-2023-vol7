@@ -6,6 +6,7 @@ export default function EditFrame() {
       <div className={styles.line_1}></div>
       <div className={styles.line_2}></div>
       <div className={styles.line_3}></div>
+      <div className={styles.line_4}></div>
     </div>
   );
 }

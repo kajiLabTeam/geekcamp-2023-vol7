@@ -7,43 +7,97 @@
 
 .edit_container {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 80px);
   padding: 50px 25px 0 50px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  z-index: 100;
 
-  .edit_area_container {
-    overflow: hidden;
+  .scroll_box {
+    overflow-x: auto;
+    display: flex;
+    scroll-snap-type: x mandatory;
+    scroll-snap-align: start;
 
-    .edit_area {
-      padding: 20px;
-      width: 100%;
-      min-height: 100%;
-      outline: 0;
-      resize: none;
+    @media (min-width: 800px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
 
-      &::before {
-        content: "";
-        width: 2px;
-        background: var(--primary);
-        position: absolute;
-        right: -1px;
-        top: 30px;
-        bottom: 0;
+    .edit_area_container {
+      overflow: hidden;
+      flex: none;
+      scroll-snap-align: start;
+      width: 95%;
+
+      @media (min-width: 800px) {
+        width: auto;
+      }
+
+      .edit_area {
+        padding: 20px;
+        width: 100%;
+        min-height: 100%;
+        outline: 0;
+        resize: none;
+        border: none;
+
+        &::before {
+          content: "";
+          width: 2px;
+          background: var(--primary);
+          position: absolute;
+          right: -1px;
+          top: 30px;
+          bottom: 0;
+        }
+      }
+    }
+
+    .preview_container {
+      overflow-y: scroll;
+      flex: none;
+      scroll-snap-align: start;
+      width: 95%;
+
+      @media (min-width: 800px) {
+        width: auto;
+        display: block;
+        direction: rtl;
+        clip-path: polygon(
+          0 00%,
+          0% 0,
+          calc(100% - 100px) 0,
+          100% 100px,
+          100% 100%,
+          0 100%
+        );
+      }
+
+      .preview_area {
+        padding: 20px 60px 20px 20px;
+        width: 100%;
+        direction: ltr;
       }
     }
   }
+}
 
-  .preview_container {
-    direction: rtl;
-    overflow-y: scroll;
+.button_container {
+  display: flex;
+  padding: 10px 50px 10px 80px;
+  justify-content: space-between;
 
-    .preview_area {
-      direction: ltr;
-      padding: 20px 60px 20px 20px;
-      width: 100%;
+  span {
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: all var(--transition-time);
+    border: 2px solid var(--primary);
+
+    &:hover {
+      color: var(--on-primary);
+      background-color: var(--primary);
     }
   }
 }
