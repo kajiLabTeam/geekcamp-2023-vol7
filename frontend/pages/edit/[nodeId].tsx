@@ -49,7 +49,7 @@ export default function EditPage() {
 
       const articleSnap = await fetchArticle(nodeIdSnap);
       setArticle(articleSnap);
-      setNodeName("node name");
+      setNodeName(articleSnap.name);
       setIsLoading(false);
     })();
   }, [setIsLoading, setArticle, router.query.nodeId]);
