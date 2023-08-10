@@ -20,6 +20,7 @@ export default function Canvas() {
 
 function ForceGraphField (props: { width: number, height: number }) {
   const { width, height } = props;
+  const isFirst = useRef(true);
   const [currentNodeId, setCurrentNodeId] = useRecoilState(currentNodeIdState);
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
@@ -27,13 +28,15 @@ function ForceGraphField (props: { width: number, height: number }) {
   const graphRef = useRef<ForceGraphMethods<GraphNode, GraphLink>>(null!);
 
   useEffect(() => {
+    if (!isFirst.current) return;
+    isFirst.current = false;
     fetchNodeConnect(currentNodeId)
       .then(connectData => {
         if (connectData == null) throw new Error("ノードの読み込みに失敗しました");
         addConnection(connectData);
         return connectData;
       });
-  }, []);
+  }, [addConnection, currentNodeId]);
 
   useEffect(() => {
     const currentNode = getNode(currentNodeId);
@@ -92,7 +95,7 @@ function ForceGraphField (props: { width: number, height: number }) {
       ctx.fillText(name, 0, 0);
       ctx.restore();
     },
-    [currentNodeId]
+    []
   )
 
   const onNodeClick = useCallback<(node: GraphNode, event: MouseEvent) => void>(async node => {
@@ -108,7 +111,7 @@ function ForceGraphField (props: { width: number, height: number }) {
     }
 
     setCurrentNodeId(node.id);
-  }, [currentNodeId]);
+  }, [addConnection, currentNodeId, setCurrentNodeId, setIsDialogOpen]);
 
   return (
     <ForceGraph2D
