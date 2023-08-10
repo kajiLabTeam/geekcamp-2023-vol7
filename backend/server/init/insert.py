@@ -7,6 +7,7 @@ from model.connection import Connection
 from model.node import Node
 
 conn = sqlite3.connect("./init/data.db")
+conn = sqlite3.connect("./init/data.db")
 cur = conn.cursor()
 
 
@@ -19,8 +20,8 @@ def insert_node_article():
     """
     ).fetchall()
 
-    output_filename = "article/all_articles.sql"  # すべての記事を出力するファイル名
-    output_filename1 = "article/all_nodes.sql"  # すべての記事を出力するファイル名
+    output_filename = "./init/article/all_articles.sql"  # すべての記事を出力するファイル名
+    output_filename1 = "./init/article/all_nodes.sql"  # すべての記事を出力するファイル名
 
     for i, node in enumerate(all_node):
         node_name = node[0]
@@ -38,7 +39,7 @@ def insert_node_article():
         # 記事をファイルに追記して出力
         with open(output_filename1, "a") as output_file:
             output_file.write(
-                f'INSERT INTO node (node_name, article_id) VALUES ("{node_name}", {article_id});'
+                f'INSERT INTO\n    node (node_name, article_id)\nVALUES\n    (\n        "{node_name}",\n        {article_id},\n    );\n'
             )
 
         if res != None:
@@ -54,7 +55,7 @@ def insert_node_article():
 
 
 def insert_connection():
-    output_filename = "article/all_connections.sql"  # すべての記事を出力するファイル名
+    output_filename = "./init/article/all_connections.sql"  # すべての記事を出力するファイル名
 
     all_connection = cur.execute(
         """
@@ -82,11 +83,12 @@ def insert_connection():
             connect_node_id=connect_node.id,
             connection_strength=connection_strength,
         )
+        Connection.insert_connection(connection)
 
         # 記事をファイルに追記して出力
         with open(output_filename, "a") as output_file:
             output_file.write(
-                f"INSERT INTO connection (node_id, connect_node_id, connection_strength) VALUES ({node.id}, {connect_node.id}, {connection_strength});"
+                f"INSERT INTO\n    connection (node_id, connect_node_id, connection_strength)\nVALUES\n    (\n        {node.id},\n        {connect_node.id},\n        {connection_strength},\n    );\n"
             )
 
         print(
