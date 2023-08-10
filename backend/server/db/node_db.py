@@ -43,7 +43,8 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                     Connection.get_connection_by_node_id(
                         relation_node.id,
                         extracted_node_limit,
-                    ) or 0,
+                    )
+                    or 0,
                 ),
             }
             for relation_node in relation_nodes
@@ -92,7 +93,8 @@ def search_node(
                 "childNodeNum": len(
                     Connection.get_connection_by_node_id(
                         relation_node.id, extracted_node_limit
-                    ) or []
+                    )
+                    or []
                 ),
             }
             for relation_node in relation_nodes
