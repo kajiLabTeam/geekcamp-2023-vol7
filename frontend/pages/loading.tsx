@@ -1,5 +1,5 @@
 import Frame from "@/components/frame";
-import styles from "@styles/components/loading.module.scss";
+import styles from "@styles/pages/loading.module.scss";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -25,6 +25,7 @@ export default function Loading({ isLoading }: { isLoading: boolean }) {
             alt={"logo"}
             width={"600"}
             height={"400"}
+            priority={true}
           />
           <Image
             className={styles.kirakira_top}

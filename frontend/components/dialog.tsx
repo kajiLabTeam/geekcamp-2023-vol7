@@ -9,6 +9,9 @@ import {
 } from "@/const/recoil/state";
 import { fetchArticle } from "@/components/util/api";
 import useGraphData from "@/hooks/useGraphData";
+import { useRouter } from "next/router";
+import LoadLogo from "./loadlogo";
+import { sanitize } from "dompurify";
 
 type Props = {
   forceLoading: boolean;
@@ -26,6 +29,31 @@ export default function Dialog(
   const [article, setArticle] = useRecoilState(currentArticleState);
   const [isLoading, setIsLoading] = useState(true);
 
+  const router = useRouter();
+
+  // yyyy.mm.dd 形式にフォーマット
+  function formatLastUpdate(lastUpdate: string) {
+    const date = new Date(lastUpdate);
+    const yyyy = date.getFullYear();
+    const mm = ("0" + (1 + date.getMonth())).slice(-2);
+    const dd = ("0" + date.getDate()).slice(-2);
+    return `${yyyy}.${mm}.${dd}`;
+  }
+
+  function markdown2html(md: string) {
+    const mdit = markdownit();
+    const sanitizedHtml = sanitize(mdit.render(md));
+    return sanitizedHtml;
+  }
+
+  function getArticle() {
+    if (article.article === null) {
+      return `### Not Found : ${currentNode?.name} は ${currentNode?.name} です`;
+    } else {
+      return article.article;
+    }
+  }
+
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Escape") setIsDialogOpen(false);
@@ -40,10 +68,22 @@ export default function Dialog(
       if (!currentNode?.id) return;
 
       const articleSnap = await fetchArticle(currentNode?.id as number);
+
+      if (articleSnap == null) {
+        setArticle({
+          id: 0,
+          nodeId: 0,
+          name: "wisdom Tree",
+          lastUpdate: "2023.08.02",
+          article: "wisdom Tree は、知識をさらに広げるためのサービスです.",
+        });
+        setIsLoading(false);
+        return;
+      }
       setArticle(articleSnap);
       setIsLoading(false);
     })();
-  }, [currentNode]);
+  }, [currentNode, setArticle]);
 
   return (
     <>
@@ -76,64 +116,32 @@ export default function Dialog(
           <div className={styles.subtitle}>{currentNode?.name}</div>
 
           {isLoading || forceLoading ? (
-            <div className={styles.loading}>
-              <div className={styles.box}>
-                <svg viewBox="0 0 120 90">
-                  <g className={styles.main_cicle}>
-                    <circle cx="41" cy="44" r="9" />
-                    <circle className={styles.stroke} cx="41" cy="44" r="12" />
-                  </g>
-                  <g className={styles.left_bottom_circle}>
-                    <circle cx="9" cy="80" r="9" />
-                    <line
-                      className={styles.stroke}
-                      x1="9"
-                      y1="80"
-                      x2="32"
-                      y2="52"
-                    />
-                  </g>
-                  <g className={styles.right_top_circle}>
-                    <circle cx="110" cy="6" r="6" />
-                    <line
-                      className={styles.stroke}
-                      x1="82"
-                      y1="46"
-                      x2="110"
-                      y2="6"
-                    />
-                  </g>
-                  <g className={styles.right_circle}>
-                    <circle cx="82" cy="46" r="8" />
-                    <line
-                      className={styles.stroke}
-                      x1="53"
-                      y1="44"
-                      x2="82"
-                      y2="46"
-                    />
-                  </g>
-                  <g className={styles.top_circle}>
-                    <circle cx="23" cy="15" r="5" />
-                    <line
-                      className={styles.stroke}
-                      x1="22"
-                      y1="15"
-                      x2="34"
-                      y2="34"
-                    />
-                  </g>
-                </svg>
-              </div>
-            </div>
+            <LoadLogo />
           ) : (
-            <div className={styles.description}>
-              <div>
-                {article.article === ""
-                  ? `Not Found : ${currentNode?.name} は ${currentNode?.name} です`
-                  : article.article}
+            <>
+              <div className={styles.description}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: markdown2html(getArticle()),
+                  }}
+                ></div>
               </div>
-            </div>
+
+              <p className={styles.last_update}>
+                {formatLastUpdate(article.lastUpdate)}
+                <svg
+                  className={styles.edit_icon}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  onClick={() => router.push(`/edit/${currentNode?.id}`)}
+                >
+                  <path
+                    fill="currentColor"
+                    d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925l-2 2H5v14h14v-6.95l2-2v8.95q0 .825-.588 1.413T19 23.7H5Zm7-9Zm4.175-8.425l1.425 1.4l-6.6 6.6V15.7h1.4l6.625-6.625l1.425 1.4l-7.2 7.225H9v-4.25l7.175-7.175Zm4.275 4.2l-4.275-4.2l2.5-2.5q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-2.475 2.475Z"
+                  ></path>
+                </svg>
+              </p>
+            </>
           )}
         </div>
       </div>

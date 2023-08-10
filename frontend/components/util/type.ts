@@ -9,6 +9,7 @@ export type NodeObject = {
 
 export type ArticleObject = {
   id: number;
+  name: string;
   nodeId: number;
   article: string;
   lastUpdate: LastUpdate;

@@ -7,6 +7,7 @@ from model.connection import Connection
 from model.node import Node
 
 conn = sqlite3.connect("./init/data.db")
+conn = sqlite3.connect("./init/data.db")
 cur = conn.cursor()
 
 
