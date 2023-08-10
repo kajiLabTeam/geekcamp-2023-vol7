@@ -1,6 +1,5 @@
-from fastapi import APIRouter, Request
-
 from db.user_db import register_user as db_register_user
+from fastapi import APIRouter, Request
 
 router = APIRouter()
 
