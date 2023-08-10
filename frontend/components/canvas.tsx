@@ -36,6 +36,12 @@ function ForceGraphField (props: { width: number, height: number }) {
         addConnection(connectData);
         return connectData;
       });
+
+    graphRef.current.d3Force("charge")
+      ?.strength(() => -5e2);
+
+    graphRef.current.d3Force('link')
+      ?.distance((link: GraphLink) => Math.min(link.source.connectNum, link.target.connectNum) * 5 + 30);
   }, [addConnection, currentNodeId]);
 
   useEffect(() => {
