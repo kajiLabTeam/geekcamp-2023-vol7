@@ -26,7 +26,16 @@ export function fetchSearchWord(
 export async function fetchNodeConnect(
   nodeId: number
 ): Promise<NodeConnectData> {
-  return customFetch(`/api/nodes/connect/${nodeId}`);
+  const result = await customFetch(`/api/nodes/connect/${nodeId}`) as NodeConnectData;
+  const namedNodes = result.relationNode.filter(v => v.name);
+  if (result.relationNode.length === namedNodes.length) return result;
+  return {
+    currentNode: {
+      ...result.currentNode,
+      childNodeNum: namedNodes.length
+    },
+    relationNode: namedNodes
+  };
 }
 
 // 記事を取得する
