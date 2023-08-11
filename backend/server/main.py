@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from init.insert import insert_all_data
 from model.table import create_all_tables
 from router.article import router as article_router
