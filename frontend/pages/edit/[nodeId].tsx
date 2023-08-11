@@ -87,6 +87,8 @@ export default function EditPage() {
   }
 
   useEffect(() => {
+    if (isLoading) return;
+
     onAuthStateChanged(auth, async (user) => {
       if (user) {
         const token = await user.getIdToken().then((token) => token);
@@ -98,9 +100,10 @@ export default function EditPage() {
         setIsLogined(true);
       } else {
         setIsLogined(false);
+        alert("右上のアイコンからログインしてください。");
       }
     })();
-  }, [setIsLoading, router.query.nodeId]);
+  }, [setIsLoading, router.query.nodeId, isLoading]);
 
   useEffect(() => {
     (async () => {
@@ -121,11 +124,6 @@ export default function EditPage() {
 
   useEffect(() => {
     if (article === null) return;
-
-    if (!isLogined) {
-      alert("右上のアイコンからログインしてください。");
-      return;
-    }
 
     setState("");
     const html = markdown2html(article.article);
