@@ -105,15 +105,13 @@ function ForceGraphField (props: { width: number, height: number }) {
   )
 
   const onNodeClick = useCallback<(node: GraphNode, event: MouseEvent) => void>(async node => {
-    if (currentNodeId === node.id) {
-      setIsDialogOpen(true);
-    }
-
     if (node.connectNum < node.val) {
       const connectData = await fetchNodeConnect(node.id);
       if (connectData) {
         addConnection(connectData);
       }
+    } else if (currentNodeId === node.id) {
+      setIsDialogOpen(true);
     }
 
     setCurrentNodeId(node.id);
