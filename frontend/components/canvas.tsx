@@ -125,7 +125,7 @@ function ForceGraphField (props: { width: number, height: number }) {
       graphData={graphData}
       backgroundColor="#FFF9F1"
       onNodeClick={onNodeClick}
-      nodeColor={node => node.connectNum >= node.val ? "#000000" : "#75BEC2"}
+      nodeColor={node => node.connectIds.length >= node.val ? "#000000" : "#75BEC2"}
       nodeCanvasObjectMode={node => node.id === currentNodeId ? "after" : "none"}
       nodeCanvasObject={drawWithLabel}
       linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
