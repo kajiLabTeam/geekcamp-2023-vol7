@@ -5,12 +5,23 @@ def dump_data():
     conn = sqlite3.connect("./init/data.db")
     cursor = conn.cursor()
 
-    output = ''
-    for table_name in ['confirm_node', 'confirm_article', 'confirm_connection']:
-        cursor.execute(f"SELECT * FROM {table_name};")
-        rows = cursor.fetchall()
-        for row in rows:
-            output += f'INSERT INTO {table_name} VALUES {row};\n'
+    output = ""
+
+    cursor.execute(f"SELECT id, article, last_update FROM confirm_article;")
+    rows = cursor.fetchall()
+    for row in rows:
+        output += f'INSERT INTO article (id, article, last_update) VALUES ({row[0]}, "{row[1]}", "{row[2]}");\n'
+
+    cursor.execute(f"SELECT node_name, article_id FROM confirm_node;")
+    rows = cursor.fetchall()
+    for row in rows:
+        output += f'INSERT INTO node (node_name, article_id) VALUES ("{row[0]}", {row[1]});\n'
+
+    cursor.execute(
+        f"SELECT node_id, connect_node_id, connection_strength FROM confirm_connection;")
+    rows = cursor.fetchall()
+    for row in rows:
+        output += f'INSERT INTO connection (node_id, connect_node_id, connection_strength) VALUES ({row[0]}, {row[1]}, {int(row[2])});\n'
 
     output_filename = "./init/init.sql"
     with open(output_filename, 'w') as f:
@@ -45,9 +56,11 @@ def format_table():
     cursor.execute("DELETE FROM confirm_node;")
     cursor.execute("DELETE FROM confirm_article;")
     cursor.execute("DELETE FROM confirm_connection;")
+
     cursor.execute("""
         INSERT INTO confirm_article (article) SELECT article FROM article_tmp;
     """)
+
     cursor.execute("""
         INSERT INTO confirm_node (node_name, article_id)
         SELECT at.node_name, ac.id
