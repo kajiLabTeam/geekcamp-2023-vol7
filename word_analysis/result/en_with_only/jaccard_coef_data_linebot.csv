@@ -1,0 +1,5 @@
+word1,word2,jaccard_coef
+lambda,linebot,0.0004187604690117253
+linebot,obniz,0.0003051881993896236
+linebot,ngrok,0.0002046245140167792
+issue,linebot,0.0001060332944544587

@@ -1,0 +1,6 @@
+word1,word2,jaccard_coef
+lightgbm,pandas,0.0006986763963824088
+lambda,lightgbm,0.0006039255158530448
+lightgbm,model,0.0001298532658096351
+model,pandas,5.716899153898925e-05
+lightgbm,mecab,5.0968399592252805e-05

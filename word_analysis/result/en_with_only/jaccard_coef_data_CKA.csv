@@ -1,0 +1,9 @@
+word1,word2,jaccard_coef
+ingress,kubernetes,0.001960888229370926
+email,networking,0.0012195121951219512
+kubernetes,networking,0.0004334096959940561
+helm,kubernetes,0.0003840983291722681
+gcp,ingress,0.00028555111364934324
+kubernetes,scheduler,0.00012809837955549862
+gcp,kubernetes,6.360513929525506e-05
+email,kubernetes,6.333924499619965e-05

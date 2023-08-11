@@ -1,0 +1,3 @@
+word1,word2,jaccard_coef
+langchain,tool,0.0029644268774703555
+langchain,sqlalchemy,0.0012345679012345679
