@@ -57,7 +57,6 @@ export default function Dialog(
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Escape") setIsDialogOpen(false);
-      else if (e.code === "Space") setIsDialogOpen((v) => !v);
     });
   }, [setIsDialogOpen]);
 
