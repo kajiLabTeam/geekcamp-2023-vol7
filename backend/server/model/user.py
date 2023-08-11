@@ -19,33 +19,20 @@ class User(SQLModel, table=True):
     @classmethod
     # ユーザーIDを元にユーザーを取得する
     def get_user_by_id(cls, user_id: int):
-        if not user_id:
-            return None
-
-        try:
-            session = get_db_session()
-            stmt = select(User).where(User.id == user_id)
-            result = session.exec(stmt).first()
-            session.close()
-            return result
-        except SQLAlchemyError as e:
-            print(f"An error occurred: {e}")
-            return e
+        session = get_db_session()
+        stmt = select(User).where(User.id == user_id)
+        result = session.exec(stmt).first()
+        session.close()
+        return result
 
     @classmethod
     # ユーザーIDを元にユーザーを取得する
     def insert_user(cls, user: "User"):
-        if not user:
-            return None
-
-        try:
-            session = get_db_session()
-            session.add(user)
-            session.commit()
-            session.refresh(user)
-            session.close()
-        except SQLAlchemyError as e:
-            return e
+        session = get_db_session()
+        session.add(user)
+        session.commit()
+        session.refresh(user)
+        session.close()
 
 
 def create_table():
