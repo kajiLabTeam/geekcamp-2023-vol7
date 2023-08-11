@@ -107,11 +107,17 @@ export default function EditPage() {
       const nodeIdSnap = Number(router.query.nodeId);
       if (Number.isNaN(nodeIdSnap)) return;
 
-      const articleSnap = await fetchArticle(nodeIdSnap);
-      setArticle(articleSnap);
-      setIsLoading(false);
+      const articleSnap = await fetchArticle(nodeIdSnap).catch(() => null);
+
+      if (articleSnap === null) {
+        alert("記事が見つかりませんでした.");
+        router.push("/");
+      } else {
+        setArticle(articleSnap);
+        setIsLoading(false);
+      }
     })();
-  }, [router.query.nodeId]);
+  }, [router]);
 
   useEffect(() => {
     if (article === null) return;
