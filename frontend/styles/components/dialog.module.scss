@@ -225,10 +225,24 @@
 
       .edit_icon {
         margin-left: 10px;
-        height: 25px;
-        width: 25px;
+        padding: 2px 3px 5px;
+        height: 30px;
+        width: 30px;
+        border-radius: 5px;
         vertical-align: top;
         cursor: pointer;
+
+        transition: all 0.3s;
+        background-color: var(--primary);
+
+        & > path {
+          color: var(--on-primary);
+          transition: all 0.3s;
+        }
+
+        &:hover {
+          padding: 4px 5px 7px;
+        }
       }
     }
 
