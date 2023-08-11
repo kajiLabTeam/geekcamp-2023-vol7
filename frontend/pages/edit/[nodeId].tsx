@@ -15,6 +15,7 @@ import {
   signOut,
 } from "firebase/auth";
 import Image from "next/image";
+import { before } from "node:test";
 
 export default function EditPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,7 @@ export default function EditPage() {
   const [markdown, setMarkdown] = useState("");
   const [state, setState] = useState("");
   const [isLogined, setIsLogined] = useState(false);
+  const [articleBefore, setArticleBefore] = useState("");
   const [userInfo, setUserInfo] = useState({
     photoURL: "/images/person-outline.png",
     displayName: "",
@@ -32,13 +34,25 @@ export default function EditPage() {
   const provider = new GoogleAuthProvider();
 
   async function submit() {
+    if (!isLogined) {
+      alert("ログインしてください.");
+      return;
+    }
+
+    if (article?.article === articleBefore) {
+      alert("更新する内容がありません.");
+      return;
+    }
+
     if (article !== null) {
       const res = await submitArticle(article.id, article.article);
 
-      if (res.article === article.article) setState("更新しました。");
-      else setState("更新に失敗しました。");
+      if (res.article === article.article) {
+        alert("更新しました.");
+        router.push("/");
+      } else setState("更新に失敗しました.");
     } else {
-      setState("nodeId がみつかりませんでした。");
+      setState("nodeId がみつかりませんでした.");
     }
   }
 
@@ -100,7 +114,7 @@ export default function EditPage() {
         setIsLogined(true);
       } else {
         setIsLogined(false);
-        alert("右上のアイコンからログインしてください。");
+        alert("右上のアイコンからログインしてください.");
       }
     })();
   }, [setIsLoading, router.query.nodeId, isLoading]);
@@ -117,6 +131,7 @@ export default function EditPage() {
         router.push("/");
       } else {
         setArticle(articleSnap);
+        setArticleBefore(articleSnap.article);
         setIsLoading(false);
       }
     })();
@@ -157,6 +172,7 @@ export default function EditPage() {
                   className={styles.edit_area}
                   defaultValue={article !== null ? article.article : ""}
                   onChange={changeArticle}
+                  {...(isLogined ? {} : { disabled: true })}
                 ></textarea>
               </div>
 
