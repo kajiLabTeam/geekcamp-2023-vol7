@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import EditFrame from "@/components/editframe";
 import LoadLogo from "@/components/loadlogo";
@@ -10,7 +10,6 @@ import { ArticleObject } from "@/components/util/type";
 import { auth } from "@/components/firebase/init";
 import {
   GoogleAuthProvider,
-  getRedirectResult,
   onAuthStateChanged,
   signInWithRedirect,
   signOut,
