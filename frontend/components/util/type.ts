@@ -34,8 +34,8 @@ export type NodeConnectData = {
 export type GraphNode = {
   id: number;
   val: number;
-  connectNum: number;
   articleId: number;
+  connectIds: number[];
   x?: number | undefined;
   y?: number | undefined;
   vx?: number | undefined;

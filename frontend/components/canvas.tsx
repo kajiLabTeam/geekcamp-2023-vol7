@@ -41,7 +41,7 @@ function ForceGraphField (props: { width: number, height: number }) {
       ?.strength(() => -5e2);
 
     graphRef.current.d3Force('link')
-      ?.distance((link: GraphLink) => Math.min(link.source.connectNum, link.target.connectNum) * 5 + 30);
+      ?.distance((link: GraphLink) => Math.min(link.source.connectIds.length, link.target.connectIds.length) * 5 + 30);
   }, [addConnection, currentNodeId]);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ function ForceGraphField (props: { width: number, height: number }) {
   )
 
   const onNodeClick = useCallback<(node: GraphNode, event: MouseEvent) => void>(async node => {
-    if (node.connectNum < node.val) {
+    if (node.connectIds.length < node.val) {
       const connectData = await fetchNodeConnect(node.id);
       if (connectData) {
         addConnection(connectData);
