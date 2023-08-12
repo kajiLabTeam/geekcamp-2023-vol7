@@ -24,7 +24,7 @@ function ForceGraphField (props: { width: number, height: number }) {
   const [currentNodeId, setCurrentNodeId] = useRecoilState(currentNodeIdState);
   const setIsDialogOpen = useSetRecoilState(isDialogOpenState);
 
-  const { graphData, addConnection, getNode } = useGraphData();
+  const { graphData, addConnection, updateConnection ,getNode } = useGraphData();
   const graphRef = useRef<ForceGraphMethods<GraphNode, GraphLink>>(null!);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ function ForceGraphField (props: { width: number, height: number }) {
 
     graphRef.current.d3Force('link')
       ?.distance((link: GraphLink) => Math.min(link.source.connectIds.length, link.target.connectIds.length) * 5 + 30);
-  }, [addConnection, currentNodeId]);
+  }, [updateConnection, currentNodeId, addConnection]);
 
   useEffect(() => {
     const currentNode = getNode(currentNodeId);
@@ -108,14 +108,14 @@ function ForceGraphField (props: { width: number, height: number }) {
     if (node.connectIds.length < node.val) {
       const connectData = await fetchNodeConnect(node.id);
       if (connectData) {
-        addConnection(connectData);
+        updateConnection(connectData);
       }
     } else if (currentNodeId === node.id) {
       setIsDialogOpen(true);
     }
 
     setCurrentNodeId(node.id);
-  }, [addConnection, currentNodeId, setCurrentNodeId, setIsDialogOpen]);
+  }, [updateConnection, currentNodeId, setCurrentNodeId, setIsDialogOpen]);
 
   return (
     <ForceGraph2D

@@ -59,6 +59,21 @@ export default function useGraphData() {
     return node;
   }, [linksMap, nodesMap]);
 
+  const deleateNode = useCallback((nodeId: number) => {
+    const node = nodesMap.get(nodeId);
+    const labelId = -nodeId;
+    const labelLinkKey = getLinkKey(nodeId, labelId);
+
+    for (const connectedId of node?.connectIds ?? []) {
+      const connectedLinkKey = getLinkKey(nodeId, connectedId);
+      linksMap.delete(connectedLinkKey);
+    }
+
+    nodesMap.delete(nodeId);
+    nodesMap.delete(labelId);
+    linksMap.delete(labelLinkKey);
+  }, [linksMap, nodesMap]);
+
   const addConnection = useCallback((connectData: NodeConnectData) => {
     const { currentNode } = connectData;
     const rootFGNode = nodesMap.get(currentNode.id) ?? addNode(connectData.currentNode);
@@ -86,11 +101,24 @@ export default function useGraphData() {
     return nodesMap.get(currentNode.id)!;
   }, [nodesMap, addNode, setGraphData, linksMap]);
 
+  const updateConnection = useCallback((connectData: NodeConnectData) => {
+    const { currentNode } = connectData;
+    const currentFGNode = nodesMap.get(currentNode.id);
+    for (const connectedId of currentFGNode?.connectIds ?? []) {
+      const connectedNode = nodesMap.get(connectedId);
+      if (connectedNode && connectedNode.connectIds.length <= 1) {
+        deleateNode(connectedId);
+      }
+    }
+
+    addConnection(connectData);
+  }, [addConnection, deleateNode, nodesMap]);
+
   const getNode = useCallback((nodeId: number) => (
     nodesMap.get(nodeId)
   ), [nodesMap]);
 
-  return { graphData, addConnection, getNode };
+  return { graphData, addConnection, updateConnection, getNode };
 }
 
 const getLinkKey = (source: number, target: number): LinkKey =>
