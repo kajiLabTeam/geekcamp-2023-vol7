@@ -65,8 +65,12 @@ export default function useGraphData() {
     const labelLinkKey = getLinkKey(nodeId, labelId);
 
     for (const connectedId of node?.connectIds ?? []) {
+      const connectedNode = nodesMap.get(connectedId);
       const connectedLinkKey = getLinkKey(nodeId, connectedId);
       linksMap.delete(connectedLinkKey);
+
+      node?.connectIds.delete(connectedId);
+      connectedNode?.connectIds.delete(nodeId);
     }
 
     nodesMap.delete(nodeId);
