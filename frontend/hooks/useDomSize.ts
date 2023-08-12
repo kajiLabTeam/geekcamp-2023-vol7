@@ -23,9 +23,10 @@ export default function useDomSize<T extends HTMLElement>(waitTime: number = 100
   );
 
   useEffect(() => {
-    resizeObserverRef.current.observe(domRef.current);
+    const resizeObserver = resizeObserverRef.current;
+    resizeObserver.observe(domRef.current);
 
-    return () => resizeObserverRef.current.disconnect();
+    return () => resizeObserver.disconnect();
   }, []);
 
   return [domRef, size] as const;

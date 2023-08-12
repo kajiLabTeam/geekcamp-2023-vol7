@@ -34,16 +34,16 @@ export default function useGraphData() {
       name: nodeObj.name,
       articleId: nodeObj.articleId,
       val: nodeObj.childNodeNum,
-      connectIds: [],
+      connectIds: new Set(),
     };
     const labelId = -node.id;
     const labelLinkKey = getLinkKey(node.id, labelId);
 
     const labelNode: GraphNode = {
       id: labelId,
-      val: node.connectIds.length,
+      val: node.connectIds.size,
       articleId: node.articleId,
-      connectIds: []
+      connectIds: new Set()
     };
 
     const labelLink: GraphLink = {
@@ -88,8 +88,8 @@ export default function useGraphData() {
           target: node
         });
 
-        nodesMap.get(rootFGNode.id)?.connectIds.push(nodeObj.id);
-        nodesMap.get(nodeObj.id)?.connectIds.push(rootFGNode.id);
+        nodesMap.get(rootFGNode.id)?.connectIds.add(nodeObj.id);
+        nodesMap.get(nodeObj.id)?.connectIds.add(rootFGNode.id);
       }
     }
 
@@ -107,7 +107,7 @@ export default function useGraphData() {
     for (const connectedId of currentFGNode?.connectIds ?? []) {
       const connectedNode = nodesMap.get(connectedId);
       const shouldDelete = connectData.relationNode.every(node => node.id !== connectedId);
-      if (connectedNode && connectedNode.connectIds.length <= 1 && shouldDelete) {
+      if (connectedNode && connectedNode.connectIds.size <= 1 && shouldDelete) {
         deleateNode(connectedId);
       }
     }
