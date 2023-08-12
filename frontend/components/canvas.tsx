@@ -41,7 +41,7 @@ function ForceGraphField (props: { width: number, height: number }) {
       ?.strength(() => -5e2);
 
     graphRef.current.d3Force('link')
-      ?.distance((link: GraphLink) => Math.min(link.source.connectIds.length, link.target.connectIds.length) * 5 + 30);
+      ?.distance((link: GraphLink) => Math.min(link.source.connectIds.size, link.target.connectIds.size) * 5 + 30);
   }, [updateConnection, currentNodeId, addConnection]);
 
   useEffect(() => {
@@ -105,7 +105,7 @@ function ForceGraphField (props: { width: number, height: number }) {
   )
 
   const onNodeClick = useCallback<(node: GraphNode, event: MouseEvent) => void>(async node => {
-    if (node.connectIds.length < node.val) {
+    if (node.connectIds.size < node.val) {
       const connectData = await fetchNodeConnect(node.id);
       if (connectData) {
         updateConnection(connectData);
@@ -118,8 +118,8 @@ function ForceGraphField (props: { width: number, height: number }) {
   }, [updateConnection, currentNodeId, setCurrentNodeId, setIsDialogOpen]);
 
   const getNodeColor = useCallback<(node: GraphNode) => string>(node => {
-    if (node.connectIds.length >= node.val) return "#000000";
-    if (node.connectIds.length >= 10) return "#f09713";
+    if (node.connectIds.size >= node.val) return "#000000";
+    if (node.connectIds.size >= 10) return "#f09713";
     return "#75BEC2";
   }, []);
 
