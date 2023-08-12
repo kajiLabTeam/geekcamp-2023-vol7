@@ -51,7 +51,7 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                     or 0
                 ),
             }
-            for relation_node in relation_nodes
+            for relation_node in relation_nodes[:res_node_limit] if relation_nodes is not None
         ],
     }
 
