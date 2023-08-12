@@ -106,7 +106,8 @@ export default function useGraphData() {
     const currentFGNode = nodesMap.get(currentNode.id);
     for (const connectedId of currentFGNode?.connectIds ?? []) {
       const connectedNode = nodesMap.get(connectedId);
-      if (connectedNode && connectedNode.connectIds.length <= 1) {
+      const shouldDelete = connectData.relationNode.every(node => node.id !== connectedId);
+      if (connectedNode && connectedNode.connectIds.length <= 1 && shouldDelete) {
         deleateNode(connectedId);
       }
     }
