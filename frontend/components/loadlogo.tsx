@@ -1,4 +1,4 @@
-import styles from "@/styles/components/load_logo.module.scss"
+import styles from "@/styles/components/load_logo.module.scss";
 
 export default function LoadLogo() {
   return (

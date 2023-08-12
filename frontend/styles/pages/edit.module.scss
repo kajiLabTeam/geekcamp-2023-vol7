@@ -1,3 +1,7 @@
+.main {
+  height: 100vh;
+}
+
 .title {
   width: 100%;
   text-align: center;
@@ -93,14 +97,6 @@
         padding: 20px 60px 20px 20px;
         width: 100%;
         direction: ltr;
-
-        p {
-          padding-top: 15px;
-        }
-
-        li {
-          margin-left: 15px;
-        }
       }
     }
   }

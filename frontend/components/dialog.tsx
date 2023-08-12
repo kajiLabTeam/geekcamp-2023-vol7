@@ -1,4 +1,5 @@
 import styles from "@/styles/components/dialog.module.scss";
+import mdStyle from "@/styles/components/markdown.module.scss";
 import { useEffect, useState } from "react";
 import markdownit from "markdown-it";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -57,7 +58,6 @@ export default function Dialog(
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       if (e.code === "Escape") setIsDialogOpen(false);
-      else if (e.code === "Space") setIsDialogOpen((v) => !v);
     });
   }, [setIsDialogOpen]);
 
@@ -65,17 +65,19 @@ export default function Dialog(
     setIsLoading(true);
 
     (async () => {
-      if (!currentNode?.id) return;
+      if (currentNode?.id === undefined) return;
 
-      const articleSnap = await fetchArticle(currentNode?.id as number);
+      const articleSnap = await fetchArticle(currentNode?.id as number).catch(
+        () => null
+      );
 
       if (articleSnap == null) {
         setArticle({
-          id: 0,
-          nodeId: 0,
-          name: "wisdom Tree",
-          lastUpdate: "2023.08.02",
-          article: "wisdom Tree は、知識をさらに広げるためのサービスです.",
+          id: -1,
+          nodeId: currentNode.id,
+          name: currentNode.name || "Not Found",
+          lastUpdate: "2023.08.11",
+          article: "記事はありません.",
         });
         setIsLoading(false);
         return;
@@ -116,11 +118,14 @@ export default function Dialog(
           <div className={styles.subtitle}>{currentNode?.name}</div>
 
           {isLoading || forceLoading ? (
-            <LoadLogo />
+            <div className={styles.load_container}>
+              <LoadLogo />
+            </div>
           ) : (
             <>
               <div className={styles.description}>
                 <div
+                  className={mdStyle.markdown}
                   dangerouslySetInnerHTML={{
                     __html: markdown2html(getArticle()),
                   }}
@@ -129,18 +134,20 @@ export default function Dialog(
 
               <p className={styles.last_update}>
                 {formatLastUpdate(article.lastUpdate)}
-                <svg
-                  className={styles.edit_icon}
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  onClick={() => router.push(`/edit/${currentNode?.id}`)}
-                  data-tip="編集"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925l-2 2H5v14h14v-6.95l2-2v8.95q0 .825-.588 1.413T19 23.7H5Zm7-9Zm4.175-8.425l1.425 1.4l-6.6 6.6V15.7h1.4l6.625-6.625l1.425 1.4l-7.2 7.225H9v-4.25l7.175-7.175Zm4.275 4.2l-4.275-4.2l2.5-2.5q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-2.475 2.475Z"
-                  ></path>
-                </svg>
+                {article.id !== -1 && (
+                  <svg
+                    className={styles.edit_icon}
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    onClick={() => router.push(`/edit/${currentNode?.id}`)}
+                    data-tip="編集"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925l-2 2H5v14h14v-6.95l2-2v8.95q0 .825-.588 1.413T19 23.7H5Zm7-9Zm4.175-8.425l1.425 1.4l-6.6 6.6V15.7h1.4l6.625-6.625l1.425 1.4l-7.2 7.225H9v-4.25l7.175-7.175Zm4.275 4.2l-4.275-4.2l2.5-2.5q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-2.475 2.475Z"
+                    ></path>
+                  </svg>
+                )}
               </p>
             </>
           )}

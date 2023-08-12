@@ -21,7 +21,9 @@ export default function Search() {
 
   async function search(word: string) {
     if (word === "") return;
-    const res = await fetchSearchWord(word);
+    const res = await fetchSearchWord(word).catch(() => null);
+
+    if (!res) return;
 
     if (res.type === "node") {
       const currentNode = addConnection(res);

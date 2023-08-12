@@ -32,24 +32,26 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
             "id": current_node.id,
             "name": current_node.node_name,
             "articleId": current_node.article_id,
-            "childNodeNum": len(relation_nodes) if relation_nodes is not None else 0,
+            "childNodeNum": len(
+                Connection.get_connection_by_node_id(
+                    current_node.id, extracted_node_limit
+                )
+                or 0
+            ),
         },
         "relationNode": [
             {
                 "id": relation_node.id,
                 "name": relation_node.node_name,
                 "articleId": relation_node.article_id,
-                "childNodeNum": min(
-                    len(
-                        Connection.get_connection_by_node_id(
-                            relation_node.id, extracted_node_limit
-                        )
-                        or 0
-                    ),
-                    res_node_limit,
+                "childNodeNum": len(
+                    Connection.get_connection_by_node_id(
+                        relation_node.id, extracted_node_limit
+                    )
+                    or 0
                 ),
             }
-            for relation_node in relation_nodes
+            for relation_node in relation_nodes[:res_node_limit] if relation_nodes is not None
         ],
     }
 

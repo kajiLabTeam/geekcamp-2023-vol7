@@ -159,6 +159,10 @@
       0 100%
     );
 
+    .load_container {
+      height: 220px;
+    }
+
     .title {
       margin-right: 100px;
       padding: 40px 0 30px 80px;
@@ -177,15 +181,17 @@
     }
 
     .subtitle {
-      white-space: nowrap;
+      width: 180px;
       color: var(--on-primary);
       font-weight: bold;
-      position: absolute;
-      right: -80px;
-      rotate: 90deg;
-      top: 250px;
       font-size: 1.5rem;
-      width: 200px;
+      position: absolute;
+      right: -70px;
+      top: 250px;
+      rotate: 90deg;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
     }
 
     .description {
@@ -195,15 +201,6 @@
       margin-left: 60px;
       overflow-y: scroll;
       direction: rtl;
-
-      p {
-        font-size: 1.3rem;
-        padding-top: 15px;
-      }
-
-      li {
-        margin-left: 15px;
-      }
 
       .edit_area {
         width: 100%;
