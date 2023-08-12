@@ -1,4 +1,5 @@
 import styles from "@/styles/components/dialog.module.scss";
+import mdStyle from "@/styles/components/markdown.module.scss";
 import { useEffect, useState } from "react";
 import markdownit from "markdown-it";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -124,6 +125,7 @@ export default function Dialog(
             <>
               <div className={styles.description}>
                 <div
+                  className={mdStyle.markdown}
                   dangerouslySetInnerHTML={{
                     __html: markdown2html(getArticle()),
                   }}

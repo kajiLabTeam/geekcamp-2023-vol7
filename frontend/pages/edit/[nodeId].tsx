@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import EditFrame from "@/components/editframe";
 import LoadLogo from "@/components/loadlogo";
 import styles from "@/styles/pages/edit.module.scss";
+import mdStyle from "@/styles/components/markdown.module.scss";
 import markdownit from "markdown-it";
 import { sanitize } from "dompurify";
 import { fetchArticle, submitArticle } from "@/components/util/api";
@@ -15,7 +16,6 @@ import {
   signOut,
 } from "firebase/auth";
 import Image from "next/image";
-import { before } from "node:test";
 
 export default function EditPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -178,7 +178,7 @@ export default function EditPage() {
 
               <div className={styles.preview_container}>
                 <div
-                  className={styles.preview_area}
+                  className={`${styles.preview_area} ${mdStyle.markdown}`}
                   dangerouslySetInnerHTML={{ __html: markdown }}
                 ></div>
               </div>
