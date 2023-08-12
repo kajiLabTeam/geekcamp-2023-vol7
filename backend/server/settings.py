@@ -7,7 +7,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlmodel import Session, create_engine
 
 EXTRACTED_NODE_LIMIT = 100
-RESPONSE_NODE_LIMIT = 1000
+RESPONSE_NODE_LIMIT = 10
 SEARCH_NODE_LIMIT = 5
 
 
