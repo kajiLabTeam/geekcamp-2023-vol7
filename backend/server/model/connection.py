@@ -1,9 +1,10 @@
 from typing import List, Optional
 
-from model.node import Node
-from settings import get_db_engine, get_db_session
 from sqlalchemy.exc import SQLAlchemyError
 from sqlmodel import Field, Relationship, SQLModel, select
+
+from model.node import Node
+from settings import get_db_engine, get_db_session
 
 
 class Connection(SQLModel, table=True):

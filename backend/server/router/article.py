@@ -1,6 +1,7 @@
+from fastapi import APIRouter, Request
+
 from db.article_db import get_article as db_get_article
 from db.article_db import put_article as db_put_article
-from fastapi import APIRouter, Request
 
 router = APIRouter()
 
