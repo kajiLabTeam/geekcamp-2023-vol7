@@ -117,6 +117,12 @@ function ForceGraphField (props: { width: number, height: number }) {
     setCurrentNodeId(node.id);
   }, [updateConnection, currentNodeId, setCurrentNodeId, setIsDialogOpen]);
 
+  const getNodeColor = useCallback<(node: GraphNode) => string>(node => {
+    if (node.connectIds.length >= node.val) return "#000000";
+    if (node.connectIds.length >= 10) return "#f09713";
+    return "#75BEC2";
+  }, []);
+
   return (
     <ForceGraph2D
       ref={graphRef}
@@ -125,7 +131,7 @@ function ForceGraphField (props: { width: number, height: number }) {
       graphData={graphData}
       backgroundColor="#FFF9F1"
       onNodeClick={onNodeClick}
-      nodeColor={node => node.connectIds.length >= node.val ? "#000000" : "#75BEC2"}
+      nodeColor={getNodeColor}
       nodeCanvasObjectMode={node => node.id === currentNodeId ? "after" : "none"}
       nodeCanvasObject={drawWithLabel}
       linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
