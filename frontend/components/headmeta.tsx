@@ -16,7 +16,7 @@ export default function HeadMeta () {
       <meta property="og:url" content={SITE_URL} />
       <meta property="og:image" content={IMG_URL} />
       <meta property="og:site_name" content={TITLE} />
-      <meta name="twitter:image" content="summary" />
+      <meta name="twitter:card" content="summary" />
     </Head>
   )
 }
