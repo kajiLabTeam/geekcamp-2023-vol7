@@ -54,7 +54,7 @@ export default function Search() {
             if (e.key === "Enter") search();
           }}
         />
-        {suggestions ? (
+        {suggestions.length ? (
           <div className={styles.suggestion}>
             {suggestions.map((suggestion) => (
               <div
@@ -69,7 +69,7 @@ export default function Search() {
           </div>
         ) : (
           <p className={styles.search_title}>
-            始まりのノードを探してみましょう
+            知っている言葉を入力してみましょう
           </p>
         )}
       </div>
