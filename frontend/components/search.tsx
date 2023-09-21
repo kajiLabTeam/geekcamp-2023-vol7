@@ -85,6 +85,7 @@ export default function Search() {
             d="M338.29 338.29L448 448"
           />
         </svg>
+
         <input
           type="text"
           className={styles.input}
@@ -92,21 +93,21 @@ export default function Search() {
           onChange={(e) => setSearchWord(e.target.value)}
           placeholder={"Search"}
         />
-      </div>
 
-      <div className={`${styles.suggestion} ${isOpen ? "" : styles.open}`}>
-        {suggestions.map((suggestion) => (
-          <div
-            className={styles.suggestionItem}
-            key={suggestion.id}
-            onClick={() => {
-              setIsOpen(false);
-              nodeId2NodeConnection(suggestion.id);
-            }}
-          >
-            {suggestion.name}
-          </div>
-        ))}
+        <div className={styles.suggestion}>
+          {suggestions.map((suggestion) => (
+            <div
+              className={styles.suggestionItem}
+              key={suggestion.id}
+              onClick={() => {
+                setIsOpen(false);
+                nodeId2NodeConnection(suggestion.id);
+              }}
+            >
+              {suggestion.name}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

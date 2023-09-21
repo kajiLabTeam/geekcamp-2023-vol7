@@ -30,5 +30,27 @@
       text-align: center;
       outline: 0;
     }
+
+    .suggestion {
+      width: 200px;
+      color: var(--on-primary);
+      background-color: var(--primary);
+      cursor: pointer;
+      transition: all 0.3s;
+      opacity: 1;
+
+      & > div {
+        text-align: center;
+        transition: all 0.3s;
+
+        &:hover {
+          color: var(--accent);
+        }
+      }
+
+      &.open {
+        opacity: 0;
+      }
+    }
   }
 }
