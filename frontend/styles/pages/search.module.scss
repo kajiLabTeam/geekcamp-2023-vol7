@@ -1,0 +1,34 @@
+.search {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--primary);
+  position: relative;
+  z-index: 50;
+
+  .search_box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .image_wrapper {
+      height: 300px;
+    }
+
+    .search_title {
+      color: var(--on-primary);
+      margin-top: 30px;
+      font-size: 1.3rem;
+    }
+
+    .search_input {
+      height: 3rem;
+      width: 300px;
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      outline: 0;
+    }
+  }
+}
