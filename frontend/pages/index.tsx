@@ -6,20 +6,29 @@ import Head from "next/head";
 import Search from "@/components/search";
 import { useEffect, useState } from "react";
 import Loading from "./loading";
+import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
+import { currentNodeIdState } from "@/const/recoil/state";
 
-const Canvas = dynamic(import('@/components/canvas'), {
+const Canvas = dynamic(import("@/components/canvas"), {
   loading: () => <></>,
-  ssr: false
-})
+  ssr: false,
+});
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+  const currentNodeId = useRecoilValue(currentNodeIdState);
 
   useEffect(() => {
     setTimeout(async () => {
-      setIsLoading(false);
+      if (currentNodeId === -1) {
+        router.push("/search");
+      } else {
+        setIsLoading(false);
+      }
     }, 1000);
-  }, []);
+  }, [currentNodeId, router]);
 
   return (
     <>
@@ -35,16 +44,11 @@ export default function Home() {
 
       <>
         <Loading isLoading={isLoading} />
-        <main
-          className={styles.main}
-        >
-          <Dialog
-            forceLoading={isLoading}
-          />
+        <main className={styles.main}>
+          <Dialog forceLoading={isLoading} />
           <Search />
           <Frame />
-          <Canvas />
-
+          {currentNodeId !== -1 && <Canvas />}
         </main>
       </>
     </>
