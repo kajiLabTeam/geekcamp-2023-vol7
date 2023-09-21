@@ -30,10 +30,8 @@ function ForceGraphField (props: { width: number, height: number }) {
   useEffect(() => {
     if (!isFirst.current) return;
     isFirst.current = false;
-    const lastNodeId = Number(window.localStorage.getItem("currentNodeId") ?? currentNodeId);
-    setCurrentNodeId(lastNodeId)
 
-    fetchNodeConnect(lastNodeId)
+    fetchNodeConnect(currentNodeId)
       .then(connectData => {
         if (connectData == null) throw new Error("ノードの読み込みに失敗しました");
         addConnection(connectData);
@@ -45,7 +43,7 @@ function ForceGraphField (props: { width: number, height: number }) {
 
     graphRef.current.d3Force('link')
       ?.distance((link: GraphLink) => Math.min(link.source.connectIds.size, link.target.connectIds.size) * 5 + 30);
-  }, [updateConnection, currentNodeId, addConnection, setCurrentNodeId]);
+  }, [updateConnection, currentNodeId, addConnection]);
 
   useEffect(() => {
     const currentNode = getNode(currentNodeId);
@@ -53,8 +51,6 @@ function ForceGraphField (props: { width: number, height: number }) {
     currentNode.fx = currentNode.x;
     currentNode.fy = currentNode.y;
     graphRef.current.centerAt(currentNode.x, currentNode.y, 1000);
-
-    window.localStorage.setItem("currentNodeId", currentNodeId.toString());
 
     return () => {
       if (currentNode) {

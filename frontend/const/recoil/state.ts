@@ -1,10 +1,14 @@
 import { ArticleObject } from "@/components/util/type";
+import { getLocalStorageNumber, setLocalStorageNumber } from "@/foundations/localStorage";
 import { atom } from "recoil";
 import { recoilKeyHashSet } from "./keys";
 
 export const currentNodeIdState = atom<number>({
   key: recoilKeyHashSet.currentNodeId,
-  default: -1,
+  default: getLocalStorageNumber("currentNodeId") ?? -1,
+  effects: [
+    ({ onSet }) => onSet((value) => setLocalStorageNumber("currentNodeId", value)),
+  ]
 });
 
 export const currentArticleState = atom<ArticleObject>({
