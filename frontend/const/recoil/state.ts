@@ -4,7 +4,7 @@ import { recoilKeyHashSet } from "./keys";
 
 export const currentNodeIdState = atom<number>({
   key: recoilKeyHashSet.currentNodeId,
-  default: 7
+  default: -1,
 });
 
 export const currentArticleState = atom<ArticleObject>({
@@ -20,5 +20,5 @@ export const currentArticleState = atom<ArticleObject>({
 
 export const isDialogOpenState = atom<boolean>({
   key: recoilKeyHashSet.isDialogOpen,
-  default: false
+  default: false,
 });

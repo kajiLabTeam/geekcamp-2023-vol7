@@ -4,10 +4,11 @@ import styles from "@/styles/pages/home.module.scss";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Search from "@/components/search";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Loading from "./loading";
-import { useDidUpdate, useLocalStorage } from "@mantine/hooks";
 import { useRouter } from "next/router";
+import { useRecoilValue } from "recoil";
+import { currentNodeIdState } from "@/const/recoil/state";
 
 const Canvas = dynamic(import("@/components/canvas"), {
   loading: () => <></>,
@@ -16,21 +17,18 @@ const Canvas = dynamic(import("@/components/canvas"), {
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
-  const [isFirst, _] = useLocalStorage({
-    key: "isFirst",
-    defaultValue: true,
-  });
   const router = useRouter();
+  const currentNodeId = useRecoilValue(currentNodeIdState);
 
-  useDidUpdate(() => {
+  useEffect(() => {
     setTimeout(async () => {
-      if (isFirst) {
+      if (currentNodeId === -1) {
         router.push("/search");
       } else {
         setIsLoading(false);
       }
     }, 1000);
-  }, [isFirst, router]);
+  }, [currentNodeId, router]);
 
   return (
     <>
@@ -50,7 +48,7 @@ export default function Home() {
           <Dialog forceLoading={isLoading} />
           <Search />
           <Frame />
-          <Canvas />
+          {currentNodeId !== -1 && <Canvas />}
         </main>
       </>
     </>

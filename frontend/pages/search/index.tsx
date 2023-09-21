@@ -1,11 +1,10 @@
 import styles from "@/styles/pages/search.module.scss";
 import Frame from "@/components/frame";
-import { useLocalStorage } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { fetchSearchWord } from "@/components/util/api";
-import { currentArticleState, currentNodeIdState } from "@/const/recoil/state";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { currentNodeIdState } from "@/const/recoil/state";
+import { useSetRecoilState } from "recoil";
 import { NodeObject } from "@/components/util/type";
 import { useRouter } from "next/router";
 
@@ -13,16 +12,8 @@ export default function Search() {
   const [searchValue, setSearchValue] = useState("");
   const setCurrentId = useSetRecoilState(currentNodeIdState);
   const [suggestions, setSuggestions] = useState<NodeObject[]>([]);
-  const [isFirst, setIsFirst] = useLocalStorage({
-    key: "isFirst",
-    defaultValue: true,
-  });
 
   const router = useRouter();
-
-  useEffect(() => {
-    setIsFirst(false);
-  }, [setIsFirst]);
 
   function jumpToNode(nodeId: number) {
     setCurrentId(nodeId);
@@ -30,7 +21,6 @@ export default function Search() {
   }
 
   async function search() {
-    console.log(searchValue);
     if (searchValue === "") return;
     const res = await fetchSearchWord(searchValue).catch(() => null);
 
