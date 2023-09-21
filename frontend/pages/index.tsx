@@ -4,22 +4,33 @@ import styles from "@/styles/pages/home.module.scss";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import Search from "@/components/search";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Loading from "./loading";
+import { useDidUpdate, useLocalStorage } from "@mantine/hooks";
+import { useRouter } from "next/router";
 
-const Canvas = dynamic(import('@/components/canvas'), {
+const Canvas = dynamic(import("@/components/canvas"), {
   loading: () => <></>,
-  ssr: false
-})
+  ssr: false,
+});
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFirst, _] = useLocalStorage({
+    key: "isFirst",
+    defaultValue: true,
+  });
+  const router = useRouter();
 
-  useEffect(() => {
+  useDidUpdate(() => {
     setTimeout(async () => {
-      setIsLoading(false);
+      if (isFirst) {
+        router.push("/search");
+      } else {
+        setIsLoading(false);
+      }
     }, 1000);
-  }, []);
+  }, [isFirst, router]);
 
   return (
     <>
@@ -35,16 +46,11 @@ export default function Home() {
 
       <>
         <Loading isLoading={isLoading} />
-        <main
-          className={styles.main}
-        >
-          <Dialog
-            forceLoading={isLoading}
-          />
+        <main className={styles.main}>
+          <Dialog forceLoading={isLoading} />
           <Search />
           <Frame />
           <Canvas />
-
         </main>
       </>
     </>
