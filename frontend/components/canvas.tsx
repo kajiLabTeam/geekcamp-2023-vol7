@@ -30,6 +30,7 @@ function ForceGraphField (props: { width: number, height: number }) {
   useEffect(() => {
     if (!isFirst.current) return;
     isFirst.current = false;
+
     fetchNodeConnect(currentNodeId)
       .then(connectData => {
         if (connectData == null) throw new Error("ノードの読み込みに失敗しました");
