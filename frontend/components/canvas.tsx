@@ -136,6 +136,8 @@ function ForceGraphField (props: { width: number, height: number }) {
       nodeCanvasObjectMode={node => node.id === currentNodeId ? "after" : "none"}
       nodeCanvasObject={drawWithLabel}
       linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
+      linkWidth={link => link.source.id === currentNodeId || link.target.id === currentNodeId ? 2 : 1}
+      linkColor={link => link.source.id === currentNodeId || link.target.id === currentNodeId ? "#919191" : "#d8d4ce"}
       linkCanvasObject={drawLinks}
       nodeVisibility={node => !!node.name}
     />
