@@ -44,11 +44,13 @@ for row in cur_read:
         print(f"{row[1]} is collect / node")
 cur_read.execute('SELECT * FROM connection')
 for row in cur_read:
-    # parentがnode_name,childrenがconnect_nodeに存在しない場合のみ書き込み
-    cur_write.execute('SELECT * FROM connection WHERE node_name=?', (row[1],))
+    node_name = row[1]
+    connect_node = row[2]
+    # Check if the combination of node_name and connect_node doesn't already exist in the destination database
+    cur_write.execute('SELECT * FROM connection WHERE node_name=? AND connect_node=?', (node_name, connect_node))
     if cur_write.fetchone() is None:
-        add_db2(row[1],row[2])
-        print(f"{row[1]} is collect / connection")
+        add_db2(node_name, connect_node)
+        print(f"({node_name}, {connect_node}) is copied to the 'connection' table")
 cur_read.execute('SELECT * FROM article')
 for row in cur_read:
     # nodeがnode_nameに存在しない場合のみ書き込み
