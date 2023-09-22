@@ -91,6 +91,9 @@ export default function Search() {
           className={styles.input}
           value={searchWord}
           onChange={(e) => setSearchWord(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") search(searchWord);
+          }}
           placeholder={"Search"}
         />
 
