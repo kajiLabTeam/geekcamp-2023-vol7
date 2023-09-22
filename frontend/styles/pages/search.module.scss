@@ -13,7 +13,12 @@
     align-items: center;
 
     .image_wrapper {
-      height: 300px;
+      height: min(300px, 40vh);
+      
+      .logo {
+        max-width: 100vw;
+        max-height: 80vw;
+      }
     }
 
     .search_title {
