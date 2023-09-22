@@ -107,8 +107,12 @@ def search_node(
                     Connection.get_connection_by_node_id(
                         relation_node.id, extracted_node_limit
                     )
-                    or []
-                ),
+                )
+                if Connection.get_connection_by_node_id(
+                    relation_node.id, extracted_node_limit
+                )
+                is not None
+                else 1,
             }
             for relation_node in relation_nodes
             if relation_nodes is not None
