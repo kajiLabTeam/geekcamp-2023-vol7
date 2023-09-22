@@ -52,6 +52,7 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                     Connection.get_connection_by_node_id(
                         relation_node.id, extracted_node_limit
                     )
+                    or [1]
                 )
                 if Connection.get_connection_by_node_id(
                     relation_node.id, extracted_node_limit
@@ -107,6 +108,7 @@ def search_node(
                     Connection.get_connection_by_node_id(
                         relation_node.id, extracted_node_limit
                     )
+                    or [1]
                 )
                 if Connection.get_connection_by_node_id(
                     relation_node.id, extracted_node_limit
