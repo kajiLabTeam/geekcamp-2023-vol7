@@ -36,8 +36,12 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                 Connection.get_connection_by_node_id(
                     current_node.id, extracted_node_limit
                 )
-                or 0
-            ),
+            )
+            if Connection.get_connection_by_node_id(
+                current_node.id, extracted_node_limit
+            )
+            is not None
+            else 0,
         },
         "relationNode": [
             {
@@ -48,10 +52,15 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                     Connection.get_connection_by_node_id(
                         relation_node.id, extracted_node_limit
                     )
-                    or 0
-                ),
+                )
+                if Connection.get_connection_by_node_id(
+                    relation_node.id, extracted_node_limit
+                )
+                is not None
+                else 0,
             }
-            for relation_node in relation_nodes[:res_node_limit] if relation_nodes is not None
+            for relation_node in relation_nodes[:res_node_limit]
+            if relation_nodes is not None
         ],
     }
 
