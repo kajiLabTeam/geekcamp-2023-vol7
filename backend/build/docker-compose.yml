@@ -7,14 +7,18 @@ services:
       dockerfile: Dockerfile
     platform: linux/x86_64
     ports:
-      - "3308:3306"
+      - "3308:3308"
     expose:
       - 3308
     volumes:
       - ./docker/db/mysqld_charset.cnf:/etc/mysql/conf.d/mysql_charset.cnf
       - ./docker/db/init:/docker-entrypoint-initdb.d
-    env_file:
-      - ../.env
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wisdomtree
+      MYSQL_USER: geek_camp
+      MYSQL_PASSWORD: geek_camp_pass
+      MYSQL_TCP_PORT: 3308
 
   python:
     container_name: Wisdom_Tree_API
