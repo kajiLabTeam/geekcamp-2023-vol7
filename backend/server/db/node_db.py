@@ -41,7 +41,7 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                 current_node.id, extracted_node_limit
             )
             is not None
-            else 0,
+            else 1,
         },
         "relationNode": [
             {
@@ -57,7 +57,7 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                     relation_node.id, extracted_node_limit
                 )
                 is not None
-                else 0,
+                else 1,
             }
             for relation_node in relation_nodes[:res_node_limit]
             if relation_nodes is not None
