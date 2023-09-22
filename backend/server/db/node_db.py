@@ -96,7 +96,7 @@ def search_node(
             "id": current_node.id,
             "name": current_node.node_name,
             "articleId": current_node.article_id,
-            "childNodeNum": len(relation_nodes) if relation_nodes is not None else 0,
+            "childNodeNum": len(relation_nodes) if relation_nodes is not None else 1,
         },
         "relationNode": [
             {
