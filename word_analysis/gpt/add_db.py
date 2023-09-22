@@ -51,6 +51,12 @@ for row in cur_read:
     if cur_write.fetchone() is None:
         add_db2(node_name, connect_node)
         print(f"({node_name}, {connect_node}) is copied to the 'connection' table")
+    
+    cur_write.execute('SELECT * FROM connection WHERE node_name=? AND connect_node=?', (connect_node,node_name))
+    if cur_write.fetchone() is None:
+        add_db2(connect_node,node_name)
+        print(f"({connect_node}, {node_name}) is copied to the 'connection' table")
+
 cur_read.execute('SELECT * FROM article')
 for row in cur_read:
     # nodeがnode_nameに存在しない場合のみ書き込み
