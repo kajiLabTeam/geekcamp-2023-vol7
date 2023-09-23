@@ -5,28 +5,19 @@ import { atom, useRecoilState } from "recoil";
 
 type LinkKey = `${number}=${number}`;
 
-const nodesMapState = atom({
-  key: recoilKeyHashSet.nodesMap,
-  default: new Map<number, GraphNode>(),
-  dangerouslyAllowMutability: true
-});
-
-const linksMapState = atom({
-  key: recoilKeyHashSet.linksMap,
-  default: new Map<LinkKey, GraphLink>(),
-  dangerouslyAllowMutability: true
-});
-
 const graphDataState = atom<GraphData>({
   key: recoilKeyHashSet.graphData,
   default: { nodes: [], links: [] },
   dangerouslyAllowMutability: true
 });
 
+const nodesMap = new Map<number, GraphNode>();
+const labelNodesMap = new Map<number, GraphNode>();
+const linksMap = new Map<LinkKey, GraphLink>();
+const labelLinksMap = new Map<LinkKey, GraphLink>();
+
 export default function useGraphData() {
   const [graphData, setGraphData] = useRecoilState(graphDataState);
-  const [nodesMap] = useRecoilState(nodesMapState);
-  const [linksMap] = useRecoilState(linksMapState);
 
   const addNode = useCallback((nodeObj: NodeObject): GraphNode => {
     const node: GraphNode = {
@@ -53,11 +44,11 @@ export default function useGraphData() {
     };
 
     nodesMap.set(node.id, node);
-    nodesMap.set(labelId, labelNode);
-    linksMap.set(labelLinkKey, labelLink);
+    labelNodesMap.set(labelId, labelNode);
+    labelLinksMap.set(labelLinkKey, labelLink);
 
     return node;
-  }, [linksMap, nodesMap]);
+  }, []);
 
   const deleateNode = useCallback((nodeId: number) => {
     const node = nodesMap.get(nodeId);
@@ -74,9 +65,9 @@ export default function useGraphData() {
     }
 
     nodesMap.delete(nodeId);
-    nodesMap.delete(labelId);
-    linksMap.delete(labelLinkKey);
-  }, [linksMap, nodesMap]);
+    labelNodesMap.delete(labelId);
+    labelLinksMap.delete(labelLinkKey);
+  }, []);
 
   const addConnection = useCallback((connectData: NodeConnectData) => {
     const { currentNode } = connectData;
@@ -98,12 +89,12 @@ export default function useGraphData() {
     }
 
     setGraphData({
-      nodes: [...nodesMap.values()],
-      links: [...linksMap.values()],
+      nodes: [...nodesMap.values(), ...labelNodesMap.values()],
+      links: [...linksMap.values(), ...labelLinksMap.values()],
     });
 
     return nodesMap.get(currentNode.id)!;
-  }, [nodesMap, addNode, setGraphData, linksMap]);
+  }, [addNode, setGraphData]);
 
   const updateConnection = useCallback((connectData: NodeConnectData) => {
     const { currentNode } = connectData;
@@ -117,11 +108,11 @@ export default function useGraphData() {
     }
 
     addConnection(connectData);
-  }, [addConnection, deleateNode, nodesMap]);
+  }, [addConnection, deleateNode]);
 
   const getNode = useCallback((nodeId: number) => (
     nodesMap.get(nodeId)
-  ), [nodesMap]);
+  ), []);
 
   return { graphData, addConnection, updateConnection, getNode };
 }
