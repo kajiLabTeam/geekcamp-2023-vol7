@@ -36,8 +36,12 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                 Connection.get_connection_by_node_id(
                     current_node.id, extracted_node_limit
                 )
-                or 0
-            ),
+            )
+            if Connection.get_connection_by_node_id(
+                current_node.id, extracted_node_limit
+            )
+            is not None
+            else 1,
         },
         "relationNode": [
             {
@@ -48,10 +52,16 @@ def get_node(node_id: int, extracted_node_limit: int, res_node_limit: int):
                     Connection.get_connection_by_node_id(
                         relation_node.id, extracted_node_limit
                     )
-                    or 0
-                ),
+                    or [1]
+                )
+                if Connection.get_connection_by_node_id(
+                    relation_node.id, extracted_node_limit
+                )
+                is not None
+                else 1,
             }
-            for relation_node in relation_nodes[:res_node_limit] if relation_nodes is not None
+            for relation_node in relation_nodes[:res_node_limit]
+            if relation_nodes is not None
         ],
     }
 
@@ -87,7 +97,7 @@ def search_node(
             "id": current_node.id,
             "name": current_node.node_name,
             "articleId": current_node.article_id,
-            "childNodeNum": len(relation_nodes) if relation_nodes is not None else 0,
+            "childNodeNum": len(relation_nodes) if relation_nodes is not None else 1,
         },
         "relationNode": [
             {
@@ -98,8 +108,13 @@ def search_node(
                     Connection.get_connection_by_node_id(
                         relation_node.id, extracted_node_limit
                     )
-                    or []
-                ),
+                    or [1]
+                )
+                if Connection.get_connection_by_node_id(
+                    relation_node.id, extracted_node_limit
+                )
+                is not None
+                else 1,
             }
             for relation_node in relation_nodes
             if relation_nodes is not None

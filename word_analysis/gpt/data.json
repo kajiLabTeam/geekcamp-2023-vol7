@@ -1,0 +1,2857 @@
+[
+    {
+        "parent": "JavaScript",
+        "library": [
+            {
+                "name": "React",
+                "description": "Reactは、Webアプリケーションを構築するために広く使用されるJavaScriptフレームワークです。",
+                "func": [
+                    {
+                        "name": "useState",
+                        "description": "useStateは、コンポーネント内で状態を管理するために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useEffect",
+                        "description": "useEffectは、コンポーネントのレンダリング後に副作用を処理するために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useContext",
+                        "description": "useContextは、コンテキストを使用してコンポーネント間で状態を共有するために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useReducer",
+                        "description": "useReducerは、複雑な状態管理とアクションに使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useCallback",
+                        "description": "useCallbackは、コールバック関数をメモ化してパフォーマンスを向上させるために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useMemo",
+                        "description": "useMemoは、高コストな計算結果をキャッシュしてパフォーマンスを最適化するために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useRef",
+                        "description": "useRefは、DOM要素への参照を取得し、レンダー間の値を保持するために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useImperativeHandle",
+                        "description": "useImperativeHandleは、子コンポーネントのカスタム命令メソッドを親コンポーネントに公開するために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "useLayoutEffect",
+                        "description": "useLayoutEffectは、useEffectと類似していますが、DOMの変更前に同期的に発生するReactフックです。"
+                    },
+                    {
+                        "name": "useDebugValue",
+                        "description": "useDebugValueは、カスタムフックに対してカスタムデバッグ情報を提供するために使用されるReactフックです。"
+                    },
+                    {
+                        "name": "React Router",
+                        "description": "React Routerは、Webアプリケーション内のナビゲーションを管理するために広く使用されるReactのルーティングライブラリです。"
+                    },
+                    {
+                        "name": "cloneElement",
+                        "description": "cloneElementは、指定された要素を起点として新しいReact要素をクローンして返すReact関数です。"
+                    },
+                    {
+                        "name": "createContext",
+                        "description": "createContextは、コンポーネント間で状態を共有するためのコンテキストオブジェクトを作成するために使用されるReact関数です。"
+                    },
+                    {
+                        "name": "createElement",
+                        "description": "createElementは、指定されたタグ名またはコンポーネントを使用して新しいReact要素を作成して返すReact関数です。"
+                    },
+                    {
+                        "name": "createFactory",
+                        "description": "createFactoryは、指定されたコンポーネントを使用して新しいReact要素ファクトリを作成して返すReact関数です。"
+                    }
+                ]
+            },
+            {
+                "name": "Angular",
+                "description": "Angularは、Webアプリケーションを構築するためのJavaScriptフレームワークで、モジュールベースのアーキテクチャやコンポーネント指向の開発をサポートします。",
+                "func": [
+                    {
+                        "name": "NgModule",
+                        "description": "NgModuleデコレータは、Angularモジュールを定義するために使用されます。NgModuleはアプリケーションの機能や構成をカプセル化し、アプリケーション全体を構築するための基本単位です。"
+                    },
+                    {
+                        "name": "Component",
+                        "description": "Componentデコレータは、Angularコンポーネントを定義するために使用されます。コンポーネントはユーザーインターフェースの一部を表し、HTMLテンプレートやロジックをカプセル化します。"
+                    },
+                    {
+                        "name": "Directive",
+                        "description": "Directiveデコレータは、カスタムディレクティブを定義するために使用されます。ディレクティブはHTML要素に対して動的な振る舞いを追加するために使用されます。"
+                    },
+                    {
+                        "name": "Service",
+                        "description": "Serviceデコレータは、Angularサービスを定義するために使用されます。サービスはデータ共有、ロジックの切り出し、非同期通信などのために使用され、コンポーネントから分離されたコードを提供します。"
+                    },
+                    {
+                        "name": "Dependency Injection",
+                        "description": "依存性注入（Dependency Injection）は、Angularでコンポーネントやサービス間の依存関係を管理するための仕組みです。これにより、コンポーネントは必要なサービスを簡単に取得できます。"
+                    },
+                    {
+                        "name": "HttpClient",
+                        "description": "HttpClientは、HTTPリクエストを送信し、受信するためのAngularモジュールです。これにより、サーバーとの通信やAPIの呼び出しが容易に行えます。"
+                    },
+                    {
+                        "name": "ngFor",
+                        "description": "ngForディレクティブは、Angularテンプレート内で繰り返し処理を実行するために使用されます。リストや配列の要素を簡単に表示するのに役立ちます。"
+                    },
+                    {
+                        "name": "ngIf",
+                        "description": "ngIfディレクティブは、Angularテンプレート内で条件に応じて要素を表示または非表示にするために使用されます。条件が真の場合に要素が表示され、偽の場合には非表示になります。"
+                    },
+                    {
+                        "name": "ngModel",
+                        "description": "ngModelディレクティブは、フォームコントロールとデータバインディングを行うために使用されます。フォームの値をコンポーネントのデータと同期させるのに便利です。"
+                    }
+                ]
+            },
+            {
+                "name": "Express",
+                "description": "Express.jsはNode.jsのためのWebアプリケーションフレームワークで、サーバーサイドのアプリケーションやAPIを簡単に構築するために使用されます。",
+                "func": [
+                    {
+                        "name": "express",
+                        "description": "express関数は、Express.jsアプリケーションのインスタンスを生成するために使用されます。これはExpress.jsアプリケーションのエントリーポイントであり、ルーティング、ミドルウェア、リクエストハンドラなどを定義します。"
+                    },
+                    {
+                        "name": "get",
+                        "description": "getメソッドは、HTTP GETリクエストに対するルートのハンドラを定義するために使用されます。指定したパスに対するGETリクエストが到達した際に実行されるコールバック関数を指定します。"
+                    },
+                    {
+                        "name": "post",
+                        "description": "postメソッドは、HTTP POSTリクエストに対するルートのハンドラを定義するために使用されます。指定したパスに対するPOSTリクエストが到達した際に実行されるコールバック関数を指定します。"
+                    },
+                    {
+                        "name": "use",
+                        "description": "useメソッドは、ミドルウェア関数をアプリケーションに適用するために使用されます。ミドルウェアはリクエストの前処理や後処理など、リクエストとレスポンスの中間で実行されるカスタムロジックを提供します。"
+                    },
+                    {
+                        "name": "listen",
+                        "description": "listenメソッドは、Expressアプリケーションを指定したポートでリッスンし、HTTPリクエストを受け付けるために使用されます。アプリケーションがサーバーとして起動する際に使用されます。"
+                    },
+                    {
+                        "name": "Router",
+                        "description": "Routerオブジェクトは、Express.jsアプリケーション内でルーティングを独立して定義するために使用されます。これにより、アプリケーションのルーティングをモジュール化し、コードを整理できます。"
+                    },
+                    {
+                        "name": "Request",
+                        "description": "Requestオブジェクトは、Expressアプリケーション内のHTTPリクエストを表すオブジェクトです。リクエストヘッダー、クエリパラメータ、リクエストボディなどの情報にアクセスできます。"
+                    },
+                    {
+                        "name": "Response",
+                        "description": "Responseオブジェクトは、Expressアプリケーション内のHTTPレスポンスを表すオブジェクトです。レスポンスヘッダー、ステータスコード、レスポンスボディなどの操作に使用されます。"
+                    },
+                    {
+                        "name": "next",
+                        "description": "next関数は、ミドルウェア内で次のミドルウェアまたはルートハンドラを呼び出すために使用されます。ミドルウェアの処理が完了した後、次の処理に制御を渡します。"
+                    },
+                    {
+                        "name": "Middleware",
+                        "description": "ミドルウェアはExpress.jsアプリケーション内のリクエスト処理の中間で実行されるカスタムロジックです。リクエストの前処理や後処理、認証などを実行するために使用されます。"
+                    }
+                ]
+            },
+            {
+                "name": "Next",
+                "description": "Next.jsはReactベースのフレームワークで、サーバーサイドレンダリングや静的サイト生成をサポートし、高パフォーマンスなWebアプリケーションの構築を容易にします。",
+                "func": [
+                    {
+                        "name": "getInitialProps",
+                        "description": "getInitialPropsは、Next.jsコンポーネント内でサーバーサイドレンダリングを実現するための静的メソッドです。データを取得してコンポーネントにプロパティとして注入するために使用されます。"
+                    },
+                    {
+                        "name": "getStaticProps",
+                        "description": "getStaticPropsは、Next.jsで静的サイト生成（SSG）を行うための関数です。ビルド時にデータをフェッチして静的なHTMLページを生成するのに使用されます。"
+                    },
+                    {
+                        "name": "getServerSideProps",
+                        "description": "getServerSidePropsは、Next.jsでサーバーサイドレンダリング（SSR）を行うための関数です。リクエストごとにデータをフェッチし、動的なHTMLを生成します。"
+                    },
+                    {
+                        "name": "Link",
+                        "description": "Linkコンポーネントは、クライアントサイドのページ遷移をサポートするために使用されます。ルーティングのためのリンクを生成し、スムーズなページ遷移を実現します。"
+                    },
+                    {
+                        "name": "useRouter",
+                        "description": "useRouterフックは、現在のルート情報を取得するために使用されます。ルーティングに関する情報やクエリパラメータなどにアクセスするのに役立ちます。"
+                    },
+                    {
+                        "name": "Head",
+                        "description": "Headコンポーネントは、ページごとのヘッダー情報（タイトル、メタタグ、リンクタグなど）を設定するために使用されます。SEO対策などに重要です。"
+                    },
+                    {
+                        "name": "getStaticPaths",
+                        "description": "getStaticPathsは、動的なルートを持つページのために使用されます。Next.jsにどのパスを事前に生成するかを指示し、SSGを実現します。"
+                    },
+                    {
+                        "name": "api/routes",
+                        "description": "apiディレクトリ内のファイルは、Next.js APIルートとして機能します。サーバーレスなAPIエンドポイントを簡単に作成できます。"
+                    },
+                    {
+                        "name": "Image",
+                        "description": "Imageコンポーネントは、画像の最適化とレスポンシブな表示をサポートするために使用されます。画像の読み込みパフォーマンスを向上させます。"
+                    },
+                    {
+                        "name": "useSWR",
+                        "description": "useSWRフックは、データのフェッチとキャッシュを管理するために使用されます。データの取得と更新を簡単に行えます。"
+                    }
+                ]
+            },
+            {
+                "name": "Nuxt",
+                "description": "Nuxt.jsはVue.jsベースのフレームワークで、サーバーサイドレンダリング、静的サイト生成、ルーティングなどをサポートし、高性能なWebアプリケーションを構築できます。",
+                "func": [
+                    {
+                        "name": "asyncData",
+                        "description": "asyncDataメソッドは、Nuxt.jsのページコンポーネント内で非同期データの取得とストアへの注入を行うために使用されます。サーバーサイドレンダリングと一緒に使用されます。"
+                    },
+                    {
+                        "name": "fetch",
+                        "description": "fetchメソッドは、Nuxt.jsのページコンポーネント内で非同期データの取得を行うために使用されます。クライアントサイドでデータを取得する場合に使用されます。"
+                    },
+                    {
+                        "name": "asyncMiddleware",
+                        "description": "asyncMiddlewareは、Nuxt.jsのミドルウェア内で非同期処理を実行するために使用されます。ミドルウェアの前処理やデータの取得に適しています。"
+                    },
+                    {
+                        "name": "layouts",
+                        "description": "layoutsディレクトリは、Nuxt.jsのレイアウトコンポーネントを配置するためのディレクトリです。異なるページに対して共通のレイアウトを適用できます。"
+                    },
+                    {
+                        "name": "pages",
+                        "description": "pagesディレクトリは、Nuxt.jsのルートコンポーネントを配置するためのディレクトリです。ファイル名に基づいて自動的にルーティングが生成されます。"
+                    },
+                    {
+                        "name": "asyncData",
+                        "description": "asyncDataメソッドは、Nuxt.jsのページコンポーネント内で非同期データの取得とストアへの注入を行うために使用されます。サーバーサイドレンダリングと一緒に使用されます。"
+                    },
+                    {
+                        "name": "plugins",
+                        "description": "pluginsディレクトリは、Nuxt.jsのプラグインを配置するためのディレクトリです。サードパーティライブラリの統合やカスタムロジックの追加に使用されます。"
+                    },
+                    {
+                        "name": "nuxtServerInit",
+                        "description": "nuxtServerInitアクションは、Nuxt.jsのストア内でサーバーサイドレンダリング時にデータの初期化を行うために使用されます。ストアへのデータのフェッチやセットアップに便利です。"
+                    },
+                    {
+                        "name": "generate",
+                        "description": "generateコマンドは、Nuxt.jsアプリケーションを静的サイトとして生成するために使用されます。ビルド時にすべてのページを事前に生成します。"
+                    },
+                    {
+                        "name": "layouts",
+                        "description": "layoutsディレクトリは、Nuxt.jsのレイアウトコンポーネントを配置するためのディレクトリです。異なるページに対して共通のレイアウトを適用できます。"
+                    }
+                ]
+            },
+            {
+                "name": "p5.js",
+                "description": "p5.jsはクリエイティブなコーディングとビジュアルアートのためのJavaScriptライブラリで、簡単にグラフィックスや対話的なアプリケーションを作成できます。",
+                "func": [
+                    {
+                        "name": "setup",
+                        "description": "setup関数は、p5.jsスケッチの初期化とセットアップのために使用されます。スケッチの初期設定や一度だけの初期化タスクを実行します。"
+                    },
+                    {
+                        "name": "draw",
+                        "description": "draw関数は、p5.jsスケッチのメインループであり、連続的に実行されます。グラフィックスの描画やアニメーション、対話などのコードはここに配置されます。"
+                    },
+                    {
+                        "name": "createCanvas",
+                        "description": "createCanvas関数は、描画領域を作成し、p5.jsスケッチのキャンバスを指定の幅と高さで生成します。描画の対象となる領域を設定します。"
+                    },
+                    {
+                        "name": "background",
+                        "description": "background関数は、キャンバスの背景色を設定します。描画の前にキャンバス全体をクリアしたり、背景を指定の色で塗りつぶしたりします。"
+                    },
+                    {
+                        "name": "fill",
+                        "description": "fill関数は、図形やテキストの塗りつぶし色を設定します。図形やテキストを描画する前に、塗りつぶしの色を指定します。"
+                    },
+                    {
+                        "name": "stroke",
+                        "description": "stroke関数は、図形やテキストの枠線の色を設定します。図形やテキストに外枠線を描画する場合に使用します。"
+                    },
+                    {
+                        "name": "rect",
+                        "description": "rect関数は、矩形を描画するために使用されます。指定の座標と寸法に基づいて矩形を描画します。"
+                    },
+                    {
+                        "name": "ellipse",
+                        "description": "ellipse関数は、楕円を描画するために使用されます。指定の座標と寸法に基づいて楕円を描画します。"
+                    },
+                    {
+                        "name": "line",
+                        "description": "line関数は、直線を描画するために使用されます。2つの座標点を指定して、直線を描画します。"
+                    },
+                    {
+                        "name": "text",
+                        "description": "text関数は、テキストを描画するために使用されます。指定のテキストと座標に基づいてテキストを描画します。"
+                    },
+                    {
+                        "name": "mouseX",
+                        "description": "mouseXは、マウスポインタのX座標位置を示すp5.js変数です。マウスの現在のX位置にアクセスするのに使用されます。"
+                    },
+                    {
+                        "name": "mouseY",
+                        "description": "mouseYは、マウスポインタのY座標位置を示すp5.js変数です。マウスの現在のY位置にアクセスするのに使用されます。"
+                    },
+                    {
+                        "name": "mousePressed",
+                        "description": "mousePressed関数は、マウスボタンが押されたときに実行されるp5.js関数です。対話的なマウスイベントの処理に使用されます。"
+                    },
+                    {
+                        "name": "keyPressed",
+                        "description": "keyPressed関数は、キーボードのキーが押されたときに実行されるp5.js関数です。キーボードイベントの処理に使用されます。"
+                    }
+                ]
+            },
+            {
+                "name": "jQuery",
+                "description": "jQueryはJavaScriptライブラリで、DOM操作やイベント処理を簡略化し、クロスブラウザの互換性を向上させるために使用されます。",
+                "func": [
+                    {
+                        "name": "$",
+                        "description": "$（またはjQuery）関数は、要素の選択と操作に使用されます。セレクタを指定してDOM要素を選択し、操作やイベントのバインドを行います。"
+                    },
+                    {
+                        "name": "addClass",
+                        "description": "addClassメソッドは、選択した要素にクラスを追加します。要素に新しいクラスを追加してスタイルを変更できます。"
+                    },
+                    {
+                        "name": "removeClass",
+                        "description": "removeClassメソッドは、選択した要素からクラスを削除します。要素からクラスを削除してスタイルを変更できます。"
+                    },
+                    {
+                        "name": "css",
+                        "description": "cssメソッドは、要素のCSSプロパティを設定または取得します。要素のスタイルを変更または取得するために使用されます。"
+                    },
+                    {
+                        "name": "html",
+                        "description": "htmlメソッドは、要素のHTMLコンテンツを設定または取得します。要素のコンテンツを変更または取得するために使用されます。"
+                    },
+                    {
+                        "name": "text",
+                        "description": "textメソッドは、要素のテキストコンテンツを設定または取得します。要素のテキストを変更または取得するために使用されます。"
+                    },
+                    {
+                        "name": "attr",
+                        "description": "attrメソッドは、要素の属性を設定または取得します。要素の属性値を変更または取得するために使用されます。"
+                    },
+                    {
+                        "name": "on",
+                        "description": "onメソッドは、要素にイベントハンドラをバインドします。指定したイベントに対する処理を登録します。"
+                    },
+                    {
+                        "name": "fadeOut",
+                        "description": "fadeOutメソッドは、要素をフェードアウトさせます。アニメーション効果を使用して要素を非表示にします。"
+                    },
+                    {
+                        "name": "fadeIn",
+                        "description": "fadeInメソッドは、要素をフェードインさせます。アニメーション効果を使用して要素を表示します。"
+                    },
+                    {
+                        "name": "ajax",
+                        "description": "ajaxメソッドは、Ajaxリクエストを送信し、サーバーからデータを非同期で取得します。データの送受信や非同期通信に使用されます。"
+                    },
+                    {
+                        "name": "each",
+                        "description": "eachメソッドは、要素のコレクションに対して反復処理を行います。各要素に対して指定した関数を実行します。"
+                    },
+                    {
+                        "name": "animate",
+                        "description": "animateメソッドは、要素のアニメーション効果を制御します。CSSプロパティをアニメーションさせて要素を動かすことができます。"
+                    },
+                    {
+                        "name": "ajax",
+                        "description": "ajaxメソッドは、Ajaxリクエストを送信し、サーバーからデータを非同期で取得します。データの送受信や非同期通信に使用されます。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "parent": "React",
+        "library": [
+            {
+                "name": "Redux",
+                "description": "Reduxは、JavaScriptの状態管理ライブラリで、アプリケーション全体の状態を一元管理するために使用されます。",
+                "func": [
+                    {
+                        "name": "createStore",
+                        "description": "createStoreは、Reduxストアを作成するための関数です。ストアはアプリケーションの状態を保持し、アクションに応じて状態を更新します。"
+                    },
+                    {
+                        "name": "combineReducers",
+                        "description": "combineReducersは、複数のリデューサー（Reducer）を結合し、単一のルートリデューサーを作成するための関数です。アプリケーションの状態が複数のサブ状態に分割される場合に便利です。"
+                    },
+                    {
+                        "name": " applyMiddleware",
+                        "description": "applyMiddlewareは、Reduxミドルウェアを適用するための関数です。ミドルウェアはアクションのディスパッチとリデューサーの間でカスタムのロジックを挿入するのに使用されます。"
+                    },
+                    {
+                        "name": "connect",
+                        "description": "connectは、ReactコンポーネントをReduxストアに接続するための高階コンポーネントです。これにより、コンポーネントはストアの状態にアクセスし、アクションをディスパッチできます。"
+                    },
+                    {
+                        "name": "Provider",
+                        "description": "Providerは、Reactアプリケーション内のすべてのコンポーネントにReduxストアを提供するためのコンポーネントです。これにより、アプリケーション全体で状態にアクセスできます。"
+                    },
+                    {
+                        "name": "dispatch",
+                        "description": "dispatchは、Reduxストアでアクションをディスパッチするためのメソッドです。アクションをディスパッチすることで、状態の変更がトリガーされます。"
+                    },
+                    {
+                        "name": "getState",
+                        "description": "getStateは、Reduxストアから現在の状態を取得するためのメソッドです。現在のアプリケーション状態にアクセスするのに使用されます。"
+                    },
+                    {
+                        "name": "subscribe",
+                        "description": "subscribeは、Reduxストアの状態変更を監視するためのメソッドです。コールバック関数を提供して、状態変更時に通知を受けることができます。"
+                    }
+                ]
+            },
+            {
+                "name": "Axios",
+                "description": "AxiosはJavaScriptのHTTPクライアントライブラリで、ブラウザとNode.jsの両方でHTTPリクエストを行うために使用されます。",
+                "func": [
+                    {
+                        "name": "axios.get",
+                        "description": "GETリクエストを送信し、指定したURLからデータを取得します。"
+                    },
+                    {
+                        "name": "axios.post",
+                        "description": "POSTリクエストを送信し、指定したURLにデータを送信します。"
+                    },
+                    {
+                        "name": "axios.put",
+                        "description": "PUTリクエストを送信し、指定したURLにデータを更新します。"
+                    },
+                    {
+                        "name": "axios.delete",
+                        "description": "DELETEリクエストを送信し、指定したURLからデータを削除します。"
+                    },
+                    {
+                        "name": "axios.request",
+                        "description": "カスタムHTTPリクエストを送信するための一般的なメソッドです。HTTPメソッド、URL、データなどを指定できます。"
+                    },
+                    {
+                        "name": "axios.interceptors",
+                        "description": "リクエストやレスポンスに対するインターセプターを設定します。リクエストやレスポンスの前後で処理を追加できます。"
+                    },
+                    {
+                        "name": "axios.create",
+                        "description": "カスタムのAxiosインスタンスを作成します。異なる設定やヘッダーを持つ複数のインスタンスを作成できます。"
+                    },
+                    {
+                        "name": "axios.defaults",
+                        "description": "Axiosのデフォルト設定を設定または取得します。リクエストのデフォルトヘッダーやタイムアウトなどを指定できます。"
+                    },
+                    {
+                        "name": "axios.all",
+                        "description": "複数のAxiosリクエストを並行して送信し、すべてのリクエストが完了するのを待つためのメソッドです。"
+                    },
+                    {
+                        "name": "axios.spread",
+                        "description": "axios.allで複数のリクエストを送信した後、各リクエストの結果を配列として受け取ります。"
+                    }
+                ]
+            },
+            {
+                "name": "React Router",
+                "description": "React RouterはReactアプリケーションのためのルーティングライブラリで、ページ遷移とURLの管理を容易にします。",
+                "func": [
+                    {
+                        "name": "BrowserRouter",
+                        "description": "BrowserRouterはReact Routerのコンポーネントで、HTML5の履歴APIを使用してルーティングを設定します。"
+                    },
+                    {
+                        "name": "Route",
+                        "description": "Routeコンポーネントは特定のパスに対応するコンポーネントを指定し、URLとコンポーネントを関連付けます。"
+                    },
+                    {
+                        "name": "Link",
+                        "description": "Linkコンポーネントは、アプリ内の異なるルートに移動するためのハイパーリンクを提供します。"
+                    },
+                    {
+                        "name": "Switch",
+                        "description": "Switchコンポーネントは、最初に一致したルートのコンポーネントのみを表示するために使用されます。"
+                    },
+                    {
+                        "name": "Redirect",
+                        "description": "Redirectコンポーネントは、指定されたパスへのリダイレクトを実行します。"
+                    },
+                    {
+                        "name": "useHistory",
+                        "description": "useHistoryカスタムフックは、プログラムからルーティング履歴を制御するために使用されます。"
+                    },
+                    {
+                        "name": "useParams",
+                        "description": "useParamsカスタムフックは、ルートのパラメーターを抽出するために使用されます。"
+                    },
+                    {
+                        "name": "useRouteMatch",
+                        "description": "useRouteMatchカスタムフックは、現在のルートに一致するかどうかをチェックするために使用されます。"
+                    },
+                    {
+                        "name": "RouteConfig",
+                        "description": "RouteConfigは、ルート構成の定義を簡素化し、プログラム内で再利用可能なルート設定を定義するのに使用されます。"
+                    },
+                    {
+                        "name": "withRouter",
+                        "description": "withRouterは、ルーターの情報（履歴、ロケーションなど）をコンポーネントに注入するために使用されます。"
+                    }
+                ]
+            },
+            {
+                "name": "Styled-components",
+                "description": "Styled-componentsはReactアプリケーションでのコンポーネントスタイリングを効率的に行うためのライブラリで、CSSをJavaScriptのコード内に埋め込むことができます。",
+                "func": [
+                    {
+                        "name": "styled",
+                        "description": "styled関数は、新しいスタイル化されたコンポーネントを作成するために使用されます。通常、テンプレートリテラルと組み合わせて使用されます。"
+                    },
+                    {
+                        "name": "css",
+                        "description": "css関数は、スタイル定義を再利用可能なコンポーネントとしてエクスポートするために使用されます。"
+                    },
+                    {
+                        "name": "createGlobalStyle",
+                        "description": "createGlobalStyle関数は、グローバルなCSSスタイルを作成し、アプリケーション全体に適用します。"
+                    },
+                    {
+                        "name": "keyframes",
+                        "description": "keyframes関数は、アニメーションキーフレームを定義し、アニメーションを作成するために使用されます。"
+                    },
+                    {
+                        "name": "ThemeProvider",
+                        "description": "ThemeProviderコンポーネントは、テーマをアプリケーションに提供し、スタイルの設定と切り替えを容易にします。"
+                    },
+                    {
+                        "name": "css prop",
+                        "description": "styled-componentsでは、スタイルを適用するためにコンポーネントにcss propを追加できます。これにより、動的なスタイリングが可能になります。"
+                    }
+                ]
+            },
+            {
+                "name": "Material-UI",
+                "description": "Material-UIはReactベースのユーザーインターフェース（UI）コンポーネントライブラリで、GoogleのMaterial Designガイドラインに従った美しいUI要素を提供します。",
+                "func": [
+                    {
+                        "name": "ThemeProvider",
+                        "description": "ThemeProviderコンポーネントは、アプリケーションのテーマを提供し、スタイリングを制御します。"
+                    },
+                    {
+                        "name": "createTheme",
+                        "description": "createTheme関数は、カスタムのテーマオブジェクトを作成し、コンポーネントのスタイルを定義します。"
+                    },
+                    {
+                        "name": "AppBar",
+                        "description": "AppBarコンポーネントは、アプリケーションの上部にナビゲーションバーやアプリケーションバーを表示します。"
+                    },
+                    {
+                        "name": "Button",
+                        "description": "Buttonコンポーネントは、クリック可能なボタンを表示します。様々なスタイルやアクションを提供します。"
+                    },
+                    {
+                        "name": "TextField",
+                        "description": "TextFieldコンポーネントは、テキスト入力フィールドを提供し、ユーザーからのテキスト入力を受け付けます。"
+                    },
+                    {
+                        "name": "Typography",
+                        "description": "Typographyコンポーネントは、テキストのスタイリングを制御し、異なるテキストスタイルを適用します。"
+                    },
+                    {
+                        "name": "Icon",
+                        "description": "Iconコンポーネントは、アイコンを表示し、アプリケーションにアイコングラフィックスを組み込みます。"
+                    },
+                    {
+                        "name": "Snackbar",
+                        "description": "Snackbarコンポーネントは、通知メッセージを表示するための小さなトーストウィンドウを提供します。"
+                    },
+                    {
+                        "name": "Drawer",
+                        "description": "Drawerコンポーネントは、サイドバーメニューやモバイルナビゲーションを表示するためのスライドインメニューを提供します。"
+                    },
+                    {
+                        "name": "Dialog",
+                        "description": "Dialogコンポーネントは、モーダルダイアログを表示し、ユーザーに情報やアクションの確認を求めます。"
+                    }
+                ]
+            },
+            {
+                "name": "Formik",
+                "description": "FormikはReactアプリケーションでフォームを簡単に管理し、フォームの状態、バリデーション、送信処理を効率的に扱うためのライブラリです。",
+                "func": [
+                    {
+                        "name": "Formik",
+                        "description": "Formikコンポーネントは、フォームの状態管理とフォーム操作のためのコンテキストを提供します。"
+                    },
+                    {
+                        "name": "Field",
+                        "description": "Fieldコンポーネントは、フォーム内の特定のフィールド（入力、セレクト、ラジオボタンなど）を扱うために使用されます。"
+                    },
+                    {
+                        "name": "ErrorMessage",
+                        "description": "ErrorMessageコンポーネントは、フィールドのバリデーションエラーメッセージを表示するために使用されます。"
+                    },
+                    {
+                        "name": "Form",
+                        "description": "Formコンポーネントは、フォーム全体のタグをラップし、送信イベントを制御します。"
+                    },
+                    {
+                        "name": "useFormik",
+                        "description": "useFormikカスタムフックは、フォームのロジックを関数コンポーネント内で共有するために使用されます。"
+                    },
+                    {
+                        "name": "withFormik",
+                        "description": "withFormik高次コンポーネントは、フォームのロジックをクラスコンポーネント内で共有するために使用されます。"
+                    },
+                    {
+                        "name": "FormikProvider",
+                        "description": "FormikProviderコンポーネントは、Formikコンテキストを提供し、フォーム内のコンポーネントがアクセスできるようにします。"
+                    },
+                    {
+                        "name": "isValid",
+                        "description": "isValid関数は、フォームのバリデーション状態を確認し、フォームがバリデーションを通過したかどうかをチェックします。"
+                    },
+                    {
+                        "name": "resetForm",
+                        "description": "resetForm関数は、フォームの値と状態をリセットし、フォームを初期状態に戻します。"
+                    },
+                    {
+                        "name": "submitForm",
+                        "description": "submitForm関数は、フォームの送信処理を手動でトリガーします。通常、フォームの送信ボタンと連動します。"
+                    }
+                ]
+            },
+            {
+                "name": "Yup",
+                "description": "YupはJavaScriptのオブジェクトスキーマバリデーションライブラリで、オブジェクトの検証とエラーメッセージの生成を行います。",
+                "func": [
+                    {
+                        "name": "string",
+                        "description": "string関数は、文字列のバリデーションを行うための関数です。文字列の長さや形式をチェックします。"
+                    },
+                    {
+                        "name": "number",
+                        "description": "number関数は、数値のバリデーションを行うための関数です。数値の範囲や形式をチェックします。"
+                    },
+                    {
+                        "name": "boolean",
+                        "description": "boolean関数は、真偽値のバリデーションを行うための関数です。真偽値の形式をチェックします。"
+                    },
+                    {
+                        "name": "date",
+                        "description": "date関数は、日付のバリデーションを行うための関数です。日付の形式をチェックします。"
+                    },
+                    {
+                        "name": "array",
+                        "description": "array関数は、配列のバリデーションを行うための関数です。配列の長さや要素の形式をチェックします。"
+                    },
+                    {
+                        "name": "object",
+                        "description": "object関数は、オブジェクトのバリデーションを行うための関数です。オブジェクトのプロパティや形式をチェックします。"
+                    },
+                    {
+                        "name": "mixed",
+                        "description": "mixed関数は、任意の型のバリデーションを行うための関数です。任意の型の形式をチェックします。"
+                    },
+                    {
+                        "name": "required",
+                        "description": "required関数は、値が必須であることをチェックします。値がnull、undefined、空文字列、空配列の場合にエラーを返します。"
+                    },
+                    {
+                        "name": "min",
+                        "description": "min関数は、値の最小値をチェックします。値が指定した最小値より小さい場合にエラーを返します。"
+                    },
+                    {
+                        "name": "max",
+                        "description": "max関数は、値の最大値をチェックします。値が指定した最大値より大きい場合にエラーを返します。"
+                    },
+                    {
+                        "name": "matches",
+                        "description": "matches関数は、正規表現に一致するかどうかをチェックします。値が指定した正規表現に一致しない場合にエラーを返します。"
+                    },
+                    {
+                        "name": "email",
+                        "description": "email関数は、メールアドレスの形式をチェックします。値がメールアドレスの形式でない場合にエラーを返します。"
+                    },
+                    {
+                        "name": "url",
+                        "description": "url関数は、URLの形式をチェックします。値がURLの形式でない場合にエラーを返します。"
+                    },
+                    {
+                        "name": "minLength",
+                        "description": "minLength関数は、文字列の最小長をチェックします。文字列の長さが指定した最小長より短い場合にエラーを返します。"
+                    },
+                    {
+                        "name": "maxLength",
+                        "description": "maxLength関数は、文字列の最大長をチェックします。文字列の長さが指定した最大長より長い場合にエラーを返します。"
+                    },
+                    {
+                        "name": "oneOf",
+                        "description": "oneOf関数は、指定した値のいずれかであることをチェックします。値が指定した値のいずれでもない場合にエラーを返します。"
+                    }
+                ]
+            },
+            {
+                "name": "React Query",
+                "description": "React QueryはReactアプリケーション内でデータの取得、キャッシュ、更新、削除などのデータ管理を効率的に行うためのライブラリです。",
+                "func": [
+                    {
+                        "name": "useQuery",
+                        "description": "useQueryカスタムフックは、データの取得とキャッシュを処理し、データをコンポーネントに提供します。"
+                    },
+                    {
+                        "name": "useMutation",
+                        "description": "useMutationカスタムフックは、データの更新や削除などの変更操作を処理し、変更結果を反映します。"
+                    },
+                    {
+                        "name": "useQueryClient",
+                        "description": "useQueryClientカスタムフックは、クエリクライアントインスタンスにアクセスし、クエリの操作を実行します。"
+                    },
+                    {
+                        "name": "queryCache",
+                        "description": "queryCacheオブジェクトは、クエリのキャッシュと削除を管理します。"
+                    },
+                    {
+                        "name": "ReactQueryProvider",
+                        "description": "ReactQueryProviderコンポーネントは、React Queryの設定とクエリクライアントを提供し、アプリケーション全体でデータ管理を可能にします。"
+                    },
+                    {
+                        "name": "useInfiniteQuery",
+                        "description": "useInfiniteQueryカスタムフックは、無限スクロールなどのページネーションをサポートし、大量のデータを取得します。"
+                    },
+                    {
+                        "name": "useQueryErrorResetBoundary",
+                        "description": "useQueryErrorResetBoundaryカスタムフックは、エラーメッセージをリセットし、エラーのハンドリングをサポートします。"
+                    },
+                    {
+                        "name": "usePaginatedQuery",
+                        "description": "usePaginatedQueryカスタムフックは、ページネーションをサポートし、データをページごとに取得します。"
+                    },
+                    {
+                        "name": "queryKey",
+                        "description": "queryKeyユーティリティは、クエリキーを作成および操作するためのヘルパー関数です。"
+                    },
+                    {
+                        "name": "invalidateQueries",
+                        "description": "invalidateQueries関数は、指定したクエリまたはクエリキーを無効化し、キャッシュをクリアします。"
+                    }
+                ]
+            },
+            {
+                "name": "React Helmet",
+                "description": "React HelmetはReactアプリケーション内でヘッド要素（`<head>`）の内容を動的に変更するためのライブラリです。",
+                "func": [
+                    {
+                        "name": "Helmet",
+                        "description": "Helmetコンポーネントはヘッド要素内のメタ情報、タイトル、スクリプトなどを設定するために使用されます。"
+                    },
+                    {
+                        "name": "title",
+                        "description": "title関数はページのタイトルを設定します。"
+                    },
+                    {
+                        "name": "meta",
+                        "description": "meta関数はメタタグを設定します。属性（name、property、httpEquivなど）とコンテンツを指定できます。"
+                    },
+                    {
+                        "name": "link",
+                        "description": "link関数は外部スタイルシートやファビコンを設定します。"
+                    },
+                    {
+                        "name": "script",
+                        "description": "script関数は外部スクリプトファイルやインラインスクリプトを設定します。"
+                    },
+                    {
+                        "name": "noscript",
+                        "description": "noscript関数はJavaScriptが無効な場合に表示する代替コンテンツを設定します。"
+                    },
+                    {
+                        "name": "base",
+                        "description": "base関数はベースURLを設定します。通常、相対URLを絶対URLに変換するために使用されます。"
+                    },
+                    {
+                        "name": "style",
+                        "description": "style関数はインラインスタイルを設定します。CSSを文字列として指定できます。"
+                    },
+                    {
+                        "name": "HelmetProvider",
+                        "description": "HelmetProviderコンポーネントはHelmetコンポーネントの設定をアプリケーション全体で提供します。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "parent": "next",
+        "library": [
+            {
+                "name": "React",
+                "description": "Reactは、JavaScriptのUIライブラリで、ユーザーインターフェース（UI）を構築するために使用されます。"
+            },
+            {
+                "name": "React Router",
+                "description": "React RouterはReactアプリケーションのためのルーティングライブラリで、ページ遷移とURLの管理を容易にします。"
+            },
+            {
+                "name": "Styled-components",
+                "description": "Styled-componentsはReactアプリケーションでのコンポーネントスタイリングを効率的に行うためのライブラリで、CSSをJavaScriptのコード内に埋め込むことができます。"
+            },
+            {
+                "name": "Redux",
+                "description": "Reduxは、JavaScriptの状態管理ライブラリで、アプリケーション全体の状態を一元管理するために使用されます。"
+            },
+            {
+                "name": "Axios",
+                "description": "AxiosはJavaScriptのHTTPクライアントライブラリで、ブラウザとNode.jsの両方でHTTPリクエストを行うために使用されます。"
+            },
+            {
+                "name": "NextAuth.js",
+                "description": "NextAuth.jsはNext.jsアプリケーションで認証とセッション管理を簡単に実装するためのライブラリです。",
+                "func": [
+                    {
+                        "name": "NextAuth",
+                        "description": "NextAuth関数は認証プロバイダーの設定とオプションを提供し、認証の設定とカスタマイズを行います。"
+                    },
+                    {
+                        "name": "useSession",
+                        "description": "useSessionカスタムフックは認証されたユーザーのセッション情報を取得し、コンポーネント内で使用できるようにします。"
+                    },
+                    {
+                        "name": "getSession",
+                        "description": "getSession関数はサーバーサイドコード内でセッション情報を取得します。"
+                    },
+                    {
+                        "name": "getProviders",
+                        "description": "getProviders関数は使用可能な認証プロバイダーのリストを取得します。"
+                    },
+                    {
+                        "name": "signOut",
+                        "description": "signOut関数はユーザーをサインアウトし、セッションを無効にします。"
+                    },
+                    {
+                        "name": "signIn",
+                        "description": "signIn関数はユーザーをサインインし、認証プロバイダーを使用して認証を行います。"
+                    },
+                    {
+                        "name": "useUser",
+                        "description": "useUserカスタムフックは認証されたユーザーの情報を取得し、コンポーネント内で使用できるようにします。"
+                    }
+                ]
+            },
+            {
+                "name": "GraphQL",
+                "description": "GraphQLはクライアントとサーバー間でデータを効率的に取得および操作するためのクエリ言語および実行エンジンです。",
+                "func": [
+                    {
+                        "name": "Query",
+                        "description": "QueryはGraphQLスキーマで定義されたデータを取得するためのクエリ操作です。"
+                    },
+                    {
+                        "name": "Mutation",
+                        "description": "Mutationはデータの変更、作成、削除などを行うためのクエリ操作です。"
+                    },
+                    {
+                        "name": "Schema",
+                        "description": "SchemaはGraphQLサーバーで利用可能なデータ型と操作を定義します。"
+                    },
+                    {
+                        "name": "Resolver",
+                        "description": "Resolverはクエリやミューテーションの実際のデータ取得または操作の処理を行う関数です。"
+                    },
+                    {
+                        "name": "Type",
+                        "description": "TypeはGraphQLスキーマで使用されるデータ型を定義します。例: String、Int、CustomTypeなど。"
+                    },
+                    {
+                        "name": "Directive",
+                        "description": "DirectiveはGraphQLスキーマに対して動的な機能や振る舞いを追加するための注釈です。例: @deprecated、@authなど。"
+                    },
+                    {
+                        "name": "Subscription",
+                        "description": "Subscriptionはリアルタイムデータ更新をサポートし、クライアントに対してデータの変更をプッシュします。"
+                    },
+                    {
+                        "name": "Introspection",
+                        "description": "IntrospectionはGraphQLスキーマを自己説明的にするための機能で、クライアントがスキーマを探索できるようにします。"
+                    },
+                    {
+                        "name": "Apollo Client",
+                        "description": "Apollo ClientはGraphQLクエリを実行するためのクライアントライブラリで、ReactやAngularなどのフレームワークと統合できます。"
+                    },
+                    {
+                        "name": "GraphQL Playground",
+                        "description": "GraphQL PlaygroundはGraphQLクエリの実行とデバッグを支援するWebベースのIDEです。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "parent": "Angular",
+        "library": [
+            {
+                "name": "Angular Material",
+                "description": "Angular MaterialはAngularフレームワーク向けのユーザーインターフェース（UI）コンポーネントライブラリで、Material Designガイドラインに従った美しいUI要素を提供します。",
+                "func": [
+                    {
+                        "name": "MatButtonModule",
+                        "description": "MatButtonModuleはボタンコンポーネントを提供し、ユーザーのアクションをトリガーするために使用します。"
+                    },
+                    {
+                        "name": "MatInputModule",
+                        "description": "MatInputModuleはテキスト入力フィールドを提供し、ユーザーからのテキスト入力を受け付けます。"
+                    },
+                    {
+                        "name": "MatCheckboxModule",
+                        "description": "MatCheckboxModuleはチェックボックスコンポーネントを提供し、ユーザーがオプションを選択できるようにします。"
+                    },
+                    {
+                        "name": "MatRadioModule",
+                        "description": "MatRadioModuleはラジオボタンコンポーネントを提供し、ユーザーが選択肢から1つを選択できるようにします。"
+                    },
+                    {
+                        "name": "MatSelectModule",
+                        "description": "MatSelectModuleはドロップダウンメニュー（セレクトボックス）コンポーネントを提供し、オプションの選択を可能にします。"
+                    },
+                    {
+                        "name": "MatTabsModule",
+                        "description": "MatTabsModuleはタブコンポーネントを提供し、コンテンツをタブで切り替えるために使用します。"
+                    },
+                    {
+                        "name": "MatDialogModule",
+                        "description": "MatDialogModuleはモーダルダイアログコンポーネントを提供し、ユーザーに情報やアクションの確認を求めます。"
+                    },
+                    {
+                        "name": "MatSnackBarModule",
+                        "description": "MatSnackBarModuleはトースト通知コンポーネントを提供し、一時的なメッセージを表示します。"
+                    },
+                    {
+                        "name": "MatDatepickerModule",
+                        "description": "MatDatepickerModuleは日付ピッカーコンポーネントを提供し、日付の選択を容易にします。"
+                    },
+                    {
+                        "name": "MatIconModule",
+                        "description": "MatIconModuleはアイコンコンポーネントを提供し、アイコングラフィックスを表示します。"
+                    },
+                    {
+                        "name": "MatToolbarModule",
+                        "description": "MatToolbarModuleはツールバーコンポーネントを提供し、アプリケーションの上部にナビゲーションバーやアクションバーを表示します。"
+                    }
+                ]
+            },
+            {
+                "name": "RxJS",
+                "description": "RxJSはJavaScriptアプリケーションで非同期プログラムを構築するためのライブラリで、リアクティブプログラミングの原則に基づいています。",
+                "func": [
+                    {
+                        "name": "Observable",
+                        "description": "Observableは非同期データストリームを表すオブジェクトで、時間の経過とともに値を生成します。"
+                    },
+                    {
+                        "name": "Observer",
+                        "description": "ObserverはObservableからの通知を受け取るオブジェクトで、next、error、completeのコールバック関数を提供します。"
+                    },
+                    {
+                        "name": "Subject",
+                        "description": "SubjectはObservableとObserverの役割を組み合わせたオブジェクトで、データの発行と購読を同時に行います。"
+                    },
+                    {
+                        "name": "Operators",
+                        "description": "OperatorsはObservableのデータを変換、フィルタリング、結合などの操作を行うための関数です。例: map、filter、mergeMapなど。"
+                    },
+                    {
+                        "name": "Subscription",
+                        "description": "SubscriptionはObservableの購読を管理し、unsubscribeメソッドを介してリソースリークを防ぎます。"
+                    },
+                    {
+                        "name": "Schedulers",
+                        "description": "Schedulersは非同期処理のスケジューリングと制御を提供し、時間に関連する操作を管理します。"
+                    },
+                    {
+                        "name": "Cold Observables",
+                        "description": "Cold Observablesは新しい購読ごとにデータを再生するObservableです。"
+                    },
+                    {
+                        "name": "Hot Observables",
+                        "description": "Hot Observablesは既存のデータストリームを共有し、複数の購読者にデータを配信します。"
+                    },
+                    {
+                        "name": "BehaviorSubject",
+                        "description": "BehaviorSubjectは最新の値を保持し、新しい購読者に最後の値を送信するSubjectの一種です。"
+                    },
+                    {
+                        "name": "ReplaySubject",
+                        "description": "ReplaySubjectは過去の値を新しい購読者に再生し、一定数の過去の値を保持します。"
+                    }
+                ]
+            },
+            {
+                "name": "NgRx",
+                "description": "NgRxはAngularアプリケーションの状態管理を行うためのライブラリで、Reduxアーキテクチャをベースにしています。",
+                "func": [
+                    {
+                        "name": "@ngrx/store",
+                        "description": "@ngrx/storeはアプリケーションの状態（State）を管理し、状態の変更とセレクターを提供します。"
+                    },
+                    {
+                        "name": "@ngrx/effects",
+                        "description": "@ngrx/effectsは副作用を処理し、非同期操作と相互作用を制御するエフェクトを提供します。"
+                    },
+                    {
+                        "name": "@ngrx/entity",
+                        "description": "@ngrx/entityはエンティティの状態管理を支援し、エンティティの追加、更新、削除を簡略化します。"
+                    },
+                    {
+                        "name": "Actions",
+                        "description": "Actionsはアプリケーション内で発生するアクション（イベント）を定義し、Reduxストアにディスパッチされます。"
+                    },
+                    {
+                        "name": "Reducer",
+                        "description": "Reducerはアクションに基づいて状態を変更し、新しい状態を生成する純粋な関数です。"
+                    },
+                    {
+                        "name": "Selector",
+                        "description": "Selectorはストア内の状態を選択し、必要なデータを取得するための関数です。"
+                    },
+                    {
+                        "name": "StoreDevtoolsModule",
+                        "description": "StoreDevtoolsModuleは開発者ツールと統合し、アプリケーションの状態をデバッグおよびモニタリングするためのモジュールです。"
+                    },
+                    {
+                        "name": "createAction",
+                        "description": "createActionはアクションクリエーターを生成し、型安全なアクションを定義するためのヘルパー関数です。"
+                    },
+                    {
+                        "name": "createReducer",
+                        "description": "createReducerはReducerを生成し、アクションに対する状態の変更ロジックを定義するためのヘルパー関数です。"
+                    },
+                    {
+                        "name": "createFeatureSelector",
+                        "description": "createFeatureSelectorはフィーチャーモジュール内の状態を選択するためのセレクターを生成します。"
+                    }
+                ]
+            },
+            {
+                "name": "Angular Universal",
+                "description": "Angular UniversalはAngularフレームワークを使用してサーバーサイドレンダリング（SSR）を実現するためのライブラリです。",
+                "func": [
+                    {
+                        "name": "ServerModule",
+                        "description": "ServerModuleはAngular Universalのエントリーポイントで、サーバーサイドアプリケーションの設定を行います。"
+                    },
+                    {
+                        "name": "platformServer",
+                        "description": "platformServerはAngular Universalアプリケーションのプラットフォームをセットアップする関数です。"
+                    },
+                    {
+                        "name": "renderModuleFactory",
+                        "description": "renderModuleFactoryはAngular Universalのモジュールファクトリーを使用してHTMLを生成し、サーバーサイドで初期レンダリングを実行します。"
+                    },
+                    {
+                        "name": "TransferState",
+                        "description": "TransferStateはサーバーとクライアント間で状態を転送するための機能を提供します。"
+                    },
+                    {
+                        "name": "StateTransferService",
+                        "description": "StateTransferServiceは状態の転送と管理を行うためのサービスです。"
+                    },
+                    {
+                        "name": "Domino",
+                        "description": "DominoはサーバーサイドでDOM操作をシミュレートするためのライブラリで、ブラウザ特有の機能を提供します。"
+                    },
+                    {
+                        "name": "preboot",
+                        "description": "prebootはAngular Universalと組み合わせてクライアントサイドのイベントをキャプチャし、初期レンダリング中のユーザーインタラクションを記録します。"
+                    }
+                ]
+            },
+            {
+                "name": "Angular Router",
+                "description": "Angular RouterはAngularアプリケーション内でルーティングを管理し、異なるビューとコンポーネントを表示するためのライブラリです。",
+                "func": [
+                    {
+                        "name": "RouterModule",
+                        "description": "RouterModuleはルーティング機能を有効にするためのAngularモジュールで、アプリケーションにルーターを統合します。"
+                    },
+                    {
+                        "name": "Routes",
+                        "description": "Routesはルートの定義を含む配列で、ルートパスと関連するコンポーネントをマッピングします。"
+                    },
+                    {
+                        "name": "RouterOutlet",
+                        "description": "RouterOutletはルートコンポーネントを表示するためのディレクティブで、ルーターがビューを描画します。"
+                    },
+                    {
+                        "name": "RouterLink",
+                        "description": "RouterLinkはルートへのナビゲーションを行うためのディレクティブで、クリック時にルートを変更します。"
+                    },
+                    {
+                        "name": "ActivatedRoute",
+                        "description": "ActivatedRouteは現在のルートに関する情報を提供し、パラメータやデータへのアクセスを可能にします。"
+                    },
+                    {
+                        "name": "Router",
+                        "description": "Routerはルーティング操作を制御し、ナビゲーションやルートの変更を実行するサービスです。"
+                    },
+                    {
+                        "name": "CanActivate",
+                        "description": "CanActivateはルートにアクセスする前に実行されるガードで、アクセス権限を制御します。"
+                    },
+                    {
+                        "name": "CanDeactivate",
+                        "description": "CanDeactivateはルートから離れる前に実行されるガードで、変更の確認や保存を行うために使用されます。"
+                    },
+                    {
+                        "name": "Route Guards",
+                        "description": "Route Guardsはルートに関するガードを定義し、ルーティング操作をカスタマイズするためのフックを提供します。"
+                    },
+                    {
+                        "name": "Child Routes",
+                        "description": "Child Routesは親ルート内にネストされたルートを定義し、複雑なルーティング構造を作成します。"
+                    },
+                    {
+                        "name": "Lazy Loading",
+                        "description": "Lazy Loadingはルートコンポーネントを遅延ロードし、アプリケーションの初期読み込み時間を短縮します。"
+                    }
+                ]
+            },
+            {
+                "name": "PrimeNG",
+                "description": "PrimeNGはAngularアプリケーション用の豊富なUIコンポーネントライブラリで、多くの使いやすいUI要素やテーマを提供します。",
+                "func": [
+                    {
+                        "name": "Button",
+                        "description": "Buttonはクリック可能なボタンを表示し、ユーザーのアクションをトリガーするために使用します。"
+                    },
+                    {
+                        "name": "Table",
+                        "description": "Tableはデータの表示と操作を行うためのテーブルコンポーネントで、ソートやフィルタリングなどをサポートします。"
+                    },
+                    {
+                        "name": "Dialog",
+                        "description": "Dialogはモーダルダイアログを表示し、ユーザーに情報の表示や編集を求めるために使用します。"
+                    },
+                    {
+                        "name": "InputText",
+                        "description": "InputTextはテキスト入力フィールドを提供し、ユーザーからのテキスト入力を受け付けます。"
+                    },
+                    {
+                        "name": "Dropdown",
+                        "description": "Dropdownはドロップダウンメニュー（セレクトボックス）を提供し、オプションの選択を可能にします。"
+                    },
+                    {
+                        "name": "Calendar",
+                        "description": "Calendarは日付選択コンポーネントを提供し、日付の入力と選択を容易にします。"
+                    },
+                    {
+                        "name": "Accordion",
+                        "description": "Accordionは折りたたみ可能なコンテンツパネルを提供し、スペースの節約と情報の整理に役立ちます。"
+                    },
+                    {
+                        "name": "ProgressBar",
+                        "description": "ProgressBarは進捗状況を表示するためのバーを提供し、タスクの進行状況を視覚化します。"
+                    },
+                    {
+                        "name": "Chart",
+                        "description": "Chartはグラフとチャートを表示し、データの視覚化と分析に使用します。"
+                    },
+                    {
+                        "name": "FileUpload",
+                        "description": "FileUploadはファイルのアップロードをサポートし、ファイルの選択とアップロードを可能にします。"
+                    },
+                    {
+                        "name": "Toast",
+                        "description": "Toastは通知メッセージを表示し、ユーザーに情報やアクションのフィードバックを提供します。"
+                    }
+                ]
+            },
+            {
+                "name": "NgBootstrap",
+                "description": "NgBootstrapはAngularアプリケーションで使える、Bootstrapフレームワークのコンポーネントおよびディレクティブのライブラリです。",
+                "func": [
+                    {
+                        "name": "NgbAlert",
+                        "description": "NgbAlertはアラートメッセージを表示するためのコンポーネントで、警告や通知をユーザーに表示します。"
+                    },
+                    {
+                        "name": "NgbCarousel",
+                        "description": "NgbCarouselはイメージカルーセルやスライダーを作成するためのコンポーネントで、コンテンツのスライドショーを実装します。"
+                    },
+                    {
+                        "name": "NgbCollapse",
+                        "description": "NgbCollapseは折りたたみ可能なコンテンツを提供し、スペースの節約や情報の整理に役立ちます。"
+                    },
+                    {
+                        "name": "NgbDatepicker",
+                        "description": "NgbDatepickerは日付選択ウィジェットを提供し、日付の入力と選択を容易にします。"
+                    },
+                    {
+                        "name": "NgbModal",
+                        "description": "NgbModalはモーダルダイアログを表示し、ユーザーに情報の表示や編集を求めるために使用します。"
+                    },
+                    {
+                        "name": "NgbPopover",
+                        "description": "NgbPopoverはポップオーバーコンポーネントを提供し、ユーザーに追加情報を表示します。"
+                    },
+                    {
+                        "name": "NgbTabset",
+                        "description": "NgbTabsetはタブセットを作成し、複数のコンテンツを切り替えるために使用します。"
+                    },
+                    {
+                        "name": "NgbTooltip",
+                        "description": "NgbTooltipはツールチップメッセージを表示し、ユーザーに補足情報を提供します。"
+                    },
+                    {
+                        "name": "NgbTypeahead",
+                        "description": "NgbTypeaheadはタイプアヘッド（自動補完）を実装し、ユーザーに入力のサジェストを提供します。"
+                    },
+                    {
+                        "name": "NgbPagination",
+                        "description": "NgbPaginationはページネーションコンポーネントを提供し、ページングとデータの表示を制御します。"
+                    },
+                    {
+                        "name": "NgbRating",
+                        "description": "NgbRatingは評価（レーティング）コンポーネントを提供し、ユーザーに評価の入力を求めます。"
+                    }
+                ]
+            },
+            {
+                "name": "AngularFire",
+                "description": "AngularFireは、AngularアプリケーションでFirebaseを使用するためのラッパーライブラリで、Firebaseの機能をAngularで利用できるようにします。",
+                "func": [
+                    {
+                        "name": "AngularFireDatabase",
+                        "description": "AngularFireDatabaseはFirebaseのリアルタイムデータベースへのアクセスと操作を提供します。"
+                    },
+                    {
+                        "name": "AngularFireAuth",
+                        "description": "AngularFireAuthはFirebase認証を管理し、ユーザーの認証と認可を実装します。"
+                    },
+                    {
+                        "name": "AngularFireStorage",
+                        "description": "AngularFireStorageはFirebaseストレージを操作し、ファイルのアップロードとダウンロードをサポートします。"
+                    },
+                    {
+                        "name": "AngularFirestore",
+                        "description": "AngularFirestoreはFirebaseのクラウドファイヤーストア（Firestore）へのアクセスとクエリ操作を提供します。"
+                    },
+                    {
+                        "name": "AngularFireFunctions",
+                        "description": "AngularFireFunctionsはFirebaseクラウドファンクションへのアクセスと呼び出しを簡素化します。"
+                    },
+                    {
+                        "name": "AngularFireMessaging",
+                        "description": "AngularFireMessagingはFirebaseクラウドメッセージングを使用してプッシュ通知を送信および受信します。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "parent": "Vue",
+        "library": [
+            {
+                "name": "Vue Router",
+                "description": "Vue Routerは、Vue.jsアプリケーション内でルーティングを管理し、異なるビューとコンポーネントを表示するための公式ルーティングライブラリです。",
+                "func": [
+                    {
+                        "name": "VueRouter",
+                        "description": "VueRouterはVue.jsアプリケーションにルーターを統合し、ルート定義とナビゲーションの制御を提供します。"
+                    },
+                    {
+                        "name": "router-link",
+                        "description": "router-linkはアプリケーション内でのナビゲーションをサポートし、クリック時にルートを変更します。"
+                    },
+                    {
+                        "name": "router-view",
+                        "description": "router-viewはルートに対応するコンポーネントを表示し、動的なコンテンツの描画を担当します。"
+                    },
+                    {
+                        "name": "Route Object",
+                        "description": "Route Objectはルートの設定とメタデータを定義し、ルート間の情報の受け渡しやガードを設定します。"
+                    },
+                    {
+                        "name": "Programmatic Navigation",
+                        "description": "Programmatic Navigationはコード内でのルートの変更を実現し、ユーザーアクションに応じてルートを制御します。"
+                    },
+                    {
+                        "name": "Navigation Guards",
+                        "description": "Navigation Guardsはルートナビゲーションに関連するガードを設定し、ナビゲーションの制御をカスタマイズします。"
+                    },
+                    {
+                        "name": "Nested Routes",
+                        "description": "Nested Routesはルーティング構造をネストし、親子のルートを定義して複雑なアプリケーションを構築します。"
+                    },
+                    {
+                        "name": "Dynamic Routes",
+                        "description": "Dynamic Routesは動的なルートを定義し、パラメータを受け取ってコンポーネントを表示します。"
+                    },
+                    {
+                        "name": "Named Routes",
+                        "description": "Named Routesはルートに名前を付けて、プログラム内でルートの識別とナビゲーションを行います。"
+                    },
+                    {
+                        "name": "Lazy Loading",
+                        "description": "Lazy Loadingはルートコンポーネントを遅延ロードし、初期読み込み時間を短縮します。"
+                    }
+                ]
+            },
+            {
+                "name": "Vuex",
+                "description": "Vuexは、Vue.jsアプリケーション内での状態管理を容易にするための状態管理ライブラリです。",
+                "func": [
+                    {
+                        "name": "Store",
+                        "description": "StoreはVuexの中心的な概念で、アプリケーションの状態を格納し、ミューテーションやアクションを通じて変更します。"
+                    },
+                    {
+                        "name": "State",
+                        "description": "Stateはアプリケーションの状態データを保持する場所で、Store内で定義されます。"
+                    },
+                    {
+                        "name": "Mutations",
+                        "description": "Mutationsは同期的な方法で状態を変更するための関数で、Store内で定義されます。"
+                    },
+                    {
+                        "name": "Actions",
+                        "description": "Actionsは非同期的な操作やミューテーションの呼び出しを実行し、非同期ロジックを処理します。"
+                    },
+                    {
+                        "name": "Getters",
+                        "description": "Gettersはコンポーネントから状態を取得するための計算プロパティで、状態を変換します。"
+                    },
+                    {
+                        "name": "Modules",
+                        "description": "Modulesは大規模なアプリケーションで状態をモジュールごとに分割し、保守性を高めるための仕組みです。"
+                    },
+                    {
+                        "name": "mapState",
+                        "description": "mapStateはコンポーネントに状態をマッピングするためのヘルパー関数で、状態をコンポーネントに取り込みます。"
+                    },
+                    {
+                        "name": "mapMutations",
+                        "description": "mapMutationsはコンポーネントにミューテーションをマッピングするためのヘルパー関数で、ミューテーションを呼び出します。"
+                    },
+                    {
+                        "name": "mapActions",
+                        "description": "mapActionsはコンポーネントにアクションをマッピングするためのヘルパー関数で、アクションを呼び出します。"
+                    },
+                    {
+                        "name": "mapGetters",
+                        "description": "mapGettersはコンポーネントにゲッターをマッピングするためのヘルパー関数で、ゲッターを利用します。"
+                    }
+                ]
+            },
+            {
+                "name": "Vue Material",
+                "description": "Vue Materialは、Vue.jsアプリケーションで使えるマテリアルデザインコンポーネントライブラリです。",
+                "func": [
+                    {
+                        "name": "MdButton",
+                        "description": "MdButtonはマテリアルデザインのボタンコンポーネントで、クリック可能なボタンを表示します。"
+                    },
+                    {
+                        "name": "MdCard",
+                        "description": "MdCardはカードスタイルのコンテナコンポーネントで、情報を整理し表示します。"
+                    },
+                    {
+                        "name": "MdDialog",
+                        "description": "MdDialogはダイアログモーダルを表示するためのコンポーネントで、ユーザーアクションを求めます。"
+                    },
+                    {
+                        "name": "MdInput",
+                        "description": "MdInputはテキスト入力フィールドを提供し、ユーザーからのテキスト入力を受け付けます。"
+                    },
+                    {
+                        "name": "MdSelect",
+                        "description": "MdSelectはセレクトボックスコンポーネントで、オプションの選択を可能にします。"
+                    },
+                    {
+                        "name": "MdTabs",
+                        "description": "MdTabsはタブナビゲーションコンポーネントで、コンテンツの切り替えに使用します。"
+                    },
+                    {
+                        "name": "MdTooltip",
+                        "description": "MdTooltipはツールチップメッセージを表示し、ユーザーに補足情報を提供します。"
+                    },
+                    {
+                        "name": "MdSnackbar",
+                        "description": "MdSnackbarはスナックバーメッセージを表示し、ユーザーに通知を提供します。"
+                    },
+                    {
+                        "name": "MdProgress",
+                        "description": "MdProgressは進捗バーコンポーネントで、タスクの進行状況を視覚化します。"
+                    },
+                    {
+                        "name": "MdList",
+                        "description": "MdListはリスト表示コンポーネントで、情報をリスト形式で表示します。"
+                    },
+                    {
+                        "name": "MdIcon",
+                        "description": "MdIconはアイコンコンポーネントで、アイコンの表示とカスタマイズをサポートします。"
+                    }
+                ]
+            },
+            {
+                "name": " Axios",
+                "description": "Axiosは、ブラウザとNode.jsで動作するPromiseベースのHTTPクライアントです。"
+            },
+            {
+                "name": "Vuelidate",
+                "description": "Vuelidateは、Vue.jsアプリケーション内でフォームのバリデーションを行うためのライブラリです。",
+                "func": [
+                    {
+                        "name": "validations",
+                        "description": "validationsオブジェクトは、フォームフィールドごとに定義されるバリデーションルールのセットです。"
+                    },
+                    {
+                        "name": "$v",
+                        "description": "$vオブジェクトは、バリデーションの状態やエラーメッセージを含むバリデーション対象のデータとバインドされます。"
+                    },
+                    {
+                        "name": "$model",
+                        "description": "$modelオブジェクトは、バリデーション対象のデータとバインドされ、フォームフィールドの値を提供します。"
+                    },
+                    {
+                        "name": "valid",
+                        "description": "validは単一のバリデーションルールを表し、フィールドがバリデーションを通過したかどうかを示します。"
+                    },
+                    {
+                        "name": "$params",
+                        "description": "$paramsオブジェクトは、バリデーションルールのパラメータを含み、バリデーションのカスタマイズに使用します。"
+                    },
+                    {
+                        "name": "$error",
+                        "description": "$errorオブジェクトは、バリデーションエラーの種類とメッセージを提供します。"
+                    },
+                    {
+                        "name": "$touch",
+                        "description": "$touch関数はフォームフィールドをタッチし、エラーメッセージを表示するトリガーとなります。"
+                    },
+                    {
+                        "name": "$reset",
+                        "description": "$reset関数はフォームフィールドの状態をリセットし、エラーメッセージを非表示にします。"
+                    },
+                    {
+                        "name": "withParams",
+                        "description": "withParams関数はバリデーションルールにパラメータを追加し、カスタムバリデーションルールを作成します。"
+                    },
+                    {
+                        "name": "validationMixin",
+                        "description": "validationMixinはVueコンポーネントにバリデーション機能を追加するためのミックスインです。"
+                    }
+                ]
+            },
+            {
+                "name": "VueI18n",
+                "description": "VueI18nは、Vue.jsアプリケーションで多言語対応を実装するためのライブラリです。",
+                "func": [
+                    {
+                        "name": "createI18n",
+                        "description": "createI18n関数はVueI18nのインスタンスを作成し、アプリケーションに多言語対応を統合します。"
+                    },
+                    {
+                        "name": "$t",
+                        "description": "$t関数は翻訳テキストを取得し、指定した言語に翻訳します。"
+                    },
+                    {
+                        "name": "locale",
+                        "description": "localeオプションはアプリケーションの現在の言語ロケールを設定します。"
+                    },
+                    {
+                        "name": "fallbackLocale",
+                        "description": "fallbackLocaleオプションはフォールバック言語ロケールを設定し、翻訳が存在しない場合に使用します。"
+                    },
+                    {
+                        "name": "messages",
+                        "description": "messagesオプションは言語ごとに翻訳テキストを定義するためのオブジェクトです。"
+                    },
+                    {
+                        "name": "datetimeFormats",
+                        "description": "datetimeFormatsオプションは日付と時刻のフォーマットを言語ごとに設定します。"
+                    },
+                    {
+                        "name": "numberFormats",
+                        "description": "numberFormatsオプションは数値のフォーマットを言語ごとに設定します。"
+                    },
+                    {
+                        "name": "getChoiceIndex",
+                        "description": "getChoiceIndex関数は複数形の選択肢を決定し、正しい翻訳を選択します。"
+                    },
+                    {
+                        "name": "mergeLocaleMessage",
+                        "description": "mergeLocaleMessage関数は既存の翻訳メッセージと新しいメッセージをマージします。"
+                    },
+                    {
+                        "name": "dateTimeFormat",
+                        "description": "dateTimeFormat関数は指定した言語で日付と時刻をフォーマットします。"
+                    },
+                    {
+                        "name": "numberFormat",
+                        "description": "numberFormat関数は指定した言語で数値をフォーマットします。"
+                    }
+                ]
+            },
+            {
+                "name": "Nuxt",
+                "description": "Nuxt.jsは、Vue.jsアプリケーションのためのフレームワークで、サーバーサイドレンダリング（SSR）や静的サイト生成（SSG）をサポートします。"
+            },
+            {
+                "name": "Vue Test Utils",
+                "description": "Vue Test Utilsは、Vue.jsアプリケーションのユニットテストと統合テストを行うためのテストユーティリティライブラリです。",
+                "func": [
+                    {
+                        "name": "mount",
+                        "description": "mount関数はVueコンポーネントを仮想DOMにマウントし、テスト用のラッパーオブジェクトを提供します。"
+                    },
+                    {
+                        "name": "shallowMount",
+                        "description": "shallowMount関数はコンポーネントを浅くマウントし、子コンポーネントをスタブ化してテストします。"
+                    },
+                    {
+                        "name": "createLocalVue",
+                        "description": "createLocalVue関数はローカルなVueインスタンスを作成し、コンポーネントのテストに使用します。"
+                    },
+                    {
+                        "name": "Wrapper",
+                        "description": "Wrapperオブジェクトはマウントされたコンポーネントをラップし、コンポーネントのテストに使用します。"
+                    },
+                    {
+                        "name": "find",
+                        "description": "find関数はコンポーネント内から要素や子コンポーネントを検索します。"
+                    },
+                    {
+                        "name": "setData",
+                        "description": "setData関数はコンポーネントのデータを設定または更新します。"
+                    },
+                    {
+                        "name": "setProps",
+                        "description": "setProps関数はコンポーネントのプロパティを設定または更新します。"
+                    },
+                    {
+                        "name": "trigger",
+                        "description": "trigger関数はDOMイベントをトリガーし、コンポーネントの動作をテストします。"
+                    },
+                    {
+                        "name": "vm",
+                        "description": "vmプロパティはラップされたコンポーネントのVueインスタンスにアクセスします。"
+                    },
+                    {
+                        "name": "props",
+                        "description": "propsプロパティはラップされたコンポーネントのプロパティにアクセスします。"
+                    },
+                    {
+                        "name": "setData",
+                        "description": "setData関数はコンポーネントのデータを設定または更新します。"
+                    },
+                    {
+                        "name": "html",
+                        "description": "htmlプロパティはラップされたコンポーネントのHTMLコードにアクセスします。"
+                    },
+                    {
+                        "name": "text",
+                        "description": "textプロパティはラップされたコンポーネントのテキストコンテンツにアクセスします。"
+                    },
+                    {
+                        "name": "isVisible",
+                        "description": "isVisible関数は要素が表示されているかどうかを確認します。"
+                    },
+                    {
+                        "name": "setData",
+                        "description": "setData関数はコンポーネントのデータを設定または更新します。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "parent": "python",
+        "library": [
+            {
+                "name": "NumPy",
+                "description": "NumPyは数値計算とデータ操作のためのPythonライブラリで、多次元配列や行列の操作に特化しています。",
+                "module": [
+                    {
+                        "name": "numpy",
+                        "description": "numpyモジュールはNumPyライブラリの中核であり、多次元配列オブジェクト（numpy.ndarray）を提供します。"
+                    },
+                    {
+                        "name": "numpy.array",
+                        "description": "numpy.array関数はPythonのリストをnumpy.ndarrayに変換し、多次元配列を作成します。"
+                    },
+                    {
+                        "name": "numpy.zeros",
+                        "description": "numpy.zeros関数は指定した形状のゼロで初期化された配列を作成します。"
+                    },
+                    {
+                        "name": "numpy.ones",
+                        "description": "numpy.ones関数は指定した形状の1で初期化された配列を作成します。"
+                    },
+                    {
+                        "name": "numpy.arange",
+                        "description": "numpy.arange関数は指定した範囲の等間隔の値からなる配列を作成します。"
+                    },
+                    {
+                        "name": "numpy.linspace",
+                        "description": "numpy.linspace関数は指定した範囲内で等間隔の値を持つ配列を作成します。"
+                    },
+                    {
+                        "name": "numpy.reshape",
+                        "description": "numpy.reshape関数は配列の形状を変更し、新しい形状の配列を作成します。"
+                    },
+                    {
+                        "name": "numpy.sum",
+                        "description": "numpy.sum関数は配列の要素の合計を計算します。"
+                    },
+                    {
+                        "name": "numpy.mean",
+                        "description": "numpy.mean関数は配列の平均値を計算します。"
+                    },
+                    {
+                        "name": "numpy.max",
+                        "description": "numpy.max関数は配列内の最大値を見つけます。"
+                    },
+                    {
+                        "name": "numpy.min",
+                        "description": "numpy.min関数は配列内の最小値を見つけます。"
+                    },
+                    {
+                        "name": "numpy.dot",
+                        "description": "numpy.dot関数は2つの配列の内積を計算します。"
+                    },
+                    {
+                        "name": "numpy.transpose",
+                        "description": "numpy.transpose関数は行列の転置を行います。"
+                    },
+                    {
+                        "name": "numpy.random",
+                        "description": "numpy.randomモジュールは乱数生成関数を提供し、ランダムなデータの生成に使用します。"
+                    }
+                ]
+            },
+            {
+                "name": "Pandas",
+                "description": "Pandasはデータ操作とデータ分析のためのPythonライブラリで、表形式のデータを効率的に操作できます。",
+                "module": [
+                    {
+                        "name": "pandas",
+                        "description": "pandasモジュールはPandasライブラリの中核であり、データフレームやシリーズなどのデータ構造を提供します。"
+                    },
+                    {
+                        "name": "pandas.DataFrame",
+                        "description": "pandas.DataFrameは2次元のデータテーブルを表し、データの操作と分析に使用されます。"
+                    },
+                    {
+                        "name": "pandas.Series",
+                        "description": "pandas.Seriesは1次元のデータ構造であり、ラベル付きのデータを表現します。"
+                    },
+                    {
+                        "name": "read_csv",
+                        "description": "read_csv関数はCSVファイルからデータを読み込み、データフレームとして返します。"
+                    },
+                    {
+                        "name": "read_excel",
+                        "description": "read_excel関数はExcelファイルからデータを読み込み、データフレームとして返します。"
+                    },
+                    {
+                        "name": "head",
+                        "description": "headメソッドはデータフレームの最初のN行を表示します。"
+                    },
+                    {
+                        "name": "tail",
+                        "description": "tailメソッドはデータフレームの末尾のN行を表示します。"
+                    },
+                    {
+                        "name": "describe",
+                        "description": "describeメソッドはデータの統計情報をまとめて表示します。"
+                    },
+                    {
+                        "name": "groupby",
+                        "description": "groupbyメソッドはデータをグループ化し、集計操作を実行します。"
+                    },
+                    {
+                        "name": "merge",
+                        "description": "merge関数はデータフレームを結合し、結合キーに基づいてデータを結合します。"
+                    },
+                    {
+                        "name": "pivot_table",
+                        "description": "pivot_table関数はデータをピボットテーブルとして再形成し、集計操作を行います。"
+                    },
+                    {
+                        "name": "to_csv",
+                        "description": "to_csvメソッドはデータフレームをCSVファイルに書き出します。"
+                    },
+                    {
+                        "name": "to_excel",
+                        "description": "to_excelメソッドはデータフレームをExcelファイルに書き出します。"
+                    },
+                    {
+                        "name": "plot",
+                        "description": "plotメソッドはデータを可視化し、グラフを生成します。"
+                    }
+                ]
+            },
+            {
+                "name": "Matplotlib",
+                "description": "MatplotlibはPythonのデータ可視化ライブラリで、グラフやプロットの生成に使用されます。",
+                "module": [
+                    {
+                        "name": "matplotlib.pyplot",
+                        "description": "matplotlib.pyplotモジュールはMatplotlibの中核であり、グラフの描画やカスタマイズを行います。"
+                    },
+                    {
+                        "name": "plot",
+                        "description": "plot関数は折れ線グラフを描画します。"
+                    },
+                    {
+                        "name": "scatter",
+                        "description": "scatter関数は散布図を描画します。"
+                    },
+                    {
+                        "name": "bar",
+                        "description": "bar関数は垂直バーチャートを描画します。"
+                    },
+                    {
+                        "name": "hist",
+                        "description": "hist関数はヒストグラムを描画します。"
+                    },
+                    {
+                        "name": "pie",
+                        "description": "pie関数は円グラフ（パイチャート）を描画します。"
+                    },
+                    {
+                        "name": "imshow",
+                        "description": "imshow関数は画像を表示します。"
+                    },
+                    {
+                        "name": "xlabel",
+                        "description": "xlabel関数はX軸のラベルを設定します。"
+                    },
+                    {
+                        "name": "ylabel",
+                        "description": "ylabel関数はY軸のラベルを設定します。"
+                    },
+                    {
+                        "name": "title",
+                        "description": "title関数はグラフのタイトルを設定します。"
+                    },
+                    {
+                        "name": "legend",
+                        "description": "legend関数は凡例を表示します。"
+                    },
+                    {
+                        "name": "xlim",
+                        "description": "xlim関数はX軸の表示範囲を設定します。"
+                    },
+                    {
+                        "name": "ylim",
+                        "description": "ylim関数はY軸の表示範囲を設定します。"
+                    },
+                    {
+                        "name": "savefig",
+                        "description": "savefig関数はグラフを画像ファイルとして保存します。"
+                    },
+                    {
+                        "name": "subplot",
+                        "description": "subplot関数は複数のサブプロットを作成します。"
+                    },
+                    {
+                        "name": "color",
+                        "description": "colorパラメータはグラフの色を指定します。"
+                    },
+                    {
+                        "name": "linewidth",
+                        "description": "linewidthパラメータは線の幅を指定します。"
+                    }
+                ]
+            },
+            {
+                "name": "Scikit-learn",
+                "description": "Scikit-learnはPythonの機械学習ライブラリで、機械学習モデルの構築とデータ解析に使用されます。",
+                "module": [
+                    {
+                        "name": "sklearn",
+                        "description": "sklearnモジュールはScikit-learnの中核であり、機械学習モデルのクラスやユーティリティ関数を提供します。"
+                    },
+                    {
+                        "name": "datasets",
+                        "description": "datasetsモジュールは機械学習用のサンプルデータセットを提供します。"
+                    },
+                    {
+                        "name": "model_selection",
+                        "description": "model_selectionモジュールはモデルの評価やハイパーパラメータの調整に使用されます。"
+                    },
+                    {
+                        "name": "preprocessing",
+                        "description": "preprocessingモジュールはデータの前処理やスケーリングなどを行うための関数を提供します。"
+                    },
+                    {
+                        "name": "linear_model",
+                        "description": "linear_modelモジュールは線形モデル（回帰や分類など）を提供します。"
+                    },
+                    {
+                        "name": "tree",
+                        "description": "treeモジュールは決定木ベースのモデルを提供します。"
+                    },
+                    {
+                        "name": "ensemble",
+                        "description": "ensembleモジュールはアンサンブル学習法（ランダムフォレストなど）を提供します。"
+                    },
+                    {
+                        "name": "cluster",
+                        "description": "clusterモジュールはクラスタリングアルゴリズムを提供します。"
+                    },
+                    {
+                        "name": "metrics",
+                        "description": "metricsモジュールはモデル評価指標（精度、F1スコアなど）を提供します。"
+                    },
+                    {
+                        "name": "svm",
+                        "description": "svmモジュールはサポートベクトルマシンモデルを提供します。"
+                    },
+                    {
+                        "name": "neighbors",
+                        "description": "neighborsモジュールは最近傍法に基づくモデルを提供します。"
+                    },
+                    {
+                        "name": "neural_network",
+                        "description": "neural_networkモジュールはニューラルネットワークモデルを提供します。"
+                    },
+                    {
+                        "name": "pipeline",
+                        "description": "pipelineモジュールはデータ処理とモデル訓練をパイプライン化するためのツールを提供します。"
+                    },
+                    {
+                        "name": "grid_search",
+                        "description": "grid_searchモジュールはグリッドサーチによるハイパーパラメータの調整をサポートします。"
+                    }
+                ]
+            },
+            {
+                "name": "TensorFlow",
+                "description": "TensorFlowは機械学習と深層学習のためのオープンソースのフレームワークで、ニューラルネットワークの構築とトレーニングに使用されます。",
+                "module": [
+                    {
+                        "name": "tensorflow",
+                        "description": "tensorflowモジュールはTensorFlowの中核であり、ニューラルネットワークの操作とトレーニングを提供します。"
+                    },
+                    {
+                        "name": "tf.keras",
+                        "description": "tf.kerasモジュールは高レベルAPIで、簡単な方法でニューラルネットワークを構築できます。"
+                    },
+                    {
+                        "name": "tf.data",
+                        "description": "tf.dataモジュールはデータの読み込み、前処理、バッチ処理を行うためのツールを提供します。"
+                    },
+                    {
+                        "name": "tf.losses",
+                        "description": "tf.lossesモジュールは損失関数を提供し、モデルのトレーニング時に使用します。"
+                    },
+                    {
+                        "name": "tf.optimizers",
+                        "description": "tf.optimizersモジュールは最適化アルゴリズムを提供し、モデルの最適化に使用します。"
+                    },
+                    {
+                        "name": "tf.metrics",
+                        "description": "tf.metricsモジュールはメトリクスを提供し、モデルの評価時に使用します。"
+                    },
+                    {
+                        "name": "tf.layers",
+                        "description": "tf.layersモジュールはレイヤーの操作とカスタムレイヤーの作成を支援します。"
+                    },
+                    {
+                        "name": "tf.estimator",
+                        "description": "tf.estimatorモジュールは高レベルAPIで、分散トレーニングとモデルのエクスポートをサポートします。"
+                    },
+                    {
+                        "name": "tf.saved_model",
+                        "description": "tf.saved_modelモジュールはモデルの保存とデプロイメントを行います。"
+                    },
+                    {
+                        "name": "tf.constant",
+                        "description": "tf.constant関数はTensorFlowの定数を作成します。"
+                    },
+                    {
+                        "name": "tf.Variable",
+                        "description": "tf.Variableクラスは変数（重みなど）を作成し、トレーニング中に変更可能なテンソルを表現します。"
+                    },
+                    {
+                        "name": "tf.Session",
+                        "description": "tf.Sessionクラスはセッションを作成し、グラフの評価を行います（TensorFlow 2.x以降は不要）。"
+                    }
+                ]
+            },
+            {
+                "name": "PyTorch",
+                "description": "PyTorchは機械学習と深層学習のためのオープンソースのフレームワークで、ニューラルネットワークの構築とトレーニングに使用されます。",
+                "module": [
+                    {
+                        "name": "torch",
+                        "description": "torchモジュールはPyTorchの中核であり、テンソル操作やニューラルネットワークの操作を提供します。"
+                    },
+                    {
+                        "name": "torch.nn",
+                        "description": "torch.nnモジュールはニューラルネットワークモデルやレイヤーを提供します。"
+                    },
+                    {
+                        "name": "torch.optim",
+                        "description": "torch.optimモジュールは最適化アルゴリズムを提供し、モデルの最適化に使用します。"
+                    },
+                    {
+                        "name": "torch.autograd",
+                        "description": "torch.autogradモジュールは自動微分（オートグラフ）をサポートし、勾配計算を行います。"
+                    },
+                    {
+                        "name": "torch.utils.data",
+                        "description": "torch.utils.dataモジュールはデータセットの読み込みとデータの前処理を支援します。"
+                    },
+                    {
+                        "name": "torchvision",
+                        "description": "torchvisionモジュールはコンピュータビジョンタスク（画像処理）向けのツールとデータセットを提供します。"
+                    },
+                    {
+                        "name": "torch.cuda",
+                        "description": "torch.cudaモジュールはGPUを使用した計算をサポートします。"
+                    },
+                    {
+                        "name": "torch.functional",
+                        "description": "torch.functionalモジュールは様々なテンソル操作と関数を提供します。"
+                    },
+                    {
+                        "name": "torch.onnx",
+                        "description": "torch.onnxモジュールはONNX（Open Neural Network Exchange）形式へのモデルのエクスポートをサポートします。"
+                    },
+                    {
+                        "name": "torchsummary",
+                        "description": "torchsummaryパッケージはモデルのサマリー情報を提供します。"
+                    }
+                ]
+            },
+            {
+                "name": "Requests",
+                "description": "RequestsはPythonのHTTPライブラリで、HTTPリクエストを送信し、HTTPレスポンスを受信するために使用されます。",
+                "func": [
+                    {
+                        "name": "get",
+                        "description": "get関数はGETリクエストを送信し、指定したURLからデータを取得します。"
+                    },
+                    {
+                        "name": "post",
+                        "description": "post関数はPOSTリクエストを送信し、データをサーバーに送信します。"
+                    },
+                    {
+                        "name": "put",
+                        "description": "put関数はPUTリクエストを送信し、指定したURLにデータをアップロードします。"
+                    },
+                    {
+                        "name": "delete",
+                        "description": "delete関数はDELETEリクエストを送信し、指定したURLからデータを削除します。"
+                    },
+                    {
+                        "name": "head",
+                        "description": "head関数はHEADリクエストを送信し、HTTPヘッダーの情報を取得します。"
+                    },
+                    {
+                        "name": "options",
+                        "description": "options関数はOPTIONSリクエストを送信し、サポートされているHTTPメソッドを取得します。"
+                    },
+                    {
+                        "name": "patch",
+                        "description": "patch関数はPATCHリクエストを送信し、データの一部を更新します。"
+                    },
+                    {
+                        "name": "request",
+                        "description": "request関数はカスタムHTTPリクエストを送信し、詳細なカスタマイズが可能です。"
+                    },
+                    {
+                        "name": "Session",
+                        "description": "Sessionクラスはセッションを管理し、クッキーのサポートや状態の保持を提供します。"
+                    },
+                    {
+                        "name": "get、post、put、deleteなどのHTTPメソッド",
+                        "description": "これらのHTTPメソッドは特定のリクエストを送信するための関数で、異なるHTTPメソッドに対応しています。"
+                    },
+                    {
+                        "name": "HTTPヘッダーの操作",
+                        "description": "RequestsはHTTPヘッダーを操作するための多くの関数やオプションを提供し、カスタムヘッダーを設定できます。"
+                    }
+                ]
+            },
+            {
+                "name": "Flask",
+                "description": "FlaskはPythonの軽量なウェブアプリケーションフレームワークで、ウェブアプリケーションの構築に使用されます。",
+                "module": [
+                    {
+                        "name": "flask",
+                        "description": "flaskモジュールはFlaskの中核であり、ウェブアプリケーションの基本的な機能を提供します。"
+                    },
+                    {
+                        "name": "Flaskクラス",
+                        "description": "Flaskクラスはアプリケーションの起動と設定を管理します。"
+                    },
+                    {
+                        "name": "ルーティング",
+                        "description": "ルーティングはURLパスと関数をマッピングし、特定のURLに対する処理を定義します。"
+                    },
+                    {
+                        "name": "リクエストとレスポンス",
+                        "description": "リクエストオブジェクトとレスポンスオブジェクトを使用して、クライアントからのリクエストを処理し、レスポンスを生成します。"
+                    },
+                    {
+                        "name": "テンプレートエンジン",
+                        "description": "FlaskはJinja2テンプレートエンジンを統合し、HTMLテンプレートを使用して動的なコンテンツを生成します。"
+                    },
+                    {
+                        "name": "拡張機能",
+                        "description": "Flaskは多くの拡張機能をサポートし、セッション管理、データベース接続、認証などの機能を追加できます。"
+                    },
+                    {
+                        "name": "Blueprints",
+                        "description": "Blueprintsはアプリケーションをモジュール化し、大規模なアプリケーションの開発をサポートします。"
+                    },
+                    {
+                        "name": "RESTful APIの開発",
+                        "description": "Flaskを使用してRESTfulなAPIを簡単に開発でき、クライアントとのデータ通信をサポートします。"
+                    },
+                    {
+                        "name": "テスト",
+                        "description": "Flaskはユニットテストや統合テストをサポートし、アプリケーションの品質を確保します。"
+                    },
+                    {
+                        "name": "デプロイメント",
+                        "description": "Flaskアプリケーションはさまざまな方法でデプロイでき、ウェブサーバーとの連携も可能です。"
+                    }
+                ]
+            },
+            {
+                "name": "Django",
+                "description": "DjangoはPythonの高機能なウェブアプリケーションフレームワークで、ウェブアプリケーションの構築に使用されます。",
+                "module": [
+                    {
+                        "name": "django",
+                        "description": "djangoモジュールはDjangoの中核であり、ウェブアプリケーションの基本的な機能を提供します。"
+                    },
+                    {
+                        "name": "モデル（Models）",
+                        "description": "モデルはデータベーステーブルを表し、データベースの操作（作成、読み取り、更新、削除）をサポートします。"
+                    },
+                    {
+                        "name": "ビュー（Views）",
+                        "description": "ビューはクライアントからのリクエストを受け取り、データモデルからデータを取得してテンプレートに渡し、レスポンスを生成します。"
+                    },
+                    {
+                        "name": "テンプレート（Templates）",
+                        "description": "テンプレートはHTMLページのレンダリングとデータの表示を管理し、Djangoのテンプレートエンジンを使用します。"
+                    },
+                    {
+                        "name": "ルーティング（URLconf）",
+                        "description": "ルーティングはURLパターンとビューのマッピングを定義し、ウェブアプリケーションのURL構造を管理します。"
+                    },
+                    {
+                        "name": "フォーム（Forms）",
+                        "description": "フォームはHTMLフォームの生成とバリデーションを支援し、データの受け取りと処理を簡素化します。"
+                    },
+                    {
+                        "name": "認証とセッション管理",
+                        "description": "Djangoはユーザー認証、セッション管理、アクセス制御などのセキュリティ機能を提供します。"
+                    },
+                    {
+                        "name": "管理画面（Admin）",
+                        "description": "管理画面はデータベースの管理とCRUD操作を提供し、カスタムモデルの管理が可能です。"
+                    },
+                    {
+                        "name": "国際化（i18n）とタイムゾーン（timezone）",
+                        "description": "Djangoは国際化とタイムゾーンサポートを提供し、多言語対応のウェブアプリケーションを構築できます。"
+                    },
+                    {
+                        "name": "拡張機能（Apps）",
+                        "description": "Djangoアプリケーションはモジュラーで再利用可能で、アプリケーション全体を構築するためのコンポーネントを提供します。"
+                    },
+                    {
+                        "name": "テスティング（Testing）",
+                        "description": "Djangoはユニットテストと統合テストをサポートし、アプリケーションの品質管理を容易にします。"
+                    },
+                    {
+                        "name": "デプロイメント",
+                        "description": "Djangoアプリケーションはさまざまなウェブサーバーにデプロイでき、本番環境への展開をサポートします。"
+                    }
+                ]
+            },
+            {
+                "name": "Beautiful Soup",
+                "description": "Beautiful SoupはPythonのライブラリで、ウェブスクレイピングやHTML/XMLの解析に使用されます。",
+                "func": [
+                    {
+                        "name": "BeautifulSoup",
+                        "description": "BeautifulSoupクラスはHTMLやXMLドキュメントを解析し、検索や操作を行うためのオブジェクトを作成します。"
+                    },
+                    {
+                        "name": "find",
+                        "description": "find関数は指定したタグや属性に一致する最初の要素を検索します。"
+                    },
+                    {
+                        "name": "find_all",
+                        "description": "find_all関数は指定したタグや属性に一致するすべての要素をリストとして返します。"
+                    },
+                    {
+                        "name": "select",
+                        "description": "select関数はCSSセレクタを使用して要素を検索し、指定された条件に一致する要素を返します。"
+                    },
+                    {
+                        "name": "get_text",
+                        "description": "get_text関数は要素内のテキストを抽出し、文字列として取得します。"
+                    },
+                    {
+                        "name": "attributes",
+                        "description": "要素の属性にアクセスし、属性値を取得または変更します。"
+                    },
+                    {
+                        "name": "prettify",
+                        "description": "prettify関数はHTMLを整形して読みやすく表示します。"
+                    },
+                    {
+                        "name": "decode_contents",
+                        "description": "decode_contents関数はエンコードされたHTML要素をデコードします。"
+                    },
+                    {
+                        "name": "descendants",
+                        "description": "descendantsプロパティは要素の子孫要素を反復処理するジェネレータを提供します。"
+                    },
+                    {
+                        "name": "parent",
+                        "description": "parentプロパティは要素の親要素にアクセスします。"
+                    },
+                    {
+                        "name": "next_sibling",
+                        "description": "next_siblingプロパティは要素の次の兄弟要素にアクセスします。"
+                    },
+                    {
+                        "name": "previous_sibling",
+                        "description": "previous_siblingプロパティは要素の前の兄弟要素にアクセスします。"
+                    },
+                    {
+                        "name": "prettify",
+                        "description": "prettify関数はHTMLを整形して読みやすく表示します。"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "parent": "Go",
+        "library": [
+            {
+                "name": "fmt",
+                "description": "fmtパッケージは、テキストベースの入出力や文字列のフォーマットに関連する関数を提供します。",
+                "func": [
+                    {
+                        "name": "Print",
+                        "description": "Print関数は、標準出力に引数を出力します。"
+                    },
+                    {
+                        "name": "Printf",
+                        "description": "Printf関数は、フォーマット文字列を使用して引数を標準出力に出力します。"
+                    },
+                    {
+                        "name": "Println",
+                        "description": "Println関数は、引数を標準出力に出力し、行末に改行を追加します。"
+                    },
+                    {
+                        "name": "Scan",
+                        "description": "Scan関数は、標準入力からデータを読み取り、指定された変数に格納します。"
+                    },
+                    {
+                        "name": "Scanf",
+                        "description": "Scanf関数は、フォーマット文字列を使用して標準入力からデータを読み取り、指定された変数に格納します。"
+                    },
+                    {
+                        "name": "Scanln",
+                        "description": "Scanln関数は、標準入力からデータを読み取り、行末までのデータを指定された変数に格納します。"
+                    },
+                    {
+                        "name": "Sprintf",
+                        "description": "Sprintf関数は、フォーマット文字列を使用して文字列を生成し、その文字列を返します。"
+                    },
+                    {
+                        "name": "Errorf",
+                        "description": "Errorf関数は、エラーメッセージを生成し、それをエラーオブジェクトとして返します。"
+                    },
+                    {
+                        "name": "Fprint",
+                        "description": "Fprint関数は、指定したio.Writerに引数を出力します。"
+                    },
+                    {
+                        "name": "Fprintf",
+                        "description": "Fprintf関数は、指定したio.Writerにフォーマット文字列を使用して引数を出力します。"
+                    },
+                    {
+                        "name": "Fprintln",
+                        "description": "Fprintln関数は、指定したio.Writerに引数を出力し、行末に改行を追加します。"
+                    },
+                    {
+                        "name": "Scanf",
+                        "description": "Scanf関数は、指定したio.Readerからフォーマット文字列を使用してデータを読み取り、指定された変数に格納します。"
+                    }
+                ]
+            },
+            {
+                "name": "net/http",
+                "description": "net/httpパッケージは、HTTPリクエストとレスポンスの処理、HTTPサーバーの構築、HTTPクライアントの作成など、HTTPに関連する機能を提供します。",
+                "func": [
+                    {
+                        "name": "HandleFunc",
+                        "description": "HandleFunc関数は、指定したパスに対するHTTPリクエストを処理するためのハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "ListenAndServe",
+                        "description": "ListenAndServe関数は、指定したアドレスとポートでHTTPサーバーを起動し、リクエストを受け付けます。"
+                    },
+                    {
+                        "name": "NewServeMux",
+                        "description": "NewServeMux関数は、新しいServeMux（HTTPリクエストマルチプレクサ）を作成します。"
+                    },
+                    {
+                        "name": "Request",
+                        "description": "Request型はHTTPリクエストの情報を表します（HTTPメソッド、ヘッダー、URLなど）。"
+                    },
+                    {
+                        "name": "ResponseWriter",
+                        "description": "ResponseWriter型はHTTPレスポンスを書き込むためのインターフェースです。"
+                    },
+                    {
+                        "name": "ServeHTTP",
+                        "description": "ServeHTTPメソッドは、ユーザー定義のハンドラがHTTPリクエストを処理するために実装するメソッドです。"
+                    },
+                    {
+                        "name": "Client",
+                        "description": "Client型はHTTPクライアントを表し、HTTPリクエストを送信するためのメソッドを提供します。"
+                    },
+                    {
+                        "name": "Get",
+                        "description": "Get関数は指定したURLにGETリクエストを送信し、HTTPレスポンスを取得します。"
+                    },
+                    {
+                        "name": "Post",
+                        "description": "Post関数は指定したURLにPOSTリクエストを送信し、HTTPレスポンスを取得します。"
+                    },
+                    {
+                        "name": "Request型のメソッド（Get、Post、など）",
+                        "description": "Request型にはHTTPリクエストを発行するためのメソッドが含まれています。"
+                    },
+                    {
+                        "name": "Header型",
+                        "description": "Header型はHTTPヘッダーの情報を表し、ヘッダーの追加、削除、取得が可能です。"
+                    },
+                    {
+                        "name": "FileServer",
+                        "description": "FileServer関数は指定したディレクトリのファイルを提供するHTTPハンドラを作成します。"
+                    },
+                    {
+                        "name": "Handle",
+                        "description": "Handle関数は指定したパスに対するHTTPリクエストを処理するハンドラを登録します。"
+                    },
+                    {
+                        "name": "NotFound",
+                        "description": "NotFound関数は、HTTP 404 Not Found エラーレスポンスを生成するハンドラを返します。"
+                    },
+                    {
+                        "name": "Redirect",
+                        "description": "Redirect関数は指定したURLにリダイレクトするHTTPハンドラを返します。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/gin-gonic/gin",
+                "description": "Ginは軽量なWebフレームワークで、高速かつ効率的なWebアプリケーションの開発に使用されます。",
+                "func": [
+                    {
+                        "name": "New",
+                        "description": "New関数は新しいGinエンジンを作成し、Ginアプリケーションの起点となります。"
+                    },
+                    {
+                        "name": "Default",
+                        "description": "Default関数はデフォルトのGinエンジンを返します。"
+                    },
+                    {
+                        "name": "RouterGroup",
+                        "description": "RouterGroup型はルーティンググループを表し、ルーティングパスのプレフィックスを管理します。"
+                    },
+                    {
+                        "name": "Handle",
+                        "description": "Handle関数は指定したHTTPメソッドとパスにハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "GET",
+                        "description": "GET関数はHTTP GETリクエスト用のハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "POST",
+                        "description": "POST関数はHTTP POSTリクエスト用のハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "PUT",
+                        "description": "PUT関数はHTTP PUTリクエスト用のハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "DELETE",
+                        "description": "DELETE関数はHTTP DELETEリクエスト用のハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "PATCH",
+                        "description": "PATCH関数はHTTP PATCHリクエスト用のハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "Group",
+                        "description": "Group関数はルーティンググループを作成し、グループに関連付けられたミドルウェアを適用します。"
+                    },
+                    {
+                        "name": "Use",
+                        "description": "Use関数はミドルウェア関数をルーティンググループに適用します。"
+                    },
+                    {
+                        "name": "Static",
+                        "description": "Static関数は静的ファイルを提供するためのミドルウェアを登録します。"
+                    },
+                    {
+                        "name": "Run",
+                        "description": "Run関数はGinアプリケーションを指定したポートで実行します。"
+                    },
+                    {
+                        "name": "Context",
+                        "description": "Context型はHTTPリクエストのコンテキストを表し、リクエストスコープ内でデータを共有します。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/gorilla/mux",
+                "description": "Gorilla Muxは柔軟性が高く、強力なHTTPルーターで、Go言語のWebアプリケーションでルーティングを処理するために使用されます。",
+                "func": [
+                    {
+                        "name": "NewRouter",
+                        "description": "NewRouter関数は新しいGorilla Muxルーターを作成します。"
+                    },
+                    {
+                        "name": "Router",
+                        "description": "Router型はHTTPリクエストのルーティングとハンドリングを管理します。"
+                    },
+                    {
+                        "name": "Methods",
+                        "description": "Methods関数は指定したHTTPメソッドに対するハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "Path",
+                        "description": "Path関数は指定したパスに対するハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "PathPrefix",
+                        "description": "PathPrefix関数は指定したパスプレフィックスに対するハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "Headers",
+                        "description": "Headers関数は指定したヘッダー条件に一致するハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "Queries",
+                        "description": "Queries関数は指定したクエリパラメータ条件に一致するハンドラ関数を登録します。"
+                    },
+                    {
+                        "name": "Handler",
+                        "description": "Handler関数は指定したHTTPハンドラをルーターに登録します。"
+                    },
+                    {
+                        "name": "GetRoute",
+                        "description": "GetRoute関数は指定したルート名に対応するルートを取得します。"
+                    },
+                    {
+                        "name": "Subrouter",
+                        "description": "Subrouter関数は新しいサブルーターを作成し、親ルーターにマウントします。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/jinzhu/gorm",
+                "description": "GORMはGo言語のORM（Object-Relational Mapping）ライブラリで、データベースとの対話を簡素化し、データベース操作をGoプログラムで行うためのツールです。",
+                "func": [
+                    {
+                        "name": "Open",
+                        "description": "Open関数は指定したデータベースの接続を開きます。"
+                    },
+                    {
+                        "name": "Close",
+                        "description": "Close関数はデータベースの接続を閉じます。"
+                    },
+                    {
+                        "name": "DB",
+                        "description": "DB型はデータベース接続を表し、データベース操作用のメソッドを提供します。"
+                    },
+                    {
+                        "name": "Model",
+                        "description": "Model関数はGORMモデルを定義し、テーブル名や関連を指定します。"
+                    },
+                    {
+                        "name": "AutoMigrate",
+                        "description": "AutoMigrate関数はGORMモデルに基づいてデータベースのテーブルを自動的に作成または更新します。"
+                    },
+                    {
+                        "name": "Create",
+                        "description": "Create関数は新しいレコードをデータベースに挿入します。"
+                    },
+                    {
+                        "name": "Save",
+                        "description": "Save関数はレコードをデータベースに保存または更新します。"
+                    },
+                    {
+                        "name": "Delete",
+                        "description": "Delete関数はレコードをデータベースから削除します。"
+                    },
+                    {
+                        "name": "First",
+                        "description": "First関数は最初のレコードを取得します。"
+                    },
+                    {
+                        "name": "Last",
+                        "description": "Last関数は最後のレコードを取得します。"
+                    },
+                    {
+                        "name": "Find",
+                        "description": "Find関数は条件に一致する複数のレコードを取得します。"
+                    },
+                    {
+                        "name": "Where",
+                        "description": "Where関数は条件を指定してレコードを検索します。"
+                    },
+                    {
+                        "name": "Order",
+                        "description": "Order関数はソート順を指定してレコードを取得します。"
+                    },
+                    {
+                        "name": "Limit",
+                        "description": "Limit関数は取得するレコードの最大数を制限します。"
+                    },
+                    {
+                        "name": "Offset",
+                        "description": "Offset関数は検索のオフセットを指定します。"
+                    },
+                    {
+                        "name": "Joins",
+                        "description": "Joins関数はJOIN操作を実行して関連テーブルのデータを取得します。"
+                    },
+                    {
+                        "name": "Preload",
+                        "description": "Preload関数はEager Loadingを使用して関連データをプリロードします。"
+                    },
+                    {
+                        "name": "Association",
+                        "description": "Association関数は関連データの操作用のメソッドを提供します。"
+                    },
+                    {
+                        "name": "GormDataType",
+                        "description": "GormDataType関数はデータベースカラムの型を指定します。"
+                    },
+                    {
+                        "name": "Callback",
+                        "description": "Callback関数はGORMのコールバックを定義します。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/sirupsen/logrus",
+                "description": "LogrusはGo言語の高機能なロギングライブラリで、ログの生成、フォーマット、出力をカスタマイズできます。",
+                "func": [
+                    {
+                        "name": "New",
+                        "description": "New関数は新しいLogrusロガーを作成します。"
+                    },
+                    {
+                        "name": "Entry",
+                        "description": "Entry関数は新しいログエントリーを作成します。"
+                    },
+                    {
+                        "name": "WithField",
+                        "description": "WithField関数はフィールドを指定してログエントリーにフィールドを追加します。"
+                    },
+                    {
+                        "name": "WithFields",
+                        "description": "WithFields関数は複数のフィールドを指定してログエントリーにフィールドを追加します。"
+                    },
+                    {
+                        "name": "WithError",
+                        "description": "WithError関数はエラーを指定してログエントリーにエラー情報を追加します。"
+                    },
+                    {
+                        "name": "SetLevel",
+                        "description": "SetLevel関数はログのレベルを設定します（例：Info、Warning、Errorなど）。"
+                    },
+                    {
+                        "name": "SetFormatter",
+                        "description": "SetFormatter関数はログのフォーマッターを設定します。"
+                    },
+                    {
+                        "name": "SetOutput",
+                        "description": "SetOutput関数はログの出力先を設定します（ファイル、標準出力、カスタム出力など）。"
+                    },
+                    {
+                        "name": "Log",
+                        "description": "Log関数は指定したログレベルでログを記録します。"
+                    },
+                    {
+                        "name": "Info",
+                        "description": "Info関数は情報レベルのログを記録します。"
+                    },
+                    {
+                        "name": "Warn",
+                        "description": "Warn関数は警告レベルのログを記録します。"
+                    },
+                    {
+                        "name": "Error",
+                        "description": "Error関数はエラーレベルのログを記録します。"
+                    },
+                    {
+                        "name": "Fatal",
+                        "description": "Fatal関数は致命的なエラーレベルのログを記録し、プログラムの実行を中止します。"
+                    },
+                    {
+                        "name": "Panic",
+                        "description": "Panic関数はパニックレベルのログを記録し、ランタイムパニックを引き起こします。"
+                    },
+                    {
+                        "name": "AddHook",
+                        "description": "AddHook関数はログフックを追加し、ログエントリーのカスタム処理を実行します。"
+                    },
+                    {
+                        "name": "StandardLogger",
+                        "description": "StandardLogger関数は標準のGo言語ロガーと互換性のあるLogrusロガーを作成します。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/spf13/viper",
+                "description": "ViperはGo言語の設定管理ライブラリで、アプリケーションの設定情報を管理し、様々なデータソースから設定を読み込むことができます。",
+                "func": [
+                    {
+                        "name": "New",
+                        "description": "New関数は新しいViperインスタンスを作成します。"
+                    },
+                    {
+                        "name": "SetConfigName",
+                        "description": "SetConfigName関数は設定ファイルのファイル名を設定します。"
+                    },
+                    {
+                        "name": "AddConfigPath",
+                        "description": "AddConfigPath関数は設定ファイルの検索パスを追加します。"
+                    },
+                    {
+                        "name": "SetConfigType",
+                        "description": "SetConfigType関数は設定ファイルのフォーマット（JSON、YAML、TOMLなど）を設定します。"
+                    },
+                    {
+                        "name": "ReadInConfig",
+                        "description": "ReadInConfig関数は設定ファイルを読み込みます。"
+                    },
+                    {
+                        "name": "SetDefault",
+                        "description": "SetDefault関数はデフォルトの設定値を設定します。"
+                    },
+                    {
+                        "name": "Get",
+                        "description": "Get関数は指定したキーに対応する設定値を取得します。"
+                    },
+                    {
+                        "name": "GetString",
+                        "description": "GetString関数は指定したキーに対応する文字列設定値を取得します。"
+                    },
+                    {
+                        "name": "GetInt",
+                        "description": "GetInt関数は指定したキーに対応する整数設定値を取得します。"
+                    },
+                    {
+                        "name": "GetFloat64",
+                        "description": "GetFloat64関数は指定したキーに対応する浮動小数点数設定値を取得します。"
+                    },
+                    {
+                        "name": "GetBool",
+                        "description": "GetBool関数は指定したキーに対応する真偽値設定値を取得します。"
+                    },
+                    {
+                        "name": "IsSet",
+                        "description": "IsSet関数は指定したキーの設定値が設定されているかどうかを確認します。"
+                    },
+                    {
+                        "name": "AllSettings",
+                        "description": "AllSettings関数はすべての設定値をマップとして取得します。"
+                    },
+                    {
+                        "name": "BindEnv",
+                        "description": "BindEnv関数は環境変数と設定値をバインドし、自動的に設定値を読み込みます。"
+                    },
+                    {
+                        "name": "SetEnvKeyReplacer",
+                        "description": "SetEnvKeyReplacer関数は環境変数のキーを置換するためのカスタムリプレーサを設定します。"
+                    },
+                    {
+                        "name": "AutomaticEnv",
+                        "description": "AutomaticEnv関数は環境変数から自動的に設定値を読み込みます。"
+                    },
+                    {
+                        "name": "RemoteConfig",
+                        "description": "RemoteConfig関数はリモート設定サーバーから設定情報を取得します。"
+                    },
+                    {
+                        "name": "WatchConfig",
+                        "description": "WatchConfig関数は設定ファイルの変更を監視し、変更がある場合にリロードします。"
+                    },
+                    {
+                        "name": "OnConfigChange",
+                        "description": "OnConfigChange関数は設定ファイルの変更時に実行されるコールバック関数を設定します。"
+                    },
+                    {
+                        "name": "ReadRemoteConfig",
+                        "description": "ReadRemoteConfig関数はリモート設定サーバーから設定情報を読み込みます。"
+                    },
+                    {
+                        "name": "ConfigFileUsed",
+                        "description": "ConfigFileUsed関数は現在の設定ファイルのパスを取得します。"
+                    },
+                    {
+                        "name": "ConfigTypeUsed",
+                        "description": "ConfigTypeUsed関数は現在の設定ファイルのフォーマットを取得します。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/robfig/cron",
+                "description": "CronパッケージはGo言語のCronジョブ管理ライブラリで、定期的なタスクのスケジュール管理と実行を提供します。",
+                "func": [
+                    {
+                        "name": "New",
+                        "description": "New関数は新しいCronジョブを作成します。"
+                    },
+                    {
+                        "name": "AddFunc",
+                        "description": "AddFunc関数はCronジョブに関数を追加し、指定したスケジュールで実行されるように設定します。"
+                    },
+                    {
+                        "name": "AddJob",
+                        "description": "AddJob関数はCronジョブにジョブオブジェクトを追加し、指定したスケジュールで実行されるように設定します。"
+                    },
+                    {
+                        "name": "Remove",
+                        "description": "Remove関数は指定したジョブをCronジョブから削除します。"
+                    },
+                    {
+                        "name": "Start",
+                        "description": "Start関数はCronジョブを開始し、スケジュールに従ってジョブを実行します。"
+                    },
+                    {
+                        "name": "Stop",
+                        "description": "Stop関数はCronジョブの実行を停止します。"
+                    },
+                    {
+                        "name": "Entries",
+                        "description": "Entries関数は現在のCronジョブのエントリー（スケジュール設定）のリストを取得します。"
+                    },
+                    {
+                        "name": "Snapshot",
+                        "description": "Snapshot関数はCronジョブのスナップショットを取得し、ジョブの状態を保存します。"
+                    },
+                    {
+                        "name": "Clear",
+                        "description": "Clear関数はCronジョブのエントリーをすべて削除します。"
+                    },
+                    {
+                        "name": "Next",
+                        "description": "Next関数は次回のジョブ実行時刻を取得します。"
+                    },
+                    {
+                        "name": "Prev",
+                        "description": "Prev関数は前回のジョブ実行時刻を取得します。"
+                    },
+                    {
+                        "name": "Schedule",
+                        "description": "Schedule関数は指定したスケジュール文字列をパースしてCronジョブに設定します。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/go-redis/redis",
+                "description": "RedisパッケージはGo言語のRedisクライアントライブラリで、Redisデータベースとの対話を簡素化し、GoプログラムからRedisサーバーとの通信を可能にします。",
+                "func": [
+                    {
+                        "name": "NewClient",
+                        "description": "NewClient関数は新しいRedisクライアントを作成します。"
+                    },
+                    {
+                        "name": "Ping",
+                        "description": "Ping関数はRedisサーバーへの接続を確認します。"
+                    },
+                    {
+                        "name": "Set",
+                        "description": "Set関数は指定したキーに対応する値を設定します。"
+                    },
+                    {
+                        "name": "Get",
+                        "description": "Get関数は指定したキーに対応する値を取得します。"
+                    },
+                    {
+                        "name": "Del",
+                        "description": "Del関数は指定したキーを削除します。"
+                    },
+                    {
+                        "name": "Exists",
+                        "description": "Exists関数は指定したキーが存在するかどうかを確認します。"
+                    },
+                    {
+                        "name": "Incr",
+                        "description": "Incr関数は指定したキーの値を1増加させます。"
+                    },
+                    {
+                        "name": "Decr",
+                        "description": "Decr関数は指定したキーの値を1減少させます。"
+                    },
+                    {
+                        "name": "Keys",
+                        "description": "Keys関数はパターンに一致するキーの一覧を取得します。"
+                    },
+                    {
+                        "name": "HSet",
+                        "description": "HSet関数は指定したハッシュ内のフィールドに値を設定します。"
+                    },
+                    {
+                        "name": "HGet",
+                        "description": "HGet関数は指定したハッシュ内のフィールドに対応する値を取得します。"
+                    },
+                    {
+                        "name": "HMSet",
+                        "description": "HMSet関数は指定したハッシュ内の複数のフィールドに値を設定します。"
+                    },
+                    {
+                        "name": "HMGet",
+                        "description": "HMGet関数は指定したハッシュ内の複数のフィールドに対応する値を取得します。"
+                    },
+                    {
+                        "name": "HDel",
+                        "description": "HDel関数は指定したハッシュ内のフィールドを削除します。"
+                    },
+                    {
+                        "name": "HExists",
+                        "description": "HExists関数は指定したハッシュ内のフィールドが存在するかどうかを確認します。"
+                    },
+                    {
+                        "name": "LPush",
+                        "description": "LPush関数はリストに要素を追加します。"
+                    },
+                    {
+                        "name": "RPop",
+                        "description": "RPop関数はリストから要素を削除し、取得します。"
+                    },
+                    {
+                        "name": "SAdd",
+                        "description": "SAdd関数はセットに要素を追加します。"
+                    },
+                    {
+                        "name": "SMembers",
+                        "description": "SMembers関数はセット内のすべての要素を取得します。"
+                    },
+                    {
+                        "name": "ZAdd",
+                        "description": "ZAdd関数はソート済みセットに要素を追加します。"
+                    },
+                    {
+                        "name": "ZRange",
+                        "description": "ZRange関数はソート済みセットの範囲内の要素を取得します。"
+                    },
+                    {
+                        "name": "Publish",
+                        "description": "Publish関数はメッセージを指定したチャンネルに発行します。"
+                    },
+                    {
+                        "name": "Subscribe",
+                        "description": "Subscribe関数は指定したチャンネルにサブスクライブします。"
+                    },
+                    {
+                        "name": "Unsubscribe",
+                        "description": "Unsubscribe関数は指定したチャンネルからサブスクライブを解除します。"
+                    }
+                ]
+            },
+            {
+                "name": "github.com/gin-contrib/cors",
+                "description": "CORSミドルウェアはGo言語のGinフレームワークで使用され、CORSポリシーを制御してクロスオリジンリクエストを許可または制限するためのツールです。",
+                "func": [
+                    {
+                        "name": "New",
+                        "description": "New関数はCORSミドルウェアの新しいインスタンスを作成します。"
+                    },
+                    {
+                        "name": "Default",
+                        "description": "Default関数はデフォルトのCORSミドルウェアを返します。"
+                    },
+                    {
+                        "name": "Middleware",
+                        "description": "Middleware関数はCORSミドルウェアをGinアプリケーションに適用します。"
+                    },
+                    {
+                        "name": "Config",
+                        "description": "Config関数はCORSミドルウェアの設定をカスタマイズするためのオプションを提供します。"
+                    },
+                    {
+                        "name": "AllowAll",
+                        "description": "AllowAll関数はすべてのオリジンからのリクエストを許可する設定を生成します。"
+                    },
+                    {
+                        "name": "AllowMethods",
+                        "description": "AllowMethods関数は許可されるHTTPメソッドを指定します。"
+                    },
+                    {
+                        "name": "AllowHeaders",
+                        "description": "AllowHeaders関数は許可されるHTTPヘッダーを指定します。"
+                    },
+                    {
+                        "name": "AllowCredentials",
+                        "description": "AllowCredentials関数は認証情報を送信するかどうかを設定します。"
+                    },
+                    {
+                        "name": "ExposeHeaders",
+                        "description": "ExposeHeaders関数はクライアントに公開するHTTPヘッダーを指定します。"
+                    },
+                    {
+                        "name": "MaxAge",
+                        "description": "MaxAge関数はプリフライトリクエストのキャッシュ時間を設定します。"
+                    },
+                    {
+                        "name": "AllowWildcard",
+                        "description": "AllowWildcard関数はすべてのヘッダー、メソッド、およびオリジンを許可する設定を生成します。"
+                    },
+                    {
+                        "name": "AllowOriginFunc",
+                        "description": "AllowOriginFunc関数はカスタムのオリジン許可関数を設定します。"
+                    },
+                    {
+                        "name": "AllowOriginFunc",
+                        "description": "AllowOriginFunc関数はカスタムのオリジン許可関数を設定します。"
+                    },
+                    {
+                        "name": "AllowOriginString",
+                        "description": "AllowOriginString関数はカンマ区切りのオリジン文字列を許可します。"
+                    },
+                    {
+                        "name": "AllowOriginValidator",
+                        "description": "AllowOriginValidator関数はカスタムのオリジン検証関数を設定します。"
+                    },
+                    {
+                        "name": "AllowOriginFunc",
+                        "description": "AllowOriginFunc関数はカスタムのオリジン許可関数を設定します。"
+                    }
+                ]
+            }
+        ]
+    }
+]
