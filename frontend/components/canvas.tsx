@@ -3,7 +3,7 @@ import useDomSize from "@/hooks/useDomSize";
 import useGraphData from "@/hooks/useGraphData";
 import styles from "@styles/components/canvas.module.scss";
 import { useCallback, useEffect, useRef } from "react";
-import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
+import ForceGraph2D, { ForceGraphMethods, LinkObject } from 'react-force-graph-2d';
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { fetchNodeConnect } from "./util/api";
 import { GraphLink, GraphNode } from "./util/type";
@@ -76,33 +76,48 @@ function ForceGraphField (props: { width: number, height: number }) {
     [currentNodeId]
   )
 
-  const drawLinks = useCallback<(obj: { source?: string | number | GraphNode, target?: string | number | GraphNode }, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
-    ({ source, target }, ctx, globalScale) => {
+  const drawLinks = useCallback<(link: LinkObject, canvasContext: CanvasRenderingContext2D, globalScale: number) => void>(
+    (link, ctx, globalScale) => {
+      const { source, target } = link;
       if (typeof source !== 'object' || typeof target !== 'object') return;
 
-      const { x: sx, y: sy, name } = source;
-      const { x: tx, y: ty } = target;
-      if (sx == null || sy == null || tx == null || ty == null || !name) return;
+      if (link.isLabel) {
+        const { x: sx, y: sy, name } = source;
+        const { x: tx, y: ty } = target;
+        if (sx == null || sy == null || tx == null || ty == null || !name) return;
 
-      const fontSize = Math.min(12 * Math.sqrt(source.val) / Math.min(4, Math.max(globalScale, 1)), 24);
-      ctx.font = `${fontSize}px Sans-Serif`;
-      const textWidth = ctx.measureText(name).width;
-      const textAngle = Math.atan2(ty - sy, tx - sx);
-      const isFlip = textAngle < -Math.PI / 2 || Math.PI / 2 < textAngle
+        const fontSize = Math.min(12 * Math.sqrt(source.val) / Math.min(4, Math.max(globalScale, 1)), 24);
+        ctx.font = `${fontSize}px Sans-Serif`;
+        const textWidth = ctx.measureText(name).width;
+        const textAngle = Math.atan2(ty - sy, tx - sx);
+        const isFlip = textAngle < -Math.PI / 2 || Math.PI / 2 < textAngle
 
-      ctx.save();
-      ctx.translate(sx, sy);
-      ctx.rotate(textAngle);
-      ctx.translate(textWidth / 2 + Math.sqrt(source.val) * 4 + 1 / globalScale, 0);
-      if (isFlip) ctx.rotate(Math.PI);
+        ctx.save();
+        ctx.translate(sx, sy);
+        ctx.rotate(textAngle);
+        ctx.translate(textWidth / 2 + Math.sqrt(source.val) * 4 + 1 / globalScale, 0);
+        if (isFlip) ctx.rotate(Math.PI);
 
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillStyle = '#000000';
-      ctx.fillText(name, 0, 0);
-      ctx.restore();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#000000';
+        ctx.fillText(name, 0, 0);
+        ctx.restore();
+      } else {
+        const isRelatedCurrent = source.id === currentNodeId || target.id === currentNodeId
+        const { x: sx, y: sy } = source;
+        const { x: tx, y: ty } = target;
+        if (sx == null || sy == null || tx == null || ty == null) return;
+
+        ctx.beginPath();
+        ctx.moveTo(sx, sy);
+        ctx.lineTo(tx, ty);
+        ctx.strokeStyle = isRelatedCurrent ? '#919191' : '#d8d4ce';
+        ctx.lineWidth = isRelatedCurrent ? 2 : 1;
+        ctx.stroke();
+      }
     },
-    []
+    [currentNodeId]
   )
 
   const onNodeClick = useCallback<(node: GraphNode, event: MouseEvent) => void>(async node => {
@@ -135,7 +150,7 @@ function ForceGraphField (props: { width: number, height: number }) {
       nodeColor={getNodeColor}
       nodeCanvasObjectMode={node => node.id === currentNodeId ? "after" : "none"}
       nodeCanvasObject={drawWithLabel}
-      linkCanvasObjectMode={link => link.isLabel ? "replace" : "none"}
+      linkCanvasObjectMode={() => "replace"}
       linkCanvasObject={drawLinks}
       nodeVisibility={node => !!node.name}
     />
